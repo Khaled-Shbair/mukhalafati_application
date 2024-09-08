@@ -6,6 +6,15 @@ initSplash() {
   Get.put<SplashController>(SplashController());
 }
 
-disposeSplash() {
+_disposeSplash() {
   Get.delete<SplashController>();
+}
+
+initOnBoarding() {
+  _disposeSplash();
+  Get.put<OnBoardingController>(OnBoardingController());
+}
+
+disposeOnBoarding() {
+  Get.delete<OnBoardingController>();
 }
