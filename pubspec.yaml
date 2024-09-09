@@ -39,6 +39,7 @@ dependencies:
   get: ^4.6.6
   flutter_svg: ^2.0.10+1
   get_it: ^7.7.0
+  smooth_page_indicator: ^1.2.0+3
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/splash/
+    - assets/images/on_boarding/
 
   fonts:
     - family: cairo
