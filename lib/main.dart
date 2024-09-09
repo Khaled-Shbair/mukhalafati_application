@@ -10,14 +10,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(Constants.deviceWidth, Constants.deviceHeight),
+      designSize:
+          const Size(AppConstants.deviceWidth, AppConstants.deviceHeight),
       splitScreenMode: true,
       minTextAdapt: true,
       builder: (context, child) {
-        return const GetMaterialApp(
+        return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           initialRoute: Routes.splashScreen,
           onGenerateRoute: RouteGenerator.getRoute,
+          translations: Translation(),
+          locale: const Locale(LocaleConstants.arabicLanguage),
+          fallbackLocale: const Locale(LocaleConstants.arabicLanguage),
         );
       },
     );

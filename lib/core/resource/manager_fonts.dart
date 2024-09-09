@@ -1,5 +1,3 @@
-import 'package:mukhalafati_application/core/util/size_uitl.dart';
-
 import '/config/all_imports.dart';
 
 class ManagerFontsSizes {
