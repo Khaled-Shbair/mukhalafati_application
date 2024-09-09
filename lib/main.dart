@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          textDirection: TextDirection.ltr,
           initialRoute: Routes.splashScreen,
           onGenerateRoute: RouteGenerator.getRoute,
           translations: Translation(),
