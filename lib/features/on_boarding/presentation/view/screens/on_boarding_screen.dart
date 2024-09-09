@@ -6,62 +6,111 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return willPopScope(
-      child: GetBuilder<OnBoardingController>(builder: (controller) {
-        return Scaffold(
-          extendBodyBehindAppBar: true,
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            backgroundColor: ManagerColors.transparent,
-            elevation: AppConstants.elevationAppBarOnBoardingScreen,
-            leadingWidth: AppConstants.leadingWidthAppBarOnBoardingScreen,
-            leading: MaterialButton(
-              padding: EdgeInsetsDirectional.zero,
-              highlightColor: ManagerColors.transparent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              onPressed: () => controller.skip(),
-              child: Text(
-                ManagerStrings.skip,
-                style: TextStyle(
-                  fontSize: ManagerFontsSizes.f14,
-                  fontWeight: ManagerFontWeight.bold,
-                  color: ManagerColors.dimGray,
-                  fontFamily: ManagerFontFamily.cairo,
+      child: GetBuilder<OnBoardingController>(
+        builder: (controller) {
+          return Scaffold(
+            extendBodyBehindAppBar: true,
+            resizeToAvoidBottomInset: false,
+            body: Column(
+              children: [
+                Expanded(
+                  child: Stack(
+                    children: [
+                      PageView(
+                        controller: controller.pageController,
+                        onPageChanged: (value) {
+                          controller.changeCurrentPage(value);
+                        },
+                        children: [
+                          ...List.generate(
+                            controller.pageViewItems.length,
+                            (index) => controller.pageViewItems[index],
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.only(
+                          top: ManagerHeight.h30,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Visibility(
+                              maintainSize: true,
+                              maintainAnimation: true,
+                              maintainState: true,
+                              visible: controller.isNotFirstPage(),
+                              child: IconButton(
+                                onPressed: () {
+                                  controller.previousPage();
+                                },
+                                icon: const Icon(
+                                  Icons.arrow_back_ios_new,
+                                  color: ManagerColors.darkPurple,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            skipButton(
+                              visible: controller.appearSkipButton,
+                              onPressed: () => controller.skip(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ),
-          ),
-          body: Column(
-            children: [
-              Expanded(
-                child: PageView(
+                SmoothPageIndicator(
                   controller: controller.pageController,
+                  count: controller.pageViewItems.length,
+                  effect: ExpandingDotsEffect(
+                    dotHeight: ManagerHeight.h7,
+                    dotWidth: ManagerWidth.w10,
+                    spacing: ManagerWidth.w10,
+                    expansionFactor: 2,
+                    activeDotColor: ManagerColors.primaryColor,
+                    dotColor: ManagerColors.darkLiver,
+                  ),
+                ),
+                SizedBox(height: ManagerHeight.h42),
+                Stack(
+                  alignment: AlignmentDirectional.center,
                   children: [
-                    ...List.generate(
-                      controller.pageViewItems.length,
-                      (index) => controller.pageViewItems[index],
+                    SizedBox(
+                      height: ManagerHeight.h55,
+                      width: ManagerWidth.w55,
+                      child: CircularProgressIndicator(
+                        color: ManagerColors.primaryColor,
+                        backgroundColor: ManagerColors.blanchedAlmond,
+                        value: controller.valueOfIndicator,
+                        strokeWidth:
+                            AppConstants.strokeWidthOfCircularProgressIndicator,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        controller.nextPage();
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: ManagerColors.primaryColor,
+                        radius: ManagerRadius.r24,
+                        child: const Icon(
+                          Icons.arrow_forward,
+                          color: ManagerColors.white,
+                          size: 18,
+                        ),
+                      ),
                     ),
                   ],
                 ),
-              ),
-              SmoothPageIndicator(
-                controller: controller.pageController,
-                count: controller.pageViewItems.length,
-                effect: ExpandingDotsEffect(
-                  dotHeight: ManagerHeight.h7,
-                  dotWidth: ManagerWidth.w10,
-                  spacing: ManagerWidth.w10,
-                  expansionFactor: 2,
-                  activeDotColor: ManagerColors.primaryColor,
-                  dotColor: ManagerColors.darkLiver,
-                ),
-              ),
-              SizedBox(height: ManagerHeight.h42),
-            ],
-          ),
-        );
-      }),
+                SizedBox(height: ManagerHeight.h26),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

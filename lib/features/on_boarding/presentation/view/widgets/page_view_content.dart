@@ -22,6 +22,7 @@ class PageViewContent extends StatelessWidget {
           height: ManagerHeight.h405,
           fit: BoxFit.cover,
         ),
+        SizedBox(height: ManagerHeight.h5),
         Text(
           title,
           style: TextStyle(

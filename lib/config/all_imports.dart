@@ -26,3 +26,4 @@ export '/features/splash/presentation/controller/splash_controller.dart';
 export '/features/on_boarding/presentation/view/screens/on_boarding_screen.dart';
 export '/features/on_boarding/presentation/controller/on_boarding_controller.dart';
 export '/features/on_boarding/presentation/view/widgets/page_view_content.dart';
+export '/features/on_boarding/presentation/view/widgets/skip_button.dart';
