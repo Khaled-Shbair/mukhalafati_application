@@ -36,25 +36,13 @@ class OnBoardingScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Visibility(
-                              maintainSize: true,
-                              maintainAnimation: true,
-                              maintainState: true,
-                              visible: controller.isNotFirstPage(),
-                              child: IconButton(
-                                onPressed: () {
-                                  controller.previousPage();
-                                },
-                                icon: const Icon(
-                                  Icons.arrow_back_ios_new,
-                                  color: ManagerColors.darkPurple,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
                             skipButton(
                               visible: controller.appearSkipButton,
                               onPressed: () => controller.skip(),
+                            ),
+                            previousButton(
+                              visible: controller.isNotFirstPage(),
+                              onPressed: () => controller.previousPage(),
                             ),
                           ],
                         ),
