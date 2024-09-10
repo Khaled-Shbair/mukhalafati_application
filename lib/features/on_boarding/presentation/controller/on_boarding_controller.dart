@@ -1,7 +1,8 @@
 import '/config/all_imports.dart';
 
 class OnBoardingController extends GetxController {
-  final AppSettingsSharedPreferences _appSettingsSharedPreferences = instance();
+  final AppSettingsSharedPreferences _appSettingsSharedPreferences =
+      instance<AppSettingsSharedPreferences>();
   late PageController pageController;
   int currentPage = 0;
   double valueOfIndicator = 0.3;
@@ -14,7 +15,7 @@ class OnBoardingController extends GetxController {
     ),
     PageViewContent(
       image: ManagerAssets.onBoardingTwo,
-      title: ManagerStrings.driver,
+      title: ManagerStrings.theDriver,
       subTitle: ManagerStrings.subTitleOnBoardingTwo,
     ),
     PageViewContent(

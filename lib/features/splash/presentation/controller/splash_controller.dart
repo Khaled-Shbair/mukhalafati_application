@@ -1,7 +1,8 @@
 import '/config/all_imports.dart';
 
 class SplashController extends GetxController {
-  final AppSettingsSharedPreferences _appSettingsSharedPreferences = instance();
+  final AppSettingsSharedPreferences _appSettingsSharedPreferences =
+      instance<AppSettingsSharedPreferences>();
 
   @override
   void onInit() {
@@ -9,11 +10,10 @@ class SplashController extends GetxController {
     Future.delayed(
       const Duration(seconds: AppConstants.durationSplashScreen),
       () {
-        if (_appSettingsSharedPreferences.getOnBoardingViewed()) {
-          Get.offAllNamed(Routes.onBoardingScreen);
-        } else {
-          Get.offAllNamed(Routes.loginScreen);
-        }
+        String route = _appSettingsSharedPreferences.getOnBoardingViewed()
+            ? Routes.loginScreen
+            : Routes.onBoardingScreen;
+        Get.offAllNamed(route);
       },
     );
   }
