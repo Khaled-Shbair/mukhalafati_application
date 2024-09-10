@@ -9,6 +9,9 @@ class RouteGenerator {
       case Routes.onBoardingScreen:
         initOnBoarding();
         return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
+      case Routes.loginScreen:
+        initLogin();
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
       default:
         return unDefinedRoute();
     }
