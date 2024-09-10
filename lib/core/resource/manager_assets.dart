@@ -10,4 +10,7 @@ class ManagerAssets {
       '$_imagePath/on_boarding/on_boarding_two.png';
   static const String onBoardingThree =
       '$_imagePath/on_boarding/on_boarding_three.png';
+  static const String login = '$_imagePath/login/login.svg';
+  static const String driverIcon = '$_imagePath/login/driver_icon.svg';
+  static const String policeIcon = '$_imagePath/login/police_icon.png';
 }
