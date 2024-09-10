@@ -69,6 +69,7 @@ flutter:
     - assets/images/
     - assets/images/splash/
     - assets/images/on_boarding/
+    - assets/images/login/
 
   fonts:
     - family: cairo
