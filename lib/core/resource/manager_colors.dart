@@ -15,5 +15,6 @@ class ManagerColors {
   static const Color dimGray = Color(0XFF696969);
   static const Color lightSilver = Color(0XFFD9D9D9);
   static const Color darkPurple = Color(0XFF230B34);
+  static const Color ghostWhite = Color(0XFFF9F9F9);
   static const Color transparent = Colors.transparent;
 }
