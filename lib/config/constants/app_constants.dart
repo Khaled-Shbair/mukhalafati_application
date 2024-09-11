@@ -7,4 +7,5 @@ class AppConstants {
   static const double expansionFactorOfSmoothPageIndicatorInOnBoardingScreen =
       2;
   static const double strokeWidthOfCircularProgressIndicator = 3;
+  static const double sideOfBorderSideInMainButton = 0.25;
 }
