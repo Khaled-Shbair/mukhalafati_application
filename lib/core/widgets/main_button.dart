@@ -9,6 +9,9 @@ Widget mainButton({
   double? elevation,
   ShapeBorder? shape,
   BorderSide? side,
+  double? borderRadius,
+  Color? highlightColor,
+  double? highlightElevation,
 }) {
   return MaterialButton(
     onPressed: onPressed,
@@ -16,6 +19,8 @@ Widget mainButton({
     height: height ?? ManagerHeight.h48,
     minWidth: minWidth ?? ManagerWidth.infinity,
     elevation: elevation.onNull(),
+    highlightColor: highlightColor,
+    highlightElevation: highlightElevation.onNull(),
     shape: shape ??
         RoundedRectangleBorder(
           side: side ??
@@ -23,7 +28,7 @@ Widget mainButton({
                 color: ManagerColors.primaryColor,
                 width: AppConstants.sideOfBorderSideInMainButton,
               ),
-          borderRadius: BorderRadius.circular(ManagerRadius.r5),
+          borderRadius: BorderRadius.circular(borderRadius ?? ManagerRadius.r5),
         ),
     child: child,
   );
