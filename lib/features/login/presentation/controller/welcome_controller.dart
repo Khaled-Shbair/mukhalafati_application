@@ -6,6 +6,6 @@ class WelcomeController extends GetxController {
   }
 
   void createAccountButton() {
-    // Get.toNamed();
+    Get.toNamed(Routes.loginScreen);
   }
 }
