@@ -1,4 +1,5 @@
-import 'package:mukhalafati_application/features/login/presentation/view/widgets/tab_bar_item.dart';
+import 'package:mukhalafati_application/features/login/presentation/view/widgets/tab_bar_button.dart';
+import 'package:mukhalafati_application/features/login/presentation/view/widgets/tab_bar_page.dart';
 
 import '/config/all_imports.dart';
 
@@ -17,12 +18,13 @@ class LoginScreen extends StatelessWidget {
             leading: mainButton(
               highlightColor: ManagerColors.transparent,
               side: BorderSide.none,
-              borderRadius: ManagerRadius.r100,
+              shape: const CircleBorder(),
               onPressed: () => controller.backButton(),
               color: Colors.transparent,
               child: const Icon(
                 Icons.arrow_back_ios,
                 color: ManagerColors.primaryColor,
+                size: 20,
               ),
             ),
           ),
@@ -81,12 +83,12 @@ class LoginScreen extends StatelessWidget {
                       top: ManagerHeight.h7,
                       bottom: ManagerHeight.h7,
                     ),
-                    indicatorPadding: EdgeInsetsDirectional.only(
-                      bottom: ManagerHeight.h5,
-                      top: ManagerHeight.h5,
-                      start: ManagerWidth.w16,
-                      end: ManagerWidth.w16,
-                    ),
+                    // indicatorPadding: EdgeInsetsDirectional.only(
+                    //   bottom: ManagerHeight.h5,
+                    //   top: ManagerHeight.h5,
+                    //   start: ManagerWidth.w16,
+                    //   end: ManagerWidth.w16,
+                    // ),
                     labelStyle: TextStyle(
                       color: ManagerColors.white,
                       fontFamily: ManagerFontFamily.cairo,
@@ -100,32 +102,13 @@ class LoginScreen extends StatelessWidget {
                       fontSize: ManagerFontsSizes.f15,
                     ),
                     tabs: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(ManagerStrings.driver),
-                          SizedBox(width: ManagerWidth.w8),
-                          Image.asset(
-                            ManagerAssets.driverIcon,
-                            height: ManagerHeight.h20,
-                            width: ManagerWidth.w20,
-                            fit: BoxFit.cover,
-                          ),
-                        ],
+                      tabBarButton(
+                        image: ManagerAssets.driverIcon,
+                        name: ManagerStrings.driver,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(ManagerStrings.police),
-                          SizedBox(width: ManagerWidth.w8),
-                          Image.asset(
-                            ManagerAssets.policeIcon,
-                            height: ManagerHeight.h24,
-                            width: ManagerWidth.w24,
-                            fit: BoxFit.cover,
-                          ),
-                        ],
+                      tabBarButton(
+                        image: ManagerAssets.policeIcon,
+                        name: ManagerStrings.police,
                       ),
                     ],
                   ),
@@ -135,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                   child: TabBarView(
                     controller: controller.tabController,
                     children: [
-                      tabBarItem(
+                      tabBarPage(
                         changeRememberMe: (bool? v) =>
                             controller.changeRememberMeDriver(v!),
                         forgotPasswordRecognizer:
@@ -150,7 +133,7 @@ class LoginScreen extends StatelessWidget {
                         password: controller.passwordDriver,
                         userNumber: controller.licenseNumber,
                       ),
-                      tabBarItem(
+                      tabBarPage(
                         changeRememberMe: (bool? v) =>
                             controller.changeRememberMePoliceMan(v!),
                         forgotPasswordRecognizer:
