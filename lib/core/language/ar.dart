@@ -13,7 +13,7 @@ const Map<String, String> ar = {
   'welcome': 'مرحبا بكم',
   'sub_title_login': 'للاستفادة من الخدمات الذي يوفرها هذا التطبيق قم بتسجيل الدخول',
 'login':'تسجيل دخول',
-  'create_account':'انشاء حساب',
+  'create_account':'إنشاء حساب',
   'welcome_back_to_our_app':'أهلا وسهلاً بك مجدداً في تطبيقنا',
   'driver':'سائق',
   'police':'شرطي',
