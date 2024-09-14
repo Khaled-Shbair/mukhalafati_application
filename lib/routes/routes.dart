@@ -9,4 +9,6 @@ class Routes {
       'forget_Police_man_password_Screen';
   static const String forgetDriverPasswordScreen =
       'forget_driver_password_Screen';
+  static const String homeScreen =
+      'home_screen';
 }
