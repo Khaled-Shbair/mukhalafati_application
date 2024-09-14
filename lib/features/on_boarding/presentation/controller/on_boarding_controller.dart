@@ -1,6 +1,8 @@
 import '/config/all_imports.dart';
 
 class OnBoardingController extends GetxController {
+  final AppSettingsSharedPreferences _appSettingsSharedPreferences =
+      instance<AppSettingsSharedPreferences>();
   late PageController pageController;
   int currentPage = 0;
   double valueOfIndicator = 0.3;
@@ -13,7 +15,7 @@ class OnBoardingController extends GetxController {
     ),
     PageViewContent(
       image: ManagerAssets.onBoardingTwo,
-      title: ManagerStrings.driver,
+      title: ManagerStrings.theDriver,
       subTitle: ManagerStrings.subTitleOnBoardingTwo,
     ),
     PageViewContent(
@@ -66,6 +68,7 @@ class OnBoardingController extends GetxController {
   void nextPage() {
     if (_isLastPage()) {
       _moveToLoginScreen();
+      _appSettingsSharedPreferences.setOnBoardingViewed();
     } else {
       pageController.nextPage(
         duration: const Duration(seconds: 1),

@@ -1,6 +1,7 @@
 import 'config/all_imports.dart';
 
 void main() {
+  initModule();
   runApp(const MyApp());
 }
 
@@ -10,8 +11,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize:
-          const Size(AppConstants.deviceWidth, AppConstants.deviceHeight),
+      designSize: const Size(
+        AppConstants.deviceWidth,
+        AppConstants.deviceHeight,
+      ),
       splitScreenMode: true,
       minTextAdapt: true,
       builder: (context, child) {

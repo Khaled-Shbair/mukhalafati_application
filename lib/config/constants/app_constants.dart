@@ -7,4 +7,7 @@ class AppConstants {
   static const double expansionFactorOfSmoothPageIndicatorInOnBoardingScreen =
       2;
   static const double strokeWidthOfCircularProgressIndicator = 3;
+  static const double sideOfBorderSideInMainButton = 0.25;
+  static const double splashRadiusOfCheckboxInLoginScreen = 0;
+  static const double widthOfBorderSideOfMainTextField = 0.45;
 }

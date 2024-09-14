@@ -77,18 +77,13 @@ class OnBoardingScreen extends StatelessWidget {
                             AppConstants.strokeWidthOfCircularProgressIndicator,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        controller.nextPage();
-                      },
-                      child: CircleAvatar(
-                        backgroundColor: ManagerColors.primaryColor,
-                        radius: ManagerRadius.r24,
-                        child: const Icon(
-                          Icons.arrow_forward,
-                          color: ManagerColors.white,
-                          size: 18,
-                        ),
+                    mainButton(
+                      onPressed: () => controller.nextPage(),
+                      shape: const CircleBorder(),
+                      height: ManagerHeight.h49,
+                      child: const Icon(
+                        Icons.arrow_forward,
+                        color: ManagerColors.white,
                       ),
                     ),
                   ],
