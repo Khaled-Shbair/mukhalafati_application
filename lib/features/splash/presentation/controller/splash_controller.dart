@@ -1,17 +1,19 @@
 import '/config/all_imports.dart';
 
 class SplashController extends GetxController {
+  // final AppSettingsSharedPreferences _appSettingsSharedPreferences =
+  //     instance<AppSettingsSharedPreferences>();
+
   @override
   void onInit() {
     super.onInit();
     Future.delayed(
       const Duration(seconds: AppConstants.durationSplashScreen),
       () {
-        if (false) {
-          Get.offAllNamed(Routes.onBoardingScreen);
-        } else {
-          Get.offAllNamed(Routes.onBoardingScreen);
-        }
+        String route =
+            //_appSettingsSharedPreferences.getOnBoardingViewed()
+            true ? Routes.welcomeScreen : Routes.onBoardingScreen;
+        Get.offAllNamed(route);
       },
     );
   }
