@@ -40,3 +40,6 @@ export '/features/login/presentation/controller/login_controller.dart';
 export '/features/login/presentation/view/screens/login_screen.dart';
 export '/features/login/presentation/controller/welcome_controller.dart';
 export '/features/login/presentation/view/widgets/check_box.dart';
+export '/features/login/presentation/view/widgets/richText.dart';
+export '/features/login/presentation/view/widgets/tab_bar_button.dart';
+export '/features/login/presentation/view/widgets/tab_bar_page.dart';
