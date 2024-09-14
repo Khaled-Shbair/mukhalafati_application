@@ -36,11 +36,11 @@ class LoginScreen extends StatelessWidget {
               children: [
                 Image.asset(
                   ManagerAssets.logo,
-                  height: ManagerHeight.h105,
-                  width: ManagerWidth.w105,
+                  height: ManagerHeight.h71,
+                  width: ManagerWidth.w85,
                   fit: BoxFit.cover,
                 ),
-                SizedBox(height: ManagerHeight.h2),
+                SizedBox(height: ManagerHeight.h20),
                 Text(
                   ManagerStrings.login,
                   style: TextStyle(
@@ -110,10 +110,10 @@ class LoginScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: ManagerHeight.h24),
                 Expanded(
                   child: TabBarView(
                     controller: controller.tabController,
+                    physics: const NeverScrollableScrollPhysics(),
                     children: [
                       tabBarPage(
                         changeRememberMe: (bool? v) =>

@@ -61,8 +61,8 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.only(
-                      start: ManagerWidth.w74,
-                      end: ManagerWidth.w74,
+                      start: ManagerWidth.w28,
+                      end: ManagerWidth.w28,
                       bottom: ManagerHeight.h16,
                     ),
                     child: mainButton(
@@ -73,15 +73,15 @@ class WelcomeScreen extends StatelessWidget {
                           color: ManagerColors.white,
                           fontFamily: ManagerFontFamily.cairo,
                           fontWeight: ManagerFontWeight.bold,
-                          fontSize: ManagerFontsSizes.f18,
+                          fontSize: ManagerFontsSizes.f16,
                         ),
                       ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.only(
-                      start: ManagerWidth.w74,
-                      end: ManagerWidth.w74,
+                      start: ManagerWidth.w28,
+                      end: ManagerWidth.w28,
                     ),
                     child: mainButton(
                       color: ManagerColors.white,
@@ -89,10 +89,10 @@ class WelcomeScreen extends StatelessWidget {
                       child: Text(
                         ManagerStrings.createAccount,
                         style: TextStyle(
-                          color: ManagerColors.black,
+                          color: ManagerColors.primaryColor,
                           fontFamily: ManagerFontFamily.cairo,
-                          fontWeight: ManagerFontWeight.bold,
-                          fontSize: ManagerFontsSizes.f18,
+                          fontWeight: ManagerFontWeight.semiBold,
+                          fontSize: ManagerFontsSizes.f16,
                         ),
                       ),
                     ),

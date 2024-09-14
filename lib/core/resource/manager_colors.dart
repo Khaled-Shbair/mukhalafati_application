@@ -8,6 +8,7 @@ class ManagerColors {
   static const Color blanchedAlmond = Color(0XFFFBF0CC);
   static const Color darkLiver = Color.fromRGBO(83, 79, 79, .25);
   static const Color gunmetal = Color.fromRGBO(38, 50, 56, .80);
+  static const Color gunmetals = Color.fromRGBO(217, 217, 217, .10);
   static const Color blackOlive = Color(0XFF404040);
   static const Color white = Color(0XFFFFFFFF);
   static const Color black = Color(0XFF000000);

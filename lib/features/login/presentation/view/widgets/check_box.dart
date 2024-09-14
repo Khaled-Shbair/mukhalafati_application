@@ -17,7 +17,7 @@ Widget checkBox({
           borderRadius: BorderRadius.circular(ManagerRadius.r5),
         ),
         side: const BorderSide(
-          color: ManagerColors.primaryColor,
+          color: ManagerColors.philippineGray,
           width: 1.5,
         ),
         splashRadius: AppConstants.splashRadiusOfCheckboxInLoginScreen,

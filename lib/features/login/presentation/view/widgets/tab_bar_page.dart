@@ -14,6 +14,7 @@ Widget tabBarPage({
 }) {
   return Column(
     children: [
+      SizedBox(height: ManagerHeight.h24),
       mainTextField(
         controller: userNumber,
         labelText: labelTextOfUserField,

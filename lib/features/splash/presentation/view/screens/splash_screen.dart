@@ -18,7 +18,7 @@ class SplashScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Image.asset(
-                ManagerAssets.logo,
+                ManagerAssets.logoSplash,
                 height: ManagerHeight.h120,
                 width: ManagerWidth.w120,
               ),

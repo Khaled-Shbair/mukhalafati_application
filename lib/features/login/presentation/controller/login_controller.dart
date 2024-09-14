@@ -52,8 +52,8 @@ class LoginController extends GetxController
   void loginPoliceMan() {}
 
   void backButton() {
+    disposeLogin();
     Get.back();
-
   }
 
   void changeRememberMePoliceMan(bool isRememberMe) {
