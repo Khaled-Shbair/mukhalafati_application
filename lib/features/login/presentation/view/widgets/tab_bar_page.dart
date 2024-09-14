@@ -36,17 +36,11 @@ Widget tabBarPage({
             value: rememberMe,
             onChanged: changeRememberMe,
           ),
-          RichText(
-            text: TextSpan(
-              text: ManagerStrings.forgotYourPassword,
-              recognizer: forgotPasswordRecognizer,
-              style: TextStyle(
-                color: ManagerColors.philippineGray,
-                fontFamily: ManagerFontFamily.cairo,
-                fontWeight: ManagerFontWeight.medium,
-                fontSize: ManagerFontsSizes.f13,
-              ),
-            ),
+          richText(
+            title: ManagerStrings.forgotYourPassword,
+            recognizer: forgotPasswordRecognizer,
+            color: ManagerColors.philippineGray,
+            fontSize: ManagerFontsSizes.f13,
           ),
         ],
       ),
@@ -64,28 +58,15 @@ Widget tabBarPage({
         ),
       ),
       SizedBox(height: ManagerHeight.h16),
-      RichText(
-        text: TextSpan(
-          text: ManagerStrings.doNotHaveAnAccount,
-          style: TextStyle(
-            color: ManagerColors.gunmetal,
-            fontFamily: ManagerFontFamily.cairo,
-            fontWeight: ManagerFontWeight.medium,
-            fontSize: ManagerFontsSizes.f15,
+      richText(
+        title: ManagerStrings.doNotHaveAnAccount,
+        children: [
+          textSpan(
+            text: ' ${ManagerStrings.subscribe}',
+            recognizer: registerRecognizer,
+            color: ManagerColors.primaryColor,
           ),
-          children: [
-            TextSpan(
-              text: ' ${ManagerStrings.subscribe}',
-              recognizer: registerRecognizer,
-              style: TextStyle(
-                color: ManagerColors.primaryColor,
-                fontFamily: ManagerFontFamily.cairo,
-                fontWeight: ManagerFontWeight.medium,
-                fontSize: ManagerFontsSizes.f15,
-              ),
-            ),
-          ],
-        ),
+        ],
       ),
     ],
   );
