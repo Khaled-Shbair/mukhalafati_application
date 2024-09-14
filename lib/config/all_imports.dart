@@ -39,3 +39,4 @@ export '/features/login/presentation/view/screens/welcome_screen.dart';
 export '/features/login/presentation/controller/login_controller.dart';
 export '/features/login/presentation/view/screens/login_screen.dart';
 export '/features/login/presentation/controller/welcome_controller.dart';
+export '/features/login/presentation/view/widgets/check_box.dart';
