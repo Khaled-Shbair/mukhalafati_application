@@ -1,6 +1,3 @@
-import 'package:mukhalafati_application/features/login/presentation/view/widgets/tab_bar_button.dart';
-import 'package:mukhalafati_application/features/login/presentation/view/widgets/tab_bar_page.dart';
-
 import '/config/all_imports.dart';
 
 class LoginScreen extends StatelessWidget {
