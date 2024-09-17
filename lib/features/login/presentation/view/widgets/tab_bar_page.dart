@@ -18,10 +18,16 @@ Widget tabBarPage({
       mainTextField(
         controller: userNumber,
         labelText: labelTextOfUserField,
+        color: ManagerColors.white,
+        colorLabelText: ManagerColors.quartz,
+        fontSizeLabelText: ManagerFontsSizes.f13,
       ),
       SizedBox(height: ManagerHeight.h20),
       mainTextField(
         controller: password,
+        colorLabelText: ManagerColors.quartz,
+        color: ManagerColors.white,
+        fontSizeLabelText: ManagerFontsSizes.f13,
         labelText: ManagerStrings.password,
         obscureText: obscureText,
         isPassword: true,

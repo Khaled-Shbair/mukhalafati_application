@@ -7,19 +7,26 @@ Widget mainTextField({
   bool isPassword = false,
   TextInputType keyboardType = TextInputType.number,
   void Function()? changeObscureText,
+  Color? color,
+  double? fontSizeLabelText,
+  Color? colorLabelText,
+  bool readOnly = false,
 }) {
   return TextFormField(
+    maxLines: 1,
+    readOnly: readOnly,
     controller: controller,
     keyboardType: keyboardType,
+    cursorColor: ManagerColors.primaryColor,
     obscureText: obscureText,
     decoration: InputDecoration(
       labelText: labelText,
-      fillColor: ManagerColors.white,
+      fillColor: color ?? ManagerColors.transparent,
       filled: true,
       labelStyle: TextStyle(
-        color: ManagerColors.quartz,
+        color: colorLabelText ?? ManagerColors.black50,
         fontWeight: ManagerFontWeight.medium,
-        fontSize: ManagerFontsSizes.f13,
+        fontSize: fontSizeLabelText ?? ManagerFontsSizes.f11,
         fontFamily: ManagerFontFamily.cairo,
       ),
       enabledBorder: OutlineInputBorder(

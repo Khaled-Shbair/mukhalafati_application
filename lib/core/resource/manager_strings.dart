@@ -47,4 +47,32 @@ class ManagerStrings {
   static String payViolations = 'pay_violations'.tr;
   static String electronicLicense = 'electronic_license'.tr;
   static String createComplaint = 'create_complaint'.tr;
+  static String driverName = 'driver_name'.tr;
+  static String driverId = 'driver_id'.tr;
+  static String ownerName = 'owner_name'.tr;
+  static String ownerId = 'owner_id'.tr;
+  static String vehicleNumber = 'vehicle_number'.tr;
+  static String vehicleType = 'vehicle_type'.tr;
+  static String vehicleColor = 'vehicle_color'.tr;
+  static String violationTime = 'violation_time'.tr;
+  static String violationDate = 'violation_date'.tr;
+  static String placeOfViolation = 'place_of_violation'.tr;
+  static String reasonForViolation = 'reason_for_violation'.tr;
+  static String doYouWantToConfirmTheInformation =
+      'do_you_want_to_confirm_the_information'.tr;
+  static String confirm = 'confirm'.tr;
+  static String back = 'back'.tr;
+  static String theViolationWasSuccessfullyCreated =
+      'the_violation_was_successfully_created'.tr;
+  static String date = 'date'.tr;
+  static String regions = 'regions'.tr;
+  static String violationAmount = 'violation_amount'.tr;
+  static String unpaidViolations = 'unpaid_violations'.tr;
+  static String paidViolations = 'paid_violations'.tr;
+  static String unpaid = 'unpaid'.tr;
+  static String status = 'status'.tr;
+  static String documentingTheViolation = 'documenting_the_violation'.tr;
+  static String doYouWantToPay = 'do_you_want_to_pay'.tr;
+  static String payNow = 'pay_now'.tr;
+  static String titleHeadViolation = 'title_head_violation'.tr;
 }

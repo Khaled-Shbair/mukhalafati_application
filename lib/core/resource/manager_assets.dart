@@ -2,6 +2,8 @@ const String _imagePath = 'assets/images';
 
 class ManagerAssets {
   static const String logo = '$_imagePath/logo.png';
+  static const String createdSuccessfully =
+      '$_imagePath/created_successfully.svg';
   static const String logoSplash = '$_imagePath/splash/logo_splash.png';
   static const String backgroundSplashScreen =
       '$_imagePath/splash/background_splash_screen.png';
@@ -16,4 +18,6 @@ class ManagerAssets {
       '$_imagePath/login/background_welcome_screen.png';
   static const String driverIcon = '$_imagePath/login/driver_icon.png';
   static const String policeIcon = '$_imagePath/login/police_icon.png';
+  static const String palestineLogo =
+      '$_imagePath/violation/palestine_logo.png';
 }

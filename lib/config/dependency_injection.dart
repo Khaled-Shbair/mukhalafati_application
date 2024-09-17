@@ -61,12 +61,21 @@ initPoliceManHome() {
 disposePoliceManHome() {
   Get.delete<PoliceManHomeController>();
 }
+
 initDriverHome() {
   disposeLogin();
   disposeWelcome();
-  // Get.put<PoliceManHomeController>(PoliceManHomeController());
+  // Get.put<DriverHomeController>(DriverHomeController());
 }
 
 disposeDriverHome() {
-  // Get.delete<PoliceManHomeController>();
+  // Get.delete<DriverHomeController>();
+}
+
+initCreateViolation() {
+  Get.put<CreateViolationController>(CreateViolationController());
+}
+
+disposeCreateViolation() {
+  Get.delete<CreateViolationController>();
 }
