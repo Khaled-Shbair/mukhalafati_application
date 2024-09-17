@@ -15,9 +15,9 @@ class RouteGenerator {
       case Routes.loginScreen:
         initLogin();
         return MaterialPageRoute(builder: (_) => const LoginScreen());
-      case Routes.homeScreen:
+      case Routes.policeManHomeScreen:
         initHome();
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+        return MaterialPageRoute(builder: (_) => const PoliceManHomeScreen());
       default:
         return unDefinedRoute();
     }
