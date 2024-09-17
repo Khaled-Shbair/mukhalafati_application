@@ -6,6 +6,7 @@ export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:smooth_page_indicator/smooth_page_indicator.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:flutter/gestures.dart';
+export 'package:syncfusion_flutter_charts/charts.dart';
 
 export '/routes/routes.dart';
 export '/routes/route_generator.dart';
@@ -43,3 +44,7 @@ export '/features/login/presentation/view/widgets/check_box.dart';
 export '/features/login/presentation/view/widgets/richText.dart';
 export '/features/login/presentation/view/widgets/tab_bar_button.dart';
 export '/features/login/presentation/view/widgets/tab_bar_page.dart';
+export '/features/home/presentation/view/widgets/statistics_box_of_police_man.dart';
+
+export '/features/home/presentation/controller/police_man_home_controller.dart';
+export '/features/home/presentation/view/screens/police_man_home_screen.dart';
