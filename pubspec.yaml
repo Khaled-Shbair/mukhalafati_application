@@ -71,6 +71,7 @@ flutter:
     - assets/images/splash/
     - assets/images/on_boarding/
     - assets/images/login/
+    - assets/images/violation/
 
   fonts:
     - family: cairo
@@ -83,3 +84,5 @@ flutter:
           weight: 500
         - asset: assets/fonts/cairo/Cairo-SemiBold.ttf
           weight: 600
+        - asset: assets/fonts/cairo/Cairo-ExtraBold.ttf
+          weight: 800
