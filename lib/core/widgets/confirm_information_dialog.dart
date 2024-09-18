@@ -49,7 +49,7 @@ Future<void> confirmInformationDialog({
                     child: Icon(
                       Icons.close,
                       color: ManagerColors.white,
-                      size: ManagerIconsSizes.r18,
+                      size: ManagerIconsSizes.i18,
                     ),
                   ),
                 ),
