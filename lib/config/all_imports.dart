@@ -63,3 +63,7 @@ export '/features/violation/presentation/view/widgets/my_sized_box.dart';
 export '/features/violation/presentation/view/widgets/head_of_violation_page.dart';
 export '/features/violation/presentation/view/screens/create_violation_screen.dart';
 export '/features/violation/presentation/controller/create_violation_controller.dart';
+export '/features/violation/presentation/view/screens/list_of_violations_screen.dart';
+export '/features/violation/presentation/controller/list_of_violations_controller.dart';
+export '/features/violation/presentation/view/widgets/item_card_of_list_of_violation.dart';
+export '/features/violation/presentation/model/data_list_of_violations.dart';
