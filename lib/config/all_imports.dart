@@ -29,8 +29,10 @@ export '/core/resource/manager_sizes.dart';
 export '/core/resource/manager_fonts.dart';
 export '/core/resource/manager_assets.dart';
 export '/core/resource/manager_colors.dart';
-export '/core/resource/manager_strings.dart';
 export '/core/widgets/main_text_field.dart';
+export '/core/resource/manager_strings.dart';
+export '/core/widgets/confirm_information.dart';
+export '/core/widgets/created_successfully_dialog.dart';
 export '/core/storage/local/app_settings_shared_preferences.dart';
 
 //features file
