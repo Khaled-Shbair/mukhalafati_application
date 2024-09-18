@@ -79,3 +79,11 @@ initCreateViolation() {
 disposeCreateViolation() {
   Get.delete<CreateViolationController>();
 }
+
+initListOfViolations() {
+  Get.put<ListOfViolationsController>(ListOfViolationsController());
+}
+
+disposeListOfViolations() {
+  Get.delete<ListOfViolationsController>();
+}
