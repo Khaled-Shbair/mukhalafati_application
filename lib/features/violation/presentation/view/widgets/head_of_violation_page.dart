@@ -1,7 +1,7 @@
 import '/config/all_imports.dart';
 
 Widget headOfViolationPage({
-  Locale? locale,
+  required String text,
 }) {
   return Container(
     margin: EdgeInsetsDirectional.only(
@@ -9,8 +9,7 @@ Widget headOfViolationPage({
       end: ManagerWidth.w5,
     ),
     child: Text(
-      ManagerStrings.titleHeadViolation,
-      locale: locale,
+      text,
       textAlign: TextAlign.center,
       textScaler: const TextScaler.linear(0.9),
       overflow: TextOverflow.ellipsis,
@@ -20,8 +19,7 @@ Widget headOfViolationPage({
         fontSize: ManagerFontsSizes.f8,
         color: ManagerColors.black,
         fontWeight: ManagerFontWeight.bold,
-        height: 2,
-        locale: locale,
+        height: ManagerHeight.h2,
       ),
     ),
   );
