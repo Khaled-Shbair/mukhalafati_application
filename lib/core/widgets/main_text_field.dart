@@ -11,16 +11,26 @@ Widget mainTextField({
   double? fontSizeLabelText,
   Color? colorLabelText,
   bool readOnly = false,
+  int? maxLength,
+  int? maxLines,
 }) {
   return TextFormField(
-    maxLines: 1,
+    maxLines: maxLines ?? 1,
     readOnly: readOnly,
     controller: controller,
     keyboardType: keyboardType,
     cursorColor: ManagerColors.primaryColor,
     obscureText: obscureText,
+    maxLength: maxLength,
+    style: TextStyle(
+      color: ManagerColors.black,
+      fontFamily: ManagerFontFamily.cairo,
+      fontWeight: ManagerFontWeight.regular,
+      fontSize: ManagerFontsSizes.f11,
+    ),
     decoration: InputDecoration(
       labelText: labelText,
+      counterText: '',
       fillColor: color ?? ManagerColors.transparent,
       filled: true,
       labelStyle: TextStyle(
