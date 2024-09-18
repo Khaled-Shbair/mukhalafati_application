@@ -61,7 +61,7 @@ const Map<String, String> ar = {
   'violation_date': 'تاربخ المخالفة',
   'place_of_violation': 'مكان المخالفة',
   'reason_for_violation': 'سبب المخالفة',
-  'do_you_want_to_confirm_the_information?': 'هل تريد تأكيد المعلومات ؟',
+  'do_you_want_to_confirm_the_information': 'هل تريد تأكيد المعلومات ؟',
   'confirm': 'تأكيد',
   'back': 'رجوع',
   'the_violation_was_successfully_created': 'تم إنشاء المخالفة بنجـــــاح',
@@ -75,5 +75,6 @@ const Map<String, String> ar = {
   'documenting_the_violation': 'توثيق المخالفة',
   'status': 'الحالة :',
   'unpaid': 'غير مدفوع',
-  'title_head_violation': 'دولة فلسطين\n وزارة الداخلــيــة\nالــإدارة العـــامة لشـــرطــة المــــرور',
+  'title_head_violation':
+  'دولة فلسطين\n وزارة الداخلــيــة\nالــإدارة العـــامة لشـــرطــة المــــرور',
 };

@@ -75,4 +75,8 @@ class ManagerStrings {
   static String doYouWantToPay = 'do_you_want_to_pay'.tr;
   static String payNow = 'pay_now'.tr;
   static String titleHeadViolation = 'title_head_violation'.tr;
+  static const String titleHeadViolationAr =
+      'دولة فلسطين\n وزارة الداخلــيــة\nالــإدارة العـــامة لشـــرطــة المــــرور';
+  static const String titleHeadViolationEn =
+      'State of Palestine\nMinistry of Interior\nGeneral Directorate of Traffic Police';
 }
