@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.splashScreen,
+          initialRoute: Routes.createViolationScreen,
           onGenerateRoute: RouteGenerator.getRoute,
           translations: Translation(),
           locale: const Locale(LocaleConstants.arabicLanguage),

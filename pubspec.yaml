@@ -41,6 +41,7 @@ dependencies:
   get_it: ^7.7.0
   smooth_page_indicator: ^1.2.0+3
   shared_preferences: ^2.3.2
+  syncfusion_flutter_charts: ^26.2.14
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,7 @@ flutter:
     - assets/images/splash/
     - assets/images/on_boarding/
     - assets/images/login/
+    - assets/images/violation/
 
   fonts:
     - family: cairo
@@ -80,3 +82,7 @@ flutter:
           weight: 400
         - asset: assets/fonts/cairo/Cairo-Medium.ttf
           weight: 500
+        - asset: assets/fonts/cairo/Cairo-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/cairo/Cairo-ExtraBold.ttf
+          weight: 800

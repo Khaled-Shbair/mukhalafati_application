@@ -47,13 +47,8 @@ class LoginController extends GetxController
     super.dispose();
   }
 
-  void loginDriver() {}
-
-  void loginPoliceMan() {}
-
   void backButton() {
-    Get.back();
-
+    Get.offAllNamed(Routes.welcomeScreen);
   }
 
   void changeRememberMePoliceMan(bool isRememberMe) {
@@ -74,5 +69,13 @@ class LoginController extends GetxController
   void changeObscurePasswordDriver() {
     obscurePasswordDriver = !obscurePasswordDriver;
     update();
+  }
+
+  void loginDriver() {
+    Get.offAllNamed(Routes.driverHomeScreen);
+  }
+
+  void loginPoliceMan() {
+    Get.offAllNamed(Routes.policeManHomeScreen);
   }
 }
