@@ -12,4 +12,8 @@ class AppConstants {
   static const double widthOfBorderSideOfMainTextField = 0.50;
   static const double thicknessOfDividerInCreateViolation = 0.4;
   static const double heightOfDividerInCreateViolation = 0;
+  static const double blurRadiusOfBoxShadowInCreatedSuccessfullyWidget = 6;
+  static const double spreadRadiusOfBoxShadowInCreatedSuccessfullyWidget = 6;
+  static const double blurRadiusOfBoxShadowInConfirmInformationWidget = 6;
+  static const double spreadRadiusOfBoxShadowInConfirmInformationWidget = 2;
 }
