@@ -20,34 +20,70 @@ initSplash() {
   Get.put<SplashController>(SplashController());
 }
 
-_disposeSplash() {
+disposeSplash() {
   Get.delete<SplashController>();
 }
 
 initOnBoarding() {
-  _disposeSplash();
+  disposeSplash();
   Get.put<OnBoardingController>(OnBoardingController());
 }
 
-_disposeOnBoarding() {
+disposeOnBoarding() {
   Get.delete<OnBoardingController>();
 }
 
 initWelcome() {
-  _disposeOnBoarding();
+  disposeOnBoarding();
   Get.put<WelcomeController>(WelcomeController());
 }
 
-_disposeWelcome() {
+disposeWelcome() {
   Get.delete<WelcomeController>();
 }
 
 initLogin() {
-  _disposeOnBoarding();
-  _disposeWelcome();
+  disposeOnBoarding();
+  disposeWelcome();
   Get.put<LoginController>(LoginController());
 }
 
-_disposeLogin() {
+disposeLogin() {
   Get.delete<LoginController>();
+}
+
+initPoliceManHome() {
+  disposeLogin();
+  disposeWelcome();
+  Get.put<PoliceManHomeController>(PoliceManHomeController());
+}
+
+disposePoliceManHome() {
+  Get.delete<PoliceManHomeController>();
+}
+
+initDriverHome() {
+  disposeLogin();
+  disposeWelcome();
+  // Get.put<DriverHomeController>(DriverHomeController());
+}
+
+disposeDriverHome() {
+  // Get.delete<DriverHomeController>();
+}
+
+initCreateViolation() {
+  Get.put<CreateViolationController>(CreateViolationController());
+}
+
+disposeCreateViolation() {
+  Get.delete<CreateViolationController>();
+}
+
+initListOfViolations() {
+  Get.put<ListOfViolationsController>(ListOfViolationsController());
+}
+
+disposeListOfViolations() {
+  Get.delete<ListOfViolationsController>();
 }

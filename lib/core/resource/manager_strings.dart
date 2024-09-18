@@ -23,4 +23,60 @@ class ManagerStrings {
   static String licenseNumber = 'license_number'.tr;
   static String subscribe = 'subscribe'.tr;
   static String password = 'password'.tr;
+  static String totalViolations = 'total_violations'.tr;
+  static String highestDayForViolations = 'highest_day_for_violations'.tr;
+  static String dailyViolations = 'daily_violations'.tr;
+  static String weeklyViolations = 'weekly_violations'.tr;
+  static String monthlyViolations = 'monthly_violations'.tr;
+  static String numberOfDailyViolations = 'number_of_daily_violations'.tr;
+  static String saturday = 'saturday'.tr;
+  static String sunday = 'sunday'.tr;
+  static String monday = 'monday'.tr;
+  static String tuesday = 'tuesday'.tr;
+  static String wednesday = 'wednesday'.tr;
+  static String thursday = 'thursday'.tr;
+  static String friday = 'friday'.tr;
+  static String goodMorning = 'good_morning'.tr;
+  static String homePage = 'home_page'.tr;
+  static String speedMonitor = 'speed_monitor'.tr;
+  static String createViolation = 'create_violation'.tr;
+  static String listOfViolations = 'list_of_violations'.tr;
+  static String logout = 'logout'.tr;
+  static String testResults = 'test_results'.tr;
+  static String showViolations = 'show_violations'.tr;
+  static String payViolations = 'pay_violations'.tr;
+  static String electronicLicense = 'electronic_license'.tr;
+  static String createComplaint = 'create_complaint'.tr;
+  static String driverName = 'driver_name'.tr;
+  static String driverId = 'driver_id'.tr;
+  static String ownerName = 'owner_name'.tr;
+  static String ownerId = 'owner_id'.tr;
+  static String vehicleNumber = 'vehicle_number'.tr;
+  static String vehicleType = 'vehicle_type'.tr;
+  static String vehicleColor = 'vehicle_color'.tr;
+  static String violationTime = 'violation_time'.tr;
+  static String violationDate = 'violation_date'.tr;
+  static String placeOfViolation = 'place_of_violation'.tr;
+  static String reasonForViolation = 'reason_for_violation'.tr;
+  static String doYouWantToConfirmTheInformation =
+      'do_you_want_to_confirm_the_information'.tr;
+  static String confirm = 'confirm'.tr;
+  static String back = 'back'.tr;
+  static String theViolationWasSuccessfullyCreated =
+      'the_violation_was_successfully_created'.tr;
+  static String date = 'date'.tr;
+  static String regions = 'regions'.tr;
+  static String violationAmount = 'violation_amount'.tr;
+  static String unpaidViolations = 'unpaid_violations'.tr;
+  static String paidViolations = 'paid_violations'.tr;
+  static String unpaid = 'unpaid'.tr;
+  static String status = 'status'.tr;
+  static String documentingTheViolation = 'documenting_the_violation'.tr;
+  static String doYouWantToPay = 'do_you_want_to_pay'.tr;
+  static String payNow = 'pay_now'.tr;
+  static String titleHeadViolation = 'title_head_violation'.tr;
+  static const String titleHeadViolationAr =
+      'دولة فلسطين\n وزارة الداخلــيــة\nالــإدارة العـــامة لشـــرطــة المــــرور';
+  static const String titleHeadViolationEn =
+      'State of Palestine\nMinistry of Interior\nGeneral Directorate of Traffic Police';
 }

@@ -11,6 +11,7 @@ Widget mainButton({
   BorderSide? side,
   double? borderRadius,
   Color? highlightColor,
+  Color? splashColor,
   double? highlightElevation,
 }) {
   return MaterialButton(
@@ -21,6 +22,8 @@ Widget mainButton({
     elevation: elevation.onNull(),
     highlightColor: highlightColor,
     highlightElevation: highlightElevation.onNull(),
+    focusColor: Colors.transparent,
+    splashColor: splashColor,
     shape: shape ??
         RoundedRectangleBorder(
           side: side ??
