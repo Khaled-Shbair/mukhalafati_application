@@ -16,4 +16,8 @@ class SizeUitl {
   static double setFontSize(double fontSize) {
     return fontSize.sp;
   }
+
+  static double setIconSize(double iconSize) {
+    return iconSize.r;
+  }
 }
