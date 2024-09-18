@@ -21,6 +21,10 @@ class RouteGenerator {
       case Routes.createViolationScreen:
         initCreateViolation();
         return MaterialPageRoute(builder: (_) => const CreateViolationScreen());
+      case Routes.listOfViolationsScreen:
+        initListOfViolations();
+        return MaterialPageRoute(
+            builder: (_) => const ListOfViolationsScreen());
       default:
         return unDefinedRoute();
     }
