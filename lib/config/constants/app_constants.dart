@@ -16,4 +16,8 @@ class AppConstants {
   static const double spreadRadiusOfBoxShadowInCreatedSuccessfullyWidget = 6;
   static const double blurRadiusOfBoxShadowInConfirmInformationWidget = 6;
   static const double spreadRadiusOfBoxShadowInConfirmInformationWidget = 2;
+  static const int maxLengthOfLicenseNumber = 8;
+  static const int maxLengthOfVehicleNumber = 8;
+  static const int maxLengthOfIDNumber = 8;
+  static const int maxLengthOfVehicleColor = 8;
 }
