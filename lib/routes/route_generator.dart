@@ -25,6 +25,12 @@ class RouteGenerator {
         initListOfViolations();
         return MaterialPageRoute(
             builder: (_) => const ListOfViolationsScreen());
+      case Routes.searchForDriverScreen:
+        initSearchForDriver();
+        return MaterialPageRoute(builder: (_) => const SearchForDriverScreen());
+      case Routes.searchOnResultsTestsOfLicenseScreen:
+        initSearchOnResultsTestsOfLicense();
+        return MaterialPageRoute(builder: (_) => const SearchOnResultsTestsOfLicenseScreen());
       default:
         return unDefinedRoute();
     }
