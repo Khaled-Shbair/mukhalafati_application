@@ -87,3 +87,18 @@ initListOfViolations() {
 disposeListOfViolations() {
   Get.delete<ListOfViolationsController>();
 }
+initSearchForDriver() {
+  Get.put<SearchForDriverController>(SearchForDriverController());
+}
+
+disposeSearchForDriver() {
+  Get.delete<SearchForDriverController>();
+}
+
+initSearchOnResultsTestsOfLicense() {
+  Get.put<SearchOnResultsTestsOfLicenseController>(SearchOnResultsTestsOfLicenseController());
+}
+
+disposeSearchOnResultsTestsOfLicense() {
+  Get.delete<SearchOnResultsTestsOfLicenseController>();
+}

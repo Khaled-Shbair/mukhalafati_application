@@ -13,6 +13,7 @@ Widget mainButton({
   Color? highlightColor,
   Color? splashColor,
   double? highlightElevation,
+  EdgeInsetsDirectional? padding,
 }) {
   return MaterialButton(
     onPressed: onPressed,
@@ -24,6 +25,7 @@ Widget mainButton({
     highlightElevation: highlightElevation.onNull(),
     focusColor: Colors.transparent,
     splashColor: splashColor,
+    padding: padding,
     shape: shape ??
         RoundedRectangleBorder(
           side: side ??

@@ -2,17 +2,21 @@ import '/config/all_imports.dart';
 
 Widget mainTextField({
   required TextEditingController controller,
-  required String labelText,
+  String? labelText,
+  String? hintText,
   bool obscureText = false,
   bool isPassword = false,
   TextInputType keyboardType = TextInputType.number,
   void Function()? changeObscureText,
   Color? color,
   double? fontSizeLabelText,
+  FontWeight? fontWeightLabelText,
   Color? colorLabelText,
+  Color borderColor = ManagerColors.lightSilver,
   bool readOnly = false,
   int? maxLength,
   int? maxLines,
+  EdgeInsetsDirectional? contentPadding,
 }) {
   return TextFormField(
     maxLines: maxLines ?? 1,
@@ -30,33 +34,41 @@ Widget mainTextField({
     ),
     decoration: InputDecoration(
       labelText: labelText,
+      hintText: hintText,
+      contentPadding: contentPadding,
       counterText: '',
       fillColor: color ?? ManagerColors.transparent,
       filled: true,
       labelStyle: TextStyle(
         color: colorLabelText ?? ManagerColors.black50,
-        fontWeight: ManagerFontWeight.medium,
+        fontWeight: fontWeightLabelText ?? ManagerFontWeight.medium,
+        fontSize: fontSizeLabelText ?? ManagerFontsSizes.f11,
+        fontFamily: ManagerFontFamily.cairo,
+      ),
+      hintStyle: TextStyle(
+        color: colorLabelText ?? ManagerColors.black50,
+        fontWeight: fontWeightLabelText ?? ManagerFontWeight.medium,
         fontSize: fontSizeLabelText ?? ManagerFontsSizes.f11,
         fontFamily: ManagerFontFamily.cairo,
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(ManagerRadius.r5),
-        borderSide: const BorderSide(
-          color: ManagerColors.lightSilver,
+        borderSide: BorderSide(
+          color: borderColor,
           width: AppConstants.widthOfBorderSideOfMainTextField,
         ),
       ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(ManagerRadius.r5),
-        borderSide: const BorderSide(
-          color: ManagerColors.lightSilver,
+        borderSide: BorderSide(
+          color: borderColor,
           width: AppConstants.widthOfBorderSideOfMainTextField,
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(ManagerRadius.r5),
-        borderSide: const BorderSide(
-          color: ManagerColors.lightSilver,
+        borderSide: BorderSide(
+          color: borderColor,
           width: AppConstants.widthOfBorderSideOfMainTextField,
         ),
       ),
