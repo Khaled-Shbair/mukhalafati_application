@@ -87,11 +87,7 @@ class SearchOnResultsTestsOfLicenseScreen extends StatelessWidget {
                   ),
                 ),
                 if (controller.loading == true) ...{
-                  const Center(
-                    child: CircularProgressIndicator(
-                      color: ManagerColors.primaryColor,
-                    ),
-                  ),
+                  myLoading(),
                 } else if (controller.result == true) ...{
                   resultOfLicense(
                     resultName: '${ManagerStrings.name}:  ',
