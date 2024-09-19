@@ -75,6 +75,27 @@ class ManagerStrings {
   static String doYouWantToPay = 'do_you_want_to_pay'.tr;
   static String payNow = 'pay_now'.tr;
   static String titleHeadViolation = 'title_head_violation'.tr;
+  static String vehicleDrivers = 'vehicle_drivers'.tr;
+  static String searchForASpecificDriverUsingTheLicenseNumber =
+      'search_for_a_specific_driver_using_the_license_number'.tr;
+  static String idNumber = 'id_number'.tr;
+  static String name = 'name'.tr;
+  static String releaseDate = 'release_date'.tr;
+  static String licenseLevels = 'license_levels'.tr;
+  static String expiryDate = 'expiry_date'.tr;
+  static String numberOfViolations = 'number_of_violations'.tr;
+  static String placesOfViolations = 'places_of_violations'.tr;
+  static String drivingLicense = 'driving_license'.tr;
+  static String licenseTestResults = 'license_test_results'.tr;
+  static String searchForLicenseResultsUsingIdNumber =
+      'search_for_license_results_using_id_number'.tr;
+  static String theoreticalTestResult = 'theoretical_test_result'.tr;
+  static String practicalTestResult = 'practical_test_result'.tr;
+  static String doYouWantToLogoutOfTheApplication =
+      'do_you_want_to_logout_of_the_application'.tr;
+  static String cancel = 'cancel'.tr;
+  static String successful = 'successful'.tr;
+  static String failed = 'failed'.tr;
   static const String titleHeadViolationAr =
       'دولة فلسطين\n وزارة الداخلــيــة\nالــإدارة العـــامة لشـــرطــة المــــرور';
   static const String titleHeadViolationEn =
