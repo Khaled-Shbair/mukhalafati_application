@@ -21,6 +21,7 @@ export '/config/constants/locale_constants.dart';
 export '/core/language/ar.dart';
 export '/core/language/en.dart';
 export '/core/util/size_uitl.dart';
+export '/core/widgets/my_loading.dart';
 export '/core/widgets/main_button.dart';
 export '/core/language/translation.dart';
 export '/core/extensions/extensions.dart';
@@ -68,9 +69,10 @@ export '/features/violation/presentation/controller/list_of_violations_controlle
 export '/features/violation/presentation/view/widgets/item_card_of_list_of_violation.dart';
 export '/features/violation/presentation/model/data_list_of_violations.dart';
 
-export '/features/search/presentation/controller/search_for_driver_controller.dart';
-export '/features/search/presentation/view/screens/search_for_driver_screen.dart';
-export '/features/search/presentation/view/screens/search_on_results_tests_of_license_screen.dart';
-export '/features/search/presentation/controller/search_on_results_tests_of_license_controller.dart';
 export '/features/search/presentation/view/widgets/empty_result.dart';
 export '/features/search/presentation/view/widgets/result_of_test.dart';
+export '/features/search/presentation/view/widgets/result_of_driver.dart';
+export '/features/search/presentation/view/screens/search_for_driver_screen.dart';
+export '/features/search/presentation/controller/search_for_driver_controller.dart';
+export '/features/search/presentation/view/screens/search_on_results_tests_of_license_screen.dart';
+export '/features/search/presentation/controller/search_on_results_tests_of_license_controller.dart';
