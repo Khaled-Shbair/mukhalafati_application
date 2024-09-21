@@ -62,20 +62,23 @@ export '/features/home/presentation/controller/police_man_home_controller.dart';
 export '/features/home/presentation/view/widgets/statistics_box_of_police_man.dart';
 
 export '/features/violation/presentation/view/widgets/my_sized_box.dart';
+export '/features/violation/presentation/model/data_list_of_violations.dart';
 export '/features/violation/presentation/view/widgets/head_of_violation_page.dart';
 export '/features/violation/presentation/view/screens/create_violation_screen.dart';
 export '/features/violation/presentation/controller/create_violation_controller.dart';
 export '/features/violation/presentation/view/screens/list_of_violations_screen.dart';
 export '/features/violation/presentation/controller/list_of_violations_controller.dart';
 export '/features/violation/presentation/view/widgets/item_card_of_list_of_violation.dart';
-export '/features/violation/presentation/model/data_list_of_violations.dart';
 
+export '/features/search/presentation/view/widgets/row_of_table.dart';
 export '/features/search/presentation/view/widgets/empty_result.dart';
 export '/features/search/presentation/view/widgets/result_of_test.dart';
 export '/features/search/presentation/view/widgets/result_of_driver.dart';
+export '/features/search/presentation/view/widgets/border_side_of_table.dart';
 export '/features/search/presentation/view/screens/search_for_driver_screen.dart';
 export '/features/search/presentation/controller/search_for_driver_controller.dart';
 export '/features/search/presentation/view/screens/search_on_results_tests_of_license_screen.dart';
 export '/features/search/presentation/controller/search_on_results_tests_of_license_controller.dart';
-export '/features/search/presentation/view/widgets/border_side_of_table.dart';
-export '/features/search/presentation/view/widgets/row_of_table.dart';
+
+export '/features/logout/presentation/view/screens/logout_screen.dart';
+export '/features/logout/presentation/controller/logout_controller.dart';

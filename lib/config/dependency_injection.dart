@@ -102,3 +102,10 @@ initSearchOnResultsTestsOfLicense() {
 disposeSearchOnResultsTestsOfLicense() {
   Get.delete<SearchOnResultsTestsOfLicenseController>();
 }
+initLogout() {
+  Get.put<LogoutController>(LogoutController());
+}
+
+disposeLogout() {
+  Get.delete<LogoutController>();
+}
