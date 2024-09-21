@@ -71,9 +71,9 @@ flutter:
     - assets/images/splash/
     - assets/images/on_boarding/
     - assets/images/login/
-    - assets/images/violation/
     - assets/images/search/
     - assets/images/official_logos/
+    - assets/images/logout/
 
   fonts:
     - family: cairo
