@@ -1,4 +1,3 @@
-
 import '/config/all_imports.dart';
 
 class RouteGenerator {
@@ -16,7 +15,7 @@ class RouteGenerator {
       case Routes.loginScreen:
         initLogin();
         return MaterialPageRoute(builder: (_) => const LoginScreen());
-        case Routes.logoutScreen:
+      case Routes.logoutScreen:
         initLogout();
         return MaterialPageRoute(builder: (_) => const LogoutScreen());
       case Routes.policeManHomeScreen:
@@ -34,7 +33,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SearchForDriverScreen());
       case Routes.searchOnResultsTestsOfLicenseScreen:
         initSearchOnResultsTestsOfLicense();
-        return MaterialPageRoute(builder: (_) => const SearchOnResultsTestsOfLicenseScreen());
+        return MaterialPageRoute(
+            builder: (_) => const SearchOnResultsTestsOfLicenseScreen());
+      case Routes.drivingLicenseCardScreenScreen:
+        initDrivingLicenseCard();
+        return MaterialPageRoute(
+            builder: (_) => const DrivingLicenseCardScreen());
       default:
         return unDefinedRoute();
     }
