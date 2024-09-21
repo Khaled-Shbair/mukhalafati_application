@@ -28,4 +28,5 @@ class ManagerAssets {
   static const String resultOfLicense =
       '$_imagePath/search/result_of_license.svg';
   static const String searchIcon = '$_imagePath/search/search_icon.svg';
+  static const String questionLogout = '$_imagePath/logout/question_logout.svg';
 }
