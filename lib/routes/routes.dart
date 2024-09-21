@@ -15,4 +15,5 @@ class Routes {
   static const String listOfViolationsScreen = 'list_of_violations_screen';
   static const String searchForDriverScreen = 'search_for_driver_screen';
   static const String searchOnResultsTestsOfLicenseScreen = 'search_on_results_tests_of_license_screen';
+  static const String logoutScreen = 'logout_screen';
 }

@@ -1,3 +1,4 @@
+
 import '/config/all_imports.dart';
 
 class RouteGenerator {
@@ -15,6 +16,9 @@ class RouteGenerator {
       case Routes.loginScreen:
         initLogin();
         return MaterialPageRoute(builder: (_) => const LoginScreen());
+        case Routes.logoutScreen:
+        initLogout();
+        return MaterialPageRoute(builder: (_) => const LogoutScreen());
       case Routes.policeManHomeScreen:
         initPoliceManHome();
         return MaterialPageRoute(builder: (_) => const PoliceManHomeScreen());
