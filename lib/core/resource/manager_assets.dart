@@ -19,10 +19,13 @@ class ManagerAssets {
       '$_imagePath/login/background_welcome_screen.png';
   static const String driverIcon = '$_imagePath/login/driver_icon.png';
   static const String policeIcon = '$_imagePath/login/police_icon.png';
+  static const String palestineFlag =
+      '$_imagePath/official_logos/palestine_flag.png';
   static const String palestineLogo =
-      '$_imagePath/violation/palestine_logo.png';
-  static const String emptyResultSearch = '$_imagePath/search/empty_result_search.svg';
-  static const String resultOfLicense = '$_imagePath/search/result_of_license.svg';
+      '$_imagePath/official_logos/palestine_logo.png';
+  static const String emptyResultSearch =
+      '$_imagePath/search/empty_result_search.svg';
+  static const String resultOfLicense =
+      '$_imagePath/search/result_of_license.svg';
   static const String searchIcon = '$_imagePath/search/search_icon.svg';
-
 }
