@@ -1,7 +1,10 @@
 import '/config/all_imports.dart';
 
 class ManagerFontsSizes {
+  static double f7 = SizeUitl.setFontSize(7);
   static double f8 = SizeUitl.setFontSize(8);
+  static double f9 = SizeUitl.setFontSize(9);
+  static double f10 = SizeUitl.setFontSize(10);
   static double f11 = SizeUitl.setFontSize(11);
   static double f12 = SizeUitl.setFontSize(12);
   static double f13 = SizeUitl.setFontSize(13);

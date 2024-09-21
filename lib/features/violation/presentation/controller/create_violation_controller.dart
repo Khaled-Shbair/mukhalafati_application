@@ -12,10 +12,6 @@ class CreateViolationController extends GetxController {
   late TextEditingController violationDateController;
   late TextEditingController placeOfViolationController;
   late TextEditingController reasonForViolationController;
-  int maxLengthOfVehicleNumber = 8;
-  int maxLengthOfDriverId = 8;
-  int maxLengthOfOwnerId = 8;
-  int maxLengthOfVehicleColor = 10;
   int _hour = 0;
 
   @override
