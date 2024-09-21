@@ -4,7 +4,19 @@ class SearchForDriverController extends GetxController {
   late TextEditingController licenseNumberController;
   bool loading = false;
   bool result = true;
+  String licenseNumber = '0015440';
+  String expiryDate = '10-02-2024';
+  String releaseDate = '22-02-2029';
+  String idNumber = '802075986';
+  String nameAr = 'محمد عبد الحليم عبد الفتاح مسعود';
+  String nameEn = 'Mohammed A.A.Massoud';
+  String licenseLevels = '[2  3  B]';
 
+  String imageDriver =
+      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
+
+  // String imageDriver = 'https://upload.wikimedia.org/wikipedia/commons/4/44/%D8%B5%D9%88%D8%B1%D8%A9_%D8%B4%D8%AE%D8%B5%D9%8A%D8%A9_%D9%88%D9%84%D9%8A%D8%AF_%D8%A7%D9%84%D8%AD%D8%B4%D9%81.jpg';
+int numberOfViolations = 15;
   @override
   void onInit() {
     super.onInit();

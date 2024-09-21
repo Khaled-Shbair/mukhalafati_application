@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.searchOnResultsTestsOfLicenseScreen,
+          initialRoute: Routes.searchForDriverScreen,
           onGenerateRoute: RouteGenerator.getRoute,
           translations: Translation(),
           locale: const Locale(LocaleConstants.arabicLanguage),

@@ -87,7 +87,17 @@ class SearchForDriverScreen extends StatelessWidget {
                 if (controller.loading == true) ...{
                   myLoading(),
                 } else if (controller.result) ...{
-                  resultOfDriver(),
+                  resultOfDriver(
+                    licenseNumber: controller.licenseNumber,
+                    nameAr: controller.nameAr,
+                    nameEn: controller.nameEn,
+                    idNumber: controller.idNumber,
+                    releaseDate: controller.releaseDate,
+                    expiryDate: controller.expiryDate,
+                    licenseLevels: controller.licenseLevels,
+                    imageDriver: controller.imageDriver,
+                    numberOfViolations: controller.numberOfViolations,
+                  ),
                 } else ...{
                   emptyResult(
                     text: ManagerStrings
