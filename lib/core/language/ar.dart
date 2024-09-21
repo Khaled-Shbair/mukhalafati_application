@@ -89,12 +89,15 @@ const Map<String, String> ar = {
   'places_of_violations': 'أماكن المخالفات',
   'driving_license': 'رخصة قيادة',
   'license_test_results': 'نتائج اختبار الرخصة',
-  'search_for_license_results_using_id_number': 'قم بالبحث عن نتائج الرخصة باستخدام رقم الهوية',
+  'search_for_license_results_using_id_number':
+      'قم بالبحث عن نتائج الرخصة باستخدام رقم الهوية',
   'theoretical_test_result': 'نتيجة الاختبار النظري',
   'practical_test_result': 'نتيجة الاختبار العملي',
-  'do_you_want_to_logout_of_the_application': 'هل تريـــد تسجيـــل الخروج من التطبيق؟',
+  'do_you_want_to_logout_of_the_application':
+      'هل تريـــد تسجيـــل الخروج من التطبيق؟',
   'cancel': 'إلغاء',
   'successful': 'ناجح',
   'failed': 'راسب',
+  'violation': 'مخالفة',
   '': '',
 };

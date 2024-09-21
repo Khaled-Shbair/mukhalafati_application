@@ -96,8 +96,13 @@ class ManagerStrings {
   static String cancel = 'cancel'.tr;
   static String successful = 'successful'.tr;
   static String failed = 'failed'.tr;
+  static String violation = 'violation'.tr;
   static const String titleHeadViolationAr =
-      'دولة فلسطين\n وزارة الداخلــيــة\nالــإدارة العـــامة لشـــرطــة المــــرور';
+      'دولة فلسطين\nوزارة الداخلــيــة\nالــإدارة العـــامة لشـــرطــة المــــرور';
   static const String titleHeadViolationEn =
       'State of Palestine\nMinistry of Interior\nGeneral Directorate of Traffic Police';
+  static const String stateOfPalestineMinistryOfTransportAnCommunicationsAr =
+      'دولة فلسطين\nوزارة النقل والمواصلات';
+  static const String stateOfPalestineMinistryOfTransportAnCommunicationsEn =
+      'State of palestine\nMinistry to Transport';
 }
