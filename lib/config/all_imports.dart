@@ -86,3 +86,4 @@ export '/features/logout/presentation/controller/logout_controller.dart';
 
 export '/features/driving_license_card/presentation/view/screens/driving_license_card_screen.dart';
 export '/features/driving_license_card/presentation/controller/driving_license_card_controller.dart';
+export '/features/driving_license_card/presentation/view/widgets/expansion_tile_card.dart';
