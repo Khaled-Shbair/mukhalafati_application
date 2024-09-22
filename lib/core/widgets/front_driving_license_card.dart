@@ -9,12 +9,10 @@ Widget frontDrivingLicenseCard({
   required String expiryDate,
   required String licenseLevels,
   required String imageDriver,
+  bool isShadowWhite = false,
 }) {
   return Container(
-    margin: EdgeInsetsDirectional.only(
-      top: ManagerHeight.h26,
-      bottom: ManagerHeight.h10,
-    ),
+    margin: EdgeInsetsDirectional.zero,
     padding: EdgeInsetsDirectional.only(
       start: ManagerWidth.w6,
       end: ManagerWidth.w6,
@@ -30,6 +28,12 @@ Widget frontDrivingLicenseCard({
           color: ManagerColors.black5,
           blurRadius: AppConstants.blurRadiusOfBoxShadowInResultOfDriverWidget,
         ),
+        if (isShadowWhite) ...{
+          BoxShadow(
+            offset: Offset(ManagerWidth.w0, ManagerHeight.h4),
+            color: ManagerColors.white,
+          ),
+        },
       ],
     ),
     child: Column(

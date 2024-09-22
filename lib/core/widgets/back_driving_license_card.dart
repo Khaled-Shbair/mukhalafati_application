@@ -1,6 +1,6 @@
 import '/config/all_imports.dart';
 
-Widget backDrivingLicenseCard() {
+Widget backDrivingLicenseCard({bool isShadowWhite = false}) {
   return Container(
     padding: EdgeInsetsDirectional.only(
       top: ManagerHeight.h28,

@@ -1,4 +1,3 @@
-
 import '/config/all_imports.dart';
 
 class DrivingLicenseCardScreen extends StatelessWidget {
