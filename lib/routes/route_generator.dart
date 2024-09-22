@@ -35,7 +35,7 @@ class RouteGenerator {
         initSearchOnResultsTestsOfLicense();
         return MaterialPageRoute(
             builder: (_) => const SearchOnResultsTestsOfLicenseScreen());
-      case Routes.drivingLicenseCardScreenScreen:
+      case Routes.drivingLicenseCardScreen:
         initDrivingLicenseCard();
         return MaterialPageRoute(
             builder: (_) => const DrivingLicenseCardScreen());
