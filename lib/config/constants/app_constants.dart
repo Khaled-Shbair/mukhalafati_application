@@ -24,6 +24,8 @@ class AppConstants {
   static const int maxLengthOfIDNumber = 8;
   static const int maxLengthOfVehicleColor = 8;
   static const double
+      heightOfTextOfTitleDrivingLicenseCardInDrivingLicenseCardScreen = 1.8;
+  static const double
       blurRadiusOfBoxShadowInNumberOfViolationsContainerInResultOfDriverWidget =
       2;
 }
