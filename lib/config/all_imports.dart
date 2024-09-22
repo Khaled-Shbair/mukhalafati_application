@@ -32,6 +32,7 @@ export '/core/resource/manager_assets.dart';
 export '/core/resource/manager_colors.dart';
 export '/core/widgets/main_text_field.dart';
 export '/core/resource/manager_strings.dart';
+export '/core/widgets/back_driving_license_card.dart';
 export '/core/widgets/front_driving_license_card.dart';
 export '/core/widgets/confirm_information_dialog.dart';
 export '/core/widgets/created_successfully_dialog.dart';
@@ -82,3 +83,7 @@ export '/features/search/presentation/controller/search_on_results_tests_of_lice
 
 export '/features/logout/presentation/view/screens/logout_screen.dart';
 export '/features/logout/presentation/controller/logout_controller.dart';
+
+export '/features/driving_license_card/presentation/view/screens/driving_license_card_screen.dart';
+export '/features/driving_license_card/presentation/controller/driving_license_card_controller.dart';
+export '/features/driving_license_card/presentation/view/widgets/expansion_tile_card.dart';

@@ -99,5 +99,12 @@ const Map<String, String> ar = {
   'successful': 'ناجح',
   'failed': 'راسب',
   'violation': 'مخالفة',
-  '': '',
+
+  'driving_license_card': 'بطاقة رخصة القيادة',
+  'show_your_driving_license_card': 'عرض بطاقة الرخصة الخاصة بك',
+  'title_driving_license_card': 'يمكنك من خلال هذه الواجهة عرض بطاقة الرخصة الإلكترونية الخاصة بك.\nاختر العرض المناسب',
+  'front_electronic_license_card': 'بطاقة الرخصة الإلكترونية الأمامية',
+  'back_electronic_license_card': 'بطاقة الرخصة الإلكترونية الخلفية',
+  'full_electronic_license_card':'بطاقة الرخصة الإلكترونية كاملة',
+  '':'',
 };

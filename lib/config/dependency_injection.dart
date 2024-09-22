@@ -1,3 +1,4 @@
+
 import 'all_imports.dart';
 
 final instance = GetIt.instance;
@@ -87,6 +88,7 @@ initListOfViolations() {
 disposeListOfViolations() {
   Get.delete<ListOfViolationsController>();
 }
+
 initSearchForDriver() {
   Get.put<SearchForDriverController>(SearchForDriverController());
 }
@@ -96,16 +98,26 @@ disposeSearchForDriver() {
 }
 
 initSearchOnResultsTestsOfLicense() {
-  Get.put<SearchOnResultsTestsOfLicenseController>(SearchOnResultsTestsOfLicenseController());
+  Get.put<SearchOnResultsTestsOfLicenseController>(
+      SearchOnResultsTestsOfLicenseController());
 }
 
 disposeSearchOnResultsTestsOfLicense() {
   Get.delete<SearchOnResultsTestsOfLicenseController>();
 }
+
 initLogout() {
   Get.put<LogoutController>(LogoutController());
 }
 
 disposeLogout() {
   Get.delete<LogoutController>();
+}
+
+initDrivingLicenseCard() {
+  Get.put<DrivingLicenseCardController>(DrivingLicenseCardController());
+}
+
+disposeDrivingLicenseCard() {
+  Get.delete<DrivingLicenseCardController>();
 }
