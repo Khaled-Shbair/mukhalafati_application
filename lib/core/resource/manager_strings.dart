@@ -97,6 +97,49 @@ class ManagerStrings {
   static String successful = 'successful'.tr;
   static String failed = 'failed'.tr;
   static String violation = 'violation'.tr;
+  static String drivingLicenseCard = 'driving_license_card'.tr;
+  static String showYourDrivingLicenseCard =
+      'show_your_driving_license_card'.tr;
+  static String titleDrivingLicenseCard = 'title_driving_license_card'.tr;
+  static String frontElectronicLicenseCard = 'front_electronic_license_card'.tr;
+  static String backElectronicLicenseCard = 'back_electronic_license_card'.tr;
+  static String fullElectronicLicenseCard = 'full_electronic_license_card'.tr;
+
+///////////////////////////////////////////////////////////////////////////////
+  static const String drivingLicenseGradesAr = 'درجات رخصة القيادة';
+  static const String drivingLicenseGradesEn = 'Driving License Classes';
+  static const String tractorAr = 'جراد رزاعي';
+  static const String tractorEn = 'Tractor';
+  static const String privateAr = 'خصوصي';
+  static const String commercialAr = 'تجاري';
+  static const String commercial15TonAr = 'حمولة';
+  static const String trucksOrTrailerAr = 'قاطرة / ساندة';
+  static const String taxiAr = 'مركبة أجرة';
+  static const String busAr = 'حافلة';
+  static const String privateEn = 'Private';
+  static const String commercialEn = 'Commercial';
+  static const String busEn = 'Bus';
+  static const String taxiEn = 'Taxi';
+  static const String trucksOrTrailerEn = 'Trucks/Trailer';
+  static const String commercial15TonEn = 'CommerciaL>15 Ton';
+  static const String motorcycleLessThanOrEqualTo50cmAr =
+      'دراجة نارية حتى 50سم.';
+  static const String motorcycleLessThanOrEqualTo500cmAr =
+      'دراجة نارية حتى 500سم.';
+  static const String motorcycleGreaterThan500cmAr = 'دراجة نارية اكبر 500سم.';
+  static const String skillSet =
+      'مدرب سياقة (س), مدير مهني (م) , محاضر (ض) , سائق إسعاف(ع) , سائق إطفاء(ف). سائق معدات هندسية(ه), ساائق رافة(ر),سائق مركبة تخليص(خ)';
+  static const String motorcycleLessThanOrEqualTo50cmEn =
+      'Motorcycle <= 50 cm.';
+  static const String motorcycleLessThanOrEqualTo500cmEn =
+      'Motorcycle <= 500 cm.';
+  static const String motorcycleGreaterThan500cmEn = 'Motorcycle > 500 cm.';
+
+  static const String automaticVehicleAr = 'مركبة اتوماتيك';
+  static const String glassesAr = 'نظارة طبية';
+  static const String glassesEn = 'Glasses';
+  static const String automaticVehicleEn = 'Automatic vehicle';
+
   static const String titleHeadViolationAr =
       'دولة فلسطين\nوزارة الداخلــيــة\nالــإدارة العـــامة لشـــرطــة المــــرور';
   static const String titleHeadViolationEn =
