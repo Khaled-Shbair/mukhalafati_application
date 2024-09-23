@@ -1,10 +1,10 @@
-
 import 'all_imports.dart';
 
 final instance = GetIt.instance;
 
 initModule() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   // _initSharedPreferences();
 }
 
@@ -54,9 +54,13 @@ disposeLogin() {
 }
 
 initPoliceManHome() {
+  Get.put<PoliceManHomeController>(PoliceManHomeController());
   disposeLogin();
   disposeWelcome();
-  Get.put<PoliceManHomeController>(PoliceManHomeController());
+  disposeCreateViolation();
+  disposeListOfViolations();
+  disposeSearchForDriver();
+  disposeLogout();
 }
 
 disposePoliceManHome() {
@@ -75,6 +79,10 @@ disposeDriverHome() {
 
 initCreateViolation() {
   Get.put<CreateViolationController>(CreateViolationController());
+  disposePoliceManHome();
+  disposeListOfViolations();
+  disposeSearchForDriver();
+  disposeLogout();
 }
 
 disposeCreateViolation() {
@@ -83,6 +91,10 @@ disposeCreateViolation() {
 
 initListOfViolations() {
   Get.put<ListOfViolationsController>(ListOfViolationsController());
+  disposePoliceManHome();
+  disposeCreateViolation();
+  disposeSearchForDriver();
+  disposeLogout();
 }
 
 disposeListOfViolations() {
@@ -91,6 +103,10 @@ disposeListOfViolations() {
 
 initSearchForDriver() {
   Get.put<SearchForDriverController>(SearchForDriverController());
+  disposePoliceManHome();
+  disposeListOfViolations();
+  disposeCreateViolation();
+  disposeLogout();
 }
 
 disposeSearchForDriver() {
