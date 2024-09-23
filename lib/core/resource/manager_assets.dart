@@ -29,5 +29,14 @@ class ManagerAssets {
       '$_imagePath/search/result_of_license.svg';
   static const String searchIcon = '$_imagePath/search/search_icon.svg';
   static const String questionLogout = '$_imagePath/logout/question_logout.svg';
-  static const String imageDrivingLicenseCard = '$_imagePath/driving_license_card/image_driving_license_card.png';
+  static const String imageDrivingLicenseCard =
+      '$_imagePath/driving_license_card/image_driving_license_card.png';
+  static const String createIcon = '$_imagePath/home/create_icon.png';
+  static const String homeIcon = '$_imagePath/home/home_icon.png';
+  static const String listOfViolationIcon =
+      '$_imagePath/home/list_of_violation_icon.png';
+  static const String logoutIcon = '$_imagePath/home/logout_icon.png';
+  static const String radarIcon = '$_imagePath/home/radar_icon.png';
+  static const String searchForDriverIcon =
+      '$_imagePath/home/search_for_driver_icon.png';
 }
