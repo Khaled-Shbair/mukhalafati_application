@@ -5,42 +5,45 @@ class ListOfViolationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ManagerColors.white,
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: ManagerColors.white,
-        centerTitle: true,
-        surfaceTintColor: ManagerColors.transparent,
-        title: Text(
-          ManagerStrings.listOfViolations,
-          style: TextStyle(
-            color: ManagerColors.black,
-            fontFamily: ManagerFontFamily.cairo,
-            fontWeight: ManagerFontWeight.bold,
-            fontSize: ManagerFontsSizes.f17,
-          ),
-        ),
-        actions: [
-          mainButton(
-            onPressed: () {},
-            minWidth: ManagerWidth.w30,
-            height: ManagerHeight.h30,
-            color: ManagerColors.transparent,
-            highlightColor: ManagerColors.transparent,
-            splashColor: ManagerColors.transparent,
-            side: BorderSide.none,
-            child: const Icon(
-              Icons.menu,
-              color: ManagerColors.black,
-              size: 30,
+    return GetBuilder<ListOfViolationsController>(
+      builder: (controller) {
+        return Scaffold(
+          key: controller.scaffoldKey,
+          backgroundColor: ManagerColors.white,
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(
+            backgroundColor: ManagerColors.white,
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            surfaceTintColor: ManagerColors.transparent,
+            title: Text(
+              ManagerStrings.listOfViolations,
+              style: TextStyle(
+                color: ManagerColors.black,
+                fontFamily: ManagerFontFamily.cairo,
+                fontWeight: ManagerFontWeight.bold,
+                fontSize: ManagerFontsSizes.f17,
+              ),
             ),
+            actions: [
+              mainButton(
+                onPressed: () => controller.openEndDrawer(),
+                minWidth: ManagerWidth.w30,
+                height: ManagerHeight.h30,
+                color: ManagerColors.transparent,
+                highlightColor: ManagerColors.transparent,
+                splashColor: ManagerColors.transparent,
+                side: BorderSide.none,
+                child: const Icon(
+                  Icons.menu,
+                  color: ManagerColors.black,
+                  size: 30,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: GetBuilder<ListOfViolationsController>(
-        builder: (controller) {
-          return Padding(
+          endDrawer: policeManDrawer(isListOfViolationsScreen: true),
+          body: Padding(
             padding: EdgeInsetsDirectional.only(
               top: ManagerHeight.h20,
               start: ManagerWidth.w20,
@@ -136,9 +139,9 @@ class ListOfViolationsScreen extends StatelessWidget {
                 ),
               ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

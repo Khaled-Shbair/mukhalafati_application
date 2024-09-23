@@ -15,6 +15,7 @@ class AppConstants {
   static const double blurRadiusOfBoxShadowInCreatedSuccessfullyWidget = 6;
   static const double spreadRadiusOfBoxShadowInCreatedSuccessfullyWidget = 6;
   static const double blurRadiusOfBoxShadowInConfirmInformationWidget = 6;
+  static const double blurRadiusOfBoxShadowInTabBarViewInPoliceManHomeScreen  = 4;
   static const double spreadRadiusOfBoxShadowInLogoutScreen = 6;
   static const double blurRadiusOfBoxShadowInLogoutScreen = 6;
   static const double spreadRadiusOfBoxShadowInConfirmInformationWidget = 2;
