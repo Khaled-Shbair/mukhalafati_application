@@ -13,6 +13,7 @@ class CreateViolationController extends GetxController {
   late TextEditingController placeOfViolationController;
   late TextEditingController reasonForViolationController;
   int _hour = 0;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void onInit() {
@@ -113,6 +114,13 @@ class CreateViolationController extends GetxController {
         _hour = 11;
       case 24:
         _hour = 12;
+    }
+  }
+
+  void openEndDrawer() {
+    if (scaffoldKey.currentState != null &&
+        !scaffoldKey.currentState!.isEndDrawerOpen) {
+      scaffoldKey.currentState!.openEndDrawer();
     }
   }
 }
