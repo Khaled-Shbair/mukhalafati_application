@@ -80,6 +80,7 @@ class ManagerStrings {
       'search_for_a_specific_driver_using_the_license_number'.tr;
   static String idNumber = 'id_number'.tr;
   static String name = 'name'.tr;
+  static String searchOnDriver = 'search_on_driver'.tr;
   static String releaseDate = 'release_date'.tr;
   static String licenseLevels = 'license_levels'.tr;
   static String expiryDate = 'expiry_date'.tr;
