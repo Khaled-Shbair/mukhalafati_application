@@ -6,6 +6,7 @@ class ManagerHeight {
   static double h9 = SizeUitl.setHeight(9);
   static double h11 = SizeUitl.setHeight(11);
   static double h13 = SizeUitl.setHeight(13);
+  static double h36 = SizeUitl.setHeight(36);
   static double h112 = SizeUitl.setHeight(112);
   static double h185 = SizeUitl.setHeight(185);
   static double h22 = SizeUitl.setHeight(22);
@@ -49,12 +50,15 @@ class ManagerHeight {
   static double h120 = SizeUitl.setHeight(120);
   static double h250 = SizeUitl.setHeight(250);
   static double h405 = SizeUitl.setHeight(405);
+  static double h54 = SizeUitl.setHeight(54);
   static const double infinity = double.infinity;
 }
 
 class ManagerWidth {
   static double w05 = SizeUitl.setWidth(0.5); // 0.5
+  static double w66 = SizeUitl.setWidth(66);
   static double w7 = SizeUitl.setWidth(7);
+  static double w22 = SizeUitl.setWidth(22);
   static double w76 = SizeUitl.setWidth(76);
   static double wM1405 = SizeUitl.setWidth(-14.5); // -14.5
   static double w9 = SizeUitl.setWidth(9);
@@ -65,6 +69,8 @@ class ManagerWidth {
   static double w12 = SizeUitl.setWidth(12);
   static double w4 = SizeUitl.setWidth(4);
   static double w18 = SizeUitl.setWidth(18);
+  static double w19 = SizeUitl.setWidth(19);
+  static double w199 = SizeUitl.setWidth(199);
   static double w282 = SizeUitl.setWidth(282);
   static double w30 = SizeUitl.setWidth(30);
   static double w33 = SizeUitl.setWidth(33);
