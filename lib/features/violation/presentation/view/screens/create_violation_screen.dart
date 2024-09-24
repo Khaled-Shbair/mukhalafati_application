@@ -66,16 +66,7 @@ class CreateViolationScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        headOfViolationPage(
-                            text: ManagerStrings.titleHeadViolationAr),
-                        Image.asset(ManagerAssets.palestineLogo),
-                        headOfViolationPage(
-                            text: ManagerStrings.titleHeadViolationEn),
-                      ],
-                    ),
+                    headOfOfficialPaper(),
                     SizedBox(height: ManagerHeight.h15),
                     const Divider(
                       color: ManagerColors.black,
