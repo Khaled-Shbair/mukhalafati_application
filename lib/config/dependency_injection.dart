@@ -137,3 +137,11 @@ initDrivingLicenseCard() {
 disposeDrivingLicenseCard() {
   Get.delete<DrivingLicenseCardController>();
 }
+
+initListOfComplaints() {
+  Get.put<ListOfComplaintsController>(ListOfComplaintsController());
+}
+
+disposeListOfComplaints() {
+  Get.delete<ListOfComplaintsController>();
+}
