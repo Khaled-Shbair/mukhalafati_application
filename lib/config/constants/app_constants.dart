@@ -18,6 +18,8 @@ class AppConstants {
   static const double blurRadiusOfBoxShadowInTabBarViewInPoliceManHomeScreen  = 4;
   static const double spreadRadiusOfBoxShadowInLogoutScreen = 6;
   static const double blurRadiusOfBoxShadowInLogoutScreen = 6;
+  static const double spreadRadiusOfBoxShadowInListOfComplaintsScreen = 3;
+  static const double blurRadiusOfBoxShadowInListOfComplaintsScreen = 5;
   static const double spreadRadiusOfBoxShadowInConfirmInformationWidget = 2;
   static const double blurRadiusOfBoxShadowInResultOfDriverWidget = 2;
   static const int maxLengthOfLicenseNumber = 8;
