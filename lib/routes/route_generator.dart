@@ -39,6 +39,10 @@ class RouteGenerator {
         initDrivingLicenseCard();
         return MaterialPageRoute(
             builder: (_) => const DrivingLicenseCardScreen());
+      case Routes.listOfComplaintsScreen:
+        initListOfComplaints();
+        return MaterialPageRoute(
+            builder: (_) => const ListOfComplaintsScreen());
       default:
         return unDefinedRoute();
     }
