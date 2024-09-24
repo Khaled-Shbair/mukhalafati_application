@@ -17,4 +17,5 @@ class Routes {
   static const String searchOnResultsTestsOfLicenseScreen = 'search_on_results_tests_of_license_screen';
   static const String logoutScreen = 'logout_screen';
   static const String drivingLicenseCardScreen = 'driving_license_card_screen';
+  static const String listOfComplaintsScreen = 'list_of_complaints_screen';
 }
