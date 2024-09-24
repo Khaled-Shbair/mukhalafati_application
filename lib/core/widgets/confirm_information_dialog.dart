@@ -4,7 +4,7 @@ Future<void> confirmInformationDialog({
   required BuildContext context,
 }) async {
   await showDialog(
-    context: Get.context!,
+    context: context,
     barrierDismissible: false,
     barrierColor: ManagerColors.black50,
     builder: (context) {
