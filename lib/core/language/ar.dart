@@ -99,12 +99,22 @@ const Map<String, String> ar = {
   'successful': 'ناجح',
   'failed': 'راسب',
   'violation': 'مخالفة',
-
   'driving_license_card': 'بطاقة رخصة القيادة',
   'show_your_driving_license_card': 'عرض بطاقة الرخصة الخاصة بك',
   'title_driving_license_card': 'يمكنك من خلال هذه الواجهة عرض بطاقة الرخصة الإلكترونية الخاصة بك.\nاختر العرض المناسب',
   'front_electronic_license_card': 'بطاقة الرخصة الإلكترونية الأمامية',
   'back_electronic_license_card': 'بطاقة الرخصة الإلكترونية الخلفية',
   'full_electronic_license_card':'بطاقة الرخصة الإلكترونية كاملة',
+
+  'list_of_complaints':'قائمة الشكاوي',
+  'complaints_submitted':'الشكاوي المقدمة',
+  'submit_complaint':'تقديم شكوى',
+  'complaint':'الشكوى',
+  'state':'الحالة',
+  'solved':'تم حلها',
+  'in_progress':'قيد التنفيذ',
+  'please_write_the_details_of_the_complaint':'يرجى كتابة تفاصيل الشكوى',
+  'complaint_created_successfully':'تم إنشاء الشكوى بنجـــــاح',
+  'no_complaints_submitted':'لا يوجد شكاوي مقدمة',
   '':'',
 };
