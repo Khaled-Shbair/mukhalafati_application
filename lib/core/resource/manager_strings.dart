@@ -105,6 +105,18 @@ class ManagerStrings {
   static String frontElectronicLicenseCard = 'front_electronic_license_card'.tr;
   static String backElectronicLicenseCard = 'back_electronic_license_card'.tr;
   static String fullElectronicLicenseCard = 'full_electronic_license_card'.tr;
+  static String listOfComplaints = 'list_of_complaints'.tr;
+  static String complaintsSubmitted = 'complaints_submitted'.tr;
+  static String submitComplaint = 'submit_complaint'.tr;
+  static String complaint = 'complaint'.tr;
+  static String state = 'state'.tr;
+  static String solved = 'solved'.tr;
+  static String inProgress = 'in_progress'.tr;
+  static String pleaseWriteTheDetailsOfTheComplaint =
+      'please_write_the_details_of_the_complaint'.tr;
+  static String complaintCreatedSuccessfully =
+      'complaint_created_successfully'.tr;
+  static String noComplaintsSubmitted = 'no_complaints_submitted'.tr;
 
 ///////////////////////////////////////////////////////////////////////////////
   static const String drivingLicenseGradesAr = 'درجات رخصة القيادة';
