@@ -26,6 +26,7 @@ export '/core/widgets/main_button.dart';
 export '/core/widgets/main_drawer.dart';
 export '/core/language/translation.dart';
 export '/core/extensions/extensions.dart';
+export '/core/widgets/driver_drawer.dart';
 export '/core/widgets/will_pop_scope.dart';
 export '/core/resource/manager_sizes.dart';
 export '/core/resource/manager_fonts.dart';
@@ -66,7 +67,7 @@ export '/features/home/presentation/view/widgets/statistics_box_of_police_man.da
 
 export '/features/violation/presentation/view/widgets/my_sized_box.dart';
 export '/features/violation/presentation/model/data_list_of_violations.dart';
-export '/features/violation/presentation/view/widgets/head_of_violation_page.dart';
+export '../core/widgets/head_of_official_paper.dart';
 export '/features/violation/presentation/view/screens/create_violation_screen.dart';
 export '/features/violation/presentation/controller/create_violation_controller.dart';
 export '/features/violation/presentation/view/screens/list_of_violations_screen.dart';
@@ -89,3 +90,10 @@ export '/features/logout/presentation/controller/logout_controller.dart';
 export '/features/driving_license_card/presentation/view/screens/driving_license_card_screen.dart';
 export '/features/driving_license_card/presentation/controller/driving_license_card_controller.dart';
 export '/features/driving_license_card/presentation/view/widgets/expansion_tile_card.dart';
+
+export '/features/complaints/presentation/view/screens/list_of_complaints_screen.dart';
+export '/features/complaints/presentation/controller/list_of_complaints_controller.dart';
+export '/features/complaints/presentation/view/widgets/border_side_of_complaints_table.dart';
+export '/features/complaints/presentation/view/widgets/data_column_of_complaints_table.dart';
+export '/features/complaints/presentation/model/data_of_complaints.dart';
+export '/features/complaints/presentation/view/widgets/dialog_of_create_complaint.dart';
