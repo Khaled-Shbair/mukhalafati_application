@@ -5,6 +5,9 @@ class PoliceManHomeController extends GetxController
   late TabController tabController;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final String totalViolations = '999';
+  String policeName = 'خالد شبير';
+  String policeImage =
+      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
 
   @override
   void onInit() {

@@ -34,15 +34,19 @@ class ListOfViolationsScreen extends StatelessWidget {
                 highlightColor: ManagerColors.transparent,
                 splashColor: ManagerColors.transparent,
                 side: BorderSide.none,
-                child: const Icon(
+                child: Icon(
                   Icons.menu,
                   color: ManagerColors.black,
-                  size: 30,
+                  size: ManagerIconsSizes.i30,
                 ),
               ),
             ],
           ),
-          endDrawer: policeManDrawer(isListOfViolationsScreen: true),
+          endDrawer: policeManDrawer(
+            isListOfViolationsScreen: true,
+            policeName: controller.policeName,
+            policeImage: controller.policeImage,
+          ),
           body: Padding(
             padding: EdgeInsetsDirectional.only(
               top: ManagerHeight.h20,

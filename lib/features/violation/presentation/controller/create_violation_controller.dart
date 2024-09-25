@@ -14,6 +14,9 @@ class CreateViolationController extends GetxController {
   late TextEditingController reasonForViolationController;
   int _hour = 0;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  String policeName = 'خالد شبير';
+  String policeImage =
+      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
 
   @override
   void onInit() {

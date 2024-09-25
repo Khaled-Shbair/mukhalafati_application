@@ -11,7 +11,11 @@ class SearchForDriverScreen extends StatelessWidget {
           key: controller.scaffoldKey,
           backgroundColor: ManagerColors.white,
           resizeToAvoidBottomInset: false,
-          endDrawer: policeManDrawer(isSearchForDriverScreen: true),
+          endDrawer: policeManDrawer(
+            isSearchForDriverScreen: true,
+            policeImage: controller.policeImage,
+            policeName: controller.policeName,
+          ),
           appBar: AppBar(
             backgroundColor: ManagerColors.white,
             centerTitle: true,
@@ -34,10 +38,10 @@ class SearchForDriverScreen extends StatelessWidget {
                 highlightColor: ManagerColors.transparent,
                 splashColor: ManagerColors.transparent,
                 side: BorderSide.none,
-                child: const Icon(
+                child: Icon(
                   Icons.menu,
                   color: ManagerColors.black,
-                  size: 30,
+                  size: ManagerIconsSizes.i30,
                 ),
               ),
             ],
