@@ -48,7 +48,11 @@ class CreateViolationController extends GetxController {
   }
 
   void createViolation() async {
-    await confirmInformationDialog(context: Get.context!);
+    await confirmInformationDialog(
+      context: Get.context!,
+      text: ManagerStrings.theViolationWasSuccessfullyCreated,
+      closeButton: () => Get.offAllNamed(Routes.policeManHomeScreen),
+    );
   }
 
   String _date() {
