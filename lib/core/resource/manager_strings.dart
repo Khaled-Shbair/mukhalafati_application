@@ -15,6 +15,7 @@ class ManagerStrings {
   static String createAccount = 'create_account'.tr;
   static String welcomeBackToOurApp = 'welcome_back_to_our_app'.tr;
   static String police = 'police'.tr;
+  static String thePolice = 'the_police'.tr;
   static String driver = 'driver'.tr;
   static String jobNumber = 'job_number'.tr;
   static String rememberMe = 'remember_me'.tr;
@@ -117,6 +118,7 @@ class ManagerStrings {
   static String complaintCreatedSuccessfully =
       'complaint_created_successfully'.tr;
   static String noComplaintsSubmitted = 'no_complaints_submitted'.tr;
+  static String profile = 'profile'.tr;
 
 ///////////////////////////////////////////////////////////////////////////////
   static const String drivingLicenseGradesAr = 'درجات رخصة القيادة';
