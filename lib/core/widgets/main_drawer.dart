@@ -5,13 +5,14 @@ Widget mainDrawer({
 }) {
   return Drawer(
     backgroundColor: ManagerColors.white,
-    width: ManagerWidth.w199,
+    width: ManagerWidth.w290,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.zero,
+      side: BorderSide.none,
+    ),
     child: ListView(
       physics: const NeverScrollableScrollPhysics(),
-      padding: EdgeInsetsDirectional.only(
-        start: ManagerWidth.w19,
-        end: ManagerWidth.w19,
-      ),
+      padding: EdgeInsetsDirectional.zero,
       children: children,
     ),
   );
@@ -24,27 +25,26 @@ Widget buttonOfMyDrawer({
   double? heightIcon,
   double? widthIcon,
 }) {
-  return mainButton(
-    onPressed: onPressed,
-    height: ManagerHeight.h36,
-    child: ListTile(
-      leading: Image.asset(
-        icon,
-        height: heightIcon ?? ManagerHeight.h19,
-        width: widthIcon ?? ManagerWidth.w19,
-        fit: BoxFit.cover,
+  return ListTile(
+    onTap: onPressed,
+    leading: Image.asset(
+      icon,
+      height: heightIcon ?? ManagerHeight.h24,
+      width: widthIcon ?? ManagerWidth.w24,
+      fit: BoxFit.cover,
+    ),
+    title: Text(
+      title,
+      style: TextStyle(
+        color: ManagerColors.black,
+        fontSize: ManagerFontsSizes.f15,
+        fontWeight: ManagerFontWeight.semiBold,
+        fontFamily: ManagerFontFamily.cairo,
       ),
-      title: Text(
-        title,
-        style: TextStyle(
-          color: ManagerColors.white,
-          fontSize: ManagerFontsSizes.f12,
-          fontWeight: ManagerFontWeight.semiBold,
-          fontFamily: ManagerFontFamily.cairo,
-        ),
-      ),
-      contentPadding: EdgeInsetsDirectional.zero,
-      horizontalTitleGap: ManagerWidth.w12,
+    ),
+    style: ListTileStyle.drawer,
+    contentPadding: EdgeInsetsDirectional.only(
+      start: ManagerWidth.w33,
     ),
   );
 }
