@@ -116,5 +116,7 @@ const Map<String, String> ar = {
   'please_write_the_details_of_the_complaint':'يرجى كتابة تفاصيل الشكوى',
   'complaint_created_successfully':'تم إنشاء الشكوى بنجـــــاح',
   'no_complaints_submitted':'لا يوجد شكاوي مقدمة',
+  'profile':'الملف الشخصي',
+  'the_police':'الشرطي',
   '':'',
 };
