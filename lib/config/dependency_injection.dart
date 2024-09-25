@@ -145,3 +145,11 @@ initListOfComplaints() {
 disposeListOfComplaints() {
   Get.delete<ListOfComplaintsController>();
 }
+
+initCreateComplaints() {
+  Get.put<CreateComplaintsController>(CreateComplaintsController());
+}
+
+disposeCreateComplaints() {
+  Get.delete<CreateComplaintsController>();
+}
