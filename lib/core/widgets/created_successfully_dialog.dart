@@ -3,6 +3,7 @@ import '/config/all_imports.dart';
 Future<void> createdSuccessfullyDialog({
   required void Function() closeButton,
   required BuildContext context,
+  required String text,
 }) async {
   await showDialog(
     context: context,
@@ -76,7 +77,7 @@ Future<void> createdSuccessfullyDialog({
                     top: ManagerHeight.h20,
                   ),
                   child: Text(
-                    ManagerStrings.theViolationWasSuccessfullyCreated,
+                    text,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: ManagerColors.eerieBlack,
