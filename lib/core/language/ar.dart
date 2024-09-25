@@ -48,7 +48,7 @@ const Map<String, String> ar = {
   'test_results': 'نتائج الإختبارات',
   'show_violations': 'عرض المخالفات',
   'create_complaint': 'إنشاء شكوى',
-  'electronic_license': 'رخصة إلكترونية',
+  'electronic_license': 'الرخصة الإلكترونية',
   'pay_violations': 'دفع المخالفات',
   'driver_name': 'اسم السائق',
   'driver_id': 'رقم هوية السائق',

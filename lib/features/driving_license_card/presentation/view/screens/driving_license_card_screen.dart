@@ -13,7 +13,7 @@ class DrivingLicenseCardScreen extends StatelessWidget {
         centerTitle: true,
         surfaceTintColor: ManagerColors.transparent,
         title: Text(
-          ManagerStrings.drivingLicenseCard,
+          ManagerStrings.electronicLicense,
           style: TextStyle(
             color: ManagerColors.black,
             fontFamily: ManagerFontFamily.cairo,
@@ -44,10 +44,13 @@ class DrivingLicenseCardScreen extends StatelessWidget {
             padding: EdgeInsetsDirectional.only(
               start: ManagerWidth.w20,
               end: ManagerWidth.w20,
-              top: ManagerHeight.h20,
             ),
             child: Column(
               children: [
+                Visibility(
+                  visible: controller.appearImageDrivingLicenseCard(),
+                  child: SizedBox(height: ManagerHeight.h10),
+                ),
                 Visibility(
                   visible: controller.appearImageDrivingLicenseCard(),
                   child: Image.asset(
@@ -97,79 +100,42 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                   visible: controller.appearText(),
                   child: SizedBox(height: ManagerHeight.h24),
                 ),
-                // if (!controller.openFrontElectronicLicenseCard &&
-                //     !controller.openBackElectronicLicenseCard) ...{
-                //   Text(
-                //     ManagerStrings.showYourDrivingLicenseCard,
-                //     textAlign: TextAlign.center,
-                //     style: TextStyle(
-                //       color: ManagerColors.black,
-                //       fontFamily: ManagerFontFamily.cairo,
-                //       fontWeight: ManagerFontWeight.bold,
-                //       fontSize: ManagerFontsSizes.f15,
-                //     ),
-                //   ),
-                //   SizedBox(height: ManagerHeight.h8),
-                //   Text(
-                //     ManagerStrings.titleDrivingLicenseCard,
-                //     textAlign: TextAlign.center,
-                //     style: TextStyle(
-                //       color: ManagerColors.davyGrey,
-                //       fontFamily: ManagerFontFamily.cairo,
-                //       fontWeight: ManagerFontWeight.medium,
-                //       fontSize: ManagerFontsSizes.f15,
-                //       height: AppConstants
-                //           .heightOfTextOfTitleDrivingLicenseCardInDrivingLicenseCardScreen,
-                //     ),
-                //   ),
-                //   SizedBox(height: ManagerHeight.h24),
-                // },
                 Expanded(
                   child: ListView(
-                    padding: EdgeInsetsDirectional.only(
-                      bottom: ManagerHeight.h10,
-                    ),
                     primary: false,
                     children: [
-                      Visibility(
-                        visible: controller.appearImageDrivingLicenseCard(),
-                        child: expansionTileCard(
-                          title: ManagerStrings.frontElectronicLicenseCard,
-                          isOpen: controller.openFrontElectronicLicenseCard,
-                          onExpansionChanged: (value) {
-                            controller
-                                .changeOpenFrontElectronicLicenseCard(value);
-                          },
-                          children: [
-                            frontDrivingLicenseCard(
-                              licenseNumber: controller.licenseNumber,
-                              nameAr: controller.nameAr,
-                              nameEn: controller.nameEn,
-                              idNumber: controller.idNumber,
-                              releaseDate: controller.releaseDate,
-                              expiryDate: controller.expiryDate,
-                              licenseLevels: controller.licenseLevels,
-                              imageDriver: controller.imageDriver,
-                            )
-                          ],
-                        ),
+                      expansionTileCard(
+                        title: ManagerStrings.frontElectronicLicenseCard,
+                        isOpen: controller.openFrontElectronicLicenseCard,
+                        onExpansionChanged: (value) {
+                          controller
+                              .changeOpenFrontElectronicLicenseCard(value);
+                        },
+                        children: [
+                          frontDrivingLicenseCard(
+                            licenseNumber: controller.licenseNumber,
+                            nameAr: controller.nameAr,
+                            nameEn: controller.nameEn,
+                            idNumber: controller.idNumber,
+                            releaseDate: controller.releaseDate,
+                            expiryDate: controller.expiryDate,
+                            licenseLevels: controller.licenseLevels,
+                            imageDriver: controller.imageDriver,
+                          )
+                        ],
                       ),
-                      SizedBox(height: ManagerHeight.h11),
-                      Visibility(
-                        visible: controller.appearImageDrivingLicenseCard(),
-                        child: expansionTileCard(
-                          title: ManagerStrings.backElectronicLicenseCard,
-                          isOpen: controller.openBackElectronicLicenseCard,
-                          onExpansionChanged: (value) {
-                            controller
-                                .changeOpenBackElectronicLicenseCard(value);
-                          },
-                          children: [
-                            backDrivingLicenseCard(),
-                          ],
-                        ),
+                      SizedBox(height: ManagerHeight.h10),
+                      expansionTileCard(
+                        title: ManagerStrings.backElectronicLicenseCard,
+                        isOpen: controller.openBackElectronicLicenseCard,
+                        onExpansionChanged: (value) {
+                          controller.changeOpenBackElectronicLicenseCard(value);
+                        },
+                        children: [
+                          backDrivingLicenseCard(),
+                        ],
                       ),
-                      SizedBox(height: ManagerHeight.h11),
+                      SizedBox(height: ManagerHeight.h10),
                       expansionTileCard(
                         title: ManagerStrings.fullElectronicLicenseCard,
                         isOpen: controller.openFullElectronicLicenseCard,
@@ -189,7 +155,7 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                             isShadowWhite: true,
                           ),
                           Container(
-                            height: ManagerHeight.h10,
+                            height: ManagerHeight.h6,
                             decoration: BoxDecoration(
                               color: ManagerColors.white,
                               boxShadow: [
