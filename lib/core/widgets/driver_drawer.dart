@@ -1,12 +1,15 @@
 import '/config/all_imports.dart';
 
-Widget policeManDrawer({
-  bool isPoliceManHomeScreen = false,
-  bool isCreateViolationScreen = false,
+Widget driverDrawer({
+  bool isListOfComplaintsScreen = false,
+  bool isDriverHomeScreen = false,
+  bool isProfileScreen = false,
+  bool isDrivingLicenseCardScreen = false,
   bool isSearchForDriverScreen = false,
-  bool isListOfViolationsScreen = false,
-  required String policeName,
-  required String policeImage,
+  bool isSearchOnResultsTestsOfLicenseScreen = false,
+  bool isPayViolationsScreen = false,
+  required String driverName,
+  required String driverImage,
 }) {
   return mainDrawer(
     children: [
@@ -26,11 +29,11 @@ Widget policeManDrawer({
           children: [
             CircleAvatar(
               radius: ManagerRadius.r40,
-              backgroundImage: NetworkImage(policeImage),
+              backgroundImage: NetworkImage(driverImage),
             ),
             SizedBox(width: ManagerWidth.w10),
             Text(
-              '${ManagerStrings.thePolice}: $policeName',
+              '${ManagerStrings.theDriver}: $driverName',
               style: TextStyle(
                 color: ManagerColors.white,
                 fontFamily: ManagerFontFamily.cairo,
@@ -41,12 +44,17 @@ Widget policeManDrawer({
           ],
         ),
       ),
+      Divider(
+        color: ManagerColors.primaryColor,
+        height: ManagerHeight.h1,
+      ),
+      SizedBox(height: ManagerHeight.h15),
       buttonOfMyDrawer(
         onPressed: () {
-          if (isPoliceManHomeScreen) {
+          if (isDriverHomeScreen) {
             Get.back();
           } else {
-            Get.offAndToNamed(Routes.policeManHomeScreen);
+            Get.offAndToNamed(Routes.driverHomeScreen);
           }
         },
         icon: ManagerAssets.homeIcon,
@@ -54,43 +62,58 @@ Widget policeManDrawer({
       ),
       buttonOfMyDrawer(
         onPressed: () {
-          debugPrint('Open camera: Radar');
+          if (isProfileScreen) {
+            Get.back();
+          } else {
+            Get.offAndToNamed(Routes.driverProfileScreen);
+          }
         },
-        icon: ManagerAssets.radarIcon,
-        title: ManagerStrings.speedMonitor,
+        icon: ManagerAssets.userProfileIcon,
+        title: ManagerStrings.profile,
       ),
       buttonOfMyDrawer(
         onPressed: () {
-          if (isCreateViolationScreen) {
+          if (isSearchOnResultsTestsOfLicenseScreen) {
             Get.back();
           } else {
-            Get.offAndToNamed(Routes.createViolationScreen);
+            Get.offAndToNamed(Routes.searchOnResultsTestsOfLicenseScreen);
           }
         },
-        icon: ManagerAssets.createIcon,
-        title: ManagerStrings.createViolation,
+        icon: ManagerAssets.resultOfTextLicenseIcon,
+        title: ManagerStrings.licenseTestResults,
       ),
       buttonOfMyDrawer(
         onPressed: () {
-          if (isSearchForDriverScreen) {
+          if (isPayViolationsScreen) {
             Get.back();
           } else {
-            Get.offAndToNamed(Routes.searchForDriverScreen);
+            Get.offAndToNamed(Routes.payViolationsScreen);
           }
         },
-        icon: ManagerAssets.searchForDriverIcon,
-        title: ManagerStrings.searchOnDriver,
+        icon: ManagerAssets.paymentIcon,
+        title: ManagerStrings.payViolations,
       ),
       buttonOfMyDrawer(
         onPressed: () {
-          if (isListOfViolationsScreen) {
+          if (isListOfComplaintsScreen) {
             Get.back();
           } else {
-            Get.offAndToNamed(Routes.listOfViolationsScreen);
+            Get.offAndToNamed(Routes.listOfComplaintsScreen);
           }
         },
-        icon: ManagerAssets.listOfViolationIcon,
-        title: ManagerStrings.listOfViolations,
+        icon: ManagerAssets.listOfComplaintsIcon,
+        title: ManagerStrings.listOfComplaints,
+      ),
+      buttonOfMyDrawer(
+        onPressed: () {
+          if (isDrivingLicenseCardScreen) {
+            Get.back();
+          } else {
+            Get.offAndToNamed(Routes.drivingLicenseCardScreen);
+          }
+        },
+        icon: ManagerAssets.drivingLicenseIcon,
+        title: ManagerStrings.electronicLicense,
       ),
       buttonOfMyDrawer(
         onPressed: () {

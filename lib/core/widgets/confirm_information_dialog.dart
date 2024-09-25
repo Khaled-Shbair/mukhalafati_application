@@ -2,9 +2,11 @@ import '/config/all_imports.dart';
 
 Future<void> confirmInformationDialog({
   required BuildContext context,
+  required String text,
+  required Function() closeButton,
 }) async {
   await showDialog(
-    context: Get.context!,
+    context: context,
     barrierDismissible: false,
     barrierColor: ManagerColors.black50,
     builder: (context) {
@@ -101,10 +103,9 @@ Future<void> confirmInformationDialog({
                         onPressed: () async {
                           Get.back();
                           await createdSuccessfullyDialog(
-                            context: context,
-                            closeButton: () =>
-                                Get.offAllNamed(Routes.policeManHomeScreen),
-                          );
+                              context: context,
+                              closeButton: closeButton,
+                              text: text);
                         },
                         borderRadius: ManagerRadius.r8,
                         height: ManagerHeight.h40,

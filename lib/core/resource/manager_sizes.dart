@@ -2,13 +2,17 @@ import '/config/all_imports.dart';
 
 class ManagerHeight {
   static double h0 = SizeUitl.setHeight(0);
+  static double h1 = SizeUitl.setHeight(1);
   static double h6 = SizeUitl.setHeight(6);
   static double h9 = SizeUitl.setHeight(9);
+  static double h60 = SizeUitl.setHeight(60);
+  static double h162 = SizeUitl.setHeight(162);
   static double h11 = SizeUitl.setHeight(11);
   static double h13 = SizeUitl.setHeight(13);
   static double h36 = SizeUitl.setHeight(36);
   static double h112 = SizeUitl.setHeight(112);
   static double h185 = SizeUitl.setHeight(185);
+  static double h64 = SizeUitl.setHeight(64);
   static double h22 = SizeUitl.setHeight(22);
   static double h28 = SizeUitl.setHeight(28);
   static double h280 = SizeUitl.setHeight(280);
@@ -56,6 +60,9 @@ class ManagerHeight {
 
 class ManagerWidth {
   static double w05 = SizeUitl.setWidth(0.5); // 0.5
+  static double w1 = SizeUitl.setWidth(1);
+  static double w3 = SizeUitl.setWidth(3);
+  static double w290 = SizeUitl.setWidth(290);
   static double w66 = SizeUitl.setWidth(66);
   static double w7 = SizeUitl.setWidth(7);
   static double w22 = SizeUitl.setWidth(22);
@@ -106,6 +113,7 @@ class ManagerWidth {
   static double w8 = SizeUitl.setWidth(8);
   static double w10 = SizeUitl.setWidth(10);
   static double w20 = SizeUitl.setWidth(20);
+  static double w50 = SizeUitl.setWidth(50);
   static double w55 = SizeUitl.setWidth(55);
   static double w320 = SizeUitl.setWidth(300);
   static const double infinity = double.infinity;
@@ -117,10 +125,13 @@ class ManagerRadius {
   static double r10 = SizeUitl.setRadius(10);
   static double r15 = SizeUitl.setRadius(15);
   static double r24 = SizeUitl.setRadius(24);
+  static double r40 = SizeUitl.setRadius(40);
   static double r100 = SizeUitl.setRadius(100);
 }
 
 class ManagerIconsSizes {
+  static double i13 = SizeUitl.setIconSize(13);
   static double i18 = SizeUitl.setIconSize(18);
   static double i24 = SizeUitl.setIconSize(24);
+  static double i30 = SizeUitl.setIconSize(30);
 }

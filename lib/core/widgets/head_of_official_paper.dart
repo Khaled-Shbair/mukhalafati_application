@@ -1,8 +1,17 @@
 import '/config/all_imports.dart';
 
-Widget headOfViolationPage({
-  required String text,
-}) {
+Widget headOfOfficialPaper() {
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.end,
+    children: [
+      _textOfHeadOfficialPaper(ManagerStrings.titleHeadViolationAr),
+      Image.asset(ManagerAssets.palestineLogo),
+      _textOfHeadOfficialPaper(ManagerStrings.titleHeadViolationEn),
+    ],
+  );
+}
+
+Widget _textOfHeadOfficialPaper(String text) {
   return Container(
     margin: EdgeInsetsDirectional.only(
       start: ManagerWidth.w5,
@@ -20,6 +29,8 @@ Widget headOfViolationPage({
         color: ManagerColors.black,
         fontWeight: ManagerFontWeight.bold,
         height: ManagerHeight.h2,
+        decoration: TextDecoration.none,
+        decorationColor: ManagerColors.transparent,
       ),
     ),
   );
