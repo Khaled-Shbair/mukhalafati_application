@@ -5,16 +5,42 @@ Widget policeManDrawer({
   bool isCreateViolationScreen = false,
   bool isSearchForDriverScreen = false,
   bool isListOfViolationsScreen = false,
+  required String policeName,
+  required String policeImage,
 }) {
   return mainDrawer(
     children: [
-      SizedBox(height: ManagerHeight.h70),
-      Image.asset(
-        ManagerAssets.logo,
-        height: ManagerHeight.h55,
-        width: ManagerWidth.w66,
+      DrawerHeader(
+        margin: EdgeInsetsDirectional.only(bottom: ManagerHeight.h8),
+        padding: EdgeInsetsDirectional.only(bottom: ManagerHeight.h10),
+        decoration: const BoxDecoration(
+          color: ManagerColors.primaryColor,
+          image: DecorationImage(
+            image: AssetImage(ManagerAssets.backgroundDrawerImage),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              radius: ManagerRadius.r40,
+              backgroundImage: NetworkImage(policeImage),
+            ),
+            SizedBox(width: ManagerWidth.w10),
+            Text(
+              '${ManagerStrings.thePolice}: $policeName',
+              style: TextStyle(
+                color: ManagerColors.white,
+                fontFamily: ManagerFontFamily.cairo,
+                fontWeight: ManagerFontWeight.bold,
+                fontSize: ManagerFontsSizes.f14,
+              ),
+            ),
+          ],
+        ),
       ),
-      SizedBox(height: ManagerHeight.h28),
       buttonOfMyDrawer(
         onPressed: () {
           if (isPoliceManHomeScreen) {
@@ -26,17 +52,13 @@ Widget policeManDrawer({
         icon: ManagerAssets.homeIcon,
         title: ManagerStrings.homePage,
       ),
-      SizedBox(height: ManagerHeight.h20),
       buttonOfMyDrawer(
         onPressed: () {
           debugPrint('Open camera: Radar');
         },
         icon: ManagerAssets.radarIcon,
         title: ManagerStrings.speedMonitor,
-        widthIcon: ManagerWidth.w22,
-        heightIcon: ManagerHeight.h22,
       ),
-      SizedBox(height: ManagerHeight.h20),
       buttonOfMyDrawer(
         onPressed: () {
           if (isCreateViolationScreen) {
@@ -48,7 +70,6 @@ Widget policeManDrawer({
         icon: ManagerAssets.createIcon,
         title: ManagerStrings.createViolation,
       ),
-      SizedBox(height: ManagerHeight.h20),
       buttonOfMyDrawer(
         onPressed: () {
           if (isSearchForDriverScreen) {
@@ -59,10 +80,7 @@ Widget policeManDrawer({
         },
         icon: ManagerAssets.searchForDriverIcon,
         title: ManagerStrings.searchOnDriver,
-        widthIcon: ManagerWidth.w22,
-        heightIcon: ManagerHeight.h22,
       ),
-      SizedBox(height: ManagerHeight.h20),
       buttonOfMyDrawer(
         onPressed: () {
           if (isListOfViolationsScreen) {
@@ -73,18 +91,13 @@ Widget policeManDrawer({
         },
         icon: ManagerAssets.listOfViolationIcon,
         title: ManagerStrings.listOfViolations,
-        widthIcon: ManagerWidth.w24,
-        heightIcon: ManagerHeight.h24,
       ),
-      SizedBox(height: ManagerHeight.h20),
       buttonOfMyDrawer(
         onPressed: () {
           Get.toNamed(Routes.logoutScreen);
         },
         icon: ManagerAssets.logoutIcon,
         title: ManagerStrings.logout,
-        widthIcon: ManagerWidth.w22,
-        heightIcon: ManagerHeight.h22,
       ),
     ],
   );
