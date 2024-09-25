@@ -33,6 +33,17 @@ class ManagerAssets {
       '$_imagePath/driving_license_card/image_driving_license_card.png';
   static const String createIcon = '$_imagePath/home/create_icon.png';
   static const String homeIcon = '$_imagePath/home/home_icon.png';
+  static const String listOfComplaintsIcon =
+      '$_imagePath/home/list_of_complaints_icon.png';
+  static const String paymentIcon = '$_imagePath/home/payment_icon.png';
+  static const String userProfileIcon = '$_imagePath/home/user_icon.png';
+  static const String resultOfTextLicenseIcon =
+      '$_imagePath/home/result_of_text_license_icon.png';
+  static const String drivingLicenseIcon =
+      '$_imagePath/home/driving_license_icon.png';
+  static const String backgroundDrawerImage =
+      '$_imagePath/home/background_drawer_image.png';
+
   static const String listOfViolationIcon =
       '$_imagePath/home/list_of_violation_icon.png';
   static const String logoutIcon = '$_imagePath/home/logout_icon.png';
