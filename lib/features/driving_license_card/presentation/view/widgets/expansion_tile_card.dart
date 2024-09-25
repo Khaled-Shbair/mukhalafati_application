@@ -7,6 +7,7 @@ Widget expansionTileCard({
   required List<Widget> children,
 }) {
   return ExpansionTile(
+    minTileHeight: ManagerHeight.h50,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(ManagerRadius.r5),
     ),
