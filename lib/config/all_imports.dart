@@ -78,6 +78,7 @@ export '/features/search/presentation/view/widgets/row_of_table.dart';
 export '/features/search/presentation/view/widgets/empty_result.dart';
 export '/features/search/presentation/view/widgets/result_of_test.dart';
 export '/features/search/presentation/view/widgets/result_of_driver.dart';
+export '/features/search/presentation/view/widgets/result_of_license.dart';
 export '/features/search/presentation/view/widgets/border_side_of_table.dart';
 export '/features/search/presentation/view/screens/search_for_driver_screen.dart';
 export '/features/search/presentation/controller/search_for_driver_controller.dart';
@@ -93,7 +94,7 @@ export '/features/driving_license_card/presentation/view/widgets/expansion_tile_
 
 export '/features/complaints/presentation/view/screens/list_of_complaints_screen.dart';
 export '/features/complaints/presentation/controller/list_of_complaints_controller.dart';
-export '/features/complaints/presentation/view/widgets/border_side_of_complaints_table.dart';
 export '/features/complaints/presentation/view/widgets/data_column_of_complaints_table.dart';
 export '/features/complaints/presentation/model/data_of_complaints.dart';
 export '/features/complaints/presentation/view/widgets/dialog_of_create_complaint.dart';
+export '/features/complaints/presentation/controller/create_complaints_controller.dart';
