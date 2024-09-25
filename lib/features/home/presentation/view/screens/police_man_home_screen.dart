@@ -30,7 +30,11 @@ class PoliceManHomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          endDrawer: policeManDrawer(isPoliceManHomeScreen: true),
+          endDrawer: policeManDrawer(
+            isPoliceManHomeScreen: true,
+            policeName: controller.policeName,
+            policeImage: controller.policeImage,
+          ),
           body: Padding(
             padding: EdgeInsetsDirectional.only(
               start: ManagerWidth.w16,

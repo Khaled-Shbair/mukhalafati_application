@@ -19,6 +19,9 @@ class SearchForDriverController extends GetxController {
 
   // String imageDriver = 'https://upload.wikimedia.org/wikipedia/commons/4/44/%D8%B5%D9%88%D8%B1%D8%A9_%D8%B4%D8%AE%D8%B5%D9%8A%D8%A9_%D9%88%D9%84%D9%8A%D8%AF_%D8%A7%D9%84%D8%AD%D8%B4%D9%81.jpg';
   int numberOfViolations = 15;
+  String policeName = 'خالد شبير';
+  String policeImage =
+      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
 
   @override
   void onInit() {
