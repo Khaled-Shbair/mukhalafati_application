@@ -19,8 +19,26 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, child) {
         return GetMaterialApp(
+          theme: ThemeData(
+            scaffoldBackgroundColor: ManagerColors.white,
+            useMaterial3: true,
+            appBarTheme: AppBarTheme(
+              centerTitle: true,
+              backgroundColor: ManagerColors.white,
+              titleTextStyle: TextStyle(
+                color: ManagerColors.black,
+                fontFamily: ManagerFontFamily.cairo,
+                fontWeight: ManagerFontWeight.bold,
+                fontSize: ManagerFontsSizes.f17,
+              ),
+              iconTheme: IconThemeData(
+                color: ManagerColors.primaryColor,
+                size: ManagerIconsSizes.i20,
+              ),
+            ),
+          ),
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.drivingLicenseCardScreen,
+          initialRoute: Routes.loginScreen,
           onGenerateRoute: RouteGenerator.getRoute,
           translations: Translation(),
           locale: const Locale(LocaleConstants.arabicLanguage),
