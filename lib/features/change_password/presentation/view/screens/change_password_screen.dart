@@ -1,11 +1,11 @@
 import '/config/all_imports.dart';
 
-class ForgotPasswordForPoliceManScreen extends StatelessWidget {
-  const ForgotPasswordForPoliceManScreen({super.key});
+class ChangePasswordScreen extends StatelessWidget {
+  const ChangePasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ForgotPasswordForPoliceManController>(
+    return GetBuilder<ChangePasswordController>(
       builder: (controller) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -14,24 +14,24 @@ class ForgotPasswordForPoliceManScreen extends StatelessWidget {
               onPressed: () => controller.backButton(),
               icon: const Icon(Icons.arrow_back_ios),
             ),
-            title: Text(ManagerStrings.forgotPassword),
+            title: Text(ManagerStrings.changePassword),
           ),
           body: ListView(
             physics: const NeverScrollableScrollPhysics(),
             padding: EdgeInsetsDirectional.only(
               start: ManagerWidth.w28,
               end: ManagerWidth.w28,
-              top: ManagerHeight.h38,
+              top: ManagerHeight.h34,
             ),
             children: [
               SvgPicture.asset(
-                ManagerAssets.forgotPasswordImage,
+                ManagerAssets.changePasswordImage,
                 height: ManagerHeight.h182,
                 width: ManagerWidth.infinity,
               ),
               SizedBox(height: ManagerHeight.h50),
               Text(
-                ManagerStrings.enterTheJobNumber,
+                ManagerStrings.enterNewPassword,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: ManagerColors.black,
@@ -48,7 +48,8 @@ class ForgotPasswordForPoliceManScreen extends StatelessWidget {
                   end: ManagerWidth.w14,
                 ),
                 child: Text(
-                  ManagerStrings.pleaseEnterYourJobNumberToRecoverYourPassword,
+                  ManagerStrings
+                      .pleaseEnterNewPasswordWhichMustBeDifferentFromTheOldPassword,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     height: 2,
@@ -59,17 +60,32 @@ class ForgotPasswordForPoliceManScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: ManagerHeight.h8),
               mainTextField(
-                controller: controller.jobNumber,
-                labelText: ManagerStrings.jobNumber,
+                controller: controller.newPassword,
+                labelText: ManagerStrings.newPassword,
                 colorLabelText: ManagerColors.quartz,
-                maxLength: AppConstants.maxLengthOfJobNumber,
+                isPassword: true,
+                obscureText: controller.obscureNewPassword,
+                keyboardType: TextInputType.visiblePassword,
+                changeObscureText: () => controller.changeObscureNewPassword(),
+              ),
+              SizedBox(height: ManagerHeight.h15),
+              mainTextField(
+                controller: controller.confirmPassword,
+                labelText: ManagerStrings.confirmPassword,
+                colorLabelText: ManagerColors.quartz,
+                obscureText: controller.obscureConfirmPassword,
+                isPassword: true,
+                keyboardType: TextInputType.visiblePassword,
+                changeObscureText: () =>
+                    controller.changeObscureConfirmPassword(),
               ),
               SizedBox(height: ManagerHeight.h24),
               mainButton(
-                onPressed: () => controller.sendButton(),
+                onPressed: () => controller.changePasswordButton(),
                 child: Text(
-                  ManagerStrings.send,
+                  ManagerStrings.changePassword,
                   style: TextStyle(
                     color: ManagerColors.white,
                     fontFamily: ManagerFontFamily.cairo,
