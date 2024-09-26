@@ -119,6 +119,29 @@ class ManagerStrings {
       'complaint_created_successfully'.tr;
   static String noComplaintsSubmitted = 'no_complaints_submitted'.tr;
   static String profile = 'profile'.tr;
+  static String forgotPassword = 'forgot_password'.tr;
+  static String enterLicenseNumber = 'enter_license_number'.tr;
+  static String pleaseEnterYourLicenseNumberToRecoverYourPassword =
+      'please_enter_your_license_number_to_recover_your_password'.tr;
+  static String send = 'send'.tr;
+  static String enterTheJobNumber = 'enter_the_job_number'.tr;
+  static String pleaseEnterYourJobNumberToRecoverYourPassword =
+      'please_enter_your_job_number_to_recover_your_password'.tr;
+  static String verification = 'verification'.tr;
+  static String enterVerificationCode = 'enter_verification_code'.tr;
+  static String verify = 'verify'.tr;
+  static String theEnteredCodeIsIncorrect = 'the_entered_code_is_incorrect'.tr;
+  static String pleaseEnterTheConfirmationCodeSentToYourMobileNumber =
+      'please_enter_the_confirmation_code_sent_to_your_mobile_number'.tr;
+  static String enterNewPassword = 'enter_new_password'.tr;
+  static String changePassword = 'change_password'.tr;
+  static String newPassword = 'new_password'.tr;
+  static String confirmPassword = 'confirm_password'.tr;
+  static String pleaseEnterNewPasswordWhichMustBeDifferentFromTheOldPassword =
+      'please_enter_new_password_which_must_be_different_from_the_old_password'
+          .tr;
+  static String passwordHasBeenChangedSuccessfully =
+      'password_has_been_changed_successfully'.tr;
 
 ///////////////////////////////////////////////////////////////////////////////
   static const String drivingLicenseGradesAr = 'درجات رخصة القيادة';

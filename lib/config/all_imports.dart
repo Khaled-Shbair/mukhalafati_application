@@ -98,3 +98,11 @@ export '/features/complaints/presentation/view/widgets/data_column_of_complaints
 export '/features/complaints/presentation/model/data_of_complaints.dart';
 export '/features/complaints/presentation/view/widgets/dialog_of_create_complaint.dart';
 export '/features/complaints/presentation/controller/create_complaints_controller.dart';
+
+export '/features/forget_password/presentation/view/screens/forgot_password_for_driver_screen.dart';
+export '/features/forget_password/presentation/view/screens/forgot_password_for_police_man_screen.dart';
+export '/features/forget_password/presentation/controller/forgot_password_for_driver_controller.dart';
+export '/features/forget_password/presentation/controller/forgot_password_for_police_man_controller.dart';
+export '/features/forget_password/presentation/controller/verification_code_controller.dart';
+export '/features/forget_password/presentation/view/screens/verification_code_screen.dart';
+export '/features/forget_password/presentation/view/widgets/filed_of_verification_code.dart';

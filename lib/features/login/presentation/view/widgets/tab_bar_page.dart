@@ -5,7 +5,6 @@ Widget tabBarPage({
   required void Function(bool? value) changeRememberMe,
   required void Function() login,
   required GestureRecognizer forgotPasswordRecognizer,
-  required GestureRecognizer registerRecognizer,
   required TextEditingController userNumber,
   required TextEditingController password,
   required String labelTextOfUserField,
@@ -63,17 +62,6 @@ Widget tabBarPage({
             fontFamily: ManagerFontFamily.cairo,
           ),
         ),
-      ),
-      SizedBox(height: ManagerHeight.h16),
-      richText(
-        title: ManagerStrings.doNotHaveAnAccount,
-        children: [
-          textSpan(
-            text: ' ${ManagerStrings.subscribe}',
-            recognizer: registerRecognizer,
-            color: ManagerColors.primaryColor,
-          ),
-        ],
       ),
     ],
   );
