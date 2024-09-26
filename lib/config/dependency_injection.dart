@@ -153,3 +153,29 @@ initCreateComplaints() {
 disposeCreateComplaints() {
   Get.delete<CreateComplaintsController>();
 }
+
+initForgotPasswordForDriver() {
+  Get.put<ForgotPasswordForDriverController>(
+      ForgotPasswordForDriverController());
+}
+
+disposeForgotPasswordForDriver() {
+  Get.delete<ForgotPasswordForDriverController>();
+}
+
+initForgotPasswordForPoliceMan() {
+  Get.put<ForgotPasswordForPoliceManController>(
+      ForgotPasswordForPoliceManController());
+}
+
+disposeForgotPasswordForPoliceMan() {
+  Get.delete<ForgotPasswordForPoliceManController>();
+}
+
+initVerificationCode() {
+  Get.put<VerificationCodeController>(VerificationCodeController());
+}
+
+disposeVerificationCode() {
+  Get.delete<VerificationCodeController>();
+}
