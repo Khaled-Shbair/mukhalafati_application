@@ -187,3 +187,11 @@ initChangePassword() {
 disposeChangePassword() {
   Get.delete<ChangePasswordController>();
 }
+
+initDriverProfile() {
+  Get.put<DriverProfileController>(DriverProfileController());
+}
+
+disposeDriverProfile() {
+  Get.delete<DriverProfileController>();
+}
