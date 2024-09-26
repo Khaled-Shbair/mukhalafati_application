@@ -51,6 +51,9 @@ class RouteGenerator {
         initForgotPasswordForPoliceMan();
         return MaterialPageRoute(
             builder: (_) => const ForgotPasswordForPoliceManScreen());
+      case Routes.changePasswordScreen:
+        initChangePassword();
+        return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
       case Routes.verificationCodeScreen:
         initVerificationCode();
         final phoneNumber = settings.arguments as String;
