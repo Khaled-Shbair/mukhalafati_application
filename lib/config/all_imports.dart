@@ -106,3 +106,6 @@ export '/features/forget_password/presentation/controller/forgot_password_for_po
 export '/features/forget_password/presentation/controller/verification_code_controller.dart';
 export '/features/forget_password/presentation/view/screens/verification_code_screen.dart';
 export '/features/forget_password/presentation/view/widgets/filed_of_verification_code.dart';
+
+export '/features/change_password/presentation/controller/change_password_controller.dart';
+export '/features/change_password/presentation/view/screens/change_password_screen.dart';
