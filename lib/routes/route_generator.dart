@@ -43,6 +43,19 @@ class RouteGenerator {
         initListOfComplaints();
         return MaterialPageRoute(
             builder: (_) => const ListOfComplaintsScreen());
+      case Routes.forgetDriverPasswordScreen:
+        initForgotPasswordForDriver();
+        return MaterialPageRoute(
+            builder: (_) => const ForgotPasswordForDriverScreen());
+      case Routes.forgetPoliceManPasswordScreen:
+        initForgotPasswordForPoliceMan();
+        return MaterialPageRoute(
+            builder: (_) => const ForgotPasswordForPoliceManScreen());
+      case Routes.verificationCodeScreen:
+        initVerificationCode();
+        final phoneNumber = settings.arguments as String;
+        return MaterialPageRoute(
+            builder: (_) => VerificationCodeScreen(phoneNumber: phoneNumber));
       default:
         return unDefinedRoute();
     }
