@@ -142,6 +142,11 @@ class ManagerStrings {
           .tr;
   static String passwordHasBeenChangedSuccessfully =
       'password_has_been_changed_successfully'.tr;
+  static String fullName = 'full_name'.tr;
+  static String updateData = 'update_data'.tr;
+  static String yourUpdateRequestHasBeenSubmittedSuccessfully =
+      'your_update_request_has_been_submitted_successfully'.tr;
+  static String phoneNumber = 'phone_number'.tr;
 
 ///////////////////////////////////////////////////////////////////////////////
   static const String drivingLicenseGradesAr = 'درجات رخصة القيادة';
