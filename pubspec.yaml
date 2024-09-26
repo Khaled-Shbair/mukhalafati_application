@@ -76,6 +76,7 @@ flutter:
     - assets/images/logout/
     - assets/images/driving_license_card/
     - assets/images/home/
+    - assets/images/forgot_password/
 
   fonts:
     - family: cairo

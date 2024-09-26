@@ -50,4 +50,13 @@ class ManagerAssets {
   static const String radarIcon = '$_imagePath/home/radar_icon.png';
   static const String searchForDriverIcon =
       '$_imagePath/home/search_for_driver_icon.png';
+
+  static const String changePasswordImage =
+      '$_imagePath/forgot_password/change_password_image.svg';
+  static const String forgotPasswordImage =
+      '$_imagePath/forgot_password/forgot_password_image.svg';
+  static const String inputIncorrect =
+      '$_imagePath/forgot_password/input_incorrect.png';
+  static const String verificationImage =
+      '$_imagePath/forgot_password/verification_image.svg';
 }
