@@ -109,3 +109,6 @@ export '/features/forget_password/presentation/view/widgets/filed_of_verificatio
 
 export '/features/change_password/presentation/controller/change_password_controller.dart';
 export '/features/change_password/presentation/view/screens/change_password_screen.dart';
+
+export '/features/profile/presentation/controller/driver_profile_controller.dart';
+export '/features/profile/presentation/view/screens/driver_profile_screen.dart';
