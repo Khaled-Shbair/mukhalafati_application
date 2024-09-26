@@ -4,6 +4,9 @@ Future<void> createdSuccessfullyDialog({
   required void Function() closeButton,
   required BuildContext context,
   required String text,
+  double? startPaddingText,
+  double? endPaddingText,
+  double? fontSizeText,
 }) async {
   await showDialog(
     context: context,
@@ -72,8 +75,8 @@ Future<void> createdSuccessfullyDialog({
                 ),
                 Container(
                   margin: EdgeInsetsDirectional.only(
-                    start: ManagerWidth.w38,
-                    end: ManagerWidth.w38,
+                    start: startPaddingText ?? ManagerWidth.w38,
+                    end: endPaddingText ?? ManagerWidth.w38,
                     top: ManagerHeight.h20,
                   ),
                   child: Text(
@@ -81,7 +84,7 @@ Future<void> createdSuccessfullyDialog({
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: ManagerColors.eerieBlack,
-                      fontSize: ManagerFontsSizes.f20,
+                      fontSize: fontSizeText ?? ManagerFontsSizes.f20,
                       fontFamily: ManagerFontFamily.cairo,
                       fontWeight: ManagerFontWeight.semiBold,
                       decoration: TextDecoration.none,
