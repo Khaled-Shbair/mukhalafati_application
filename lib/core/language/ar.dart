@@ -139,5 +139,10 @@ const Map<String, String> ar = {
   'please_enter_new_password_which_must_be_different_from_the_old_password':
       'يرجى إدخال كلمة السر الجديدة ويجب أن تكون مختلفة عن كلمة السر القديمة',
   'password_has_been_changed_successfully': 'تم تغيير كلمة السر بنجـــــاح',
+  'full_name': 'الاسم رباعي',
+  'update_data': 'تحديث البيانات',
+  'your_update_request_has_been_submitted_successfully':
+      'تم إرسال طلب التحديث بنجاح سيتم مراجعته وستتلقى إشعارًا عند الموافقة',
+  'phone_number': 'رقم الجوال',
   '': '',
 };
