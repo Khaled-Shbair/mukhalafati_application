@@ -129,6 +129,9 @@ class ManagerRadius {
   static double r15 = SizeUitl.setRadius(15);
   static double r24 = SizeUitl.setRadius(24);
   static double r40 = SizeUitl.setRadius(40);
+  static double r60 = SizeUitl.setRadius(60);
+  static double r64 = SizeUitl.setRadius(64);
+  static double r66 = SizeUitl.setRadius(66);
   static double r100 = SizeUitl.setRadius(100);
 }
 
