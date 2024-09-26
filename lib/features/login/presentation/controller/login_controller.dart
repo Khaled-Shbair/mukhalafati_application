@@ -7,8 +7,6 @@ class LoginController extends GetxController
   late TextEditingController passwordPoliceMan;
   late TextEditingController licenseNumber;
   late TextEditingController passwordDriver;
-  late GestureRecognizer registerPoliceManRecognizer;
-  late GestureRecognizer registerDriverRecognizer;
   late GestureRecognizer forgetPoliceManPasswordRecognizer;
   late GestureRecognizer forgetDriverPasswordRecognizer;
   bool rememberMePoliceMan = false;
@@ -24,10 +22,6 @@ class LoginController extends GetxController
     passwordPoliceMan = TextEditingController();
     licenseNumber = TextEditingController();
     passwordDriver = TextEditingController();
-    registerPoliceManRecognizer = TapGestureRecognizer()
-      ..onTap = () => Get.toNamed(Routes.registerPoliceManScreen);
-    registerDriverRecognizer = TapGestureRecognizer()
-      ..onTap = () => Get.toNamed(Routes.registerDriverScreen);
     forgetPoliceManPasswordRecognizer = TapGestureRecognizer()
       ..onTap = () => Get.toNamed(Routes.forgetPoliceManPasswordScreen);
     forgetDriverPasswordRecognizer = TapGestureRecognizer()
@@ -40,8 +34,6 @@ class LoginController extends GetxController
     passwordPoliceMan.dispose();
     licenseNumber.dispose();
     passwordDriver.dispose();
-    registerPoliceManRecognizer.dispose();
-    registerDriverRecognizer.dispose();
     forgetPoliceManPasswordRecognizer.dispose();
     forgetDriverPasswordRecognizer.dispose();
     super.dispose();
