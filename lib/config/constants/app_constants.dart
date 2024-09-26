@@ -23,9 +23,11 @@ class AppConstants {
   static const double spreadRadiusOfBoxShadowInConfirmInformationWidget = 2;
   static const double blurRadiusOfBoxShadowInResultOfDriverWidget = 2;
   static const int maxLengthOfLicenseNumber = 8;
+  static const int maxLengthOfJobNumber = 8;
   static const int maxLengthOfVehicleNumber = 8;
   static const int maxLengthOfIDNumber = 8;
   static const int maxLengthOfVehicleColor = 8;
+  static const int maxLengthOfVerificationCode = 1;
   static const double
       heightOfTextOfTitleDrivingLicenseCardInDrivingLicenseCardScreen = 1.8;
   static const double
