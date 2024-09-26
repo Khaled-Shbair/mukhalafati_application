@@ -179,3 +179,11 @@ initVerificationCode() {
 disposeVerificationCode() {
   Get.delete<VerificationCodeController>();
 }
+
+initChangePassword() {
+  Get.put<ChangePasswordController>(ChangePasswordController());
+}
+
+disposeChangePassword() {
+  Get.delete<ChangePasswordController>();
+}
