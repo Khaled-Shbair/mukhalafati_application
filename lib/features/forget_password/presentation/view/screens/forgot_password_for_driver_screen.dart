@@ -56,7 +56,7 @@ class ForgotPasswordForDriverScreen extends StatelessWidget {
                     color: ManagerColors.davyGrey,
                     fontFamily: ManagerFontFamily.cairo,
                     fontWeight: ManagerFontWeight.medium,
-                    fontSize: ManagerFontsSizes.f15,
+                    fontSize: ManagerFontsSizes.f13,
                   ),
                 ),
               ),
