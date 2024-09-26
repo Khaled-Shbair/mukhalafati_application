@@ -54,6 +54,9 @@ class RouteGenerator {
       case Routes.changePasswordScreen:
         initChangePassword();
         return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
+      case Routes.driverProfileScreen:
+        initDriverProfile();
+        return MaterialPageRoute(builder: (_) => const DriverProfileScreen());
       case Routes.verificationCodeScreen:
         initVerificationCode();
         final phoneNumber = settings.arguments as String;
