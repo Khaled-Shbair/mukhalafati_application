@@ -9,20 +9,10 @@ class LoginScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
-          backgroundColor: ManagerColors.white,
           appBar: AppBar(
-            backgroundColor: ManagerColors.white,
-            leading: mainButton(
-              highlightColor: ManagerColors.transparent,
-              side: BorderSide.none,
-              shape: const CircleBorder(),
+            leading: IconButton(
               onPressed: () => controller.backButton(),
-              color: Colors.transparent,
-              child: const Icon(
-                Icons.arrow_back_ios,
-                color: ManagerColors.primaryColor,
-                size: 20,
-              ),
+              icon: const Icon(Icons.arrow_back_ios),
             ),
           ),
           body: Padding(
@@ -31,8 +21,6 @@ class LoginScreen extends StatelessWidget {
               end: ManagerWidth.w28,
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
                   ManagerAssets.logo,
@@ -120,7 +108,6 @@ class LoginScreen extends StatelessWidget {
                             controller.changeRememberMeDriver(v!),
                         forgotPasswordRecognizer:
                             controller.forgetDriverPasswordRecognizer,
-                        registerRecognizer: controller.registerDriverRecognizer,
                         rememberMe: controller.rememberMeDriver,
                         obscureText: controller.obscurePasswordDriver,
                         changeObscurePassword: () =>
@@ -136,8 +123,6 @@ class LoginScreen extends StatelessWidget {
                         forgotPasswordRecognizer:
                             controller.forgetPoliceManPasswordRecognizer,
                         login: () => controller.loginPoliceMan(),
-                        registerRecognizer:
-                            controller.registerPoliceManRecognizer,
                         rememberMe: controller.rememberMePoliceMan,
                         obscureText: controller.obscurePasswordPoliceMan,
                         changeObscurePassword: () =>
