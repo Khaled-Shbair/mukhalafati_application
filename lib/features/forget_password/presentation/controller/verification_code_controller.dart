@@ -50,7 +50,7 @@ class VerificationCodeController extends GetxController {
   String phoneNumber = '0599724073';
 
   void verifyButton() {
-    Get.toNamed(Routes.changePasswordScreen);
+    Get.offAndToNamed(Routes.changePasswordScreen);
     disposeVerificationCode();
     disposeForgotPasswordForDriver();
     disposeForgotPasswordForPoliceMan();
