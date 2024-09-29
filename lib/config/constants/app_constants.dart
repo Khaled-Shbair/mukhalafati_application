@@ -8,6 +8,7 @@ class AppConstants {
       2;
   static const double strokeWidthOfCircularProgressIndicator = 3;
   static const double sideOfBorderSideInMainButton = 0.25;
+  static const double elevationOfStepperInPaymentScreen = 0;
   static const double splashRadiusOfCheckboxInLoginScreen = 0;
   static const double widthOfBorderSideOfMainTextField = 0.50;
   static const double thicknessOfDividerInCreateViolation = 0.4;
@@ -35,4 +36,5 @@ class AppConstants {
   static const double
       blurRadiusOfBoxShadowInNumberOfViolationsContainerInResultOfDriverWidget =
       2;
+  static const double stepIconSizeOfStepperInPaymentScreen = 34;
 }
