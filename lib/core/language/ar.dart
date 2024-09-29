@@ -144,5 +144,36 @@ const Map<String, String> ar = {
   'your_update_request_has_been_submitted_successfully':
       'تم إرسال طلب التحديث بنجاح سيتم مراجعته وستتلقى إشعارًا عند الموافقة',
   'phone_number': 'رقم الجوال',
+  'payment_selection': 'اختيار الدفع',
+  'enter_details': 'إدخال التفاصيل',
+  'payment_confirmation': 'تأكيد الدفع',
+  'choose_payment_method': 'اختر طريقة الدفع',
+  'sub_title_payment_method':
+      'يرجى اختيار طريقة الدفع المناسبة من الخيارات التالية لإتمام عملية الدفع',
+  'visa_card': 'بطاقة الفيزا',
+  'pal_pay': 'محفظة بال باي',
+  'jawwal_pay': 'محفظة جوال باي',
+  'next': 'التالي',
+  'payment_details_by': 'تفاصيل الدفع ب',
+  'sub_title_payment_details':
+      'يرجى إدخال بيانات المطلوبة بشكل صحيح لضمان إتمام الدفع',
+  'card_holder_name': 'اسم حامل البطاقة',
+  'card_number': 'رقم البطاقة',
+  'complete_payment_by': 'إتمام الدفع بـ',
+  'security_code': 'رمز الأمان CVV',
+  'expiry_date_card': 'تاريخ انتهاء الصلاحية MM/YY',
+  'sub_title_payment_confirmation':
+      'يرجى مراجعة تفاصيل الدفع أدناه قبل إتمام العملية',
+  'total_amount': 'إجمالي المبلغ',
+  'payment_method': 'طريقة الدفع',
+  'shekel': 'شيكل',
+  'after_clicking_on_confirm_payment':
+      'بعد الضغط على "تأكيد الدفع" لن تتمكن من التراجع عن العملية',
+  'payment_successful': 'تم الدفع بنجـــــاح',
+  'sub_title_payment_successful': 'لقد تمت عملية الدفع بنجاح وتم خصم المبلغ من حسابك',
+  'back_to_violations': 'العودة إلى المخالفات',
+  'payment_failed': 'فشلت عملية الدفع',
+  'sub_title_payment_failed': 'عذراً، لم تتم عملية الدفع\nيرجى التحقق من تفاصيل البطاقة والمحاولة مرة أخرى',
+  'try_again': 'إعادة المحاولة',
   '': '',
 };
