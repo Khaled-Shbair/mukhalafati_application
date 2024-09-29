@@ -57,6 +57,11 @@ class RouteGenerator {
       case Routes.driverProfileScreen:
         initDriverProfile();
         return MaterialPageRoute(builder: (_) => const DriverProfileScreen());
+      case Routes.paymentScreen:
+        initPayment();
+        final priceOfViolation = settings.arguments as String;
+        // return MaterialPageRoute(builder: (_) => PaymentScreen(priceOfViolation: priceOfViolation));
+         return MaterialPageRoute(builder: (_) => PaymentScreen());
       case Routes.verificationCodeScreen:
         initVerificationCode();
         final phoneNumber = settings.arguments as String;
