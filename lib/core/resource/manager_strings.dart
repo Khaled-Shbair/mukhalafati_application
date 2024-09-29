@@ -147,8 +147,37 @@ class ManagerStrings {
   static String yourUpdateRequestHasBeenSubmittedSuccessfully =
       'your_update_request_has_been_submitted_successfully'.tr;
   static String phoneNumber = 'phone_number'.tr;
+  static String shekel = 'shekel'.tr;
+  static String paymentMethod = 'payment_method'.tr;
+  static String totalAmount = 'total_amount'.tr;
+  static String subTitlePaymentConfirmation =
+      'sub_title_payment_confirmation'.tr;
+  static String expiryDateCard = 'expiry_date_card'.tr;
+  static String securityCode = 'security_code'.tr;
+  static String completePaymentBy = 'complete_payment_by'.tr;
+  static String cardNumber = 'card_number'.tr;
+  static String cardHolderName = 'card_holder_name'.tr;
+  static String subTitlePaymentDetails = 'sub_title_payment_details'.tr;
+  static String paymentDetailsBy = 'payment_details_by'.tr;
+  static String next = 'next'.tr;
+  static String visaCard = 'visa_card'.tr;
+  static String subTitlePaymentMethod = 'sub_title_payment_method'.tr;
+  static String choosePaymentMethod = 'choose_payment_method'.tr;
+  static String paymentConfirmation = 'payment_confirmation'.tr;
+  static String enterDetails = 'enter_details'.tr;
+  static String paymentSelection = 'payment_selection'.tr;
+  static String afterClickingOnConfirmPayment =
+      'after_clicking_on_confirm_payment'.tr;
+  static String paymentSuccessful = 'payment_successful'.tr;
+  static String subTitlePaymentSuccessful = 'sub_title_payment_successful'.tr;
+  static String backToViolations = 'back_to_violations'.tr;
+  static String paymentFailed = 'payment_failed'.tr;
+  static String subTitlePaymentFailed = 'sub_title_payment_failed'.tr;
+  static String tryAgain = 'try_again'.tr;
 
 ///////////////////////////////////////////////////////////////////////////////
+  static const String jawwalPay = 'Jawwal pay';
+  static const String palPay = 'PalPay';
   static const String drivingLicenseGradesAr = 'درجات رخصة القيادة';
   static const String drivingLicenseGradesEn = 'Driving License Classes';
   static const String tractorAr = 'جراد رزاعي';
