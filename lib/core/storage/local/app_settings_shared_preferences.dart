@@ -12,7 +12,7 @@ class AppSettingsSharedPreferences {
   Future<void> clear() => _sharedPreferences.clear();
 
   Future<void> setOnBoardingViewed() async {
-    _sharedPreferences.setBool(PrefKeys.onBoarding.toString(), true);
+    await _sharedPreferences.setBool(PrefKeys.onBoarding.toString(), true);
   }
 
   bool getOnBoardingViewed() {
