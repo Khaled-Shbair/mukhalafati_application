@@ -3,6 +3,7 @@ import '/config/all_imports.dart';
 class ManagerHeight {
   static double h0 = SizeUitl.setHeight(0);
   static double h1 = SizeUitl.setHeight(1);
+  static double h3 = SizeUitl.setHeight(3);
   static double h6 = SizeUitl.setHeight(6);
   static double h9 = SizeUitl.setHeight(9);
   static double h60 = SizeUitl.setHeight(60);
@@ -65,8 +66,10 @@ class ManagerWidth {
   static double w05 = SizeUitl.setWidth(0.5); // 0.5
   static double w1 = SizeUitl.setWidth(1);
   static double w3 = SizeUitl.setWidth(3);
+  static double w34 = SizeUitl.setWidth(34);
   static double w290 = SizeUitl.setWidth(290);
   static double w66 = SizeUitl.setWidth(66);
+  static double w35 = SizeUitl.setWidth(35);
   static double w7 = SizeUitl.setWidth(7);
   static double w22 = SizeUitl.setWidth(22);
   static double w76 = SizeUitl.setWidth(76);
@@ -127,6 +130,7 @@ class ManagerRadius {
   static double r8 = SizeUitl.setRadius(8);
   static double r10 = SizeUitl.setRadius(10);
   static double r15 = SizeUitl.setRadius(15);
+  static double r17 = SizeUitl.setRadius(17);
   static double r24 = SizeUitl.setRadius(24);
   static double r40 = SizeUitl.setRadius(40);
   static double r60 = SizeUitl.setRadius(60);
