@@ -10,6 +10,7 @@ class ManagerColors {
   static const Color gunmetal = Color.fromRGBO(38, 50, 56, .80);
   static const Color grannySmithApple = Color.fromRGBO(161, 217, 155, .70);
   static const Color begonia = Color.fromRGBO(247, 109, 109, .70);
+  static const Color lightSilver40 = Color.fromRGBO(217, 217, 217, .40);
   static const Color peach = Color.fromRGBO(255, 229, 180, .70);
 
   static const Color mayGreen = Color(0XFF4F8F48);
@@ -28,6 +29,7 @@ class ManagerColors {
   static const Color antiFlashWhite = Color(0XFFF3F4F6);
   static const Color darkGunmetal = Color(0XFF182233);
   static const Color spanishGray = Color(0XFF979797);
+  static const Color gainsBoro = Color(0XFFDADADA);
   static const Color transparent = Colors.transparent;
 
   static const Color black = Color(0XFF000000);
