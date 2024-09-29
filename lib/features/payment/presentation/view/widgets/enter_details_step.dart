@@ -1,0 +1,91 @@
+import '/config/all_imports.dart';
+
+Step enterDetailsStep({
+  required bool enterDetailsDone,
+  required Function() completePaymentButton,
+  required String paymentBy,
+  required String price,
+  required TextEditingController cardHolderName,
+  required TextEditingController cardNumber,
+  required TextEditingController securityCode,
+  required TextEditingController expiryDateCard,
+}) {
+  return myStep(
+    isActive: enterDetailsDone,
+    label: ManagerStrings.enterDetails,
+    content: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: ManagerHeight.h20),
+        Text(
+          '${ManagerStrings.paymentDetailsBy} $paymentBy',
+          style: TextStyle(
+            color: ManagerColors.black,
+            fontSize: ManagerFontsSizes.f15,
+            fontWeight: ManagerFontWeight.bold,
+            fontFamily: ManagerFontFamily.cairo,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsetsDirectional.only(
+            end: ManagerWidth.w122,
+            top: ManagerHeight.h6,
+            bottom: ManagerHeight.h19,
+          ),
+          child: Text(
+            ManagerStrings.subTitlePaymentDetails,
+            style: TextStyle(
+              color: ManagerColors.davyGrey,
+              fontSize: ManagerFontsSizes.f12,
+              fontWeight: ManagerFontWeight.medium,
+              fontFamily: ManagerFontFamily.cairo,
+              height: 2,
+            ),
+          ),
+        ),
+        mainTextField(
+          controller: cardHolderName,
+          labelText: ManagerStrings.cardHolderName,
+        ),
+        SizedBox(height: ManagerHeight.h24),
+        mainTextField(
+          controller: cardNumber,
+          labelText: ManagerStrings.cardNumber,
+        ),
+        SizedBox(height: ManagerHeight.h24),
+        Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: mainTextField(
+                controller: expiryDateCard,
+                labelText: ManagerStrings.expiryDateCard,
+              ),
+            ),
+            SizedBox(width: ManagerWidth.w10),
+            Expanded(
+              child: mainTextField(
+                controller: securityCode,
+                labelText: ManagerStrings.securityCode,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: ManagerHeight.h30),
+        mainButton(
+          onPressed: completePaymentButton,
+          child: Text(
+            '${ManagerStrings.completePaymentBy} $price₪',
+            style: TextStyle(
+              color: ManagerColors.white,
+              fontFamily: ManagerFontFamily.cairo,
+              fontWeight: ManagerFontWeight.bold,
+              fontSize: ManagerFontsSizes.f15,
+            ),
+          ),
+        )
+      ],
+    ),
+  );
+}
