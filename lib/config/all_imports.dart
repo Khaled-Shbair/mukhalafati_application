@@ -112,3 +112,11 @@ export '/features/change_password/presentation/view/screens/change_password_scre
 
 export '/features/profile/presentation/controller/driver_profile_controller.dart';
 export '/features/profile/presentation/view/screens/driver_profile_screen.dart';
+
+export '/features/payment/presentation/controller/payment_controller.dart';
+export '/features/payment/presentation/view/screens/payment_screen.dart';
+export '/features/payment/presentation/view/widgets/my_step.dart';
+export '/features/payment/presentation/view/widgets/payment_method.dart';
+export '/features/payment/presentation/view/widgets/enter_details_step.dart';
+export '/features/payment/presentation/view/widgets/payment_confirmation_step.dart';
+export '/features/payment/presentation/view/widgets/payment_selection_step.dart';
