@@ -24,6 +24,8 @@ class AppConstants {
   static const double blurRadiusOfBoxShadowInListOfComplaintsScreen = 5;
   static const double spreadRadiusOfBoxShadowInConfirmInformationWidget = 2;
   static const double blurRadiusOfBoxShadowInResultOfDriverWidget = 2;
+  static const double spreadRadiusOfBoxShadowInViolationPaymentScreen= 4;
+  static const double blurRadiusOfBoxShadowInViolationPaymentScreen = 3;
   static const int maxLengthOfLicenseNumber = 8;
   static const int maxLengthOfPhoneNumber = 10;
   static const int maxLengthOfJobNumber = 8;
@@ -37,4 +39,7 @@ class AppConstants {
       blurRadiusOfBoxShadowInNumberOfViolationsContainerInResultOfDriverWidget =
       2;
   static const double stepIconSizeOfStepperInPaymentScreen = 34;
+  static const String one = '1';
+  static const String two = '2';
+  static const String three = '3';
 }
