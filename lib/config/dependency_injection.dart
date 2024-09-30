@@ -203,3 +203,11 @@ initPayment() {
 disposePayment() {
   Get.delete<PaymentController>();
 }
+
+initViolationPayment() {
+  Get.put<ViolationPaymentController>(ViolationPaymentController());
+}
+
+disposeViolationPayment() {
+  Get.delete<ViolationPaymentController>();
+}
