@@ -28,6 +28,10 @@ class RouteGenerator {
         initListOfViolations();
         return MaterialPageRoute(
             builder: (_) => const ListOfViolationsScreen());
+      case Routes.violationPaymentScreen:
+        initViolationPayment();
+        return MaterialPageRoute(
+            builder: (_) => const ViolationPaymentScreen());
       case Routes.searchForDriverScreen:
         initSearchForDriver();
         return MaterialPageRoute(builder: (_) => const SearchForDriverScreen());
@@ -60,8 +64,8 @@ class RouteGenerator {
       case Routes.paymentScreen:
         initPayment();
         final priceOfViolation = settings.arguments as String;
-        // return MaterialPageRoute(builder: (_) => PaymentScreen(priceOfViolation: priceOfViolation));
-         return MaterialPageRoute(builder: (_) => PaymentScreen());
+        return MaterialPageRoute(
+            builder: (_) => PaymentScreen(priceOfViolation: priceOfViolation));
       case Routes.verificationCodeScreen:
         initVerificationCode();
         final phoneNumber = settings.arguments as String;
