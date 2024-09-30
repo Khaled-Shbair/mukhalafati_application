@@ -64,4 +64,7 @@ class ManagerAssets {
   static const String visaCard = '$_imagePath/payment/visa_card.png';
   static const String palPay = '$_imagePath/payment/palpay.png';
   static const String warningIcon = '$_imagePath/payment/warning_icon.png';
+  static const String filterIcon = '$_imagePath/payment/filter_icon.png';
+  static const String cancelFilterIcon =
+      '$_imagePath/payment/cancel_filter_icon.png';
 }
