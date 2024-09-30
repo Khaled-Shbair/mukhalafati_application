@@ -174,6 +174,14 @@ class ManagerStrings {
   static String paymentFailed = 'payment_failed'.tr;
   static String subTitlePaymentFailed = 'sub_title_payment_failed'.tr;
   static String tryAgain = 'try_again'.tr;
+  static String yourViolations = 'your_violations'.tr;
+  static String filter = 'filter'.tr;
+  static String cancelFilter = 'cancel_filter'.tr;
+  static String paid = 'paid'.tr;
+  static String close = 'close'.tr;
+  static String violationDetails = 'violation_details'.tr;
+  static String youCanViewAllYourPaidAndUnpaidViolations =
+      'you_can_view_all_your_paid_and_unpaid_violations'.tr;
 
 ///////////////////////////////////////////////////////////////////////////////
   static const String jawwalPay = 'Jawwal pay';
