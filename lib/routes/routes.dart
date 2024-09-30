@@ -27,5 +27,6 @@ class Routes {
       'forgot_password_for_police_man_screen';
   static const String verificationCodeScreen = 'verification_code_screen';
   static const String changePasswordScreen = 'change_password_screen';
-  static const String paymentScreen = 'payment_Screen';
+  static const String paymentScreen = 'payment_screen';
+  static const String violationPaymentScreen = 'violation_payment_screen';
 }
