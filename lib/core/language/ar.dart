@@ -175,5 +175,12 @@ const Map<String, String> ar = {
   'payment_failed': 'فشلت عملية الدفع',
   'sub_title_payment_failed': 'عذراً، لم تتم عملية الدفع\nيرجى التحقق من تفاصيل البطاقة والمحاولة مرة أخرى',
   'try_again': 'إعادة المحاولة',
+  'your_violations': 'مخالفاتك',
+  'filter': 'التصفية',
+  'cancel_filter': 'إلغاء التصفية',
+  'you_can_view_all_your_paid_and_unpaid_violations': 'يمكنك مشاهدة جميع مخالفاتك المدفوعة وغير المدفوعة',
+  'paid': 'مدفوعة',
+  'close': 'إغلاق',
+  'violation_details': 'تفاصيل المخالفة',
   '': '',
 };
