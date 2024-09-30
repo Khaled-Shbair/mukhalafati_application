@@ -5,9 +5,11 @@ class ManagerHeight {
   static double h1 = SizeUitl.setHeight(1);
   static double h3 = SizeUitl.setHeight(3);
   static double h6 = SizeUitl.setHeight(6);
+  static double h21 = SizeUitl.setHeight(21);
   static double h9 = SizeUitl.setHeight(9);
   static double h60 = SizeUitl.setHeight(60);
   static double h162 = SizeUitl.setHeight(162);
+  static double h186 = SizeUitl.setHeight(186);
   static double h182 = SizeUitl.setHeight(182);
   static double h11 = SizeUitl.setHeight(11);
   static double h203 = SizeUitl.setHeight(203);
@@ -96,6 +98,7 @@ class ManagerWidth {
   static double w5 = SizeUitl.setWidth(5);
   static double w6 = SizeUitl.setWidth(6);
   static double w85 = SizeUitl.setWidth(85);
+  static double w186 = SizeUitl.setWidth(186);
   static double w14 = SizeUitl.setWidth(14);
   static double w15 = SizeUitl.setWidth(15);
   static double w23 = SizeUitl.setWidth(23);
