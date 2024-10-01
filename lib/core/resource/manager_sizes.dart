@@ -2,11 +2,15 @@ import '/config/all_imports.dart';
 
 class ManagerHeight {
   static double h0 = SizeUitl.setHeight(0);
+  static double h05 = SizeUitl.setHeight(0.5);//0.5
   static double h1 = SizeUitl.setHeight(1);
+  static double h3 = SizeUitl.setHeight(3);
   static double h6 = SizeUitl.setHeight(6);
+  static double h21 = SizeUitl.setHeight(21);
   static double h9 = SizeUitl.setHeight(9);
   static double h60 = SizeUitl.setHeight(60);
   static double h162 = SizeUitl.setHeight(162);
+  static double h186 = SizeUitl.setHeight(186);
   static double h182 = SizeUitl.setHeight(182);
   static double h11 = SizeUitl.setHeight(11);
   static double h203 = SizeUitl.setHeight(203);
@@ -65,8 +69,15 @@ class ManagerWidth {
   static double w05 = SizeUitl.setWidth(0.5); // 0.5
   static double w1 = SizeUitl.setWidth(1);
   static double w3 = SizeUitl.setWidth(3);
+  static double w34 = SizeUitl.setWidth(34);
+  static double w72 = SizeUitl.setWidth(72);
   static double w290 = SizeUitl.setWidth(290);
+  static double w300 = SizeUitl.setWidth(300);
+  static double w80 = SizeUitl.setWidth(80);
+  static double w287 = SizeUitl.setWidth(287);
+  static double w27 = SizeUitl.setWidth(27);
   static double w66 = SizeUitl.setWidth(66);
+  static double w35 = SizeUitl.setWidth(35);
   static double w7 = SizeUitl.setWidth(7);
   static double w22 = SizeUitl.setWidth(22);
   static double w76 = SizeUitl.setWidth(76);
@@ -93,6 +104,7 @@ class ManagerWidth {
   static double w5 = SizeUitl.setWidth(5);
   static double w6 = SizeUitl.setWidth(6);
   static double w85 = SizeUitl.setWidth(85);
+  static double w186 = SizeUitl.setWidth(186);
   static double w14 = SizeUitl.setWidth(14);
   static double w15 = SizeUitl.setWidth(15);
   static double w23 = SizeUitl.setWidth(23);
@@ -103,6 +115,7 @@ class ManagerWidth {
   static double w254 = SizeUitl.setWidth(254);
   static double w210 = SizeUitl.setWidth(210);
   static double w268 = SizeUitl.setWidth(268);
+  static double w280 = SizeUitl.setWidth(280);
   static double w24 = SizeUitl.setWidth(24);
   static double w60 = SizeUitl.setWidth(60);
   static double w16 = SizeUitl.setWidth(16);
@@ -127,6 +140,7 @@ class ManagerRadius {
   static double r8 = SizeUitl.setRadius(8);
   static double r10 = SizeUitl.setRadius(10);
   static double r15 = SizeUitl.setRadius(15);
+  static double r17 = SizeUitl.setRadius(17);
   static double r24 = SizeUitl.setRadius(24);
   static double r40 = SizeUitl.setRadius(40);
   static double r60 = SizeUitl.setRadius(60);

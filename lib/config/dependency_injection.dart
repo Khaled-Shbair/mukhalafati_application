@@ -195,3 +195,19 @@ initDriverProfile() {
 disposeDriverProfile() {
   Get.delete<DriverProfileController>();
 }
+
+initPayment() {
+  Get.put<PaymentController>(PaymentController());
+}
+
+disposePayment() {
+  Get.delete<PaymentController>();
+}
+
+initViolationPayment() {
+  Get.put<ViolationPaymentController>(ViolationPaymentController());
+}
+
+disposeViolationPayment() {
+  Get.delete<ViolationPaymentController>();
+}

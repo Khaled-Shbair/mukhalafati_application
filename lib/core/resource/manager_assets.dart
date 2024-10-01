@@ -59,4 +59,12 @@ class ManagerAssets {
       '$_imagePath/forgot_password/input_incorrect.png';
   static const String verificationImage =
       '$_imagePath/forgot_password/verification_image.svg';
+
+  static const String jawwalPay = '$_imagePath/payment/jawwal_pay.png';
+  static const String visaCard = '$_imagePath/payment/visa_card.png';
+  static const String palPay = '$_imagePath/payment/palpay.png';
+  static const String warningIcon = '$_imagePath/payment/warning_icon.png';
+  static const String filterIcon = '$_imagePath/payment/filter_icon.png';
+  static const String cancelFilterIcon =
+      '$_imagePath/payment/cancel_filter_icon.png';
 }
