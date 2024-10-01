@@ -138,7 +138,7 @@ class ListOfComplaintsScreen extends StatelessWidget {
                     columnSpacing: ManagerWidth.w5,
                     horizontalMargin: ManagerWidth.w10,
                     columns: [
-                      dataColumnOfComplaintsTable('#'),
+                      dataColumnOfComplaintsTable(AppConstants.hash),
                       dataColumnOfComplaintsTable(ManagerStrings.date),
                       dataColumnOfComplaintsTable(ManagerStrings.complaint),
                       dataColumnOfComplaintsTable(ManagerStrings.state),
