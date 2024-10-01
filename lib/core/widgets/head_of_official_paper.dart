@@ -3,6 +3,7 @@ import '/config/all_imports.dart';
 Widget headOfOfficialPaper() {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.end,
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       _textOfHeadOfficialPaper(ManagerStrings.titleHeadViolationAr),
       Image.asset(ManagerAssets.palestineLogo),
