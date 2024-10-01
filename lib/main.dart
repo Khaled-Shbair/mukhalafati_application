@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.paymentScreen,
+          initialRoute: Routes.violationPaymentScreen,
           onGenerateRoute: RouteGenerator.getRoute,
           translations: Translation(),
           locale: const Locale(LocaleConstants.arabicLanguage),
