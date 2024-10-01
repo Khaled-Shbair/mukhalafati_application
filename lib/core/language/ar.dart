@@ -182,5 +182,7 @@ const Map<String, String> ar = {
   'paid': 'مدفوعة',
   'close': 'إغلاق',
   'violation_details': 'تفاصيل المخالفة',
+  'amount': 'المبلغ',
+  'no_recorded_violations': 'لا يوجد مخالفات مسجلة',
   '': '',
 };

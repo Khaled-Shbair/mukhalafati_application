@@ -180,6 +180,8 @@ class ManagerStrings {
   static String paid = 'paid'.tr;
   static String close = 'close'.tr;
   static String violationDetails = 'violation_details'.tr;
+  static String amount = 'amount'.tr;
+  static String noRecordedViolations = 'no_recorded_violations'.tr;
   static String youCanViewAllYourPaidAndUnpaidViolations =
       'you_can_view_all_your_paid_and_unpaid_violations'.tr;
 
