@@ -1,5 +1,3 @@
-import 'package:mukhalafati_application/features/payment/presentation/view/widgets/state_payment.dart';
-
 import '/config/all_imports.dart';
 
 class PaymentController extends GetxController {
@@ -15,6 +13,7 @@ class PaymentController extends GetxController {
   String driverName = 'خالد شبير';
   String driverImage =
       'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
+  bool loading = false;
 
   late TextEditingController cardHolderName;
   late TextEditingController cardNumber;
@@ -75,20 +74,6 @@ class PaymentController extends GetxController {
     update();
   }
 
-  void onStepContinue() {
-    if (currentStep < 2) {
-      currentStep += 1;
-    }
-    update();
-  }
-
-  void onStepCancel() {
-    if (currentStep > 0) {
-      currentStep -= 1;
-    }
-    update();
-  }
-
   void openEndDrawer() {
     if (scaffoldKey.currentState != null &&
         !scaffoldKey.currentState!.isEndDrawerOpen) {
@@ -98,26 +83,29 @@ class PaymentController extends GetxController {
 
   void backButton() {
     Get.back();
+    disposePayment();
   }
 
-  bool loading = false;
-
   void paymentSelectionButton() {
-    loading = true;
-    pageController.nextPage(
-      duration: const Duration(milliseconds: 10),
-      curve: Curves.easeIn,
-    );
-    loading = false;
-    update();
+    if (isJawwalPay == true || isVisaCard == true || isPalPay == true) {
+      loading = true;
+      pageController.nextPage(
+        duration: const Duration(milliseconds: 10),
+        curve: Curves.easeIn,
+      );
+      loading = false;
+      update();
+    } else {}
   }
 
   void completePaymentButton() {
-    loading = true;
-    pageController.nextPage(
-        duration: const Duration(milliseconds: 10), curve: Curves.easeIn);
-    loading = false;
-    update();
+    if (true) {
+      loading = true;
+      pageController.nextPage(
+          duration: const Duration(milliseconds: 10), curve: Curves.easeIn);
+      loading = false;
+      update();
+    } else {}
   }
 
   void paymentConfirmationButton() {
@@ -129,8 +117,7 @@ class PaymentController extends GetxController {
         return statePayment(
           isSuccessful: false,
           button: () {
-            Get.toNamed(Routes.violationPaymentScreen);
-            disposePayment();
+            cancelButton();
           },
         );
       },
@@ -138,16 +125,12 @@ class PaymentController extends GetxController {
   }
 
   void cancelButton() {
-    loading = true;
-    pageController.previousPage(
-        duration: const Duration(seconds: 1), curve: Curves.easeIn);
-    loading = false;
-    update();
+    Get.offAndToNamed(Routes.violationPaymentScreen);
+    disposePayment();
   }
 
   void changeCurrentPage(int value) {
     currentPage = value;
     update();
-    debugPrint('$currentPage');
   }
 }
