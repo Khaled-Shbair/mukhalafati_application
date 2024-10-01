@@ -121,3 +121,10 @@ export '/features/payment/presentation/view/widgets/payment_confirmation_step.da
 export '/features/payment/presentation/view/widgets/payment_selection_step.dart';
 export '/features/payment/presentation/view/screens/violation_payment_screen.dart';
 export '/features/payment/presentation/controller/violation_payment_controller.dart';
+export '/features/payment/presentation/view/widgets/data_column_of_violation_table.dart';
+export '/features/payment/presentation/model/data_of_violation.dart';
+export '/features/payment/presentation/view/widgets/data_row_of_violation_table.dart';
+export '/features/payment/presentation/view/widgets/table_of_violation.dart';
+export '/features/payment/presentation/view/widgets/text_of_head_violation_table.dart';
+export '/features/payment/presentation/view/widgets/view_violation_details.dart';
+export '/features/payment/presentation/view/widgets/state_payment.dart';
