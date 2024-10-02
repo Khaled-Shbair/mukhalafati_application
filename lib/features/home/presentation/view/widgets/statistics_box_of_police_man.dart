@@ -13,6 +13,9 @@ Widget statisticsBoxPoliceMan({
         top: ManagerHeight.h12,
         bottom: ManagerHeight.h10,
       ),
+      margin: EdgeInsetsDirectional.only(
+        bottom: ManagerHeight.h22,
+      ),
       decoration: BoxDecoration(
         color: ManagerColors.white,
         borderRadius: BorderRadius.circular(ManagerRadius.r5),

@@ -1,3 +1,5 @@
+import 'package:mukhalafati_application/features/home/presentation/view/widgets/tab_bar_view_item.dart';
+
 import '/config/all_imports.dart';
 
 class PoliceManHomeScreen extends StatelessWidget {
@@ -9,26 +11,23 @@ class PoliceManHomeScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           key: controller.scaffoldKey,
-          backgroundColor: ManagerColors.white,
           resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            backgroundColor: ManagerColors.white,
-            actions: [
-              mainButton(
-                onPressed: () => controller.openEndDrawer(),
-                minWidth: ManagerWidth.w30,
-                height: ManagerHeight.h30,
-                color: ManagerColors.transparent,
-                highlightColor: ManagerColors.transparent,
-                splashColor: ManagerColors.transparent,
-                side: BorderSide.none,
-                child: const Icon(
-                  Icons.menu,
-                  color: ManagerColors.black,
-                  size: 30,
+          appBar: homeAppBar(
+            firstName: controller.policeFirstName,
+            openEndDrawer: () => controller.openEndDrawer(),
+            welcome: controller.welcome,
+            widget: Container(
+              height: ManagerHeight.h50,
+              width: ManagerWidth.w50,
+              decoration: BoxDecoration(
+                color: ManagerColors.primaryColor,
+                borderRadius: BorderRadius.circular(ManagerRadius.r5),
+                image: DecorationImage(
+                  image: NetworkImage(controller.policeImage),
+                  fit: BoxFit.cover,
                 ),
               ),
-            ],
+            ),
           ),
           endDrawer: policeManDrawer(
             isPoliceManHomeScreen: true,
@@ -37,25 +36,13 @@ class PoliceManHomeScreen extends StatelessWidget {
           ),
           body: Padding(
             padding: EdgeInsetsDirectional.only(
-              start: ManagerWidth.w16,
-              end: ManagerWidth.w23,
+              start: ManagerWidth.w19,
+              end: ManagerWidth.w19,
+              top: ManagerHeight.h26,
+              bottom: ManagerHeight.h30,
             ),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    statisticsBoxPoliceMan(
-                      title: ManagerStrings.totalViolations,
-                      subTitle: controller.totalViolations,
-                    ),
-                    SizedBox(width: ManagerWidth.w14),
-                    statisticsBoxPoliceMan(
-                      title: ManagerStrings.highestDayForViolations,
-                      subTitle: ManagerStrings.saturday,
-                    ),
-                  ],
-                ),
-                SizedBox(height: ManagerHeight.h26),
                 TabBar(
                   controller: controller.tabController,
                   dividerColor: ManagerColors.transparent,
@@ -63,72 +50,51 @@ class PoliceManHomeScreen extends StatelessWidget {
                     color: ManagerColors.white,
                     fontFamily: ManagerFontFamily.cairo,
                     fontWeight: ManagerFontWeight.bold,
-                    fontSize: ManagerFontsSizes.f9,
+                    fontSize: ManagerFontsSizes.f13,
                   ),
                   unselectedLabelStyle: TextStyle(
-                    color: ManagerColors.black,
+                    color: ManagerColors.primaryColor,
                     fontFamily: ManagerFontFamily.cairo,
                     fontWeight: ManagerFontWeight.semiBold,
-                    fontSize: ManagerFontsSizes.f9,
+                    fontSize: ManagerFontsSizes.f13,
                   ),
                   indicatorSize: TabBarIndicatorSize.tab,
-                  tabAlignment: TabAlignment.center,
                   indicator: BoxDecoration(
                     color: ManagerColors.primaryColor,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(ManagerRadius.r5),
-                      topLeft: Radius.circular(ManagerRadius.r5),
-                    ),
+                    borderRadius: BorderRadius.circular(ManagerRadius.r5),
+                  ),
+                  padding: EdgeInsetsDirectional.only(
+                    bottom: ManagerHeight.h28,
+                  ),
+                  labelPadding: EdgeInsetsDirectional.only(
+                    start: ManagerWidth.w16,
+                    end: ManagerWidth.w16,
                   ),
                   isScrollable: false,
                   tabs: [
-                    Text(ManagerStrings.dailyViolations),
-                    Text(ManagerStrings.weeklyViolations),
-                    Text(ManagerStrings.monthlyViolations),
+                    tabBarItemPoliceMan(ManagerStrings.weeklyViolations),
+                    tabBarItemPoliceMan(ManagerStrings.monthlyViolations),
                   ],
                 ),
                 Expanded(
-                  child: Container(
-                    margin: EdgeInsetsDirectional.only(
-                      bottom: ManagerHeight.h40,
-                    ),
-                    decoration: BoxDecoration(
-                      color: ManagerColors.white,
-                      borderRadius: BorderRadius.circular(ManagerRadius.r5),
-                      boxShadow: [
-                        BoxShadow(
-                          color: ManagerColors.black5,
-                          offset: Offset(ManagerWidth.w0, ManagerHeight.h4),
-                          blurRadius: AppConstants
-                              .blurRadiusOfBoxShadowInTabBarViewInPoliceManHomeScreen,
-                        ),
-                      ],
-                    ),
-                    child: TabBarView(
-                      controller: controller.tabController,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(height: ManagerHeight.h28),
-                            Text(
-                              ManagerStrings.numberOfDailyViolations,
-                              style: TextStyle(
-                                color: ManagerColors.primaryColor,
-                                fontFamily: ManagerFontFamily.cairo,
-                                fontWeight: ManagerFontWeight.bold,
-                                fontSize: ManagerFontsSizes.f12,
-                              ),
-                            ),
-                            SizedBox(height: ManagerHeight.h12),
-                            //Chart
-                          ],
-                        ),
-                        Text('2'),
-                        Text('3'),
-                      ],
-                    ),
+                  child: TabBarView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    controller: controller.tabController,
+                    children: [
+                      tabBarViewItem(
+                        highestViolations: controller.highestViolationsInWeek,
+                        totalViolations: controller.totalViolations,
+                        isTotalOfWeek: true,
+                        barChart: Text(''),
+                      ),
+                      tabBarViewItem(
+                        highestViolations: controller.highestViolationsInMonth,
+                        totalViolations: controller.totalViolations,
+                        isTotalOfWeek: false,
+                        barChart: Text(ManagerStrings.noteOfNumbersMonthsOfYear),
+
+                      ),
+                    ],
                   ),
                 ),
               ],
