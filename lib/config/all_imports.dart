@@ -61,9 +61,12 @@ export '/features/login/presentation/view/widgets/tab_bar_button.dart';
 export '/features/login/presentation/controller/login_controller.dart';
 export '/features/login/presentation/controller/welcome_controller.dart';
 
+export '/features/home/presentation/view/widgets/home_app_bar.dart';
 export '/features/home/presentation/view/screens/police_man_home_screen.dart';
+export '/features/home/presentation/view/widgets/tab_bar_item_police_man.dart';
 export '/features/home/presentation/controller/police_man_home_controller.dart';
 export '/features/home/presentation/view/widgets/statistics_box_of_police_man.dart';
+export '/features/home/presentation/view/widgets/box_of_number_of_violation_driver.dart';
 
 export '/features/violation/presentation/view/widgets/my_sized_box.dart';
 export '/features/violation/presentation/model/data_list_of_violations.dart';
@@ -128,3 +131,5 @@ export '/features/payment/presentation/view/widgets/table_of_violation.dart';
 export '/features/payment/presentation/view/widgets/text_of_head_violation_table.dart';
 export '/features/payment/presentation/view/widgets/view_violation_details.dart';
 export '/features/payment/presentation/view/widgets/state_payment.dart';
+export '/features/home/presentation/view/screens/driver_home_screen.dart';
+export '/features/home/presentation/controller/driver_home_controller.dart';
