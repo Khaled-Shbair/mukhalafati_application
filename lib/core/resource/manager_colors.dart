@@ -30,6 +30,7 @@ class ManagerColors {
   static const Color darkGunmetal = Color(0XFF182233);
   static const Color spanishGray = Color(0XFF979797);
   static const Color gainsBoro = Color(0XFFDADADA);
+  static const Color redNotification = Color(0XFFE90000);
   static const Color transparent = Colors.transparent;
 
   static const Color black = Color(0XFF000000);
