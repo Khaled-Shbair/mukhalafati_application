@@ -26,6 +26,12 @@ class ManagerStrings {
   static String password = 'password'.tr;
   static String totalViolations = 'total_violations'.tr;
   static String highestDayForViolations = 'highest_day_for_violations'.tr;
+  static String highestMonthlyForViolations =
+      'highest_monthly_for_violations'.tr;
+  static String distributionOfViolationsByMonths =
+      'distribution_of_violations_by_months'.tr;
+  static String distributionOfViolationsByDays =
+      'distribution_of_violations_by_days'.tr;
   static String dailyViolations = 'daily_violations'.tr;
   static String weeklyViolations = 'weekly_violations'.tr;
   static String monthlyViolations = 'monthly_violations'.tr;
@@ -182,6 +188,9 @@ class ManagerStrings {
   static String violationDetails = 'violation_details'.tr;
   static String amount = 'amount'.tr;
   static String noRecordedViolations = 'no_recorded_violations'.tr;
+  static String instructionsAndGuidelines = 'instructions_and_guidelines'.tr;
+  static String goodEvening = 'good_evening'.tr;
+  static String noteOfNumbersMonthsOfYear = 'note_of_numbers_months_of_year'.tr;
   static String youCanViewAllYourPaidAndUnpaidViolations =
       'you_can_view_all_your_paid_and_unpaid_violations'.tr;
 
