@@ -70,11 +70,11 @@ disposePoliceManHome() {
 initDriverHome() {
   disposeLogin();
   disposeWelcome();
-  // Get.put<DriverHomeController>(DriverHomeController());
+  Get.put<DriverHomeController>(DriverHomeController());
 }
 
 disposeDriverHome() {
-  // Get.delete<DriverHomeController>();
+  Get.delete<DriverHomeController>();
 }
 
 initCreateViolation() {
