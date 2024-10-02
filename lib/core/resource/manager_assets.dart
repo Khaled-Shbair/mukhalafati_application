@@ -33,6 +33,9 @@ class ManagerAssets {
       '$_imagePath/driving_license_card/image_driving_license_card.png';
   static const String createIcon = '$_imagePath/home/create_icon.png';
   static const String homeIcon = '$_imagePath/home/home_icon.png';
+  static const String notificationIcon =
+      '$_imagePath/home/notification_icon.svg';
+  static const String welcomeIcon = '$_imagePath/home/welcome_icon.svg';
   static const String listOfComplaintsIcon =
       '$_imagePath/home/list_of_complaints_icon.png';
   static const String paymentIcon = '$_imagePath/home/payment_icon.png';
@@ -48,6 +51,8 @@ class ManagerAssets {
       '$_imagePath/home/list_of_violation_icon.png';
   static const String logoutIcon = '$_imagePath/home/logout_icon.png';
   static const String radarIcon = '$_imagePath/home/radar_icon.png';
+  static const String instructionsAndGuidelines =
+      '$_imagePath/home/instructions_and_guidelines.svg';
   static const String searchForDriverIcon =
       '$_imagePath/home/search_for_driver_icon.png';
 
