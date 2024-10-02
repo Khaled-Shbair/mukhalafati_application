@@ -2,15 +2,17 @@ import '/config/all_imports.dart';
 
 class ManagerHeight {
   static double h0 = SizeUitl.setHeight(0);
-  static double h05 = SizeUitl.setHeight(0.5);//0.5
+  static double h05 = SizeUitl.setHeight(0.5); //0.5
   static double h1 = SizeUitl.setHeight(1);
   static double h3 = SizeUitl.setHeight(3);
   static double h6 = SizeUitl.setHeight(6);
   static double h21 = SizeUitl.setHeight(21);
   static double h9 = SizeUitl.setHeight(9);
   static double h60 = SizeUitl.setHeight(60);
+  static double h66 = SizeUitl.setHeight(66);
   static double h162 = SizeUitl.setHeight(162);
   static double h186 = SizeUitl.setHeight(186);
+  static double h252 = SizeUitl.setHeight(252);
   static double h182 = SizeUitl.setHeight(182);
   static double h11 = SizeUitl.setHeight(11);
   static double h203 = SizeUitl.setHeight(203);
@@ -72,6 +74,7 @@ class ManagerWidth {
   static double w34 = SizeUitl.setWidth(34);
   static double w72 = SizeUitl.setWidth(72);
   static double w290 = SizeUitl.setWidth(290);
+  static double w162 = SizeUitl.setWidth(162);
   static double w300 = SizeUitl.setWidth(300);
   static double w80 = SizeUitl.setWidth(80);
   static double w287 = SizeUitl.setWidth(287);
@@ -155,4 +158,5 @@ class ManagerIconsSizes {
   static double i20 = SizeUitl.setIconSize(20);
   static double i24 = SizeUitl.setIconSize(24);
   static double i30 = SizeUitl.setIconSize(30);
+  static double i34 = SizeUitl.setIconSize(34);
 }
