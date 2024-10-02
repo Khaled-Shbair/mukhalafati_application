@@ -18,6 +18,9 @@ class RouteGenerator {
       case Routes.logoutScreen:
         initLogout();
         return MaterialPageRoute(builder: (_) => const LogoutScreen());
+      case Routes.driverHomeScreen:
+        initDriverHome();
+        return MaterialPageRoute(builder: (_) => const DriverHomeScreen());
       case Routes.policeManHomeScreen:
         initPoliceManHome();
         return MaterialPageRoute(builder: (_) => const PoliceManHomeScreen());
