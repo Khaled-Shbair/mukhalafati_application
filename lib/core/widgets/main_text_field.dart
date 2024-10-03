@@ -22,10 +22,12 @@ Widget mainTextField({
   Color? colorInputText,
   FontWeight? fontWeightInputText,
   double? fontSizeInputText,
+  bool autofocus = false,
   TextAlign textAlign = TextAlign.start,
 }) {
   return TextFormField(
     maxLines: maxLines ?? 1,
+    autofocus: autofocus,
     readOnly: readOnly,
     controller: controller,
     focusNode: focusNode,
