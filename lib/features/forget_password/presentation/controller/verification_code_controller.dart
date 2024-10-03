@@ -50,10 +50,22 @@ class VerificationCodeController extends GetxController {
   String phoneNumber = '0599724073';
 
   void verifyButton() {
-    Get.offAndToNamed(Routes.changePasswordScreen);
-    disposeVerificationCode();
-    disposeForgotPasswordForDriver();
-    disposeForgotPasswordForPoliceMan();
+    if (_checkDataDriver()) {
+      Get.offAndToNamed(Routes.changePasswordScreen);
+      disposeVerificationCode();
+      disposeForgotPasswordForDriver();
+      disposeForgotPasswordForPoliceMan();
+    } else {
+      returnCodeIsInCorrect = true;
+      Future.delayed(
+        const Duration(seconds: 3),
+        () {
+          returnCodeIsInCorrect = false;
+          update();
+        },
+      );
+    }
+    update();
   }
 
   void onChangeOneFiled(value) {
@@ -96,5 +108,16 @@ class VerificationCodeController extends GetxController {
       threeFocusNode.requestFocus();
     }
     update();
+  }
+
+  bool _checkDataDriver() {
+    if (oneNumberOfCode.text.isNotEmpty &&
+        twoNumberOfCode.text.isNotEmpty &&
+        threeNumberOfCode.text.isNotEmpty &&
+        fourNumberOfCode.text.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
