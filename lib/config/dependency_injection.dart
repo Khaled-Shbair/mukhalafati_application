@@ -5,10 +5,10 @@ final instance = GetIt.instance;
 initModule() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // _initSharedPreferences();
+  await _initSharedPreferences();
 }
 
-_initSharedPreferences() async {
+Future<void> _initSharedPreferences() async {
   if (!GetIt.I.isRegistered<AppSettingsSharedPreferences>()) {
     final SharedPreferences sharedPref = await SharedPreferences.getInstance();
     instance.registerLazySingleton<SharedPreferences>(() => sharedPref);
