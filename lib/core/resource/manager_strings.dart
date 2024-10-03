@@ -10,7 +10,9 @@ class ManagerStrings {
   static String violations = 'violations'.tr;
   static String subTitleOnBoardingThree = 'sub_title_on_boarding_three'.tr;
   static String welcome = 'welcome'.tr;
-  static String subTitleLogin = 'sub_title_login'.tr;
+
+  static String subTitleWelcome = 'sub_title_welcome'.tr;
+  static String passwordDoesNotMatch = 'password_does_not_match'.tr;
   static String login = 'login'.tr;
   static String createAccount = 'create_account'.tr;
   static String welcomeBackToOurApp = 'welcome_back_to_our_app'.tr;
@@ -193,6 +195,8 @@ class ManagerStrings {
   static String noteOfNumbersMonthsOfYear = 'note_of_numbers_months_of_year'.tr;
   static String youCanViewAllYourPaidAndUnpaidViolations =
       'you_can_view_all_your_paid_and_unpaid_violations'.tr;
+  static String pleaseEnterTheRequiredData =
+      'please_enter_the_required_data'.tr;
 
 ///////////////////////////////////////////////////////////////////////////////
   static const String jawwalPay = 'Jawwal pay';
