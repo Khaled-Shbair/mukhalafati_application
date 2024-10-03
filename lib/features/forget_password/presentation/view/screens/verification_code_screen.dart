@@ -10,7 +10,6 @@ class VerificationCodeScreen extends StatelessWidget {
     return GetBuilder<VerificationCodeController>(
       builder: (controller) {
         return Scaffold(
-          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             leading: IconButton(
               onPressed: () => controller.backButton(),
@@ -19,7 +18,7 @@ class VerificationCodeScreen extends StatelessWidget {
             title: Text(ManagerStrings.verification),
           ),
           body: ListView(
-            physics: const NeverScrollableScrollPhysics(),
+            primary: false,
             padding: EdgeInsetsDirectional.only(
               start: ManagerWidth.w28,
               end: ManagerWidth.w28,
