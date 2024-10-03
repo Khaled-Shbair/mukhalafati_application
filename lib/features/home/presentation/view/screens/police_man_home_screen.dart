@@ -1,5 +1,3 @@
-import 'package:mukhalafati_application/features/home/presentation/view/widgets/tab_bar_view_item.dart';
-
 import '/config/all_imports.dart';
 
 class PoliceManHomeScreen extends StatelessWidget {
@@ -43,56 +41,60 @@ class PoliceManHomeScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                TabBar(
-                  controller: controller.tabController,
-                  dividerColor: ManagerColors.transparent,
-                  labelStyle: TextStyle(
-                    color: ManagerColors.white,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.bold,
-                    fontSize: ManagerFontsSizes.f13,
-                  ),
-                  unselectedLabelStyle: TextStyle(
-                    color: ManagerColors.primaryColor,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.semiBold,
-                    fontSize: ManagerFontsSizes.f13,
-                  ),
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  indicator: BoxDecoration(
-                    color: ManagerColors.primaryColor,
-                    borderRadius: BorderRadius.circular(ManagerRadius.r5),
-                  ),
-                  padding: EdgeInsetsDirectional.only(
-                    bottom: ManagerHeight.h28,
-                  ),
-                  labelPadding: EdgeInsetsDirectional.only(
-                    start: ManagerWidth.w16,
-                    end: ManagerWidth.w16,
-                  ),
-                  isScrollable: false,
-                  tabs: [
-                    tabBarItemPoliceMan(ManagerStrings.weeklyViolations),
-                    tabBarItemPoliceMan(ManagerStrings.monthlyViolations),
+                Row(
+                  children: [
+                    Expanded(
+                      child: buttonForViolationDistributionPages(
+                        text: ManagerStrings.weeklyViolations,
+                        isSelected: controller.isSelectedButtonWeeklyViolations,
+                        onTap: () => controller.buttonWeeklyViolations(),
+                      ),
+                    ),
+                    SizedBox(width: ManagerWidth.w11),
+                    Expanded(
+                      child: buttonForViolationDistributionPages(
+                        text: ManagerStrings.monthlyViolations,
+                        isSelected:
+                            controller.isSelectedButtonMonthlyViolations,
+                        onTap: () => controller.buttonMonthlyViolations(),
+                      ),
+                    ),
                   ],
                 ),
+                SizedBox(height: ManagerHeight.h28),
                 Expanded(
-                  child: TabBarView(
+                  child: PageView(
                     physics: const NeverScrollableScrollPhysics(),
-                    controller: controller.tabController,
+                    controller: controller.pageController,
+                    onPageChanged: (value) => controller.onPageChanged(value),
                     children: [
-                      tabBarViewItem(
+                      pageViewItem(
                         highestViolations: controller.highestViolationsInWeek,
                         totalViolations: controller.totalViolations,
                         isTotalOfWeek: true,
-                        barChart: Text(''),
+                        barChart: barChartDistribution(
+                          tooltipBehavior: controller.tooltipBehavior,
+                          dataSource: [
+                            ...List.generate(
+                              controller.weeklyViolations.length,
+                              (index) => controller.weeklyViolations[index],
+                            ),
+                          ],
+                        ),
                       ),
-                      tabBarViewItem(
+                      pageViewItem(
                         highestViolations: controller.highestViolationsInMonth,
                         totalViolations: controller.totalViolations,
                         isTotalOfWeek: false,
-                        barChart: Text(ManagerStrings.noteOfNumbersMonthsOfYear),
-
+                        barChart: barChartDistribution(
+                          tooltipBehavior: controller.tooltipBehavior,
+                          dataSource: [
+                            ...List.generate(
+                              controller.monthlyViolations.length,
+                              (index) => controller.monthlyViolations[index],
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
