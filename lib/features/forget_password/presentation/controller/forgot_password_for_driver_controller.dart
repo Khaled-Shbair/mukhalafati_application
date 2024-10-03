@@ -1,6 +1,6 @@
 import '/config/all_imports.dart';
 
-class ForgotPasswordForDriverController extends GetxController {
+class ForgotPasswordForDriverController extends GetxController with Helpers {
   late TextEditingController licenseNumber;
 
   @override
@@ -17,22 +17,32 @@ class ForgotPasswordForDriverController extends GetxController {
 
   void backButton() {
     Get.back();
-    disposeForgotPasswordForPoliceMan();
+    disposeForgotPasswordForDriver();
   }
 
   void sendButton() {
-    String number = '0599724037';
-    number =
-        // '${number.characters.characterAt(0)}${number.characters.characterAt(1)}${number.characters.characterAt(2)}*****${number.characters.characterAt(8)}${number.characters.characterAt(9)}';
-        '${number.characters.characterAt(8)}${number.characters.characterAt(9)}*****${number.characters.characterAt(0)}${number.characters.characterAt(1)}${number.characters.characterAt(2)}';
-
-    Get.toNamed(
-      Routes.verificationCodeScreen,
-      arguments: number,
-    );
+    //TODO: Later Edit phone number get from Api
+    if (_checkDataDriver()) {
+      String phoneNumber = '0599724037';
+      phoneNumber =
+          // '${number.characters.characterAt(0)}${number.characters.characterAt(1)}${number.characters.characterAt(2)}*****${number.characters.characterAt(8)}${number.characters.characterAt(9)}';
+          '${phoneNumber.characters.characterAt(8)}${phoneNumber.characters.characterAt(9)}*****${phoneNumber.characters.characterAt(0)}${phoneNumber.characters.characterAt(1)}${phoneNumber.characters.characterAt(2)}';
+      Get.toNamed(
+        Routes.verificationCodeScreen,
+        arguments: phoneNumber,
+      );
+    } else {
+      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+    }
   }
 
-  String phoneNumber(number) {
-    return '${number.characters.characterAt(0)}${number.characters.characterAt(1)}${number.characters.characterAt(2)}*****${number.characters.characterAt(8)}${number.characters.characterAt(9)}';
+
+
+  bool _checkDataDriver() {
+    if (licenseNumber.text.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
