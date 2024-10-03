@@ -13,6 +13,7 @@ export '/routes/routes.dart';
 export '/routes/route_generator.dart';
 
 //config file
+export '/config/helper.dart';
 export '/config/dependency_injection.dart';
 export '/config/constants/app_constants.dart';
 export '/config/constants/locale_constants.dart';
@@ -61,16 +62,19 @@ export '/features/login/presentation/view/widgets/tab_bar_button.dart';
 export '/features/login/presentation/controller/login_controller.dart';
 export '/features/login/presentation/controller/welcome_controller.dart';
 
+export '/features/home/presentation/model/bar_chart_data.dart';
 export '/features/home/presentation/view/widgets/home_app_bar.dart';
+export '/features/home/presentation/view/widgets/page_view_item.dart';
+export '/features/home/presentation/view/widgets/bar_chart_distribution.dart';
 export '/features/home/presentation/view/screens/police_man_home_screen.dart';
-export '/features/home/presentation/view/widgets/tab_bar_item_police_man.dart';
 export '/features/home/presentation/controller/police_man_home_controller.dart';
 export '/features/home/presentation/view/widgets/statistics_box_of_police_man.dart';
 export '/features/home/presentation/view/widgets/box_of_number_of_violation_driver.dart';
+export '/features/home/presentation/view/widgets/button_for_violation_distribution_pages.dart';
 
+export '../core/widgets/head_of_official_paper.dart';
 export '/features/violation/presentation/view/widgets/my_sized_box.dart';
 export '/features/violation/presentation/model/data_list_of_violations.dart';
-export '../core/widgets/head_of_official_paper.dart';
 export '/features/violation/presentation/view/screens/create_violation_screen.dart';
 export '/features/violation/presentation/controller/create_violation_controller.dart';
 export '/features/violation/presentation/view/screens/list_of_violations_screen.dart';
