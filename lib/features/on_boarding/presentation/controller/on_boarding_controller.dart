@@ -67,7 +67,7 @@ class OnBoardingController extends GetxController {
 
   void nextPage() {
     if (_isLastPage()) {
-      _moveToLoginScreen();
+      _moveToWelcomeScreen();
       _appSettingsSharedPreferences.setOnBoardingViewed();
     } else {
       pageController.nextPage(
@@ -86,8 +86,8 @@ class OnBoardingController extends GetxController {
     update();
   }
 
-  void _moveToLoginScreen() {
-    Get.offAllNamed(Routes.loginScreen);
+  void _moveToWelcomeScreen() {
+    Get.offAllNamed(Routes.welcomeScreen);
   }
 
   bool _isLastPage() {
