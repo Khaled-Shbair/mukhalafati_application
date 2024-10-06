@@ -104,4 +104,22 @@ class PoliceManHomeController extends GetxController
     BarChartData(AppConstants.eleven, 110),
     BarChartData(AppConstants.twelve, 120),
   ];
+
+//////////////////////////
+// void image(int? noteId) async {
+//   final picker = ImagePicker();
+//   final imageFile = await picker.pickImage(
+//     source: ImageSource.camera,
+//     maxHeight: 600,
+//   );
+//   if (imageFile != null) {
+//     _file = File(imageFile.path);
+//   }
+//   Directory directory = await getApplicationDocumentsDirectory();
+//   final fileName = path.basename(imageFile!.path);
+//   _saveImage = await _file!.copy('${directory.path}/$fileName');
+//   _save(noteId);
+// }
+
+//   void returnImage(int noteId) => _imagesNote.value = _allImagesNotes.where((image) => image.noteId == noteId).toList();
 }

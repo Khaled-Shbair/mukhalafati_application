@@ -44,12 +44,21 @@ class SearchForDriverController extends GetxController {
 
   void searchButton() {
     loading = true;
-    if (licenseNumberController.text == '10203040') {
+    if (_checkDataPolice()) {
       result = true;
     } else {
       result = false;
     }
     loading = false;
     update();
+  }
+
+  bool _checkDataPolice() {
+    if (licenseNumberController.text.isNotEmpty &&
+        licenseNumberController.text == '10203040') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

@@ -1,6 +1,11 @@
 import '/config/all_imports.dart';
 
 class DrivingLicenseCardController extends GetxController {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final AppSettingsSharedPreferences _sharedPreferences =
+      instance<AppSettingsSharedPreferences>();
+
   String licenseNumber = '0015440';
   String expiryDate = '10-02-2024';
   String releaseDate = '22-02-2029';
@@ -14,18 +19,41 @@ class DrivingLicenseCardController extends GetxController {
   bool openFrontElectronicLicenseCard = false;
   bool openBackElectronicLicenseCard = false;
   bool openFullElectronicLicenseCard = false;
+  late String driverName;
+  late String driverImage;
+
+  @override
+  void onInit() {
+    super.onInit();
+    driverName =
+        '${_sharedPreferences.firstName()} ${_sharedPreferences.lastName()}';
+    driverImage = _sharedPreferences.image();
+  }
+
+  void openEndDrawer() {
+    if (scaffoldKey.currentState != null &&
+        !scaffoldKey.currentState!.isEndDrawerOpen) {
+      scaffoldKey.currentState!.openEndDrawer();
+    }
+  }
 
   void changeOpenFrontElectronicLicenseCard(bool value) {
+    openFullElectronicLicenseCard = !value;
+    openBackElectronicLicenseCard = !value;
     openFrontElectronicLicenseCard = value;
     update();
   }
 
   void changeOpenBackElectronicLicenseCard(bool value) {
+    openFullElectronicLicenseCard = !value;
+    openFrontElectronicLicenseCard = !value;
     openBackElectronicLicenseCard = value;
     update();
   }
 
   void changeOpenFullElectronicLicenseCard(bool value) {
+    openFrontElectronicLicenseCard = !value;
+    openBackElectronicLicenseCard = !value;
     openFullElectronicLicenseCard = value;
     update();
   }

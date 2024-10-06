@@ -13,6 +13,7 @@ class DriverHomeScreen extends StatelessWidget {
           endDrawer: driverDrawer(
             driverName: controller.driverName,
             driverImage: controller.driverImage,
+            isDriverHomeScreen: true,
           ),
           appBar: homeAppBar(
             welcome: controller.welcome,

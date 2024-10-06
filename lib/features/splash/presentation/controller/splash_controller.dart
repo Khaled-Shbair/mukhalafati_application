@@ -11,7 +11,11 @@ class SplashController extends GetxController {
       const Duration(seconds: AppConstants.durationSplashScreen),
       () {
         String route = _appSettingsSharedPreferences.getOnBoardingViewed()
-            ? Routes.welcomeScreen
+            ? _appSettingsSharedPreferences.getRememberMeDriver()
+                ? Routes.driverHomeScreen
+                : _appSettingsSharedPreferences.getRememberMePolice()
+                    ? Routes.policeManHomeScreen
+                    : Routes.welcomeScreen
             : Routes.onBoardingScreen;
         Get.offAllNamed(route);
       },

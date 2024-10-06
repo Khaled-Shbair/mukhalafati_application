@@ -2,9 +2,12 @@ import '/config/all_imports.dart';
 
 class DriverProfileController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  String driverName = 'خالد شبير';
-  String driverImage =
-      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
+  final AppSettingsSharedPreferences _sharedPreferences =
+      instance<AppSettingsSharedPreferences>();
+
+  late String driverName;
+
+  late String driverImage;
 
   late TextEditingController driverNameController;
   late TextEditingController phoneNumberController;
@@ -14,11 +17,16 @@ class DriverProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    driverName = _sharedPreferences.firstName();
+    driverImage = _sharedPreferences.image();
     driverNameController =
-        TextEditingController(text: 'خالد عبد المنعم عثمان شبير');
-    phoneNumberController = TextEditingController(text: '0599724037');
-    idNumberController = TextEditingController(text: '407811736');
-    licenceNumberController = TextEditingController(text: '93615796');
+        TextEditingController(text: _sharedPreferences.fullName());
+    phoneNumberController =
+        TextEditingController(text: _sharedPreferences.phoneNumber());
+    idNumberController =
+        TextEditingController(text: _sharedPreferences.idNumber());
+    licenceNumberController =
+        TextEditingController(text: _sharedPreferences.licenseNumber());
   }
 
   @override
@@ -38,14 +46,30 @@ class DriverProfileController extends GetxController {
   }
 
   void updateDataButton() {
-    createdSuccessfullyDialog(
-        closeButton: () {
-          Get.offAllNamed(Routes.driverHomeScreen);
-        },
+    if (_checkDataDriver()) {
+      createdSuccessfullyDialog(
+        closeButton: () => Get.offAllNamed(Routes.driverHomeScreen),
         context: Get.context!,
         text: ManagerStrings.yourUpdateRequestHasBeenSubmittedSuccessfully,
         startPaddingText: ManagerWidth.w28,
         endPaddingText: ManagerWidth.w28,
-        fontSizeText: ManagerFontsSizes.f16);
+        fontSizeText: ManagerFontsSizes.f16,
+      );
+    } else {}
+  }
+
+  bool _checkDataDriver() {
+    if (driverNameController.text.isNotEmpty &&
+            phoneNumberController.text.isNotEmpty &&
+            idNumberController.text.isNotEmpty &&
+            licenceNumberController.text.isNotEmpty &&
+            driverNameController.text != _sharedPreferences.fullName() ||
+        phoneNumberController.text != _sharedPreferences.phoneNumber() ||
+        idNumberController.text != _sharedPreferences.idNumber() ||
+        licenceNumberController.text != _sharedPreferences.licenseNumber()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

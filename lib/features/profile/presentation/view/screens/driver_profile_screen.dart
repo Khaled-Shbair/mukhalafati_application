@@ -16,6 +16,7 @@ class DriverProfileScreen extends StatelessWidget {
           ),
           appBar: AppBar(
             title: Text(ManagerStrings.profile),
+            automaticallyImplyLeading: false,
             actions: [
               mainButton(
                 onPressed: () => controller.openEndDrawer(),

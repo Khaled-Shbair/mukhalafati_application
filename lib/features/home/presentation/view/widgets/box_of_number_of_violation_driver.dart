@@ -18,19 +18,27 @@ Widget boxOfNumberOfViolationDriver({
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
       children: [
         isPaid
-            ? Icon(
-                Icons.attach_money,
-                color: ManagerColors.mayGreen,
-                size: ManagerIconsSizes.i34,
+            ? SizedBox(
+                height: ManagerHeight.h36,
+                child: Icon(
+                  Icons.attach_money,
+                  color: ManagerColors.mayGreen,
+                  size: ManagerIconsSizes.i34,
+                ),
               )
-            : Image.asset(
-                ManagerAssets.warningIcon,
-                height: ManagerHeight.h34,
-                width: ManagerWidth.w34,
-                fit: BoxFit.cover,
+            : SizedBox(
+                height: ManagerHeight.h36,
+                child: Text(
+                  AppConstants.exclamationMark,
+                  style: TextStyle(
+                    color: ManagerColors.bittersweetShimmer,
+                    fontWeight: ManagerFontWeight.bold,
+                    fontSize: ManagerFontsSizes.f32,
+                    height: ManagerHeight.h0,
+                  ),
+                ),
               ),
         SizedBox(height: ManagerHeight.h5),
         Text(
@@ -44,6 +52,7 @@ Widget boxOfNumberOfViolationDriver({
                 : ManagerColors.bittersweetShimmer,
           ),
         ),
+        // if (!isPaid) ...{SizedBox(height: ManagerHeight.h10)},
       ],
     ),
   );

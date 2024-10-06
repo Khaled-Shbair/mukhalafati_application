@@ -2,6 +2,9 @@ import '/config/all_imports.dart';
 
 class LoginController extends GetxController
     with GetSingleTickerProviderStateMixin, Helpers {
+  final AppSettingsSharedPreferences _sharedPreferences =
+      instance<AppSettingsSharedPreferences>();
+
   late TabController tabController;
   late TextEditingController jobNumber;
   late TextEditingController passwordPoliceMan;
@@ -65,6 +68,8 @@ class LoginController extends GetxController
 
   void loginDriver() {
     if (_checkDataDriver()) {
+      _sharedPreferences.setDriverData();
+      _sharedPreferences.setRememberMeDriver(rememberMeDriver);
       Get.offAllNamed(Routes.driverHomeScreen);
     } else {
       showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
@@ -73,6 +78,8 @@ class LoginController extends GetxController
 
   void loginPoliceMan() {
     if (_checkDataPolice()) {
+      _sharedPreferences.setPoliceData();
+      _sharedPreferences.setRememberMePolice(rememberMePoliceMan);
       Get.offAllNamed(Routes.policeManHomeScreen);
     } else {
       showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);

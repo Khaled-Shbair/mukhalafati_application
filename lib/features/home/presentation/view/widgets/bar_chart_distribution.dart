@@ -16,7 +16,6 @@ Widget barChartDistribution({
       ColumnSeries<BarChartData, String>(
         isVisibleInLegend: false,
         enableTooltip: true,
-
         dataSource: dataSource,
         xValueMapper: (BarChartData data, _) => data.x,
         yValueMapper: (BarChartData data, _) => data.y,
