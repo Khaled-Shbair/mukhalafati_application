@@ -1,6 +1,6 @@
 import '/config/all_imports.dart';
 
-class CreateViolationController extends GetxController {
+class CreateViolationController extends GetxController with Helpers {
   late TextEditingController driverNameController;
   late TextEditingController driverIdController;
   late TextEditingController ownerNameController;
@@ -48,14 +48,6 @@ class CreateViolationController extends GetxController {
     placeOfViolationController.dispose();
     reasonForViolationController.dispose();
     super.dispose();
-  }
-
-  void createViolation() async {
-    await confirmInformationDialog(
-      context: Get.context!,
-      text: ManagerStrings.theViolationWasSuccessfullyCreated,
-      closeButton: () => Get.offAllNamed(Routes.policeManHomeScreen),
-    );
   }
 
   String _date() {
@@ -128,6 +120,36 @@ class CreateViolationController extends GetxController {
     if (scaffoldKey.currentState != null &&
         !scaffoldKey.currentState!.isEndDrawerOpen) {
       scaffoldKey.currentState!.openEndDrawer();
+    }
+  }
+
+  void createViolation() async {
+    if (_checkDataViolation()) {
+      await confirmInformationDialog(
+        context: Get.context!,
+        text: ManagerStrings.theViolationWasSuccessfullyCreated,
+        closeButton: () => Get.offAllNamed(Routes.policeManHomeScreen),
+      );
+    } else {
+      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+    }
+  }
+
+  bool _checkDataViolation() {
+    if (driverNameController.text.isNotEmpty &&
+        driverIdController.text.isNotEmpty &&
+        ownerNameController.text.isNotEmpty &&
+        ownerIdController.text.isNotEmpty &&
+        vehicleNumberController.text.isNotEmpty &&
+        vehicleTypeController.text.isNotEmpty &&
+        vehicleColorController.text.isNotEmpty &&
+        placeOfViolationController.text.isNotEmpty &&
+        reasonForViolationController.text.isNotEmpty &&
+        violationTimeController.text.isNotEmpty &&
+        violationDateController.text.isNotEmpty) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

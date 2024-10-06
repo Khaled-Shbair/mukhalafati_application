@@ -50,7 +50,7 @@ class WelcomeScreen extends StatelessWidget {
                       color: ManagerColors.blackOlive,
                       fontSize: ManagerFontsSizes.f14,
                       fontWeight: ManagerFontWeight.medium,
-                      height: AppConstants.heightOfsubTitleWelcomeScreen,
+                      height: AppConstants.heightOfSubTitleWelcomeScreen,
                     ),
                   ),
                   Padding(

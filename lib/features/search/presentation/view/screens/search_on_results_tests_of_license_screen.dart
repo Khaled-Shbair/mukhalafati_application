@@ -8,20 +8,12 @@ class SearchOnResultsTestsOfLicenseScreen extends StatelessWidget {
     return GetBuilder<SearchOnResultsTestsOfLicenseController>(
       builder: (controller) {
         return Scaffold(
-          backgroundColor: ManagerColors.white,
+          key: controller.scaffoldKey,
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
-            backgroundColor: ManagerColors.white,
-            centerTitle: true,
-            surfaceTintColor: ManagerColors.transparent,
+            automaticallyImplyLeading: false,
             title: Text(
               ManagerStrings.licenseTestResults,
-              style: TextStyle(
-                color: ManagerColors.black,
-                fontFamily: ManagerFontFamily.cairo,
-                fontWeight: ManagerFontWeight.bold,
-                fontSize: ManagerFontsSizes.f17,
-              ),
             ),
             actions: [
               mainButton(
@@ -32,7 +24,7 @@ class SearchOnResultsTestsOfLicenseScreen extends StatelessWidget {
                 highlightColor: ManagerColors.transparent,
                 splashColor: ManagerColors.transparent,
                 side: BorderSide.none,
-                child:  Icon(
+                child: Icon(
                   Icons.menu,
                   color: ManagerColors.black,
                   size: ManagerIconsSizes.i30,

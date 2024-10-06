@@ -9,7 +9,6 @@ class ListOfComplaintsScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           key: controller.scaffoldKey,
-          backgroundColor: ManagerColors.white,
           resizeToAvoidBottomInset: false,
           endDrawer: driverDrawer(
             isListOfComplaintsScreen: true,
@@ -17,18 +16,8 @@ class ListOfComplaintsScreen extends StatelessWidget {
             driverImage: controller.driverImage,
           ),
           appBar: AppBar(
-            backgroundColor: ManagerColors.white,
-            centerTitle: true,
-            surfaceTintColor: ManagerColors.transparent,
-            title: Text(
-              ManagerStrings.listOfComplaints,
-              style: TextStyle(
-                color: ManagerColors.black,
-                fontFamily: ManagerFontFamily.cairo,
-                fontWeight: ManagerFontWeight.bold,
-                fontSize: ManagerFontsSizes.f17,
-              ),
-            ),
+            automaticallyImplyLeading: false,
+            title: Text(ManagerStrings.listOfComplaints),
             actions: [
               mainButton(
                 onPressed: () => controller.openEndDrawer(),
@@ -127,22 +116,7 @@ class ListOfComplaintsScreen extends StatelessWidget {
                 ),
                 SizedBox(height: ManagerHeight.h20),
                 if (controller.data.isNotEmpty) ...{
-                  DataTable(
-                    border: TableBorder.all(
-                      color: ManagerColors.platinum,
-                      width: ManagerWidth.w1,
-                      borderRadius: BorderRadius.circular(ManagerRadius.r5),
-                    ),
-                    headingRowHeight: ManagerHeight.h40,
-                    dataRowMinHeight: ManagerHeight.h40,
-                    columnSpacing: ManagerWidth.w5,
-                    horizontalMargin: ManagerWidth.w10,
-                    columns: [
-                      dataColumnOfComplaintsTable(AppConstants.hash),
-                      dataColumnOfComplaintsTable(ManagerStrings.date),
-                      dataColumnOfComplaintsTable(ManagerStrings.complaint),
-                      dataColumnOfComplaintsTable(ManagerStrings.state),
-                    ],
+                  tableOfComplaints(
                     rows: [
                       ...List.generate(
                         controller.data.length,
@@ -234,60 +208,56 @@ class ListOfComplaintsScreen extends StatelessWidget {
                     ],
                   ),
                 } else ...{
-                  DataTable(
-                    border: TableBorder.all(
-                      color: ManagerColors.platinum,
-                      width: ManagerWidth.w1,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(ManagerRadius.r5),
-                        topRight: Radius.circular(ManagerRadius.r5),
-                      ),
-                    ),
-                    headingRowHeight: ManagerHeight.h40,
-                    dataRowMinHeight: ManagerHeight.h40,
-                    columnSpacing: ManagerWidth.w48,
-                    horizontalMargin: ManagerWidth.w10,
-                    columns: [
-                      dataColumnOfComplaintsTable('#'),
-                      dataColumnOfComplaintsTable(ManagerStrings.date),
-                      dataColumnOfComplaintsTable(ManagerStrings.complaint),
-                      dataColumnOfComplaintsTable(ManagerStrings.state),
-                    ],
-                    rows: const [],
-                  ),
                   Container(
-                    height: ManagerHeight.h64,
-                    width: ManagerWidth.infinity,
+                    width: ManagerWidth.w287,
                     alignment: AlignmentDirectional.center,
+                    padding: EdgeInsetsDirectional.only(
+                      top: ManagerHeight.h10,
+                      bottom: ManagerHeight.h30,
+                    ),
                     decoration: BoxDecoration(
                       color: ManagerColors.transparent,
-                      border: Border(
-                        left: BorderSide(
-                          color: ManagerColors.platinum,
-                          width: ManagerWidth.w1,
-                        ),
-                        right: BorderSide(
-                          color: ManagerColors.platinum,
-                          width: ManagerWidth.w1,
-                        ),
-                        bottom: BorderSide(
-                          color: ManagerColors.platinum,
-                          width: ManagerWidth.w1,
-                        ),
+                      border: Border.all(
+                        color: ManagerColors.platinum,
+                        width: ManagerWidth.w1,
                       ),
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(ManagerRadius.r5),
-                        bottomRight: Radius.circular(ManagerRadius.r5),
-                      ),
+                      borderRadius: BorderRadius.circular(ManagerRadius.r5),
                     ),
-                    child: Text(
-                      ManagerStrings.noComplaintsSubmitted,
-                      style: TextStyle(
-                        color: ManagerColors.black,
-                        fontFamily: ManagerFontFamily.cairo,
-                        fontSize: ManagerFontsSizes.f12,
-                        fontWeight: ManagerFontWeight.semiBold,
-                      ),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.only(
+                            bottom: ManagerHeight.h4,
+                            start: ManagerWidth.w10,
+                            end: ManagerWidth.w20,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              textOfHeadViolationTable(AppConstants.hash),
+                              textOfHeadViolationTable(ManagerStrings.date),
+                              textOfHeadViolationTable(
+                                  ManagerStrings.complaint),
+                              textOfHeadViolationTable(ManagerStrings.state),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          color: ManagerColors.platinum,
+                          thickness: ManagerHeight.h1,
+                        ),
+                        SizedBox(height: ManagerHeight.h20),
+                        Text(
+                          ManagerStrings.noComplaintsSubmitted,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: ManagerColors.black,
+                            fontFamily: ManagerFontFamily.cairo,
+                            fontSize: ManagerFontsSizes.f12,
+                            fontWeight: ManagerFontWeight.semiBold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 },
