@@ -105,6 +105,7 @@ export '/features/complaints/presentation/view/widgets/data_column_of_complaints
 export '/features/complaints/presentation/model/data_of_complaints.dart';
 export '/features/complaints/presentation/view/widgets/dialog_of_create_complaint.dart';
 export '/features/complaints/presentation/controller/create_complaints_controller.dart';
+export '/features/complaints/presentation/view/widgets/table_of_complaints.dart';
 
 export '/features/forget_password/presentation/view/screens/forgot_password_for_driver_screen.dart';
 export '/features/forget_password/presentation/view/screens/forgot_password_for_police_man_screen.dart';
