@@ -4,7 +4,9 @@ class AppConstants {
   static const int durationSplashScreen = 3;
   static const double elevationAppBarOnBoardingScreen = 0;
   static const double leadingWidthAppBarOnBoardingScreen = 80;
-  static const double heightOfsubTitleWelcomeScreen = 1.8;
+  static const double heightOfSubTitleWelcomeScreen = 1.8;
+  static const int maxLinesOfTextOfComplaint = 13;
+  static const String exclamationMark = '!';
   static const double expansionFactorOfSmoothPageIndicatorInOnBoardingScreen =
       2;
   static const double strokeWidthOfCircularProgressIndicator = 3;
