@@ -55,6 +55,12 @@ Widget driverDrawer({
             Get.back();
           } else {
             Get.offAndToNamed(Routes.driverHomeScreen);
+            disposeDriverProfile();
+            disposeLogout();
+            disposeDrivingLicenseCard();
+            disposeListOfComplaints();
+            disposeViolationPayment();
+            disposeSearchOnResultsTestsOfLicense();
           }
         },
         icon: ManagerAssets.homeIcon,
@@ -66,6 +72,12 @@ Widget driverDrawer({
             Get.back();
           } else {
             Get.offAndToNamed(Routes.driverProfileScreen);
+            disposeLogout();
+            disposeDrivingLicenseCard();
+            disposeListOfComplaints();
+            disposeViolationPayment();
+            disposeSearchOnResultsTestsOfLicense();
+            disposeDriverHome();
           }
         },
         icon: ManagerAssets.userProfileIcon,
@@ -77,6 +89,12 @@ Widget driverDrawer({
             Get.back();
           } else {
             Get.offAndToNamed(Routes.searchOnResultsTestsOfLicenseScreen);
+            disposeDriverProfile();
+            disposeLogout();
+            disposeDrivingLicenseCard();
+            disposeListOfComplaints();
+            disposeViolationPayment();
+            disposeDriverHome();
           }
         },
         icon: ManagerAssets.resultOfTextLicenseIcon,
@@ -87,7 +105,13 @@ Widget driverDrawer({
           if (isPayViolationsScreen) {
             Get.back();
           } else {
-            Get.offAndToNamed(Routes.payViolationsScreen);
+            Get.offAndToNamed(Routes.listOfViolationsScreen);
+            disposeDriverProfile();
+            disposeLogout();
+            disposeDrivingLicenseCard();
+            disposeListOfComplaints();
+            disposeSearchOnResultsTestsOfLicense();
+            disposeDriverHome();
           }
         },
         icon: ManagerAssets.paymentIcon,
@@ -99,6 +123,12 @@ Widget driverDrawer({
             Get.back();
           } else {
             Get.offAndToNamed(Routes.listOfComplaintsScreen);
+            disposeDriverProfile();
+            disposeLogout();
+            disposeDrivingLicenseCard();
+            disposeViolationPayment();
+            disposeSearchOnResultsTestsOfLicense();
+            disposeDriverHome();
           }
         },
         icon: ManagerAssets.listOfComplaintsIcon,
@@ -110,6 +140,12 @@ Widget driverDrawer({
             Get.back();
           } else {
             Get.offAndToNamed(Routes.drivingLicenseCardScreen);
+            disposeDriverProfile();
+            disposeLogout();
+            disposeListOfComplaints();
+            disposeViolationPayment();
+            disposeSearchOnResultsTestsOfLicense();
+            disposeDriverHome();
           }
         },
         icon: ManagerAssets.drivingLicenseIcon,
@@ -117,7 +153,13 @@ Widget driverDrawer({
       ),
       buttonOfMyDrawer(
         onPressed: () {
-          Get.toNamed(Routes.logoutScreen);
+          Get.toNamed(Routes.logoutScreen, arguments: false);
+          disposeDriverProfile();
+          disposeDrivingLicenseCard();
+          disposeListOfComplaints();
+          disposeViolationPayment();
+          disposeSearchOnResultsTestsOfLicense();
+          disposeDriverHome();
         },
         icon: ManagerAssets.logoutIcon,
         title: ManagerStrings.logout,

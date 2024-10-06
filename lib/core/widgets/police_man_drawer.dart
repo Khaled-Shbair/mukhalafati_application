@@ -53,9 +53,7 @@ Widget policeManDrawer({
         title: ManagerStrings.homePage,
       ),
       buttonOfMyDrawer(
-        onPressed: () {
-          debugPrint('Open camera: Radar');
-        },
+        onPressed: () {},
         icon: ManagerAssets.radarIcon,
         title: ManagerStrings.speedMonitor,
       ),
@@ -94,7 +92,7 @@ Widget policeManDrawer({
       ),
       buttonOfMyDrawer(
         onPressed: () {
-          Get.toNamed(Routes.logoutScreen);
+          Get.toNamed(Routes.logoutScreen, arguments: true);
         },
         icon: ManagerAssets.logoutIcon,
         title: ManagerStrings.logout,
