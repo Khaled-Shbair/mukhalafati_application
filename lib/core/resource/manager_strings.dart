@@ -10,7 +10,8 @@ class ManagerStrings {
   static String violations = 'violations'.tr;
   static String subTitleOnBoardingThree = 'sub_title_on_boarding_three'.tr;
   static String welcome = 'welcome'.tr;
-
+  static String address = 'address'.tr;
+  static String dateOfIncidentOrProblem = 'date_of_incident_or_problem'.tr;
   static String subTitleWelcome = 'sub_title_welcome'.tr;
   static String passwordDoesNotMatch = 'password_does_not_match'.tr;
   static String login = 'login'.tr;

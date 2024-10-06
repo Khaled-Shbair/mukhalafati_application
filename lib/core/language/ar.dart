@@ -191,5 +191,7 @@ const Map<String, String> ar = {
   'note_of_numbers_months_of_year':'يرجى ملاحظة أن الأرقام تمثل الأشهر من السنة، حيث 1 = يناير، 2 = فبراير، وهكذا.',
   'please_enter_the_required_data':'يرجي ادخال البيانات المطلوبة',
   'password_does_not_match':'كلمة السر غير متطابقة',
+  'address':'العنوان',
+  'date_of_incident_or_problem':'تاريخ الحادث أو المشكلة',
   '':'',
 };
