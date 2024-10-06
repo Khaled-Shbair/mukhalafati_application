@@ -72,4 +72,10 @@ class ManagerAssets {
   static const String filterIcon = '$_imagePath/payment/filter_icon.png';
   static const String cancelFilterIcon =
       '$_imagePath/payment/cancel_filter_icon.png';
+
+  ///////////////////////////////////
+  static const String geneen = '$_imagePath/team/geneen.jpeg';
+  static const String malak = '$_imagePath/team/malak.jpeg';
+  static const String saja = '$_imagePath/team/saja.jpeg';
+  static const String shahed = '$_imagePath/team/shahed.jpeg';
 }

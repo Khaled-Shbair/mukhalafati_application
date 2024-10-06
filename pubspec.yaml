@@ -78,6 +78,7 @@ flutter:
     - assets/images/home/
     - assets/images/forgot_password/
     - assets/images/payment/
+    - assets/images/team/
 
   fonts:
     - family: cairo
