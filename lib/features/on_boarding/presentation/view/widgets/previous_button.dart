@@ -11,10 +11,10 @@ Widget previousButton({
     visible: visible,
     child: IconButton(
       onPressed: onPressed,
-      icon: const Icon(
-        Icons.arrow_forward_ios,
+      icon: Icon(
+        Icons.arrow_back_ios_new,
         color: ManagerColors.darkPurple,
-        size: 20,
+        size: ManagerIconsSizes.i20,
       ),
     ),
   );

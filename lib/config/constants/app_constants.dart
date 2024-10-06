@@ -4,6 +4,9 @@ class AppConstants {
   static const int durationSplashScreen = 3;
   static const double elevationAppBarOnBoardingScreen = 0;
   static const double leadingWidthAppBarOnBoardingScreen = 80;
+  static const double heightOfSubTitleWelcomeScreen = 1.8;
+  static const int maxLinesOfTextOfComplaint = 13;
+  static const String exclamationMark = '!';
   static const double expansionFactorOfSmoothPageIndicatorInOnBoardingScreen =
       2;
   static const double strokeWidthOfCircularProgressIndicator = 3;
@@ -24,7 +27,7 @@ class AppConstants {
   static const double blurRadiusOfBoxShadowInListOfComplaintsScreen = 5;
   static const double spreadRadiusOfBoxShadowInConfirmInformationWidget = 2;
   static const double blurRadiusOfBoxShadowInResultOfDriverWidget = 2;
-  static const double spreadRadiusOfBoxShadowInViolationPaymentScreen= 4;
+  static const double spreadRadiusOfBoxShadowInViolationPaymentScreen = 4;
   static const double blurRadiusOfBoxShadowInViolationPaymentScreen = 3;
   static const int maxLengthOfLicenseNumber = 8;
   static const int maxLengthOfPhoneNumber = 10;
@@ -42,5 +45,14 @@ class AppConstants {
   static const String one = '1';
   static const String two = '2';
   static const String three = '3';
+  static const String four = '4';
+  static const String five = '5';
+  static const String sex = '6';
+  static const String seven = '7';
+  static const String eight = '8';
+  static const String nine = '9';
+  static const String ten = '10';
+  static const String eleven = '11';
+  static const String twelve = '12';
   static const String hash = '#';
 }

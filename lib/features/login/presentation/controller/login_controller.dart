@@ -1,7 +1,10 @@
 import '/config/all_imports.dart';
 
 class LoginController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+    with GetSingleTickerProviderStateMixin, Helpers {
+  final AppSettingsSharedPreferences _sharedPreferences =
+      instance<AppSettingsSharedPreferences>();
+
   late TabController tabController;
   late TextEditingController jobNumber;
   late TextEditingController passwordPoliceMan;
@@ -64,10 +67,38 @@ class LoginController extends GetxController
   }
 
   void loginDriver() {
-    Get.offAllNamed(Routes.driverHomeScreen);
+    if (_checkDataDriver()) {
+      _sharedPreferences.setDriverData();
+      _sharedPreferences.setRememberMeDriver(rememberMeDriver);
+      Get.offAllNamed(Routes.driverHomeScreen);
+    } else {
+      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+    }
   }
 
   void loginPoliceMan() {
-    Get.offAllNamed(Routes.policeManHomeScreen);
+    if (_checkDataPolice()) {
+      _sharedPreferences.setPoliceData();
+      _sharedPreferences.setRememberMePolice(rememberMePoliceMan);
+      Get.offAllNamed(Routes.policeManHomeScreen);
+    } else {
+      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+    }
+  }
+
+  bool _checkDataDriver() {
+    if (licenseNumber.text.isNotEmpty && passwordDriver.text.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool _checkDataPolice() {
+    if (jobNumber.text.isNotEmpty && passwordPoliceMan.text.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

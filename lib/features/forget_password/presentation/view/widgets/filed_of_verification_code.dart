@@ -14,6 +14,7 @@ Widget filedOfVerificationCode({
       ),
       child: mainTextField(
         controller: controller,
+        autofocus: true,
         maxLength: AppConstants.maxLengthOfVerificationCode,
         textAlign: TextAlign.center,
         focusNode: focusNode,

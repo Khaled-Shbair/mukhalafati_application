@@ -41,22 +41,16 @@ class WelcomeScreen extends StatelessWidget {
                       fontWeight: ManagerFontWeight.bold,
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsetsDirectional.only(
-                      start: ManagerWidth.w70,
-                      end: ManagerWidth.w70,
-                      bottom: ManagerHeight.h55,
-                      top: ManagerHeight.h7,
-                    ),
-                    child: Text(
-                      ManagerStrings.subTitleLogin,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: ManagerFontFamily.cairo,
-                        color: ManagerColors.blackOlive,
-                        fontSize: ManagerFontsSizes.f14,
-                        fontWeight: ManagerFontWeight.medium,
-                      ),
+                  SizedBox(height: ManagerHeight.h10),
+                  Text(
+                    ManagerStrings.subTitleWelcome,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: ManagerFontFamily.cairo,
+                      color: ManagerColors.blackOlive,
+                      fontSize: ManagerFontsSizes.f14,
+                      fontWeight: ManagerFontWeight.medium,
+                      height: AppConstants.heightOfSubTitleWelcomeScreen,
                     ),
                   ),
                   Padding(
@@ -64,6 +58,7 @@ class WelcomeScreen extends StatelessWidget {
                       start: ManagerWidth.w28,
                       end: ManagerWidth.w28,
                       bottom: ManagerHeight.h16,
+                      top: ManagerHeight.h30,
                     ),
                     child: mainButton(
                       onPressed: () => controller.loginButton(),
@@ -73,25 +68,6 @@ class WelcomeScreen extends StatelessWidget {
                           color: ManagerColors.white,
                           fontFamily: ManagerFontFamily.cairo,
                           fontWeight: ManagerFontWeight.bold,
-                          fontSize: ManagerFontsSizes.f16,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.only(
-                      start: ManagerWidth.w28,
-                      end: ManagerWidth.w28,
-                    ),
-                    child: mainButton(
-                      color: ManagerColors.white,
-                      onPressed: () => controller.createAccountButton(),
-                      child: Text(
-                        ManagerStrings.createAccount,
-                        style: TextStyle(
-                          color: ManagerColors.primaryColor,
-                          fontFamily: ManagerFontFamily.cairo,
-                          fontWeight: ManagerFontWeight.semiBold,
                           fontSize: ManagerFontsSizes.f16,
                         ),
                       ),

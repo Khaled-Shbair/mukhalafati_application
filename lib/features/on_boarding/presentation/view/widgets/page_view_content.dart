@@ -33,10 +33,9 @@ class PageViewContent extends StatelessWidget {
           ),
         ),
         Container(
-          // height: ManagerHeight.h137,
           margin: EdgeInsetsDirectional.only(
-            start: ManagerWidth.w38,
-            end: ManagerWidth.w38,
+            start: ManagerWidth.w24,
+            end: ManagerWidth.w24,
             top: ManagerHeight.h16,
             bottom: ManagerHeight.h44,
           ),

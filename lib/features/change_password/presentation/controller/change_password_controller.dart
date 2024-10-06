@@ -1,6 +1,6 @@
 import '/config/all_imports.dart';
 
-class ChangePasswordController extends GetxController {
+class ChangePasswordController extends GetxController with Helpers {
   late TextEditingController newPassword;
   late TextEditingController confirmPassword;
   bool obscureNewPassword = true;
@@ -25,11 +25,17 @@ class ChangePasswordController extends GetxController {
   }
 
   void changePasswordButton() {
-    createdSuccessfullyDialog(
-      closeButton: () => Get.back(),
-      context: Get.context!,
-      text: ManagerStrings.passwordHasBeenChangedSuccessfully,
-    );
+    if (_checkDataDriver()) {
+      createdSuccessfullyDialog(
+        closeButton: () {
+          Get.offAndToNamed(Routes.loginScreen);
+        },
+        context: Get.context!,
+        text: ManagerStrings.passwordHasBeenChangedSuccessfully,
+      );
+    } else {
+      showSnackBar(message: ManagerStrings.passwordDoesNotMatch);
+    }
   }
 
   void changeObscureNewPassword() {
@@ -40,5 +46,13 @@ class ChangePasswordController extends GetxController {
   void changeObscureConfirmPassword() {
     obscureConfirmPassword = !obscureConfirmPassword;
     update();
+  }
+
+  bool _checkDataDriver() {
+    if (newPassword.text.isNotEmpty && confirmPassword.text.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

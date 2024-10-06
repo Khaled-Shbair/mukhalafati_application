@@ -9,26 +9,23 @@ class PoliceManHomeScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           key: controller.scaffoldKey,
-          backgroundColor: ManagerColors.white,
           resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            backgroundColor: ManagerColors.white,
-            actions: [
-              mainButton(
-                onPressed: () => controller.openEndDrawer(),
-                minWidth: ManagerWidth.w30,
-                height: ManagerHeight.h30,
-                color: ManagerColors.transparent,
-                highlightColor: ManagerColors.transparent,
-                splashColor: ManagerColors.transparent,
-                side: BorderSide.none,
-                child: const Icon(
-                  Icons.menu,
-                  color: ManagerColors.black,
-                  size: 30,
+          appBar: homeAppBar(
+            firstName: controller.policeFirstName,
+            openEndDrawer: () => controller.openEndDrawer(),
+            welcome: controller.welcome,
+            widget: Container(
+              height: ManagerHeight.h50,
+              width: ManagerWidth.w50,
+              decoration: BoxDecoration(
+                color: ManagerColors.primaryColor,
+                borderRadius: BorderRadius.circular(ManagerRadius.r5),
+                image: DecorationImage(
+                  image: NetworkImage(controller.policeImage),
+                  fit: BoxFit.cover,
                 ),
               ),
-            ],
+            ),
           ),
           endDrawer: policeManDrawer(
             isPoliceManHomeScreen: true,
@@ -37,98 +34,69 @@ class PoliceManHomeScreen extends StatelessWidget {
           ),
           body: Padding(
             padding: EdgeInsetsDirectional.only(
-              start: ManagerWidth.w16,
-              end: ManagerWidth.w23,
+              start: ManagerWidth.w19,
+              end: ManagerWidth.w19,
+              top: ManagerHeight.h26,
+              bottom: ManagerHeight.h30,
             ),
             child: Column(
               children: [
                 Row(
                   children: [
-                    statisticsBoxPoliceMan(
-                      title: ManagerStrings.totalViolations,
-                      subTitle: controller.totalViolations,
+                    Expanded(
+                      child: buttonForViolationDistributionPages(
+                        text: ManagerStrings.weeklyViolations,
+                        isSelected: controller.isSelectedButtonWeeklyViolations,
+                        onTap: () => controller.buttonWeeklyViolations(),
+                      ),
                     ),
-                    SizedBox(width: ManagerWidth.w14),
-                    statisticsBoxPoliceMan(
-                      title: ManagerStrings.highestDayForViolations,
-                      subTitle: ManagerStrings.saturday,
+                    SizedBox(width: ManagerWidth.w11),
+                    Expanded(
+                      child: buttonForViolationDistributionPages(
+                        text: ManagerStrings.monthlyViolations,
+                        isSelected:
+                            controller.isSelectedButtonMonthlyViolations,
+                        onTap: () => controller.buttonMonthlyViolations(),
+                      ),
                     ),
                   ],
                 ),
-                SizedBox(height: ManagerHeight.h26),
-                TabBar(
-                  controller: controller.tabController,
-                  dividerColor: ManagerColors.transparent,
-                  labelStyle: TextStyle(
-                    color: ManagerColors.white,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.bold,
-                    fontSize: ManagerFontsSizes.f9,
-                  ),
-                  unselectedLabelStyle: TextStyle(
-                    color: ManagerColors.black,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.semiBold,
-                    fontSize: ManagerFontsSizes.f9,
-                  ),
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  tabAlignment: TabAlignment.center,
-                  indicator: BoxDecoration(
-                    color: ManagerColors.primaryColor,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(ManagerRadius.r5),
-                      topLeft: Radius.circular(ManagerRadius.r5),
-                    ),
-                  ),
-                  isScrollable: false,
-                  tabs: [
-                    Text(ManagerStrings.dailyViolations),
-                    Text(ManagerStrings.weeklyViolations),
-                    Text(ManagerStrings.monthlyViolations),
-                  ],
-                ),
+                SizedBox(height: ManagerHeight.h28),
                 Expanded(
-                  child: Container(
-                    margin: EdgeInsetsDirectional.only(
-                      bottom: ManagerHeight.h40,
-                    ),
-                    decoration: BoxDecoration(
-                      color: ManagerColors.white,
-                      borderRadius: BorderRadius.circular(ManagerRadius.r5),
-                      boxShadow: [
-                        BoxShadow(
-                          color: ManagerColors.black5,
-                          offset: Offset(ManagerWidth.w0, ManagerHeight.h4),
-                          blurRadius: AppConstants
-                              .blurRadiusOfBoxShadowInTabBarViewInPoliceManHomeScreen,
-                        ),
-                      ],
-                    ),
-                    child: TabBarView(
-                      controller: controller.tabController,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(height: ManagerHeight.h28),
-                            Text(
-                              ManagerStrings.numberOfDailyViolations,
-                              style: TextStyle(
-                                color: ManagerColors.primaryColor,
-                                fontFamily: ManagerFontFamily.cairo,
-                                fontWeight: ManagerFontWeight.bold,
-                                fontSize: ManagerFontsSizes.f12,
-                              ),
+                  child: PageView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    controller: controller.pageController,
+                    onPageChanged: (value) => controller.onPageChanged(value),
+                    children: [
+                      pageViewItem(
+                        highestViolations: controller.highestViolationsInWeek,
+                        totalViolations: controller.totalViolations,
+                        isTotalOfWeek: true,
+                        barChart: barChartDistribution(
+                          tooltipBehavior: controller.tooltipBehavior,
+                          dataSource: [
+                            ...List.generate(
+                              controller.weeklyViolations.length,
+                              (index) => controller.weeklyViolations[index],
                             ),
-                            SizedBox(height: ManagerHeight.h12),
-                            //Chart
                           ],
                         ),
-                        Text('2'),
-                        Text('3'),
-                      ],
-                    ),
+                      ),
+                      pageViewItem(
+                        highestViolations: controller.highestViolationsInMonth,
+                        totalViolations: controller.totalViolations,
+                        isTotalOfWeek: false,
+                        barChart: barChartDistribution(
+                          tooltipBehavior: controller.tooltipBehavior,
+                          dataSource: [
+                            ...List.generate(
+                              controller.monthlyViolations.length,
+                              (index) => controller.monthlyViolations[index],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

@@ -10,7 +10,10 @@ class ManagerStrings {
   static String violations = 'violations'.tr;
   static String subTitleOnBoardingThree = 'sub_title_on_boarding_three'.tr;
   static String welcome = 'welcome'.tr;
-  static String subTitleLogin = 'sub_title_login'.tr;
+  static String address = 'address'.tr;
+  static String dateOfIncidentOrProblem = 'date_of_incident_or_problem'.tr;
+  static String subTitleWelcome = 'sub_title_welcome'.tr;
+  static String passwordDoesNotMatch = 'password_does_not_match'.tr;
   static String login = 'login'.tr;
   static String createAccount = 'create_account'.tr;
   static String welcomeBackToOurApp = 'welcome_back_to_our_app'.tr;
@@ -26,6 +29,12 @@ class ManagerStrings {
   static String password = 'password'.tr;
   static String totalViolations = 'total_violations'.tr;
   static String highestDayForViolations = 'highest_day_for_violations'.tr;
+  static String highestMonthlyForViolations =
+      'highest_monthly_for_violations'.tr;
+  static String distributionOfViolationsByMonths =
+      'distribution_of_violations_by_months'.tr;
+  static String distributionOfViolationsByDays =
+      'distribution_of_violations_by_days'.tr;
   static String dailyViolations = 'daily_violations'.tr;
   static String weeklyViolations = 'weekly_violations'.tr;
   static String monthlyViolations = 'monthly_violations'.tr;
@@ -182,8 +191,13 @@ class ManagerStrings {
   static String violationDetails = 'violation_details'.tr;
   static String amount = 'amount'.tr;
   static String noRecordedViolations = 'no_recorded_violations'.tr;
+  static String instructionsAndGuidelines = 'instructions_and_guidelines'.tr;
+  static String goodEvening = 'good_evening'.tr;
+  static String noteOfNumbersMonthsOfYear = 'note_of_numbers_months_of_year'.tr;
   static String youCanViewAllYourPaidAndUnpaidViolations =
       'you_can_view_all_your_paid_and_unpaid_violations'.tr;
+  static String pleaseEnterTheRequiredData =
+      'please_enter_the_required_data'.tr;
 
 ///////////////////////////////////////////////////////////////////////////////
   static const String jawwalPay = 'Jawwal pay';

@@ -3,16 +3,16 @@ const Map<String, String> ar = {
   'skip': 'تخطي',
   'police_man': 'شرطي المرور',
   'sub_title_on_boarding_one':
-      'شرطي المرور يقوم بتطبيق قوانين المرور ورصد المخالفات للحفاظ على سلامة الطرق وتنظيم حركة المرور كما يقوم بتطبيق قوانين ولوائح المرور',
+      'شرطي المرور يقوم بتطبيق قوانين المرور\nورصد المخالفات للحفاظ على سلامة\nالطرق وتنظيم حركة المرور كما يقوم\nبتطبيق قوانين ولوائح المرور',
   'the_driver': 'السائق',
   'sub_title_on_boarding_two':
-      'مهمة السائق بالتطبيق هي الالتزام بقوانين المرور، تجنب تجاوز السرعة، والتفاعل مع إشعارات النظام للمحافظة على سلامته وسلامة الآخرين على الطريق.',
+      'مهمة السائق بالتطبيق هي الالتزام بقوانين\nالمرور، تجنب تجاوز السرعة، والتفاعل مع\nإشعارات النظام للمحافظة على سلامته\nوسلامة الآخرين على الطريق',
   'violations': 'المخــالفات',
   'sub_title_on_boarding_three':
-      'المخالفات المرورية هي تخالف القوانين واللوائح المرورية المعمول بها مثل تجاوز الحد الأقصى للسرعة، وأي سلوك يتعارض مع قوانين ولوائح السلامة على الطرق',
+      'المخالفات المرورية هي تخالف القوانين واللوائح\nالمرورية المعمول بها مثل تجاوز الحد الأقصى\nللسرعة، وأي سلوك يتعارض مع قوانين ولوائح\nالسلامة على الطرق',
   'welcome': 'مرحبا بكم',
-  'sub_title_login':
-      'للاستفادة من الخدمات الذي يوفرها هذا التطبيق قم بتسجيل الدخول',
+  'sub_title_welcome':
+      'للاستفادة من الخدمات الذي يوفرها\nهذا التطبيق قم بتسجيل الدخول',
   'login': 'تسجيل دخول',
   'create_account': 'إنشاء حساب',
   'welcome_back_to_our_app': 'أهلا وسهلاً بك مجدداً في تطبيقنا',
@@ -25,9 +25,11 @@ const Map<String, String> ar = {
   'subscribe': 'إشترك',
   'password': 'كلمة السر',
   'license_number': 'رقم الرخصة',
-  'total_violations': 'إجمالي المخالفات المسجلة',
+  'total_violations': 'إجمالي المخالفات',
   'highest_day_for_violations': 'أعلى يوم للمخالفات',
-  'daily_violations': 'المخالفات اليومية',
+  'highest_monthly_for_violations': 'أعلى شهر للمخالفات',
+  'distribution_of_violations_by_days': 'توزيع المخالفات حسب الأيام',
+  'distribution_of_violations_by_months': 'توزيع المخالفات حسب الأشهر',
   'weekly_violations': 'المخالفات الأسبوعية',
   'monthly_violations': 'المخالفات الشهرية',
   'number_of_daily_violations': 'عدد المخالفات اليومية',
@@ -121,15 +123,15 @@ const Map<String, String> ar = {
   'forgot_password': 'نسيت كلمة السر',
   'enter_license_number': 'إدخال رقم الرخصة',
   'please_enter_your_license_number_to_recover_your_password':
-      'يرجى إدخال رقم الرخصة الخاصة بك لاستعادة كلمة السر',
+      'يرجى إدخال رقم الرخصة الخاصة بك\nلاستعادة كلمة السر',
   'send': 'إرسال',
   'enter_the_job_number': 'إدخال الرقم الوظيفي',
   'please_enter_your_job_number_to_recover_your_password':
-      'يرجى إدخال الرقم الوظيفي الخاص بك لاستعادة كلمة السر',
+      'يرجى إدخال الرقم الوظيفي الخاص بك\nلاستعادة كلمة السر',
   'verification': 'التحقق',
   'enter_verification_code': 'إدخال رمز التأكيد',
   'please_enter_the_confirmation_code_sent_to_your_mobile_number':
-      'يرجى إدخال رمز التأكيد الذي تم إرساله إلى رقم  جوالك',
+      'يرجى إدخال رمز التأكيد الذي تم إرساله إلى رقم\nجوالك',
   'verify': 'تحقق',
   'the_entered_code_is_incorrect': 'الرمز المدخل غير صحيح',
   'enter_new_password': 'إدخال كلمة السر الجديدة',
@@ -137,7 +139,7 @@ const Map<String, String> ar = {
   'new_password': 'كلمة السر الجديدة',
   'confirm_password': 'تأكيد كلمة السر',
   'please_enter_new_password_which_must_be_different_from_the_old_password':
-      'يرجى إدخال كلمة السر الجديدة ويجب أن تكون مختلفة عن كلمة السر القديمة',
+      'يرجى إدخال كلمة السر الجديدة ويجب أن تكون\nمختلفة عن كلمة السر القديمة',
   'password_has_been_changed_successfully': 'تم تغيير كلمة السر بنجـــــاح',
   'full_name': 'الاسم رباعي',
   'update_data': 'تحديث البيانات',
@@ -184,5 +186,12 @@ const Map<String, String> ar = {
   'violation_details': 'تفاصيل المخالفة',
   'amount': 'المبلغ',
   'no_recorded_violations': 'لا يوجد مخالفات مسجلة',
-  '': '',
+  'instructions_and_guidelines': 'الإرشادات والتعليمات',
+  'good_evening':'مساء الخير',
+  'note_of_numbers_months_of_year':'يرجى ملاحظة أن الأرقام تمثل الأشهر من السنة، حيث 1 = يناير، 2 = فبراير، وهكذا.',
+  'please_enter_the_required_data':'يرجي ادخال البيانات المطلوبة',
+  'password_does_not_match':'كلمة السر غير متطابقة',
+  'address':'العنوان',
+  'date_of_incident_or_problem':'تاريخ الحادث أو المشكلة',
+  '':'',
 };

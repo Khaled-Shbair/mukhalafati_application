@@ -29,4 +29,5 @@ class Routes {
   static const String changePasswordScreen = 'change_password_screen';
   static const String paymentScreen = 'payment_screen';
   static const String violationPaymentScreen = 'violation_payment_screen';
+  static const String notificationScreen = 'notification_screen';
 }

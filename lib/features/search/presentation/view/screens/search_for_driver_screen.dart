@@ -9,7 +9,6 @@ class SearchForDriverScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           key: controller.scaffoldKey,
-          backgroundColor: ManagerColors.white,
           resizeToAvoidBottomInset: false,
           endDrawer: policeManDrawer(
             isSearchForDriverScreen: true,
@@ -17,18 +16,8 @@ class SearchForDriverScreen extends StatelessWidget {
             policeName: controller.policeName,
           ),
           appBar: AppBar(
-            backgroundColor: ManagerColors.white,
-            centerTitle: true,
-            surfaceTintColor: ManagerColors.transparent,
-            title: Text(
-              ManagerStrings.vehicleDrivers,
-              style: TextStyle(
-                color: ManagerColors.black,
-                fontFamily: ManagerFontFamily.cairo,
-                fontWeight: ManagerFontWeight.bold,
-                fontSize: ManagerFontsSizes.f17,
-              ),
-            ),
+            automaticallyImplyLeading: false,
+            title: Text(ManagerStrings.vehicleDrivers),
             actions: [
               mainButton(
                 onPressed: () => controller.openEndDrawer(),

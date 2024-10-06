@@ -1,7 +1,7 @@
 import 'config/all_imports.dart';
 
-void main() {
-  initModule();
+void main() async {
+  await initModule();
   runApp(const MyApp());
 }
 
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.violationPaymentScreen,
+          initialRoute: Routes.splashScreen,
           onGenerateRoute: RouteGenerator.getRoute,
           translations: Translation(),
           locale: const Locale(LocaleConstants.arabicLanguage),
