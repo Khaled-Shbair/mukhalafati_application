@@ -17,7 +17,6 @@ class ManagerColors {
   static const Color bittersweetShimmer = Color(0XFFBE5151);
   static const Color harvestGold = Color(0XFFD28801);
   static const Color blackOlive = Color(0XFF404040);
-  static const Color white = Color(0XFFFFFFFF);
   static const Color davyGrey = Color(0XFF595959);
   static const Color dimGray = Color(0XFF696969);
   static const Color lightSilver = Color(0XFFD9D9D9);
@@ -31,6 +30,7 @@ class ManagerColors {
   static const Color spanishGray = Color(0XFF979797);
   static const Color gainsBoro = Color(0XFFDADADA);
   static const Color redNotification = Color(0XFFE90000);
+  static const Color lotion2 = Color(0XFFFAFAFA);
   static const Color transparent = Colors.transparent;
 
   static const Color black = Color(0XFF000000);
@@ -38,5 +38,7 @@ class ManagerColors {
   static const Color black25 = Color.fromRGBO(0, 0, 0, .25); //black opacity 25%
   static const Color black50 = Color.fromRGBO(0, 0, 0, .50); //black opacity 50%
   static const Color black70 = Color.fromRGBO(0, 0, 0, .70); //black opacity 70%
-
+  static const Color white = Color(0XFFFFFFFF);
+  static const Color white80 =
+      Color.fromRGBO(255, 255, 255, .80); //white opacity 80%
 }
