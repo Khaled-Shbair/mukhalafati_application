@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
             appBarTheme: AppBarTheme(
               centerTitle: true,
+              surfaceTintColor: ManagerColors.white,
               backgroundColor: ManagerColors.white,
               titleTextStyle: TextStyle(
                 color: ManagerColors.black,
