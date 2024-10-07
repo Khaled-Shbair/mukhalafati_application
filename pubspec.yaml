@@ -43,6 +43,11 @@ dependencies:
   shared_preferences: ^2.3.2
   syncfusion_flutter_charts: ^26.2.14
 
+  #local database
+  sqflite: ^2.3.3+1
+  path_provider: ^2.1.4
+  path: ^1.9.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
