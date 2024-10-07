@@ -3,7 +3,11 @@ import '/config/all_imports.dart';
 Future<void> confirmInformationDialog({
   required BuildContext context,
   required String text,
+  String? textConfirmButton,
+  String? textCancelButton,
+  String? title,
   required Function() closeButton,
+  Function()? cancelButton,
 }) async {
   await showDialog(
     context: context,
@@ -44,7 +48,7 @@ Future<void> confirmInformationDialog({
                 Align(
                   alignment: Alignment.topRight,
                   child: mainButton(
-                    onPressed: () => Get.back(),
+                    onPressed: cancelButton ?? () => Get.back(),
                     shape: const CircleBorder(),
                     height: ManagerHeight.h24,
                     minWidth: ManagerWidth.w0,
@@ -63,7 +67,7 @@ Future<void> confirmInformationDialog({
                     top: ManagerHeight.h20,
                   ),
                   child: Text(
-                    ManagerStrings.doYouWantToConfirmTheInformation,
+                    title ?? ManagerStrings.doYouWantToConfirmTheInformation,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: ManagerColors.eerieBlack,
@@ -83,14 +87,14 @@ Future<void> confirmInformationDialog({
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       mainButton(
-                        onPressed: () => Get.back(),
+                        onPressed: cancelButton ?? () => Get.back(),
                         borderRadius: ManagerRadius.r8,
                         height: ManagerHeight.h40,
                         minWidth: ManagerWidth.w85,
                         color: ManagerColors.antiFlashWhite,
                         side: BorderSide.none,
                         child: Text(
-                          ManagerStrings.back,
+                          textCancelButton ?? ManagerStrings.back,
                           style: TextStyle(
                             color: ManagerColors.darkGunmetal,
                             fontWeight: ManagerFontWeight.semiBold,
@@ -103,15 +107,16 @@ Future<void> confirmInformationDialog({
                         onPressed: () async {
                           Get.back();
                           await createdSuccessfullyDialog(
-                              context: context,
-                              closeButton: closeButton,
-                              text: text);
+                            context: context,
+                            closeButton: closeButton,
+                            text: text,
+                          );
                         },
                         borderRadius: ManagerRadius.r8,
                         height: ManagerHeight.h40,
                         minWidth: ManagerWidth.w85,
                         child: Text(
-                          ManagerStrings.confirm,
+                          textConfirmButton ?? ManagerStrings.confirm,
                           style: TextStyle(
                             color: ManagerColors.white,
                             fontWeight: ManagerFontWeight.bold,
