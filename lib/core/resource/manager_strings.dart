@@ -198,7 +198,17 @@ class ManagerStrings {
       'you_can_view_all_your_paid_and_unpaid_violations'.tr;
   static String pleaseEnterTheRequiredData =
       'please_enter_the_required_data'.tr;
-
+  static String notifications = 'notifications'.tr;
+  static String unReadMessages = 'un_read_messages'.tr;
+  static String since = 'since'.tr;
+  static String doYouWantToDeleteNotification =
+      'do_you_want_to_delete_notification'.tr;
+  static String notificationSuccessfullyDeleted =
+      'notification_successfully_deleted'.tr;
+  static String no = 'no'.tr;
+  static String yes = 'yes'.tr;
+  static String notificationsSuccessfullyDeleted = 'notifications_successfully_deleted'.tr;
+  static String doYouWantToDeleteAllNotifications = 'do_you_want_to_delete_all_notifications'.tr;
 ///////////////////////////////////////////////////////////////////////////////
   static const String jawwalPay = 'Jawwal pay';
   static const String palPay = 'PalPay';
