@@ -74,6 +74,9 @@ class RouteGenerator {
         final phoneNumber = settings.arguments as String;
         return MaterialPageRoute(
             builder: (_) => VerificationCodeScreen(phoneNumber: phoneNumber));
+      case Routes.notificationScreen:
+        initNotification();
+        return MaterialPageRoute(builder: (_) => const NotificationsScreen());
       default:
         return unDefinedRoute();
     }
