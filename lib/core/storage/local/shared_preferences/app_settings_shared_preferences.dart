@@ -2,15 +2,23 @@ import '/config/all_imports.dart';
 
 enum PrefKeys {
   onBoarding,
-  rememberMe,
+  userId,
+  rememberMeDriver,
+  rememberMePolice,
   firstName,
   lastName,
-  fullName,
+  fullNameAr,
+  fullNameEn,
   image,
   phoneNumber,
+  licenseOrJobNumber,
+  expiryDateLicense,
+  releaseDateLicense,
   idNumber,
-  licenseNumber,
-  jobNumber,
+  licenseLevelsOfLicense,
+  numberOfViolations,
+  numberOfUnReadNotifications,
+  policeMilitaryRank
 }
 
 class AppSettingsSharedPreferences {
@@ -26,68 +34,117 @@ class AppSettingsSharedPreferences {
 
   Future<void> setRememberMeDriver(bool isRememberMe) async {
     await _sharedPreferences.setBool(
-        PrefKeys.rememberMe.toString(), isRememberMe);
+        PrefKeys.rememberMeDriver.toString(), isRememberMe);
   }
 
   Future<void> setRememberMePolice(bool isRememberMe) async {
     await _sharedPreferences.setBool(
-        PrefKeys.rememberMe.toString(), isRememberMe);
+        PrefKeys.rememberMePolice.toString(), isRememberMe);
   }
 
-  Future<void> setDriverData() async {
-    await _sharedPreferences.setString(PrefKeys.firstName.toString(), 'خالد');
-    await _sharedPreferences.setString(PrefKeys.lastName.toString(), 'شبير');
+  Future<void> setDriverData(DriverModel driver) async {
+    await _sharedPreferences.setInt(
+        PrefKeys.numberOfUnReadNotifications.toString(),
+        driver.numberOfUnReadNotifications);
+    await _sharedPreferences.setInt(
+        PrefKeys.numberOfViolations.toString(), driver.numberOfViolations);
+    await _sharedPreferences.setInt(
+        PrefKeys.userId.toString(), driver.driverId);
     await _sharedPreferences.setString(
-        PrefKeys.fullName.toString(), 'خالد المنعم عثمان شبير');
+        PrefKeys.expiryDateLicense.toString(), driver.expiryDate);
     await _sharedPreferences.setString(
-      PrefKeys.image.toString(),
-      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg',
-    );
+        PrefKeys.releaseDateLicense.toString(), driver.releaseDate);
     await _sharedPreferences.setString(
-        PrefKeys.phoneNumber.toString(), '0599724037');
+        PrefKeys.idNumber.toString(), driver.driverIdNumber);
     await _sharedPreferences.setString(
-        PrefKeys.licenseNumber.toString(), '987654321');
+        PrefKeys.licenseLevelsOfLicense.toString(), driver.licenseLevels);
     await _sharedPreferences.setString(
-        PrefKeys.idNumber.toString(), '407811736');
+        PrefKeys.firstName.toString(), driver.driverFirstNameAr);
+    await _sharedPreferences.setString(
+        PrefKeys.lastName.toString(), driver.driverLastNameAr);
+    await _sharedPreferences.setString(PrefKeys.fullNameAr.toString(),
+        '${driver.driverFirstNameAr} ${driver.driverFatherNameAr} ${driver.driverGrandfatherNameAr} ${driver.driverLastNameAr}');
+    await _sharedPreferences.setString(
+        PrefKeys.fullNameEn.toString(), driver.driverNameEn);
+    await _sharedPreferences.setString(
+        PrefKeys.image.toString(), driver.driverImage);
+    await _sharedPreferences.setString(
+        PrefKeys.phoneNumber.toString(), driver.phone);
+    await _sharedPreferences.setString(
+        PrefKeys.licenseOrJobNumber.toString(), driver.licenseNumber);
   }
 
-  Future<void> setPoliceData() async {
-    await _sharedPreferences.setString(PrefKeys.image.toString(), '');
-    // await _sharedPreferences.setString(PrefKeys.phoneNumber.toString(), '');
-    await _sharedPreferences.setString(PrefKeys.jobNumber.toString(), '');
-    // await _sharedPreferences.setString(PrefKeys.idNumber.toString(), '');
+  Future<void> setPoliceData(PoliceModel police) async {
+    await _sharedPreferences.setString(
+        PrefKeys.image.toString(), police.policeImage);
+    await _sharedPreferences.setString(
+        PrefKeys.phoneNumber.toString(), police.policePhoneNumber);
+    await _sharedPreferences.setString(
+        PrefKeys.firstName.toString(), police.policeFirstNameAr);
+    await _sharedPreferences.setString(
+        PrefKeys.lastName.toString(), police.policeLastNameAr);
+    await _sharedPreferences.setInt(
+        PrefKeys.licenseOrJobNumber.toString(), police.policeJobNumber);
+    await _sharedPreferences.setString(
+        PrefKeys.policeMilitaryRank.toString(), police.policeMilitaryRank);
+    await _sharedPreferences.setInt(
+        PrefKeys.userId.toString(), police.policeId);
   }
 
   bool getRememberMeDriver() =>
-      _sharedPreferences.getBool(PrefKeys.rememberMe.toString()).onNull();
+      _sharedPreferences.getBool(PrefKeys.rememberMeDriver.toString()).onNull();
 
   bool getRememberMePolice() =>
-      _sharedPreferences.getBool(PrefKeys.rememberMe.toString()).onNull();
+      _sharedPreferences.getBool(PrefKeys.rememberMePolice.toString()).onNull();
 
-  String firstName() =>
+  String getFirstName() =>
       _sharedPreferences.getString(PrefKeys.firstName.toString()).onNull();
 
-  String lastName() =>
+  String getLastName() =>
       _sharedPreferences.getString(PrefKeys.lastName.toString()).onNull();
 
-  String fullName() =>
-      _sharedPreferences.getString(PrefKeys.fullName.toString()).onNull();
+  String getFullNameAr() =>
+      _sharedPreferences.getString(PrefKeys.fullNameAr.toString()).onNull();
 
-  String image() =>
+  String getFullNameEn() =>
+      _sharedPreferences.getString(PrefKeys.fullNameEn.toString()).onNull();
+
+  String getImage() =>
       _sharedPreferences.getString(PrefKeys.image.toString()).onNull();
 
-  String jobNumber() =>
-      _sharedPreferences.getString(PrefKeys.jobNumber.toString()).onNull();
+  String getLicenseOrJobNumber() => _sharedPreferences
+      .getString(PrefKeys.licenseOrJobNumber.toString())
+      .onNull();
 
-  String idNumber() =>
+  String getIdNumber() =>
       _sharedPreferences.getString(PrefKeys.idNumber.toString()).onNull();
 
-  String licenseNumber() =>
-      _sharedPreferences.getString(PrefKeys.licenseNumber.toString()).onNull();
-
-  String phoneNumber() =>
+  String getPhoneNumber() =>
       _sharedPreferences.getString(PrefKeys.phoneNumber.toString()).onNull();
 
   bool getOnBoardingViewed() =>
       _sharedPreferences.getBool(PrefKeys.onBoarding.toString()).onNull();
+
+  int getNumberOfUnReadNotifications() => _sharedPreferences
+      .getInt(PrefKeys.numberOfUnReadNotifications.toString())
+      .onNull();
+
+  int getNumberOfViolations() => _sharedPreferences
+      .getInt(PrefKeys.numberOfViolations.toString())
+      .onNull();
+
+  int getUserId() =>
+      _sharedPreferences.getInt(PrefKeys.userId.toString()).onNull();
+
+  String getExpiryDateLicense() => _sharedPreferences
+      .getString(PrefKeys.expiryDateLicense.toString())
+      .onNull();
+
+  String getReleaseDateLicense() => _sharedPreferences
+      .getString(PrefKeys.releaseDateLicense.toString())
+      .onNull();
+
+  String getLicenseLevelsOfLicense() => _sharedPreferences
+      .getString(PrefKeys.licenseLevelsOfLicense.toString())
+      .onNull();
 }
