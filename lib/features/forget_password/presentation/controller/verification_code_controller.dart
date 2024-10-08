@@ -47,14 +47,12 @@ class VerificationCodeController extends GetxController {
     disposeVerificationCode();
   }
 
-  String phoneNumber = '0599724073';
-
-  void verifyButton() {
+  void verifyButton(int id, bool isDriver) {
     if (_checkDataDriver()) {
-      Get.offAndToNamed(Routes.changePasswordScreen);
-      disposeVerificationCode();
-      disposeForgotPasswordForDriver();
-      disposeForgotPasswordForPoliceMan();
+      Get.offAndToNamed(
+        Routes.changePasswordScreen,
+        arguments: [id, isDriver],
+      );
     } else {
       returnCodeIsInCorrect = true;
       Future.delayed(

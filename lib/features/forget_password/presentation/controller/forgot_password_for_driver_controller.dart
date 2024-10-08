@@ -1,6 +1,8 @@
 import '/config/all_imports.dart';
 
 class ForgotPasswordForDriverController extends GetxController with Helpers {
+  final DriverDatabaseController _driverDatabase =
+      instance<DriverDatabaseController>();
   late TextEditingController licenseNumber;
 
   @override
@@ -20,23 +22,25 @@ class ForgotPasswordForDriverController extends GetxController with Helpers {
     disposeForgotPasswordForDriver();
   }
 
-  void sendButton() {
-    //TODO: Later Edit phone number get from Api
+  void sendButton() async {
     if (_checkDataDriver()) {
-      String phoneNumber = '0599724037';
-      phoneNumber =
-          // '${number.characters.characterAt(0)}${number.characters.characterAt(1)}${number.characters.characterAt(2)}*****${number.characters.characterAt(8)}${number.characters.characterAt(9)}';
-          '${phoneNumber.characters.characterAt(8)}${phoneNumber.characters.characterAt(9)}*****${phoneNumber.characters.characterAt(0)}${phoneNumber.characters.characterAt(1)}${phoneNumber.characters.characterAt(2)}';
-      Get.toNamed(
-        Routes.verificationCodeScreen,
-        arguments: phoneNumber,
-      );
+      DriverModel? driver = await _driverDatabase.getDriver(licenseNumber.text);
+      if (driver != null) {
+        String phoneNumber = driver.phone;
+        phoneNumber =
+            // '${number.characters.characterAt(0)}${number.characters.characterAt(1)}${number.characters.characterAt(2)}*****${number.characters.characterAt(8)}${number.characters.characterAt(9)}';
+            '${phoneNumber.characters.characterAt(8)}${phoneNumber.characters.characterAt(9)}*****${phoneNumber.characters.characterAt(0)}${phoneNumber.characters.characterAt(1)}${phoneNumber.characters.characterAt(2)}';
+        Get.toNamed(
+          Routes.verificationCodeScreen,
+          arguments: [phoneNumber, driver.driverId, false],
+        );
+      } else {
+        showSnackBar(message: ManagerStrings.licenseNumberNotFound);
+      }
     } else {
       showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
     }
   }
-
-
 
   bool _checkDataDriver() {
     if (licenseNumber.text.isNotEmpty) {
