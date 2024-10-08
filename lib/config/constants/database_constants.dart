@@ -21,7 +21,7 @@ class DatabaseConstants {
   static const String driverGrandFatherNameEn = 'driver_grand_father_name_en';
   static const String driverNameEn = 'driver_name_en';
   static const String driverPassword = 'driver_password';
-  static const String numberOfViolations = 'number_of_violations';
+  static const String numberOfViolationsUnPaid = 'number_of_violations_un_paid';
   static const String numberOfUnReadNotifications =
       'number_of_un_read_notifications';
 
