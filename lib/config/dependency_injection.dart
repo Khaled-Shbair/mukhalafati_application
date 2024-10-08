@@ -1,4 +1,5 @@
 import 'all_imports.dart';
+import 'data_of_team.dart';
 
 final instance = GetIt.instance;
 
@@ -6,6 +7,11 @@ initModule() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _initDatabase();
   await _initSharedPreferences();
+  createSajaAccount();
+  createMalakAccount();
+  createGeneenAccount();
+  createShahedAccount();
+  createPoliceAccount();
 }
 
 Future<void> _initSharedPreferences() async {
