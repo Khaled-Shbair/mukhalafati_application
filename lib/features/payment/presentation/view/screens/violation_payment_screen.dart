@@ -243,6 +243,7 @@ class ViolationPaymentScreen extends StatelessWidget {
                                     numberOfViolation: data.numberOfViolation,
                                     placeOfViolation: data.placeOfViolation,
                                     timeOfViolation: data.timeOfViolation,
+                                    violationId: data.violationId,
                                     price: data.price.toString(),
                                     date: data.date,
                                   );

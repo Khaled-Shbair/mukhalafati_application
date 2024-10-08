@@ -1,9 +1,14 @@
 import '/config/all_imports.dart';
 
 class PaymentScreen extends StatelessWidget {
-  const PaymentScreen({required this.priceOfViolation, super.key});
+  const PaymentScreen({
+    required this.priceOfViolation,
+    required this.violationId,
+    super.key,
+  });
 
   final String priceOfViolation;
+  final int violationId;
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +196,7 @@ class PaymentScreen extends StatelessWidget {
                           paymentConfirmationDone:
                               controller.paymentConfirmationDone,
                           paymentConfirmationButton: () =>
-                              controller.paymentConfirmationButton(),
+                              controller.paymentConfirmationButton(violationId),
                           totalAmount: priceOfViolation,
                           paymentMethod: controller.paymentBy,
                           cancelButton: () => controller.cancelButton(),
