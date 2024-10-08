@@ -29,7 +29,8 @@ Widget driverDrawer({
           children: [
             CircleAvatar(
               radius: ManagerRadius.r40,
-              backgroundImage: NetworkImage(driverImage),
+              // backgroundImage: NetworkImage(driverImage),
+              backgroundImage: AssetImage(driverImage),
             ),
             SizedBox(width: ManagerWidth.w10),
             Text(
