@@ -1,41 +1,26 @@
 import '/config/all_imports.dart';
 
 class ListOfComplaintsController extends GetxController {
+  final ComplaintDatabaseController _complaintDatabase =
+      instance<ComplaintDatabaseController>();
+
+  static ListOfComplaintsController get to => Get.find();
+
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final AppSettingsSharedPreferences _sharedPreferences =
       instance<AppSettingsSharedPreferences>();
 
   late String driverName;
   late String driverImage;
-
-  List<DataOfComplaints> data = <DataOfComplaints>[
-    // DataOfComplaints(
-    //   state: true,
-    //   text: 'تجاوزك الحد القانوني للسرعة',
-    //   date: '24/9/2024',
-    // ),
-    // DataOfComplaints(
-    //   state: false,
-    //   text: 'الوقوف في مكان ممنوع الوقوف فيه',
-    //   date: '10/12/2024',
-    // ),
-    // DataOfComplaints(
-    //   state: true,
-    //   text: ' تجاوزك الحد القانوني للسرعة المحددة',
-    //   date: '31/12/2000',
-    // ),
-    // DataOfComplaints(
-    //   state: false,
-    //   text: 'تجاوز الاشارة الحمراء',
-    //   date: '24/9/2024',
-    // ),
-  ];
+  bool loading = false;
+  List<ComplaintModel> data = <ComplaintModel>[];
 
   @override
   void onInit() {
+    getComplaints();
     driverName =
-        '${_sharedPreferences.firstName()} ${_sharedPreferences.lastName()}';
-    driverImage = _sharedPreferences.image();
+        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
+    driverImage = _sharedPreferences.getImage();
     super.onInit();
   }
 
@@ -48,6 +33,16 @@ class ListOfComplaintsController extends GetxController {
 
   void submitComplaintButton() {
     initCreateComplaints();
-    dialogOfCreateComplaint(Get.context!);
+    dialogOfCreateComplaint(
+      Get.context!,
+    );
+    update();
+  }
+
+  void getComplaints() async {
+    loading = true;
+    data = await _complaintDatabase.read();
+    loading = false;
+    update();
   }
 }
