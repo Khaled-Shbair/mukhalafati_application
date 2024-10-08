@@ -52,7 +52,7 @@ class DatabaseProvider {
             ${DatabaseConstants.licenseLevels} TEXT NOT NULL,
             ${DatabaseConstants.driverPassword} TEXT NOT NULL,
             ${DatabaseConstants.driverIdNumber} TEXT NOT NULL,
-            ${DatabaseConstants.numberOfViolations} INTEGER NOT NULL,
+            ${DatabaseConstants.numberOfViolationsUnPaid} INTEGER NOT NULL,
             ${DatabaseConstants.numberOfUnReadNotifications} INTEGER NOT NULL
         )''');
         await db.execute('''
@@ -64,7 +64,7 @@ class DatabaseProvider {
             ${DatabaseConstants.policeGrandfatherNameAr} TEXT NOT NULL,
             ${DatabaseConstants.policeImage} TEXT NOT NULL,
             ${DatabaseConstants.policePassword} TEXT NOT NULL,
-            ${DatabaseConstants.policeJobNumber} INTEGER NOT NULL,
+            ${DatabaseConstants.policeJobNumber} TEXT NOT NULL,
             ${DatabaseConstants.policePhoneNumber} TEXT NOT NULL,
             ${DatabaseConstants.policeMilitaryRank} TEXT NOT NULL
         )''');

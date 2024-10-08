@@ -16,7 +16,7 @@ enum PrefKeys {
   releaseDateLicense,
   idNumber,
   licenseLevelsOfLicense,
-  numberOfViolations,
+  numberOfViolationsUnPaid,
   numberOfUnReadNotifications,
   policeMilitaryRank
 }
@@ -47,7 +47,8 @@ class AppSettingsSharedPreferences {
         PrefKeys.numberOfUnReadNotifications.toString(),
         driver.numberOfUnReadNotifications);
     await _sharedPreferences.setInt(
-        PrefKeys.numberOfViolations.toString(), driver.numberOfViolations);
+        PrefKeys.numberOfViolationsUnPaid.toString(),
+        driver.numberOfViolationsUnPaid);
     await _sharedPreferences.setInt(
         PrefKeys.userId.toString(), driver.driverId);
     await _sharedPreferences.setString(
@@ -83,7 +84,7 @@ class AppSettingsSharedPreferences {
         PrefKeys.firstName.toString(), police.policeFirstNameAr);
     await _sharedPreferences.setString(
         PrefKeys.lastName.toString(), police.policeLastNameAr);
-    await _sharedPreferences.setInt(
+    await _sharedPreferences.setString(
         PrefKeys.licenseOrJobNumber.toString(), police.policeJobNumber);
     await _sharedPreferences.setString(
         PrefKeys.policeMilitaryRank.toString(), police.policeMilitaryRank);
@@ -129,8 +130,8 @@ class AppSettingsSharedPreferences {
       .getInt(PrefKeys.numberOfUnReadNotifications.toString())
       .onNull();
 
-  int getNumberOfViolations() => _sharedPreferences
-      .getInt(PrefKeys.numberOfViolations.toString())
+  int getNumberOfViolationsUnPaid() => _sharedPreferences
+      .getInt(PrefKeys.numberOfViolationsUnPaid.toString())
       .onNull();
 
   int getUserId() =>
