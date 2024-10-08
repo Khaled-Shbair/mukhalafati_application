@@ -5,12 +5,15 @@ class ManagerStrings {
   static String skip = 'skip'.tr;
   static String policeMan = 'police_man'.tr;
   static String subTitleOnBoardingOne = 'sub_title_on_boarding_one'.tr;
+  static String theEnteredDataIsIncorrect = 'the_entered_data_is_incorrect'.tr;
   static String theDriver = 'the_driver'.tr;
   static String subTitleOnBoardingTwo = 'sub_title_on_boarding_two'.tr;
   static String violations = 'violations'.tr;
   static String subTitleOnBoardingThree = 'sub_title_on_boarding_three'.tr;
   static String welcome = 'welcome'.tr;
+  static String pleaseEnterPaymentCardDetails = 'please_enter_payment_card_details'.tr;
   static String address = 'address'.tr;
+  static String pleaseSelectionPaymentWay = 'please_selection_payment_way'.tr;
   static String dateOfIncidentOrProblem = 'date_of_incident_or_problem'.tr;
   static String subTitleWelcome = 'sub_title_welcome'.tr;
   static String passwordDoesNotMatch = 'password_does_not_match'.tr;
@@ -198,6 +201,8 @@ class ManagerStrings {
       'you_can_view_all_your_paid_and_unpaid_violations'.tr;
   static String pleaseEnterTheRequiredData =
       'please_enter_the_required_data'.tr;
+  static String licenseNumberNotFound =
+      'license_number_not_found'.tr;
   static String notifications = 'notifications'.tr;
   static String unReadMessages = 'un_read_messages'.tr;
   static String since = 'since'.tr;
