@@ -4,51 +4,23 @@ class NotificationsController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final AppSettingsSharedPreferences _sharedPreferences =
       instance<AppSettingsSharedPreferences>();
+  final NotificationsDatabaseController _notificationsDatabase =
+      NotificationsDatabaseController();
   late String driverName;
   late String driverImage;
 
   // int unReadMessagesNumber = 4;
   bool loading = false;
 
-  List notifications = <DataNotification>[
-    DataNotification(
-      text:
-          'قد تم مخالفتك قبل قليل بسبب الزيادة بسرعة المركبة فوق المسموح يرجى اتباع المعلومات',
-      time: 'ساعتين',
-    ),
-    DataNotification(
-      text:
-          'عزيزي السائق أن تقترب من الفترة المحددة لك لدفع المخالفة التي تمت عليك يرجى متابعة الأمر',
-      time: '4 ساعات',
-    ),
-    DataNotification(
-      text:
-          'عزيزي السائق انتبه من شارع المسمى “صلاح الدين يوجد هناك حفريات ف كن على حذر',
-      time: '3 ساعات',
-    ),
-    DataNotification(
-      text: 'الوقت المناسب لفحص سيارتك  .  حدد موعدًا للفحص الدوري',
-      time: 'ساعة',
-    ),
-    DataNotification(
-      text:
-          'عزيزي السائق أن تقترب من الفترة المحددة لك لدفع المخالفة التي تمت عليك يرجى متابعة الأمر',
-      time: '5 دقائق',
-    ),
-    DataNotification(
-      text:
-          'عزيزي السائق أن تقترب من الفترة المحددة لك لدفع المخالفة التي تمت عليك يرجى متابعة الأمر',
-      time: '4 ساعات',
-    ),
-  ];
+  List notifications = <NotificationModel>[];
 
   @override
   void onInit() {
     super.onInit();
-    disposeDriverHome();
     driverName =
-        '${_sharedPreferences.firstName()} ${_sharedPreferences.lastName()}';
-    driverImage = _sharedPreferences.image();
+        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
+    driverImage = _sharedPreferences.getImage();
+    getNotifications();
   }
 
   void backButton() {
@@ -56,14 +28,17 @@ class NotificationsController extends GetxController {
     disposeNotification();
   }
 
-  void deleteNotification() {
+  void deleteNotifications() async {
     confirmInformationDialog(
       title: ManagerStrings.doYouWantToDeleteAllNotifications,
       text: ManagerStrings.notificationsSuccessfullyDeleted,
       textConfirmButton: ManagerStrings.yes,
       textCancelButton: ManagerStrings.no,
-      closeButton: () {
-        notifications.clear();
+      confirmButton: () async {
+        _notificationsDatabase.clear();
+      },
+      closeButton: () async {
+        getNotifications();
         Get.back();
         update();
       },
@@ -78,7 +53,7 @@ class NotificationsController extends GetxController {
     }
   }
 
-  void onLongPressOnBoxOfNotification(int index) async {
+  void onLongPressOnBoxOfNotification(int notificationId, int index) async {
     notifications[index].boxColor = ManagerColors.primaryColor;
     notifications[index].textColor = ManagerColors.white;
     notifications[index].timeColor = ManagerColors.white80;
@@ -87,10 +62,12 @@ class NotificationsController extends GetxController {
       text: ManagerStrings.notificationSuccessfullyDeleted,
       textConfirmButton: ManagerStrings.yes,
       textCancelButton: ManagerStrings.no,
+      confirmButton: () {
+        _notificationsDatabase.delete(notificationId);
+      },
       closeButton: () {
-        notifications.removeAt(index);
+        getNotifications();
         Get.back();
-        update();
       },
       cancelButton: () {
         notifications[index].boxColor = ManagerColors.lotion2;
@@ -102,6 +79,13 @@ class NotificationsController extends GetxController {
       context: Get.context!,
     );
 
+    update();
+  }
+
+  void getNotifications() async {
+    loading = true;
+    notifications = await _notificationsDatabase.read();
+    loading = false;
     update();
   }
 }
