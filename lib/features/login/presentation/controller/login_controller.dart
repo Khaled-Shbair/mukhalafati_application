@@ -2,6 +2,10 @@ import '/config/all_imports.dart';
 
 class LoginController extends GetxController
     with GetSingleTickerProviderStateMixin, Helpers {
+  final DriverDatabaseController _driverDatabase =
+      instance<DriverDatabaseController>();
+  final PoliceDatabaseController _policeDatabase =
+      instance<PoliceDatabaseController>();
   final AppSettingsSharedPreferences _sharedPreferences =
       instance<AppSettingsSharedPreferences>();
 
@@ -66,21 +70,36 @@ class LoginController extends GetxController
     update();
   }
 
-  void loginDriver() {
+  void loginDriver() async {
     if (_checkDataDriver()) {
-      _sharedPreferences.setDriverData();
-      _sharedPreferences.setRememberMeDriver(rememberMeDriver);
-      Get.offAllNamed(Routes.driverHomeScreen);
+      bool login =
+          await _driverDatabase.login(licenseNumber.text, passwordDriver.text);
+      if (login) {
+        DriverModel? driverData =
+            await _driverDatabase.getDriver(licenseNumber.text);
+        _sharedPreferences.setDriverData(driverData!);
+        _sharedPreferences.setRememberMeDriver(rememberMeDriver);
+        Get.offAllNamed(Routes.driverHomeScreen);
+      } else {
+        showSnackBar(message: ManagerStrings.theEnteredDataIsIncorrect);
+      }
     } else {
       showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
     }
   }
 
-  void loginPoliceMan() {
+  void loginPoliceMan() async {
     if (_checkDataPolice()) {
-      _sharedPreferences.setPoliceData();
-      _sharedPreferences.setRememberMePolice(rememberMePoliceMan);
-      Get.offAllNamed(Routes.policeManHomeScreen);
+      bool login =
+          await _policeDatabase.login(jobNumber.text, passwordPoliceMan.text);
+      if (login) {
+        PoliceModel? police = await _policeDatabase.show(jobNumber.text);
+        _sharedPreferences.setPoliceData(police!);
+        _sharedPreferences.setRememberMePolice(rememberMePoliceMan);
+        Get.offAllNamed(Routes.policeManHomeScreen);
+      } else {
+        showSnackBar(message: ManagerStrings.theEnteredDataIsIncorrect);
+      }
     } else {
       showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
     }
