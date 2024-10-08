@@ -7,6 +7,7 @@ Future<void> confirmInformationDialog({
   String? textCancelButton,
   String? title,
   required Function() closeButton,
+  Function()? confirmButton,
   Function()? cancelButton,
 }) async {
   await showDialog(
@@ -106,6 +107,9 @@ Future<void> confirmInformationDialog({
                       mainButton(
                         onPressed: () async {
                           Get.back();
+                          if (confirmButton != null) {
+                            confirmButton();
+                          }
                           await createdSuccessfullyDialog(
                             context: context,
                             closeButton: closeButton,
