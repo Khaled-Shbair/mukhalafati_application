@@ -60,20 +60,37 @@ class RouteGenerator {
             builder: (_) => const ForgotPasswordForPoliceManScreen());
       case Routes.changePasswordScreen:
         initChangePassword();
-        return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
+        final args = settings.arguments as List;
+        final isDriver = args[0] as bool;
+        final id = args[1] as int;
+        return MaterialPageRoute(
+            builder: (_) => ChangePasswordScreen(id: id, isDriver: isDriver));
       case Routes.driverProfileScreen:
         initDriverProfile();
         return MaterialPageRoute(builder: (_) => const DriverProfileScreen());
       case Routes.paymentScreen:
         initPayment();
-        final priceOfViolation = settings.arguments as String;
+        final args = settings.arguments as List;
+        final priceOfViolation = args[0] as String;
+        final violationId = args[1] as int;
         return MaterialPageRoute(
-            builder: (_) => PaymentScreen(priceOfViolation: priceOfViolation));
+            builder: (_) => PaymentScreen(
+                  priceOfViolation: priceOfViolation,
+                  violationId: violationId,
+                ));
       case Routes.verificationCodeScreen:
         initVerificationCode();
-        final phoneNumber = settings.arguments as String;
+        final args = settings.arguments as List;
+        final phoneNumber = args[0] as String;
+        final id = args[1] as int;
+        final isDriver = args[2] as bool;
         return MaterialPageRoute(
-            builder: (_) => VerificationCodeScreen(phoneNumber: phoneNumber));
+          builder: (_) => VerificationCodeScreen(
+            phoneNumber: phoneNumber,
+            id: id,
+            isDriver: isDriver,
+          ),
+        );
       case Routes.notificationScreen:
         initNotification();
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());
