@@ -4,27 +4,47 @@ class PoliceManHomeController extends GetxController
     with GetSingleTickerProviderStateMixin {
   late PageController pageController;
   late TooltipBehavior tooltipBehavior;
-
+  final AppSettingsSharedPreferences _sharedPreferences =
+      instance<AppSettingsSharedPreferences>();
+  final ViolationsDatabaseController _violationsDatabase =
+      ViolationsDatabaseController();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  String totalViolations = '999';
-  String policeName = 'خالد شبير';
-  String policeImage =
-      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
-  String policeFirstName = 'خالد';
+  late String policeName;
+
+  late String policeImage;
+
+  late String policeFirstName;
+  int currentPage = 0;
+
+  late String totalViolations;
+
   String welcome = ManagerStrings.goodMorning;
+
   String highestViolationsInMonth = 'يناير';
   String highestViolationsInWeek = ManagerStrings.saturday;
-  int currentPage = 0;
+
   bool isSelectedButtonWeeklyViolations = true;
   bool isSelectedButtonMonthlyViolations = false;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    getTotalViolationsFromDatabase();
+    policeFirstName = _sharedPreferences.getFirstName();
+    policeName =
+        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
+    policeImage = _sharedPreferences.getImage();
     changeWelcome();
+
     pageController = PageController();
     tooltipBehavior = TooltipBehavior(enable: true);
     s();
+  }
+
+  void getTotalViolationsFromDatabase() {
+    totalViolations = _violationsDatabase
+        .totalViolationsOfPolice(_sharedPreferences.getUserId())
+        .toString();
   }
 
   void changeWelcome() {

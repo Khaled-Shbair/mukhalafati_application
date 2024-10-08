@@ -13,6 +13,7 @@ class DriverProfileScreen extends StatelessWidget {
           endDrawer: driverDrawer(
             driverName: controller.driverName,
             driverImage: controller.driverImage,
+            isProfileScreen: true,
           ),
           appBar: AppBar(
             title: Text(ManagerStrings.profile),
@@ -50,9 +51,8 @@ class DriverProfileScreen extends StatelessWidget {
                   backgroundColor: ManagerColors.white,
                   child: CircleAvatar(
                     radius: ManagerRadius.r60,
-                    backgroundImage: NetworkImage(
-                      controller.driverImage,
-                    ),
+                    // backgroundImage: NetworkImage(controller.driverImage),
+                    backgroundImage: AssetImage(controller.driverImage),
                   ),
                 ),
               ),

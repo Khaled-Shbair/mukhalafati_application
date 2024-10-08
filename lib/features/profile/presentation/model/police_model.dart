@@ -10,7 +10,7 @@ class PoliceModel {
   late String policePassword;
   late String policeMilitaryRank;
   late String policePhoneNumber;
-  late int policeJobNumber;
+  late String policeJobNumber;
 
   PoliceModel();
 
