@@ -2,39 +2,23 @@ import '/config/all_imports.dart';
 
 class ViolationPaymentController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  String driverName = 'خالد شبير';
-  String driverImage =
-      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
+  final AppSettingsSharedPreferences _sharedPreferences =
+      instance<AppSettingsSharedPreferences>();
+  final ViolationsDatabaseController _violationsDatabase =
+      instance<ViolationsDatabaseController>();
+  late String driverName;
+  late String driverImage;
+  bool loading = false;
   String filter = ManagerStrings.filter;
-  List dataOfViolation = <DataOfViolation>[
-    DataOfViolation(
-      isPaid: true,
-      date: '18/9/2024',
-      price: 100,
-      timeOfViolation: '10:00 AM',
-      placeOfViolation: 'خانيونس - البلد - شارع شبير',
-      numberOfViolation: '491158',
-      reasonForViolation: 'تجاوزك الحد القانوني للسرعة',
-    ),
-    DataOfViolation(
-      isPaid: true,
-      date: '12/12/2024',
-      price: 10000,
-      timeOfViolation: '12:40 PM',
-      placeOfViolation: 'جباليا البلد شارع السكة',
-      numberOfViolation: '496558',
-      reasonForViolation: 'الوقوف في مكان ممنوع الوقوف فيه',
-    ),
-    DataOfViolation(
-      isPaid: false,
-      date: '20/1/2024',
-      price: 8000,
-      timeOfViolation: '3:42 AM',
-      placeOfViolation: 'دير البلح البلد دوار المدفع',
-      numberOfViolation: '491354',
-      reasonForViolation: 'عدم ربط حزام الأمان',
-    ),
-  ];
+  List dataOfViolation = <ViolationModel>[];
+
+  @override
+  void onInit() {
+    driverName =
+        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
+    driverImage = _sharedPreferences.getImage();
+    super.onInit();
+  }
 
   void openEndDrawer() {
     if (scaffoldKey.currentState != null &&
@@ -65,6 +49,7 @@ class ViolationPaymentController extends GetxController {
     required String placeOfViolation,
     required String timeOfViolation,
     required String reasonForViolation,
+    required int violationId,
   }) {
     showDialog(
       context: Get.context!,
@@ -73,7 +58,10 @@ class ViolationPaymentController extends GetxController {
       builder: (context) {
         return viewViolationDetails(
           closeButton: () => Get.back(),
-          payNowButton: () => payNowButton(price),
+          payNowButton: () => payNowButton(
+            price,
+            violationId,
+          ),
           date: date,
           numberOfViolation: numberOfViolation,
           price: price,
@@ -85,13 +73,23 @@ class ViolationPaymentController extends GetxController {
     );
   }
 
-  void payNowButton(String price) {
-    Get.toNamed(Routes.paymentScreen, arguments: price);
+  void payNowButton(String price, int violationId) {
+    Get.toNamed(
+      Routes.paymentScreen,
+      arguments: [price, violationId],
+    );
     disposeViolationPayment();
   }
 
   void backButton() {
     Get.back();
     disposeViolationPayment();
+  }
+
+  void getDriverViolation() async {
+    loading = true;
+    dataOfViolation = await _violationsDatabase.read();
+    loading = false;
+    update();
   }
 }

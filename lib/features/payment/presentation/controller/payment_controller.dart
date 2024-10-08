@@ -1,7 +1,11 @@
 import '/config/all_imports.dart';
 
-class PaymentController extends GetxController {
+class PaymentController extends GetxController with Helpers {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final AppSettingsSharedPreferences _sharedPreferences =
+      instance<AppSettingsSharedPreferences>();
+  final ViolationsDatabaseController _violationsDatabase =
+      instance<ViolationsDatabaseController>();
   late PageController pageController;
   int currentStep = 0;
   bool paymentSelectionDone = false;
@@ -10,23 +14,25 @@ class PaymentController extends GetxController {
   bool isJawwalPay = false;
   bool isPalPay = false;
   bool isVisaCard = false;
-  String driverName = 'خالد شبير';
-  String driverImage =
-      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
   bool loading = false;
+  late String driverName;
+  late String driverImage;
 
   late TextEditingController cardHolderName;
   late TextEditingController cardNumber;
   late TextEditingController securityCode;
   late TextEditingController expiryDateCard;
 
-  // String paymentBy = '';
-  String paymentBy = ManagerStrings.jawwalPay;
+  late String paymentBy;
+
   int currentPage = 0;
 
   @override
   void onInit() {
     super.onInit();
+    driverName =
+        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
+    driverImage = _sharedPreferences.getImage();
     cardHolderName = TextEditingController();
     cardNumber = TextEditingController();
     securityCode = TextEditingController();
@@ -87,37 +93,48 @@ class PaymentController extends GetxController {
   }
 
   void paymentSelectionButton() {
-    if (isJawwalPay == true || isVisaCard == true || isPalPay == true) {
+    if (isPalPay == true || isVisaCard == true || isJawwalPay == true) {
       loading = true;
+      paymentBy = ManagerStrings.palPay;
       pageController.nextPage(
         duration: const Duration(milliseconds: 10),
         curve: Curves.easeIn,
       );
       loading = false;
-      update();
-    } else {}
+    } else {
+      showSnackBar(message: ManagerStrings.pleaseSelectionPaymentWay);
+    }
+    update();
   }
 
   void completePaymentButton() {
-    if (true) {
+    if (_checkData()) {
       loading = true;
       pageController.nextPage(
           duration: const Duration(milliseconds: 10), curve: Curves.easeIn);
       loading = false;
-      update();
-    } else {}
+    } else {
+      showSnackBar(message: ManagerStrings.pleaseEnterPaymentCardDetails);
+    }
+    update();
   }
 
-  void paymentConfirmationButton() {
+  void paymentConfirmationButton(int violationId) async {
+    bool isSuccessful =
+        await _violationsDatabase.paymentViolation(1, paymentBy, violationId);
     showDialog(
       context: Get.context!,
       barrierColor: ManagerColors.white,
       barrierDismissible: false,
       builder: (context) {
         return statePayment(
-          isSuccessful: false,
+          isSuccessful: isSuccessful,
           button: () {
-            cancelButton();
+            if (isSuccessful) {
+              cancelButton();
+            } else {
+              cancelButton();
+            }
           },
         );
       },
@@ -132,5 +149,16 @@ class PaymentController extends GetxController {
   void changeCurrentPage(int value) {
     currentPage = value;
     update();
+  }
+
+  bool _checkData() {
+    if (cardHolderName.text.isNotEmpty &&
+        cardNumber.text.isNotEmpty &&
+        securityCode.text.isNotEmpty &&
+        expiryDateCard.text.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
