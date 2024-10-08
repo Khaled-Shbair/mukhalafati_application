@@ -4,7 +4,7 @@ final instance = GetIt.instance;
 
 initModule() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await _initDatabase();
   await _initSharedPreferences();
 }
 
@@ -15,6 +15,21 @@ Future<void> _initSharedPreferences() async {
     instance.registerLazySingleton<AppSettingsSharedPreferences>(
         () => AppSettingsSharedPreferences(instance()));
   }
+}
+
+Future<void> _initDatabase() async {
+  await DatabaseProvider.initDatabase();
+  instance.registerLazySingleton<ComplaintDatabaseController>(
+      () => ComplaintDatabaseController());
+  instance.registerLazySingleton<DriverDatabaseController>(
+      () => DriverDatabaseController());
+  instance.registerLazySingleton<TestResultDatabaseController>(
+      () => TestResultDatabaseController());
+  instance.registerLazySingleton<ViolationsDatabaseController>(
+      () => ViolationsDatabaseController());
+  instance.registerLazySingleton<ViolationsDatabaseController>(
+      () => ViolationsDatabaseController());
+  // final ComplaintDatabaseController _complaintDatabase = instance<ComplaintDatabaseController>();
 }
 
 initSplash() {
@@ -181,6 +196,9 @@ disposeVerificationCode() {
 }
 
 initChangePassword() {
+  disposeVerificationCode();
+  disposeForgotPasswordForDriver();
+  disposeForgotPasswordForPoliceMan();
   Get.put<ChangePasswordController>(ChangePasswordController());
 }
 
@@ -213,6 +231,7 @@ disposeViolationPayment() {
 }
 
 initNotification() {
+  disposeDriverHome();
   Get.put<NotificationsController>(NotificationsController());
 }
 
