@@ -23,7 +23,7 @@ class NotificationsDatabaseController
     return countOfDeletedRows == 1;
   }
 
-  Future<bool>clear() async {
+  Future<bool> clear() async {
     int countOfDeletedRows = await _database.delete(
       DatabaseConstants.notificationsTableName,
     );
@@ -36,6 +36,14 @@ class NotificationsDatabaseController
       DatabaseConstants.notificationsTableName,
     );
     return rows.map((row) => NotificationModel.fromMap(row)).toList();
+  }
+
+  @override
+  Future<int> numberOfNotifications() async {
+    List<Map<String, dynamic>> rows = await _database.query(
+      DatabaseConstants.notificationsTableName,
+    );
+    return rows.length;
   }
 
   @override

@@ -33,6 +33,43 @@ class ViolationsDatabaseController extends DatabaseOperations<ViolationModel> {
     return null;
   }
 
+  Future<int> numberOfViolationsUnPaid(int driverId) async {
+    List<Map<String, dynamic>> rows = await _database.query(
+      DatabaseConstants.violationsTableName,
+      where:
+          '${DatabaseConstants.driverId} = ? AND ${DatabaseConstants.violationState} = ?',
+      whereArgs: [driverId, 0],
+    );
+    if (rows.isNotEmpty) {
+      return rows.length;
+    }
+    return 0;
+  }
+  Future<int> numberOfViolationsPaid(int driverId) async {
+    List<Map<String, dynamic>> rows = await _database.query(
+      DatabaseConstants.violationsTableName,
+      where:
+      '${DatabaseConstants.driverId} = ? AND ${DatabaseConstants.violationState} = ?',
+      whereArgs: [driverId, 1],
+    );
+    if (rows.isNotEmpty) {
+      return rows.length;
+    }
+    return 0;
+  }
+  Future<int> totalViolationsOfPolice(int policeId) async {
+    List<Map<String, dynamic>> rows = await _database.query(
+      DatabaseConstants.violationsTableName,
+      where:
+      '${DatabaseConstants.policeId} = ?',
+      whereArgs: [policeId],
+    );
+    if (rows.isNotEmpty) {
+      return rows.length;
+    }
+    return 0;
+  }
+
   Future<bool> paymentViolation(
       int payed, String payedBy, int violationId) async {
     int countOfUpdatedRows = await _database.update(
