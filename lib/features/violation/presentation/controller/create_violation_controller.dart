@@ -1,6 +1,12 @@
 import '/config/all_imports.dart';
 
 class CreateViolationController extends GetxController with Helpers {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  // final ViolationsDatabaseController _violationsDatabase = ViolationsDatabaseController();
+  final ViolationsDatabaseController _violationsDatabase =
+      instance<ViolationsDatabaseController>();
+
   late TextEditingController driverNameController;
   late TextEditingController driverIdController;
   late TextEditingController ownerNameController;
@@ -13,7 +19,6 @@ class CreateViolationController extends GetxController with Helpers {
   late TextEditingController placeOfViolationController;
   late TextEditingController reasonForViolationController;
   int _hour = 0;
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   String policeName = 'خالد شبير';
   String policeImage =
       'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';

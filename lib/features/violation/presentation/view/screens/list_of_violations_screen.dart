@@ -100,47 +100,48 @@ class ListOfViolationsScreen extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: ManagerHeight.h10),
-                Expanded(
-                  child: ListView(
-                    children: [
-                      ...List.generate(
-                        controller.data.length,
-                        (index) {
-                          return Container(
-                            margin: EdgeInsetsDirectional.only(
-                              top: ManagerHeight.h10,
-                            ),
-                            padding: EdgeInsetsDirectional.only(
-                              top: ManagerHeight.h10,
-                              bottom: ManagerHeight.h10,
-                            ),
-                            decoration: BoxDecoration(
-                              color: ManagerColors.lotion,
-                              borderRadius:
-                                  BorderRadius.circular(ManagerRadius.r5),
-                            ),
-                            child: Column(
-                              children: [
-                                itemCardOfListOfViolation(
-                                  text: controller.data[index].name,
-                                  icon: Icons.person,
-                                ),
-                                itemCardOfListOfViolation(
-                                  text: controller.data[index].date,
-                                  icon: Icons.calendar_month,
-                                ),
-                                itemCardOfListOfViolation(
-                                  text: controller.data[index].place,
-                                  icon: Icons.location_on,
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+                //TODO: Remember
+                // Expanded(
+                //   child: ListView(
+                //     children: [
+                //       ...List.generate(
+                //         controller.data.length,
+                //         (index) {
+                //           return Container(
+                //             margin: EdgeInsetsDirectional.only(
+                //               top: ManagerHeight.h10,
+                //             ),
+                //             padding: EdgeInsetsDirectional.only(
+                //               top: ManagerHeight.h10,
+                //               bottom: ManagerHeight.h10,
+                //             ),
+                //             decoration: BoxDecoration(
+                //               color: ManagerColors.lotion,
+                //               borderRadius:
+                //                   BorderRadius.circular(ManagerRadius.r5),
+                //             ),
+                //             child: Column(
+                //               children: [
+                //                 itemCardOfListOfViolation(
+                //                   text: controller.data[index].name,
+                //                   icon: Icons.person,
+                //                 ),
+                //                 itemCardOfListOfViolation(
+                //                   text: controller.data[index].date,
+                //                   icon: Icons.calendar_month,
+                //                 ),
+                //                 itemCardOfListOfViolation(
+                //                   text: controller.data[index].place,
+                //                   icon: Icons.location_on,
+                //                 ),
+                //               ],
+                //             ),
+                //           );
+                //         },
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),
