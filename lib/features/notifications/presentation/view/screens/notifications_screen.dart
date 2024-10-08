@@ -44,7 +44,7 @@ class NotificationsScreen extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () => controller.deleteNotification(),
+                      onPressed: () => controller.deleteNotifications(),
                       icon: Icon(
                         Icons.delete,
                         color: ManagerColors.primaryColor,
@@ -67,9 +67,11 @@ class NotificationsScreen extends StatelessWidget {
                         return myLoading();
                       } else {
                         return boxOfNotification(
-                          onLongPress: () {
-                            controller.onLongPressOnBoxOfNotification(index);
-                          },
+                          onLongPress: () =>
+                              controller.onLongPressOnBoxOfNotification(
+                            controller.notifications[index].notificationId,
+                            index,
+                          ),
                           color: controller.notifications[index].boxColor,
                           colorText: controller.notifications[index].textColor,
                           colorTime: controller.notifications[index].timeColor,
