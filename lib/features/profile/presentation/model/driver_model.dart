@@ -18,7 +18,8 @@ class DriverModel {
   late String releaseDate;
   late String expiryDate;
   late String licenseLevels;
-  late int numberOfViolations;
+  late String password;
+  late int numberOfViolationsUnPaid;
   late int numberOfUnReadNotifications;
 
   DriverModel();
@@ -26,6 +27,7 @@ class DriverModel {
   DriverModel.fromMap(Map<String, dynamic> map) {
     driverId = map[DatabaseConstants.driverId];
     driverIdNumber = map[DatabaseConstants.driverIdNumber];
+    password = map[DatabaseConstants.driverPassword];
     driverImage = map[DatabaseConstants.driverImage];
     driverFirstNameEn = map[DatabaseConstants.driverFirstNameEn];
     driverFirstNameAr = map[DatabaseConstants.driverFirstNameAr];
@@ -41,16 +43,16 @@ class DriverModel {
     releaseDate = map[DatabaseConstants.releaseDate];
     expiryDate = map[DatabaseConstants.expiryDate];
     licenseLevels = map[DatabaseConstants.licenseLevels];
-    numberOfViolations = map[DatabaseConstants.numberOfViolations];
+    numberOfViolationsUnPaid = map[DatabaseConstants.numberOfViolationsUnPaid];
     numberOfUnReadNotifications =
         map[DatabaseConstants.numberOfUnReadNotifications];
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      DatabaseConstants.driverId: driverId,
       DatabaseConstants.driverIdNumber: driverIdNumber,
       DatabaseConstants.driverImage: driverImage,
+      DatabaseConstants.driverPassword: password,
       DatabaseConstants.driverFirstNameEn: driverFirstNameEn,
       DatabaseConstants.driverFirstNameAr: driverFirstNameAr,
       DatabaseConstants.driverLastNameEn: driverLastNameEn,
@@ -65,7 +67,7 @@ class DriverModel {
       DatabaseConstants.releaseDate: releaseDate,
       DatabaseConstants.expiryDate: expiryDate,
       DatabaseConstants.licenseLevels: licenseLevels,
-      DatabaseConstants.numberOfViolations: numberOfViolations,
+      DatabaseConstants.numberOfViolationsUnPaid: numberOfViolationsUnPaid,
       DatabaseConstants.numberOfUnReadNotifications:
           numberOfUnReadNotifications,
     };

@@ -69,7 +69,7 @@ class SearchForDriverController extends GetxController {
         nameEn = driver.driverNameEn;
         licenseLevels = driver.licenseLevels;
         imageDriver = driver.driverImage;
-        numberOfViolations = driver.numberOfViolations;
+        numberOfViolations = driver.numberOfViolationsUnPaid;
       }
     } else {
       result = false;
