@@ -1,6 +1,10 @@
 import '/config/all_imports.dart';
 
 class ChangePasswordController extends GetxController with Helpers {
+  final DriverDatabaseController _driverDatabase =
+      instance<DriverDatabaseController>();
+  final PoliceDatabaseController _policeDatabase =
+      instance<PoliceDatabaseController>();
   late TextEditingController newPassword;
   late TextEditingController confirmPassword;
   bool obscureNewPassword = true;
@@ -24,8 +28,13 @@ class ChangePasswordController extends GetxController with Helpers {
     Get.back();
   }
 
-  void changePasswordButton() {
+  void changePasswordButton(bool isDriver, int id) async {
     if (_checkDataDriver()) {
+      if (isDriver) {
+        await _driverDatabase.changePassword(newPassword.text, id);
+      } else {
+        await _policeDatabase.changePassword(newPassword.text, id);
+      }
       createdSuccessfullyDialog(
         closeButton: () {
           Get.offAndToNamed(Routes.loginScreen);
