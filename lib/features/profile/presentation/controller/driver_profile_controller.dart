@@ -17,16 +17,17 @@ class DriverProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    driverName = _sharedPreferences.firstName();
-    driverImage = _sharedPreferences.image();
+    driverName =
+        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
+    driverImage = _sharedPreferences.getImage();
     driverNameController =
-        TextEditingController(text: _sharedPreferences.fullName());
+        TextEditingController(text: _sharedPreferences.getFullNameAr());
     phoneNumberController =
-        TextEditingController(text: _sharedPreferences.phoneNumber());
+        TextEditingController(text: _sharedPreferences.getPhoneNumber());
     idNumberController =
-        TextEditingController(text: _sharedPreferences.idNumber());
+        TextEditingController(text: _sharedPreferences.getIdNumber());
     licenceNumberController =
-        TextEditingController(text: _sharedPreferences.licenseNumber());
+        TextEditingController(text: _sharedPreferences.getLicenseOrJobNumber());
   }
 
   @override
@@ -63,10 +64,11 @@ class DriverProfileController extends GetxController {
             phoneNumberController.text.isNotEmpty &&
             idNumberController.text.isNotEmpty &&
             licenceNumberController.text.isNotEmpty &&
-            driverNameController.text != _sharedPreferences.fullName() ||
-        phoneNumberController.text != _sharedPreferences.phoneNumber() ||
-        idNumberController.text != _sharedPreferences.idNumber() ||
-        licenceNumberController.text != _sharedPreferences.licenseNumber()) {
+            driverNameController.text != _sharedPreferences.getFullNameAr() ||
+        phoneNumberController.text != _sharedPreferences.getPhoneNumber() ||
+        idNumberController.text != _sharedPreferences.getIdNumber() ||
+        licenceNumberController.text !=
+            _sharedPreferences.getLicenseOrJobNumber()) {
       return true;
     } else {
       return false;
