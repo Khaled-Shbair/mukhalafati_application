@@ -57,6 +57,7 @@ Widget driverDrawer({
             Get.offAndToNamed(Routes.driverHomeScreen);
             disposeDriverProfile();
             disposeLogout();
+            disposeNotification();
             disposeDrivingLicenseCard();
             disposeListOfComplaints();
             disposeViolationPayment();
@@ -73,6 +74,7 @@ Widget driverDrawer({
           } else {
             Get.offAndToNamed(Routes.driverProfileScreen);
             disposeLogout();
+            disposeNotification();
             disposeDrivingLicenseCard();
             disposeListOfComplaints();
             disposeViolationPayment();
@@ -90,6 +92,7 @@ Widget driverDrawer({
           } else {
             Get.offAndToNamed(Routes.searchOnResultsTestsOfLicenseScreen);
             disposeDriverProfile();
+            disposeNotification();
             disposeLogout();
             disposeDrivingLicenseCard();
             disposeListOfComplaints();
@@ -108,6 +111,7 @@ Widget driverDrawer({
             Get.offAndToNamed(Routes.listOfViolationsScreen);
             disposeDriverProfile();
             disposeLogout();
+            disposeNotification();
             disposeDrivingLicenseCard();
             disposeListOfComplaints();
             disposeSearchOnResultsTestsOfLicense();
@@ -125,6 +129,7 @@ Widget driverDrawer({
             Get.offAndToNamed(Routes.listOfComplaintsScreen);
             disposeDriverProfile();
             disposeLogout();
+            disposeNotification();
             disposeDrivingLicenseCard();
             disposeViolationPayment();
             disposeSearchOnResultsTestsOfLicense();
@@ -142,6 +147,7 @@ Widget driverDrawer({
             Get.offAndToNamed(Routes.drivingLicenseCardScreen);
             disposeDriverProfile();
             disposeLogout();
+            disposeNotification();
             disposeListOfComplaints();
             disposeViolationPayment();
             disposeSearchOnResultsTestsOfLicense();
@@ -158,6 +164,7 @@ Widget driverDrawer({
           disposeDrivingLicenseCard();
           disposeListOfComplaints();
           disposeViolationPayment();
+          disposeNotification();
           disposeSearchOnResultsTestsOfLicense();
           disposeDriverHome();
         },

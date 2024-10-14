@@ -211,3 +211,11 @@ initViolationPayment() {
 disposeViolationPayment() {
   Get.delete<ViolationPaymentController>();
 }
+
+initNotification() {
+  Get.put<NotificationsController>(NotificationsController());
+}
+
+disposeNotification() {
+  Get.delete<NotificationsController>();
+}
