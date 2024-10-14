@@ -21,7 +21,8 @@ class PoliceManHomeScreen extends StatelessWidget {
                 color: ManagerColors.primaryColor,
                 borderRadius: BorderRadius.circular(ManagerRadius.r5),
                 image: DecorationImage(
-                  image: NetworkImage(controller.policeImage),
+                  // image: NetworkImage(controller.policeImage),
+                  image: AssetImage(controller.policeImage),
                   fit: BoxFit.cover,
                 ),
               ),

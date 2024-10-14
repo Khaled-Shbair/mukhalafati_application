@@ -2,20 +2,31 @@ import '/config/all_imports.dart';
 
 class SearchOnResultsTestsOfLicenseController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final AppSettingsSharedPreferences _sharedPreferences =
+      instance<AppSettingsSharedPreferences>();
+  final TestResultDatabaseController _testResultDatabase =
+      instance<TestResultDatabaseController>();
 
   late TextEditingController idNumberController;
-  String resultName = 'خالد عبد المنعم عثمان شبير';
-  bool licenseTestResults = true;
-  bool practicalTestResult = false;
+  late String resultName;
+
+  late bool licenseTestResults;
+
+  late bool practicalTestResult;
+
   bool loading = false;
-  bool result = true;
-  String driverName = 'خالد شبير';
-  String driverImage =
-      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
+  bool result = false;
+
+  late String driverName;
+
+  late String driverImage;
 
   @override
   void onInit() {
     super.onInit();
+    driverName =
+        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
+    driverImage = _sharedPreferences.getImage();
     idNumberController = TextEditingController();
   }
 
@@ -31,5 +42,29 @@ class SearchOnResultsTestsOfLicenseController extends GetxController {
       scaffoldKey.currentState!.openEndDrawer();
     }
   }
-  void searchButton() {}
+
+  void searchButton() async {
+    loading = true;
+    if (_checkData()) {
+      TestResultModel? testResult =
+          await _testResultDatabase.show(idNumberController.text);
+      if (testResult != null) {
+        result = true;
+        resultName = testResult.studentName;
+        practicalTestResult =
+            testResult.practicalTestResults == 0 ? false : true;
+        licenseTestResults = testResult.licenseTestResults == 0 ? false : true;
+      }
+    }
+    loading = false;
+    update();
+  }
+
+  bool _checkData() {
+    if (idNumberController.text.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

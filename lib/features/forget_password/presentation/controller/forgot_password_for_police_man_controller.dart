@@ -3,6 +3,9 @@ import '/config/all_imports.dart';
 class ForgotPasswordForPoliceManController extends GetxController with Helpers {
   late TextEditingController jobNumber;
 
+  final PoliceDatabaseController _policeDatabase =
+      instance<PoliceDatabaseController>();
+
   @override
   void onInit() {
     super.onInit();
@@ -20,18 +23,21 @@ class ForgotPasswordForPoliceManController extends GetxController with Helpers {
     disposeForgotPasswordForPoliceMan();
   }
 
-
-  void sendButton() {
-    //TODO: Later Edit phone number get from Api
+  void sendButton() async {
     if (_checkDataDriver()) {
-      String phoneNumber = '0599724037';
-      phoneNumber =
-          // '${number.characters.characterAt(0)}${number.characters.characterAt(1)}${number.characters.characterAt(2)}*****${number.characters.characterAt(8)}${number.characters.characterAt(9)}';
-          '${phoneNumber.characters.characterAt(8)}${phoneNumber.characters.characterAt(9)}*****${phoneNumber.characters.characterAt(0)}${phoneNumber.characters.characterAt(1)}${phoneNumber.characters.characterAt(2)}';
-      Get.toNamed(
-        Routes.verificationCodeScreen,
-        arguments: phoneNumber,
-      );
+      PoliceModel? police = await _policeDatabase.show(jobNumber.text);
+      if (police != null) {
+        String phoneNumber = police.policePhoneNumber;
+        phoneNumber =
+            // '${number.characters.characterAt(0)}${number.characters.characterAt(1)}${number.characters.characterAt(2)}*****${number.characters.characterAt(8)}${number.characters.characterAt(9)}';
+            '${phoneNumber.characters.characterAt(8)}${phoneNumber.characters.characterAt(9)}*****${phoneNumber.characters.characterAt(0)}${phoneNumber.characters.characterAt(1)}${phoneNumber.characters.characterAt(2)}';
+        Get.toNamed(
+          Routes.verificationCodeScreen,
+          arguments: [phoneNumber, police.policeId, true],
+        );
+      } else {
+        showSnackBar(message: ManagerStrings.licenseNumberNotFound);
+      }
     } else {
       showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
     }

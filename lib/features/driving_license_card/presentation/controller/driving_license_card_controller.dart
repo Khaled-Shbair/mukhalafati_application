@@ -6,16 +6,21 @@ class DrivingLicenseCardController extends GetxController {
   final AppSettingsSharedPreferences _sharedPreferences =
       instance<AppSettingsSharedPreferences>();
 
-  String licenseNumber = '0015440';
-  String expiryDate = '10-02-2024';
-  String releaseDate = '22-02-2029';
-  String idNumber = '802075986';
-  String nameAr = 'محمد عبد الحليم عبد الفتاح مسعود';
-  String nameEn = 'Mohammed A.A.Massoud';
-  String licenseLevels = '[2  3  B]';
+  late String licenseNumber;
+  late String expiryDate;
 
-  String imageDriver =
-      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
+  late String releaseDate;
+
+  late String idNumber;
+
+  late String nameAr;
+
+  late String nameEn;
+
+  late String licenseLevels;
+
+  late String imageDriver;
+
   bool openFrontElectronicLicenseCard = false;
   bool openBackElectronicLicenseCard = false;
   bool openFullElectronicLicenseCard = false;
@@ -25,9 +30,16 @@ class DrivingLicenseCardController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    licenseNumber = _sharedPreferences.getLicenseOrJobNumber();
+    expiryDate = _sharedPreferences.getExpiryDateLicense();
+    releaseDate = _sharedPreferences.getReleaseDateLicense();
+    idNumber = _sharedPreferences.getIdNumber();
+    nameAr = _sharedPreferences.getFullNameAr();
+    nameEn = _sharedPreferences.getFullNameEn();
+    licenseLevels = _sharedPreferences.getLicenseLevelsOfLicense();
     driverName =
-        '${_sharedPreferences.firstName()} ${_sharedPreferences.lastName()}';
-    driverImage = _sharedPreferences.image();
+        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
+    driverImage = _sharedPreferences.getImage();
   }
 
   void openEndDrawer() {

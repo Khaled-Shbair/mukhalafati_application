@@ -169,7 +169,9 @@ Widget frontDrivingLicenseCard({
                 ],
                 borderRadius: BorderRadius.circular(ManagerRadius.r5),
                 image: DecorationImage(
-                  image: NetworkImage(imageDriver),
+                  //TODO: Add NetworkImage later
+                  // image: NetworkImage(imageDriver),
+                  image: AssetImage(imageDriver),
                   fit: BoxFit.cover,
                 ),
               ),

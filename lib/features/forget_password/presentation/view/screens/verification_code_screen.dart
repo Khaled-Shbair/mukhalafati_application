@@ -1,9 +1,16 @@
 import '/config/all_imports.dart';
 
 class VerificationCodeScreen extends StatelessWidget {
-  const VerificationCodeScreen({required this.phoneNumber, super.key});
+  const VerificationCodeScreen({
+    required this.phoneNumber,
+    required this.id,
+    required this.isDriver,
+    super.key,
+  });
 
   final String phoneNumber;
+  final int id;
+  final bool isDriver;
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +122,7 @@ class VerificationCodeScreen extends StatelessWidget {
               ),
               SizedBox(height: ManagerHeight.h10),
               mainButton(
-                onPressed: () => controller.verifyButton(),
+                onPressed: () => controller.verifyButton(id, isDriver),
                 child: Text(
                   ManagerStrings.verify,
                   style: TextStyle(

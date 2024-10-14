@@ -1,7 +1,14 @@
 import '/config/all_imports.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
-  const ChangePasswordScreen({super.key});
+  const ChangePasswordScreen({
+    required this.isDriver,
+    required this.id,
+    super.key,
+  });
+
+  final bool isDriver;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +90,7 @@ class ChangePasswordScreen extends StatelessWidget {
               ),
               SizedBox(height: ManagerHeight.h24),
               mainButton(
-                onPressed: () => controller.changePasswordButton(),
+                onPressed: () => controller.changePasswordButton(isDriver, id),
                 child: Text(
                   ManagerStrings.changePassword,
                   style: TextStyle(

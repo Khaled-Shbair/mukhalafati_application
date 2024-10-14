@@ -1,6 +1,9 @@
 import '/config/all_imports.dart';
 
-Widget statePayment({required bool isSuccessful, required Function() button}) {
+Widget statePayment({
+  required bool isSuccessful,
+  required Function() button,
+}) {
   return Padding(
     padding: EdgeInsetsDirectional.only(
       start: ManagerWidth.w20,

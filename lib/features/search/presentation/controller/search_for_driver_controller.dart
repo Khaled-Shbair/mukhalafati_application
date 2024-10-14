@@ -3,29 +3,40 @@ import '/config/all_imports.dart';
 class SearchForDriverController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
+  final DriverDatabaseController _driverDatabase =
+      instance<DriverDatabaseController>();
+  final AppSettingsSharedPreferences _sharedPreferences =
+      instance<AppSettingsSharedPreferences>();
+
   late TextEditingController licenseNumberController;
   bool loading = false;
   bool result = false;
-  String licenseNumber = '10203040';
-  String expiryDate = '10-02-2024';
-  String releaseDate = '22-02-2029';
-  String idNumber = '12345678';
-  String nameAr = 'محمد عبد الحليم عبد الفتاح مسعود';
-  String nameEn = 'Mohammed A.A.Massoud';
-  String licenseLevels = '[2  3  B]';
+  late String licenseNumber;
 
-  String imageDriver =
-      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
+  late String expiryDate;
+  late String releaseDate;
 
-  // String imageDriver = 'https://upload.wikimedia.org/wikipedia/commons/4/44/%D8%B5%D9%88%D8%B1%D8%A9_%D8%B4%D8%AE%D8%B5%D9%8A%D8%A9_%D9%88%D9%84%D9%8A%D8%AF_%D8%A7%D9%84%D8%AD%D8%B4%D9%81.jpg';
-  int numberOfViolations = 15;
-  String policeName = 'خالد شبير';
-  String policeImage =
-      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
+  late String idNumber;
+  late String nameAr;
+  late String nameEn;
+
+  late String licenseLevels;
+
+  late String imageDriver;
+
+  // 'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
+
+  late int numberOfViolations;
+
+  late String policeName;
+  late String policeImage;
 
   @override
   void onInit() {
     super.onInit();
+    policeName =
+        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
+    policeImage = _sharedPreferences.getImage();
     licenseNumberController = TextEditingController();
   }
 
@@ -42,10 +53,24 @@ class SearchForDriverController extends GetxController {
     }
   }
 
-  void searchButton() {
+  void searchButton() async {
     loading = true;
     if (_checkDataPolice()) {
-      result = true;
+      DriverModel? driver =
+          await _driverDatabase.getDriver(licenseNumberController.text);
+      if (driver != null) {
+        result = true;
+        licenseNumber = driver.licenseNumber;
+        expiryDate = driver.expiryDate;
+        releaseDate = driver.releaseDate;
+        idNumber = driver.driverIdNumber;
+        nameAr =
+            '${driver.driverFirstNameAr} ${driver.driverFatherNameAr} ${driver.driverGrandfatherNameAr} ${driver.driverLastNameAr}';
+        nameEn = driver.driverNameEn;
+        licenseLevels = driver.licenseLevels;
+        imageDriver = driver.driverImage;
+        numberOfViolations = driver.numberOfViolationsUnPaid;
+      }
     } else {
       result = false;
     }
@@ -54,8 +79,7 @@ class SearchForDriverController extends GetxController {
   }
 
   bool _checkDataPolice() {
-    if (licenseNumberController.text.isNotEmpty &&
-        licenseNumberController.text == '10203040') {
+    if (licenseNumberController.text.isNotEmpty) {
       return true;
     } else {
       return false;

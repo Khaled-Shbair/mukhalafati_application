@@ -19,20 +19,7 @@ class ListOfComplaintsScreen extends StatelessWidget {
             automaticallyImplyLeading: false,
             title: Text(ManagerStrings.listOfComplaints),
             actions: [
-              mainButton(
-                onPressed: () => controller.openEndDrawer(),
-                minWidth: ManagerWidth.w30,
-                height: ManagerHeight.h30,
-                color: ManagerColors.transparent,
-                highlightColor: ManagerColors.transparent,
-                splashColor: ManagerColors.transparent,
-                side: BorderSide.none,
-                child: Icon(
-                  Icons.menu,
-                  color: ManagerColors.black,
-                  size: ManagerIconsSizes.i30,
-                ),
-              ),
+              menuButton(() => controller.openEndDrawer()),
             ],
           ),
           body: Container(
@@ -115,7 +102,10 @@ class ListOfComplaintsScreen extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: ManagerHeight.h20),
-                if (controller.data.isNotEmpty) ...{
+                if (controller.loading) ...{
+                  myLoading(),
+                } else if (controller.data.isNotEmpty &&
+                    controller.loading == false) ...{
                   tableOfComplaints(
                     rows: [
                       ...List.generate(
@@ -143,7 +133,8 @@ class ListOfComplaintsScreen extends StatelessWidget {
                                   ),
                                   child: Text(
                                     textAlign: TextAlign.center,
-                                    controller.data[index].date,
+                                    controller
+                                        .data[index].dateOfIncidentOrProblem,
                                     style: TextStyle(
                                       color: ManagerColors.black50,
                                       fontFamily: ManagerFontFamily.cairo,
@@ -161,7 +152,7 @@ class ListOfComplaintsScreen extends StatelessWidget {
                                     end: ManagerWidth.w1,
                                   ),
                                   child: Text(
-                                    controller.data[index].text,
+                                    controller.data[index].detailOfComplaint,
                                     style: TextStyle(
                                       color: ManagerColors.black50,
                                       fontFamily: ManagerFontFamily.cairo,
@@ -180,18 +171,22 @@ class ListOfComplaintsScreen extends StatelessWidget {
                                     start: ManagerWidth.w4,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: controller.data[index].state
+                                    color: controller
+                                                .data[index].stateOfComplaint ==
+                                            1
                                         ? ManagerColors.grannySmithApple
                                         : ManagerColors.peach,
                                     borderRadius:
                                         BorderRadius.circular(ManagerRadius.r5),
                                   ),
                                   child: Text(
-                                    controller.data[index].state
+                                    controller.data[index].stateOfComplaint == 1
                                         ? ManagerStrings.solved
                                         : ManagerStrings.inProgress,
                                     style: TextStyle(
-                                      color: controller.data[index].state
+                                      color: controller.data[index]
+                                                  .stateOfComplaint ==
+                                              1
                                           ? ManagerColors.mayGreen
                                           : ManagerColors.harvestGold,
                                       fontFamily: ManagerFontFamily.cairo,

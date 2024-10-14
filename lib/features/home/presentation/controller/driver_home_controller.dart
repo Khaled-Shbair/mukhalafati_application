@@ -2,18 +2,32 @@ import '/config/all_imports.dart';
 
 class DriverHomeController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  String driverName = 'خالد شبير';
-  String driverImage =
-      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
+  final AppSettingsSharedPreferences _sharedPreferences =
+      instance<AppSettingsSharedPreferences>();
 
-  String driverFirstName = 'خالد';
+  final ViolationsDatabaseController _violationsDatabase =
+      ViolationsDatabaseController();
+
+  late String driverName;
+  late String driverImage;
+  late String driverFirstName;
+
   String welcome = ManagerStrings.goodMorning;
-  int counterOfNotification = 9;
-int unPaidViolation = 3;
-int paidViolation = 3;
+  late int counterOfNotification;
+  late int unPaidViolation;
+
+  late int paidViolation;
+
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    paidViolation = await _violationsDatabase
+        .numberOfViolationsUnPaid(_sharedPreferences.getUserId());
+    counterOfNotification = _sharedPreferences.getNumberOfUnReadNotifications();
+    unPaidViolation = _sharedPreferences.getNumberOfViolationsUnPaid();
+    driverName =
+        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
+    driverImage = _sharedPreferences.getImage();
     changeWelcome();
   }
 
