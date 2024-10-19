@@ -25,7 +25,6 @@ class DrivingLicenseCardController extends GetxController {
   bool openBackElectronicLicenseCard = false;
   bool openFullElectronicLicenseCard = false;
   late String driverName;
-  late String driverImage;
 
   @override
   void onInit() {
@@ -37,9 +36,9 @@ class DrivingLicenseCardController extends GetxController {
     nameAr = _sharedPreferences.getFullNameAr();
     nameEn = _sharedPreferences.getFullNameEn();
     licenseLevels = _sharedPreferences.getLicenseLevelsOfLicense();
+    imageDriver = _sharedPreferences.getImage();
     driverName =
         '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
-    driverImage = _sharedPreferences.getImage();
   }
 
   void openEndDrawer() {
@@ -50,22 +49,16 @@ class DrivingLicenseCardController extends GetxController {
   }
 
   void changeOpenFrontElectronicLicenseCard(bool value) {
-    openFullElectronicLicenseCard = !value;
-    openBackElectronicLicenseCard = !value;
     openFrontElectronicLicenseCard = value;
     update();
   }
 
   void changeOpenBackElectronicLicenseCard(bool value) {
-    openFullElectronicLicenseCard = !value;
-    openFrontElectronicLicenseCard = !value;
     openBackElectronicLicenseCard = value;
     update();
   }
 
   void changeOpenFullElectronicLicenseCard(bool value) {
-    openFrontElectronicLicenseCard = !value;
-    openBackElectronicLicenseCard = !value;
     openFullElectronicLicenseCard = value;
     update();
   }
