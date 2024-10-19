@@ -17,6 +17,7 @@ enum PrefKeys {
   idNumber,
   licenseLevelsOfLicense,
   numberOfViolationsUnPaid,
+  numberOfViolationsPaid,
   numberOfUnReadNotifications,
   policeMilitaryRank
 }
@@ -46,6 +47,8 @@ class AppSettingsSharedPreferences {
     await _sharedPreferences.setInt(
         PrefKeys.numberOfUnReadNotifications.toString(),
         driver.numberOfUnReadNotifications);
+    await _sharedPreferences.setInt(PrefKeys.numberOfViolationsPaid.toString(),
+        driver.numberOfViolationsPaid);
     await _sharedPreferences.setInt(
         PrefKeys.numberOfViolationsUnPaid.toString(),
         driver.numberOfViolationsUnPaid);
@@ -112,6 +115,10 @@ class AppSettingsSharedPreferences {
 
   String getImage() =>
       _sharedPreferences.getString(PrefKeys.image.toString()).onNull();
+
+  int getNumberOfViolationsPaid() => _sharedPreferences
+      .getInt(PrefKeys.numberOfViolationsPaid.toString())
+      .onNull();
 
   String getLicenseOrJobNumber() => _sharedPreferences
       .getString(PrefKeys.licenseOrJobNumber.toString())
