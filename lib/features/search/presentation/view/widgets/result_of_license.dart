@@ -45,7 +45,7 @@ Widget resultOfLicense({
       ),
       SizedBox(height: ManagerHeight.h28),
       resultOfTest(
-        testType: ManagerStrings.licenseTestResults,
+        testType: ManagerStrings.theoreticalTestResult,
         isSuccessful: statusLicenseTest,
       ),
       resultOfTest(
