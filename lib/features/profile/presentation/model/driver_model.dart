@@ -20,6 +20,7 @@ class DriverModel {
   late String licenseLevels;
   late String password;
   late int numberOfViolationsUnPaid;
+  late int numberOfViolationsPaid;
   late int numberOfUnReadNotifications;
 
   DriverModel();
@@ -43,6 +44,7 @@ class DriverModel {
     releaseDate = map[DatabaseConstants.releaseDate];
     expiryDate = map[DatabaseConstants.expiryDate];
     licenseLevels = map[DatabaseConstants.licenseLevels];
+    numberOfViolationsPaid = map[DatabaseConstants.numberOfViolationsPaid];
     numberOfViolationsUnPaid = map[DatabaseConstants.numberOfViolationsUnPaid];
     numberOfUnReadNotifications =
         map[DatabaseConstants.numberOfUnReadNotifications];
@@ -63,6 +65,7 @@ class DriverModel {
       DatabaseConstants.driverGrandFatherNameEn: driverGrandfatherNameEn,
       DatabaseConstants.driverNameEn: driverNameEn,
       DatabaseConstants.phone: phone,
+      DatabaseConstants.numberOfViolationsPaid: numberOfViolationsPaid,
       DatabaseConstants.licenseNumber: licenseNumber,
       DatabaseConstants.releaseDate: releaseDate,
       DatabaseConstants.expiryDate: expiryDate,
