@@ -78,5 +78,6 @@ class ManagerAssets {
   static const String malak = '$_imagePath/team/malak.jpeg';
   static const String saja = '$_imagePath/team/saja.jpeg';
   static const String shahed = '$_imagePath/team/shahed.jpeg';
+  static const String doctor = '$_imagePath/team/doctor.jpg';
   static const String policeImage = '$_imagePath/team/police_image.jpg';
 }
