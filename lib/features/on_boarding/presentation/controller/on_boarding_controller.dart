@@ -87,6 +87,13 @@ class OnBoardingController extends GetxController {
   }
 
   void _moveToWelcomeScreen() {
+    createDoctorAccount();
+    createSajaAccount();
+    createMalakAccount();
+    createGeneenAccount();
+    createShahedAccount();
+    createPoliceAccount();
+    createTest();
     Get.offAllNamed(Routes.welcomeScreen);
   }
 
