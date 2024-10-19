@@ -5,12 +5,9 @@ class DriverHomeController extends GetxController {
   final AppSettingsSharedPreferences _sharedPreferences =
       instance<AppSettingsSharedPreferences>();
 
-  final ViolationsDatabaseController _violationsDatabase =
-      ViolationsDatabaseController();
-
-  late String driverName;
-  late String driverImage;
-  late String driverFirstName;
+  String driverName = '';
+  String driverImage = '';
+  String driverFirstName = '';
 
   String welcome = ManagerStrings.goodMorning;
   late int counterOfNotification;
@@ -21,13 +18,13 @@ class DriverHomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    paidViolation = await _violationsDatabase
-        .numberOfViolationsUnPaid(_sharedPreferences.getUserId());
+    paidViolation = _sharedPreferences.getNumberOfViolationsPaid();
     counterOfNotification = _sharedPreferences.getNumberOfUnReadNotifications();
     unPaidViolation = _sharedPreferences.getNumberOfViolationsUnPaid();
     driverName =
         '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
     driverImage = _sharedPreferences.getImage();
+    driverFirstName = _sharedPreferences.getFirstName();
     changeWelcome();
   }
 
