@@ -74,9 +74,11 @@ class LoginController extends GetxController
     if (_checkDataDriver()) {
       bool login =
           await _driverDatabase.login(licenseNumber.text, passwordDriver.text);
+      debugPrint('Login :$login');
       if (login) {
         DriverModel? driverData =
             await _driverDatabase.getDriver(licenseNumber.text);
+        debugPrint('Driver :${driverData?.driverFirstNameAr}');
         _sharedPreferences.setDriverData(driverData!);
         _sharedPreferences.setRememberMeDriver(rememberMeDriver);
         Get.offAllNamed(Routes.driverHomeScreen);
