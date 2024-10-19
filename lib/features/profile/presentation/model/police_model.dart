@@ -29,7 +29,6 @@ class PoliceModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      DatabaseConstants.policeId: policeId,
       DatabaseConstants.policeFirstNameAr: policeFirstNameAr,
       DatabaseConstants.policeLastNameAr: policeLastNameAr,
       DatabaseConstants.policeFatherNameAr: policeFatherNameAr,
