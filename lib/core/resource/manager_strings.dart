@@ -83,6 +83,7 @@ class ManagerStrings {
   static String unpaidViolations = 'unpaid_violations'.tr;
   static String paidViolations = 'paid_violations'.tr;
   static String unpaid = 'unpaid'.tr;
+  static String unPaid = 'unPaid'.tr;
   static String status = 'status'.tr;
   static String documentingTheViolation = 'documenting_the_violation'.tr;
   static String doYouWantToPay = 'do_you_want_to_pay'.tr;
