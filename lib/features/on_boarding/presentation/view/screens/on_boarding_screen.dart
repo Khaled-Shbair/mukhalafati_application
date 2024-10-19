@@ -28,21 +28,18 @@ class OnBoardingScreen extends StatelessWidget {
               ),
               body: Column(
                 children: [
-                  SizedBox(
-                    height: ManagerHeight.h630,
-                    child: Expanded(
-                      child: PageView(
-                        controller: controller.pageController,
-                        onPageChanged: (value) {
-                          controller.changeCurrentPage(value);
-                        },
-                        children: [
-                          ...List.generate(
-                            controller.pageViewItems.length,
-                            (index) => controller.pageViewItems[index],
-                          ),
-                        ],
-                      ),
+                  Expanded(
+                    child: PageView(
+                      controller: controller.pageController,
+                      onPageChanged: (value) {
+                        controller.changeCurrentPage(value);
+                      },
+                      children: [
+                        ...List.generate(
+                          controller.pageViewItems.length,
+                          (index) => controller.pageViewItems[index],
+                        ),
+                      ],
                     ),
                   ),
                   SmoothPageIndicator(
@@ -84,6 +81,7 @@ class OnBoardingScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(height: ManagerHeight.h42),
                 ],
               ),
             ),
