@@ -12,7 +12,7 @@ class DrivingLicenseCardScreen extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           endDrawer: driverDrawer(
             driverName: controller.driverName,
-            driverImage: controller.driverImage,
+            driverImage: controller.imageDriver,
             isDrivingLicenseCardScreen: true,
           ),
           appBar: AppBar(
