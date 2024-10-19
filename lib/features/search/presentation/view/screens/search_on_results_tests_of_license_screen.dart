@@ -85,7 +85,7 @@ class SearchOnResultsTestsOfLicenseScreen extends StatelessWidget {
                   myLoading(),
                 } else if (controller.result == true) ...{
                   resultOfLicense(
-                    resultName: '${ManagerStrings.name}:  ',
+                    resultName: controller.resultName,
                     statusLicenseTest: controller.licenseTestResults,
                     statusPracticalTest: controller.practicalTestResult,
                   ),
