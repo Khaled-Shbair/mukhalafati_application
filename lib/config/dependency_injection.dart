@@ -1,5 +1,4 @@
 import 'all_imports.dart';
-import 'data_of_team.dart';
 
 final instance = GetIt.instance;
 
@@ -7,11 +6,6 @@ initModule() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _initDatabase();
   await _initSharedPreferences();
-  createSajaAccount();
-  createMalakAccount();
-  createGeneenAccount();
-  createShahedAccount();
-  createPoliceAccount();
 }
 
 Future<void> _initSharedPreferences() async {
@@ -25,16 +19,31 @@ Future<void> _initSharedPreferences() async {
 
 Future<void> _initDatabase() async {
   await DatabaseProvider.initDatabase();
-  instance.registerLazySingleton<ComplaintDatabaseController>(
-      () => ComplaintDatabaseController());
-  instance.registerLazySingleton<DriverDatabaseController>(
-      () => DriverDatabaseController());
-  instance.registerLazySingleton<TestResultDatabaseController>(
-      () => TestResultDatabaseController());
-  instance.registerLazySingleton<ViolationsDatabaseController>(
-      () => ViolationsDatabaseController());
-  instance.registerLazySingleton<ViolationsDatabaseController>(
-      () => ViolationsDatabaseController());
+  if (!instance.isRegistered<ComplaintDatabaseController>()) {
+    instance.registerLazySingleton<ComplaintDatabaseController>(
+        () => ComplaintDatabaseController());
+  }
+  if (!instance.isRegistered<DriverDatabaseController>()) {
+    instance.registerLazySingleton<DriverDatabaseController>(
+        () => DriverDatabaseController());
+  }
+  if (!instance.isRegistered<PoliceDatabaseController>()) {
+    instance.registerLazySingleton<PoliceDatabaseController>(
+        () => PoliceDatabaseController());
+  }
+  if (!instance.isRegistered<TestResultDatabaseController>()) {
+    instance.registerLazySingleton<TestResultDatabaseController>(
+        () => TestResultDatabaseController());
+  }
+  if (!instance.isRegistered<ViolationsDatabaseController>()) {
+    instance.registerLazySingleton<ViolationsDatabaseController>(
+        () => ViolationsDatabaseController());
+  }
+  if (!instance.isRegistered<NotificationsDatabaseController>()) {
+    instance.registerLazySingleton<NotificationsDatabaseController>(
+        () => NotificationsDatabaseController());
+  }
+
   // final ComplaintDatabaseController _complaintDatabase = instance<ComplaintDatabaseController>();
 }
 
