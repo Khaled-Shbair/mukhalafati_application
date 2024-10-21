@@ -35,6 +35,17 @@ class PoliceDatabaseController extends DatabaseOperations {
     );
     return countOfUpdatedRows == 1;
   }
+  Future<PoliceModel?> police(int id) async {
+    List<Map<String, dynamic>> rows = await _database.query(
+      DatabaseConstants.policeTableName,
+      where: '${DatabaseConstants.policeId} = ?',
+      whereArgs: [id],
+    );
+    if (rows.isNotEmpty) {
+      return PoliceModel.fromMap(rows.first);
+    }
+    return null;
+  }
 
   @override
   Future<PoliceModel?> show(String jobNumber) async {
