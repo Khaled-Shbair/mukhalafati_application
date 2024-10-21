@@ -5,6 +5,7 @@ void createDoctorAccount() async {
       instance<DriverDatabaseController>();
   DriverModel doctor = DriverModel();
   doctor.driverIdNumber = '968892830';
+  doctor.driverVerificationCode = 2222;
   doctor.password = '0000';
   doctor.driverImage = ManagerAssets.doctor;
   doctor.licenseNumber = '987654321';
@@ -51,6 +52,7 @@ void createSajaAccount() async {
   saja.numberOfUnReadNotifications = 2;
   saja.numberOfViolationsUnPaid = 1;
   saja.numberOfViolationsPaid = 1;
+  saja.driverVerificationCode = 2222;
   await driverDatabase.create(saja);
 }
 
@@ -80,6 +82,7 @@ void createMalakAccount() async {
   malak.numberOfUnReadNotifications = 2;
   malak.numberOfViolationsPaid = 1;
   malak.numberOfViolationsUnPaid = 1;
+  malak.driverVerificationCode = 2222;
   await driverDatabase.create(malak);
 }
 
@@ -109,6 +112,7 @@ void createGeneenAccount() async {
   geneen.numberOfUnReadNotifications = 2;
   geneen.numberOfViolationsPaid = 1;
   geneen.numberOfViolationsUnPaid = 1;
+  geneen.driverVerificationCode = 2222;
   await driverDatabase.create(geneen);
 }
 
@@ -116,6 +120,7 @@ void createShahedAccount() async {
   DriverDatabaseController driverDatabase =
       instance<DriverDatabaseController>();
   DriverModel shahed = DriverModel();
+  shahed.driverVerificationCode = 2222;
   shahed.numberOfViolationsUnPaid = 10;
   shahed.numberOfViolationsPaid = 7;
   shahed.driverIdNumber = '407811739';
@@ -145,6 +150,7 @@ void createPoliceAccount() async {
   PoliceDatabaseController policeDatabase =
       instance<PoliceDatabaseController>();
   PoliceModel police = PoliceModel();
+  police.policeVerificationCode = 2222;
   police.policeJobNumber = '12345678';
   police.policeImage = ManagerAssets.policeImage;
   police.policeMilitaryRank = 'رائد';
@@ -170,7 +176,71 @@ void createTest() async {
   debugPrint('Test Result: $x');
 }
 
-void s() async {
+void createNotifications() async {
+  NotificationsDatabaseController notificationsDatabase =
+      instance<NotificationsDatabaseController>();
+  NotificationModel notificationS1 = NotificationModel();
+  notificationS1.driverId = 2;
+  notificationS1.notificationText =
+      'قد تم مخالفتك قبل قليل بسبب الزيادة بسرعة المركبة فوق المسموح يرجى اتباع المعلومات';
+  notificationS1.notificationTime = 'ساعتين';
+  await notificationsDatabase.create(notificationS1);
+  NotificationModel notificationS2 = NotificationModel();
+  notificationS2.driverId = 2;
+  notificationS2.notificationText = 'لقد تم مخالفتك قبل قليل بسبب الوقوف في مكان ممنوع الوقوف فيه';
+  notificationS2.notificationTime = 'ساعة';
+  await notificationsDatabase.create(notificationS2);
+  NotificationModel notificationSh1 = NotificationModel();
+  notificationSh1.driverId = 5;
+  notificationSh1.notificationText =
+      'قد تم مخالفتك قبل قليل بسبب الزيادة بسرعة المركبة فوق المسموح يرجى اتباع المعلومات';
+  notificationSh1.notificationTime = 'ساعتين';
+  await notificationsDatabase.create(notificationSh1);
+  NotificationModel notificationSh2 = NotificationModel();
+  notificationSh2.driverId = 5;
+  notificationSh2.notificationText =
+      'لقد تم مخالفتك قبل قليل بسبب الوقوف في مكان ممنوع الوقوف فيه';
+  notificationSh2.notificationTime = 'ساعة';
+  await notificationsDatabase.create(notificationSh2);
+  NotificationModel notificationD1 = NotificationModel();
+  notificationD1.driverId = 1;
+  notificationD1.notificationText =
+      'قد تم مخالفتك قبل قليل بسبب الزيادة بسرعة المركبة فوق المسموح يرجى اتباع المعلومات';
+  notificationD1.notificationTime = 'ساعتين';
+  await notificationsDatabase.create(notificationD1);
+  NotificationModel notificationD2 = NotificationModel();
+  notificationD2.driverId = 1;
+  notificationD2.notificationText =
+      'لقد تم مخالفتك قبل قليل بسبب الوقوف في مكان ممنوع الوقوف فيه';
+  notificationD2.notificationTime = 'ساعة';
+  await notificationsDatabase.create(notificationD2);
+  NotificationModel notificationM1 = NotificationModel();
+  notificationM1.driverId = 3;
+  notificationM1.notificationText =
+      'قد تم مخالفتك قبل قليل بسبب الزيادة بسرعة المركبة فوق المسموح يرجى اتباع المعلومات';
+  notificationM1.notificationTime = 'ساعتين';
+  await notificationsDatabase.create(notificationM1);
+  NotificationModel notificationM2 = NotificationModel();
+  notificationM2.driverId = 3;
+  notificationM2.notificationText =
+      'لقد تم مخالفتك قبل قليل بسبب الوقوف في مكان ممنوع الوقوف فيه';
+  notificationM2.notificationTime = 'ساعة';
+  await notificationsDatabase.create(notificationM2);
+  NotificationModel notificationG1 = NotificationModel();
+  notificationG1.driverId = 4;
+  notificationG1.notificationText =
+      'قد تم مخالفتك قبل قليل بسبب الزيادة بسرعة المركبة فوق المسموح يرجى اتباع المعلومات';
+  notificationG1.notificationTime = 'ساعتين';
+  await notificationsDatabase.create(notificationG1);
+  NotificationModel notificationG2 = NotificationModel();
+  notificationG2.driverId = 4;
+  notificationG2.notificationText =
+      'لقد تم مخالفتك قبل قليل بسبب الوقوف في مكان ممنوع الوقوف فيه';
+  notificationG2.notificationTime = 'ساعة';
+  await notificationsDatabase.create(notificationG2);
+}
+
+void createViolations() async {
   ViolationsDatabaseController violationsDatabase =
       instance<ViolationsDatabaseController>();
   ViolationModel a = ViolationModel();
