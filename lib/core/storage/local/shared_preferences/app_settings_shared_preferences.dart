@@ -27,7 +27,27 @@ class AppSettingsSharedPreferences {
 
   AppSettingsSharedPreferences(this._sharedPreferences);
 
-  Future<void> clear() => _sharedPreferences.clear();
+  Future<void> clear() async {
+    _sharedPreferences.remove(PrefKeys.phoneNumber.toString());
+    _sharedPreferences.remove(PrefKeys.image.toString());
+    _sharedPreferences.remove(PrefKeys.fullNameEn.toString());
+    _sharedPreferences.remove(PrefKeys.fullNameAr.toString());
+    _sharedPreferences.remove(PrefKeys.lastName.toString());
+    _sharedPreferences.remove(PrefKeys.firstName.toString());
+    _sharedPreferences.remove(PrefKeys.rememberMeDriver.toString());
+    _sharedPreferences.remove(PrefKeys.rememberMePolice.toString());
+    _sharedPreferences.remove(PrefKeys.userId.toString());
+
+    _sharedPreferences.remove(PrefKeys.policeMilitaryRank.toString());
+    _sharedPreferences.remove(PrefKeys.numberOfUnReadNotifications.toString());
+    _sharedPreferences.remove(PrefKeys.numberOfViolationsPaid.toString());
+    _sharedPreferences.remove(PrefKeys.numberOfViolationsUnPaid.toString());
+    _sharedPreferences.remove(PrefKeys.licenseLevelsOfLicense.toString());
+    _sharedPreferences.remove(PrefKeys.idNumber.toString());
+    _sharedPreferences.remove(PrefKeys.releaseDateLicense.toString());
+    _sharedPreferences.remove(PrefKeys.expiryDateLicense.toString());
+    _sharedPreferences.remove(PrefKeys.licenseOrJobNumber.toString());
+  }
 
   Future<void> setOnBoardingViewed() async {
     await _sharedPreferences.setBool(PrefKeys.onBoarding.toString(), true);
