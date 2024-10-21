@@ -84,11 +84,13 @@ class RouteGenerator {
         final phoneNumber = args[0] as String;
         final id = args[1] as int;
         final isDriver = args[2] as bool;
+        final verificationCode = args[3] as int;
         return MaterialPageRoute(
           builder: (_) => VerificationCodeScreen(
             phoneNumber: phoneNumber,
             id: id,
             isDriver: isDriver,
+            verificationCode: verificationCode,
           ),
         );
       case Routes.notificationScreen:
