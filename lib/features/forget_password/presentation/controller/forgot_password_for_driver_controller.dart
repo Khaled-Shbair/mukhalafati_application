@@ -32,7 +32,12 @@ class ForgotPasswordForDriverController extends GetxController with Helpers {
             '${phoneNumber.characters.characterAt(8)}${phoneNumber.characters.characterAt(9)}*****${phoneNumber.characters.characterAt(0)}${phoneNumber.characters.characterAt(1)}${phoneNumber.characters.characterAt(2)}';
         Get.toNamed(
           Routes.verificationCodeScreen,
-          arguments: [phoneNumber, driver.driverId, false],
+          arguments: [
+            phoneNumber,
+            driver.driverId,
+            true,
+            driver.driverVerificationCode,
+          ],
         );
       } else {
         showSnackBar(message: ManagerStrings.licenseNumberNotFound);
