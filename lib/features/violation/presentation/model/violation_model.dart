@@ -10,7 +10,7 @@ class ViolationModel {
   late int violationState;
   late String violationReason;
   late String violationAddress;
-  late String violationPayedBy;
+  String? violationPayedBy;
 
   ViolationModel();
 
