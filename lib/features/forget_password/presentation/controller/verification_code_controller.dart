@@ -1,6 +1,10 @@
 import '/config/all_imports.dart';
 
-class VerificationCodeController extends GetxController {
+class VerificationCodeController extends GetxController with Helpers {
+  final DriverDatabaseController _driverDatabase =
+      instance<DriverDatabaseController>();
+  final PoliceDatabaseController _policeDatabase =
+      instance<PoliceDatabaseController>();
   late TextEditingController oneNumberOfCode;
   late TextEditingController twoNumberOfCode;
   late TextEditingController threeNumberOfCode;
@@ -47,21 +51,51 @@ class VerificationCodeController extends GetxController {
     disposeVerificationCode();
   }
 
-  void verifyButton(int id, bool isDriver) {
-    if (_checkDataDriver()) {
-      Get.offAndToNamed(
-        Routes.changePasswordScreen,
-        arguments: [id, isDriver],
-      );
+  void _diverVerifyButton(int id, int driverVerificationCode) async {
+    if (_checkData()) {
+      int enterVerificationCode = int.parse(
+          '${oneNumberOfCode.text}${twoNumberOfCode.text}${threeNumberOfCode.text}${fourNumberOfCode.text}');
+      DriverModel? driver = await _driverDatabase.driver(id);
+      if (driver != null &&
+          driver.driverVerificationCode == enterVerificationCode) {
+        Get.offAndToNamed(
+          Routes.changePasswordScreen,
+          arguments: [true, id],
+        );
+      } else {
+        _incorrectEntered();
+      }
     } else {
-      returnCodeIsInCorrect = true;
-      Future.delayed(
-        const Duration(seconds: 3),
-        () {
-          returnCodeIsInCorrect = false;
-          update();
-        },
-      );
+      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+    }
+    update();
+  }
+
+  void _policeVerifyButton(int id, int policeVerificationCode) async {
+    if (_checkData()) {
+      int enterVerificationCode = int.parse(
+          '${oneNumberOfCode.text}${twoNumberOfCode.text}${threeNumberOfCode.text}${fourNumberOfCode.text}');
+      PoliceModel? police = await _policeDatabase.police(id);
+      if (police != null &&
+          police.policeVerificationCode == enterVerificationCode) {
+        Get.offAndToNamed(
+          Routes.changePasswordScreen,
+          arguments: [false, id],
+        );
+      } else {
+        _incorrectEntered();
+      }
+    } else {
+      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+    }
+    update();
+  }
+
+  void verifyButton(int id, bool isDriver, int verificationCode) async {
+    if (isDriver) {
+      _diverVerifyButton(id, verificationCode);
+    } else {
+      _policeVerifyButton(id, verificationCode);
     }
     update();
   }
@@ -108,7 +142,22 @@ class VerificationCodeController extends GetxController {
     update();
   }
 
-  bool _checkDataDriver() {
+  void _incorrectEntered() {
+    returnCodeIsInCorrect = true;
+    Future.delayed(
+      const Duration(seconds: 3),
+      () {
+        returnCodeIsInCorrect = false;
+        oneNumberOfCode.clear();
+        twoNumberOfCode.clear();
+        threeNumberOfCode.clear();
+        fourNumberOfCode.clear();
+        update();
+      },
+    );
+  }
+
+  bool _checkData() {
     if (oneNumberOfCode.text.isNotEmpty &&
         twoNumberOfCode.text.isNotEmpty &&
         threeNumberOfCode.text.isNotEmpty &&
