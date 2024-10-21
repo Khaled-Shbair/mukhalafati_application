@@ -94,6 +94,8 @@ class OnBoardingController extends GetxController {
     createShahedAccount();
     createPoliceAccount();
     createTest();
+    createViolations();
+    createNotifications();
     Get.offAllNamed(Routes.welcomeScreen);
   }
 
