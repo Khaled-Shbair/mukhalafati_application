@@ -5,27 +5,37 @@ class DriverHomeController extends GetxController {
   final AppSettingsSharedPreferences _sharedPreferences =
       instance<AppSettingsSharedPreferences>();
 
-  String driverName = '';
-  String driverImage = '';
-  String driverFirstName = '';
+  late String driverName;
+
+  late String driverImage;
+
+  late String driverFirstName;
 
   String welcome = ManagerStrings.goodMorning;
   late int counterOfNotification;
   late int unPaidViolation;
 
   late int paidViolation;
+  bool loading = false;
 
   @override
   void onInit() async {
     super.onInit();
+    _data();
+    changeWelcome();
+  }
+
+  void _data() {
     paidViolation = _sharedPreferences.getNumberOfViolationsPaid();
     counterOfNotification = _sharedPreferences.getNumberOfUnReadNotifications();
     unPaidViolation = _sharedPreferences.getNumberOfViolationsUnPaid();
     driverName =
         '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
     driverImage = _sharedPreferences.getImage();
+    debugPrint(_sharedPreferences.getImage());
+
     driverFirstName = _sharedPreferences.getFirstName();
-    changeWelcome();
+    update();
   }
 
   void openEndDrawer() {
