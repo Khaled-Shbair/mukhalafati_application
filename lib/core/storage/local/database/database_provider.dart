@@ -52,6 +52,7 @@ class DatabaseProvider {
             ${DatabaseConstants.licenseLevels} TEXT NOT NULL,
             ${DatabaseConstants.driverPassword} TEXT NOT NULL,
             ${DatabaseConstants.driverIdNumber} TEXT NOT NULL,
+            ${DatabaseConstants.driverVerificationCode} INTEGER NOT NULL,
             ${DatabaseConstants.numberOfViolationsUnPaid} INTEGER NOT NULL,
             ${DatabaseConstants.numberOfViolationsPaid} INTEGER NOT NULL,
             ${DatabaseConstants.numberOfUnReadNotifications} INTEGER NOT NULL
@@ -61,6 +62,7 @@ class DatabaseProvider {
             ${DatabaseConstants.policeId} INTEGER PRIMARY KEY AUTOINCREMENT,
             ${DatabaseConstants.policeFirstNameAr} TEXT NOT NULL,
             ${DatabaseConstants.policeLastNameAr} TEXT NOT NULL,
+            ${DatabaseConstants.policeVerificationCode} INTEGER NOT NULL,
             ${DatabaseConstants.policeFatherNameAr} TEXT NOT NULL,
             ${DatabaseConstants.policeGrandfatherNameAr} TEXT NOT NULL,
             ${DatabaseConstants.policeImage} TEXT NOT NULL,
