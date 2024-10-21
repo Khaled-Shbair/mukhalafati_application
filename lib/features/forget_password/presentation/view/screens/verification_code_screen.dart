@@ -4,12 +4,14 @@ class VerificationCodeScreen extends StatelessWidget {
   const VerificationCodeScreen({
     required this.phoneNumber,
     required this.id,
+    required this.verificationCode,
     required this.isDriver,
     super.key,
   });
 
   final String phoneNumber;
   final int id;
+  final int verificationCode;
   final bool isDriver;
 
   @override
@@ -122,7 +124,8 @@ class VerificationCodeScreen extends StatelessWidget {
               ),
               SizedBox(height: ManagerHeight.h10),
               mainButton(
-                onPressed: () => controller.verifyButton(id, isDriver),
+                onPressed: () =>
+                    controller.verifyButton(id, isDriver, verificationCode),
                 child: Text(
                   ManagerStrings.verify,
                   style: TextStyle(
