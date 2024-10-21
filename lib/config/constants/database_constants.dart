@@ -5,6 +5,7 @@ class DatabaseConstants {
   static const String driverTableName = 'driver_table';
   static const String driverId = 'driver_id';
   static const String driverIdNumber = 'driver_id_number';
+  static const String driverVerificationCode = 'driver_verification_code';
   static const String driverImage = 'driver_image';
   static const String phone = 'driver_name';
   static const String licenseNumber = 'license_number';
@@ -72,4 +73,5 @@ class DatabaseConstants {
   static const String policePassword = 'police_password';
   static const String policePhoneNumber = 'police_phone_number';
   static const String policeMilitaryRank = 'police_military_rank';
+  static const String policeVerificationCode = 'police_verification_code';
 }
