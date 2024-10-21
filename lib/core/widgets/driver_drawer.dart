@@ -109,7 +109,7 @@ Widget driverDrawer({
           if (isPayViolationsScreen) {
             Get.back();
           } else {
-            Get.offAndToNamed(Routes.listOfViolationsScreen);
+            Get.offAndToNamed(Routes.violationPaymentScreen);
             disposeDriverProfile();
             disposeLogout();
             disposeNotification();
