@@ -31,12 +31,14 @@ class ChangePasswordController extends GetxController with Helpers {
   void changePasswordButton(bool isDriver, int id) async {
     if (_checkDataDriver()) {
       if (isDriver) {
-        await _driverDatabase.changePassword(newPassword.text, id);
+        bool x = await _driverDatabase.changePassword(newPassword.text, id);
+        debugPrint('$x');
       } else {
         await _policeDatabase.changePassword(newPassword.text, id);
       }
       createdSuccessfullyDialog(
         closeButton: () {
+          disposeChangePassword();
           Get.offAndToNamed(Routes.loginScreen);
         },
         context: Get.context!,
