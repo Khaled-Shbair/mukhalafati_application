@@ -2,6 +2,7 @@ import '/config/all_imports.dart';
 
 class DriverModel {
   late int driverId;
+  late int driverVerificationCode;
   late String driverImage;
   late String driverFirstNameEn;
   late String driverFirstNameAr;
@@ -29,6 +30,7 @@ class DriverModel {
     driverId = map[DatabaseConstants.driverId];
     driverIdNumber = map[DatabaseConstants.driverIdNumber];
     password = map[DatabaseConstants.driverPassword];
+    driverVerificationCode = map[DatabaseConstants.driverVerificationCode];
     driverImage = map[DatabaseConstants.driverImage];
     driverFirstNameEn = map[DatabaseConstants.driverFirstNameEn];
     driverFirstNameAr = map[DatabaseConstants.driverFirstNameAr];
@@ -54,6 +56,7 @@ class DriverModel {
     return <String, dynamic>{
       DatabaseConstants.driverIdNumber: driverIdNumber,
       DatabaseConstants.driverImage: driverImage,
+      DatabaseConstants.driverVerificationCode: driverVerificationCode,
       DatabaseConstants.driverPassword: password,
       DatabaseConstants.driverFirstNameEn: driverFirstNameEn,
       DatabaseConstants.driverFirstNameAr: driverFirstNameAr,
