@@ -247,7 +247,7 @@ void createViolations() async {
   a.violationDate = '17/9/2024';
   a.violationTime = '10:49:30 AM';
   a.priceOfViolation = 200;
-  a.violationState = 1;
+  a.violationState = 0;
   a.violationReason = 'الوقوف في مكان ممنوع';
   a.violationAddress = 'خانيونس - البلد - شارع شبير';
   a.violationPayedBy = ManagerStrings.jawwalPay;
@@ -258,7 +258,7 @@ void createViolations() async {
   aa.violationDate = '17/9/2024';
   aa.violationTime = '2:49:30 PM';
   aa.priceOfViolation = 250;
-  aa.violationState = 0;
+  aa.violationState = 1;
   aa.violationReason = 'عدم وضع حزام الأمان';
   aa.violationAddress = 'خانيونس - دوار بني سهيلا';
   aa.driverId = 1;
@@ -269,7 +269,7 @@ void createViolations() async {
   b.violationDate = '17/9/2024';
   b.violationTime = '10:49:30 AM';
   b.priceOfViolation = 200;
-  b.violationState = 1;
+  b.violationState = 0;
   b.violationReason = 'الوقوف في مكان ممنوع';
   b.violationAddress = 'خانيونس - البلد - شارع شبير';
   b.violationPayedBy = ManagerStrings.jawwalPay;
@@ -280,7 +280,7 @@ void createViolations() async {
   bb.violationDate = '17/9/2024';
   bb.violationTime = '2:49:30 PM';
   bb.priceOfViolation = 250;
-  bb.violationState = 0;
+  bb.violationState = 1;
   bb.violationReason = 'عدم وضع حزام الأمان';
   bb.violationAddress = 'خانيونس - دوار بني سهيلا';
   bb.driverId = 2;
@@ -290,7 +290,7 @@ void createViolations() async {
   c.violationDate = '17/9/2024';
   c.violationTime = '10:49:30 AM';
   c.priceOfViolation = 200;
-  c.violationState = 1;
+  c.violationState = 0;
   c.violationReason = 'الوقوف في مكان ممنوع';
   c.violationAddress = 'خانيونس - البلد - شارع شبير';
   c.violationPayedBy = ManagerStrings.jawwalPay;
@@ -301,7 +301,7 @@ void createViolations() async {
   cc.violationDate = '17/9/2024';
   cc.violationTime = '2:49:30 PM';
   cc.priceOfViolation = 250;
-  cc.violationState = 0;
+  cc.violationState = 1;
   cc.violationReason = 'عدم وضع حزام الأمان';
   cc.violationAddress = 'خانيونس - دوار بني سهيلا';
   cc.driverId = 3;
@@ -311,7 +311,7 @@ void createViolations() async {
   d.violationDate = '17/9/2024';
   d.violationTime = '10:49:30 AM';
   d.priceOfViolation = 200;
-  d.violationState = 1;
+  d.violationState = 0;
   d.violationReason = 'الوقوف في مكان ممنوع';
   d.violationAddress = 'خانيونس - البلد - شارع شبير';
   d.violationPayedBy = ManagerStrings.jawwalPay;
@@ -322,7 +322,7 @@ void createViolations() async {
   dd.violationDate = '17/9/2024';
   dd.violationTime = '2:49:30 PM';
   dd.priceOfViolation = 250;
-  dd.violationState = 0;
+  dd.violationState = 1;
   dd.violationReason = 'عدم وضع حزام الأمان';
   dd.violationAddress = 'خانيونس - دوار بني سهيلا';
   dd.driverId = 4;
@@ -332,7 +332,7 @@ void createViolations() async {
   e.violationDate = '17/9/2024';
   e.violationTime = '10:49:30 AM';
   e.priceOfViolation = 200;
-  e.violationState = 1;
+  e.violationState = 0;
   e.violationReason = 'الوقوف في مكان ممنوع';
   e.violationAddress = 'خانيونس - البلد - شارع شبير';
   e.violationPayedBy = ManagerStrings.jawwalPay;
@@ -343,7 +343,7 @@ void createViolations() async {
   ee.violationDate = '17/9/2024';
   ee.violationTime = '2:49:30 PM';
   ee.priceOfViolation = 250;
-  ee.violationState = 0;
+  ee.violationState = 1;
   ee.violationReason = 'عدم وضع حزام الأمان';
   ee.violationAddress = 'خانيونس - دوار بني سهيلا';
   ee.driverId = 5;
