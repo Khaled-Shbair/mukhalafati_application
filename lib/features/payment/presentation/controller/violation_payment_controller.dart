@@ -1,7 +1,10 @@
 import '/config/all_imports.dart';
 
 class ViolationPaymentController extends GetxController {
+  static ViolationPaymentController get to => Get.find();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  late ExpansionTileController expansionTileController;
+
   final AppSettingsSharedPreferences _sharedPreferences =
       instance<AppSettingsSharedPreferences>();
   final ViolationsDatabaseController _violationsDatabase =
@@ -10,13 +13,18 @@ class ViolationPaymentController extends GetxController {
   late String driverImage;
   bool loading = false;
   String filter = ManagerStrings.filter;
-  List dataOfViolation = <ViolationModel>[];
+  List allViolations = <ViolationModel>[];
+  List viewViolations = <ViolationModel>[];
+  List paidViolations = <ViolationModel>[];
+  List unpaidViolations = <ViolationModel>[];
 
   @override
   void onInit() {
     driverName =
         '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
     driverImage = _sharedPreferences.getImage();
+    getDriverViolation();
+    expansionTileController = ExpansionTileController();
     super.onInit();
   }
 
@@ -29,16 +37,41 @@ class ViolationPaymentController extends GetxController {
 
   void cancelFilterButton() {
     filter = ManagerStrings.filter;
+    loading = true;
+    viewViolations = allViolations;
+    expansionTileController.collapse();
+    loading = false;
     update();
   }
 
   void unpaidButton() {
+    loading = true;
     filter = ManagerStrings.unpaid;
+    expansionTileController.collapse();
+
+    unpaidViolations = [];
+    for (var e in allViolations) {
+      if (e.violationState == 0) {
+        unpaidViolations.add(e);
+      }
+    }
+    viewViolations = unpaidViolations;
+    loading = false;
     update();
   }
 
   void paidButton() {
+    loading = true;
     filter = ManagerStrings.paid;
+    expansionTileController.collapse();
+    paidViolations = [];
+    for (var e in allViolations) {
+      if (e.violationState == 1) {
+        paidViolations.add(e);
+      }
+    }
+    viewViolations = paidViolations;
+    loading = false;
     update();
   }
 
@@ -50,6 +83,7 @@ class ViolationPaymentController extends GetxController {
     required String timeOfViolation,
     required String reasonForViolation,
     required int violationId,
+    required bool isPaid,
   }) {
     showDialog(
       context: Get.context!,
@@ -62,6 +96,7 @@ class ViolationPaymentController extends GetxController {
             price,
             violationId,
           ),
+          isPaid: isPaid,
           date: date,
           numberOfViolation: numberOfViolation,
           price: price,
@@ -78,17 +113,20 @@ class ViolationPaymentController extends GetxController {
       Routes.paymentScreen,
       arguments: [price, violationId],
     );
-    disposeViolationPayment();
   }
 
   void backButton() {
-    Get.back();
     disposeViolationPayment();
+    Get.back();
   }
 
   void getDriverViolation() async {
     loading = true;
-    dataOfViolation = await _violationsDatabase.read();
+    allViolations = [];
+    viewViolations = [];
+    allViolations =
+        await _violationsDatabase.read(_sharedPreferences.getUserId());
+    viewViolations = allViolations;
     loading = false;
     update();
   }
