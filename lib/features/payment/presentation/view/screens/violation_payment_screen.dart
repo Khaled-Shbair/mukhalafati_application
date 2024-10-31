@@ -226,7 +226,8 @@ class ViolationPaymentScreen extends StatelessWidget {
                               leading: Image.asset(
                                 ManagerAssets.filterIcon,
                                 height: ManagerHeight.h21,
-                                width: ManagerWidth.w23,
+                                width: ManagerWidth.w21,
+
                               ),
                               title: Text(
                                 controller.filter,

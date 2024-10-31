@@ -11,21 +11,21 @@ class OnBoardingScreen extends StatelessWidget {
           return Directionality(
             textDirection: TextDirection.ltr,
             child: Scaffold(
-              extendBodyBehindAppBar: true,
+              // extendBodyBehindAppBar: true,
               resizeToAvoidBottomInset: false,
-              appBar: AppBar(
-                backgroundColor: ManagerColors.transparent,
-                leading: previousButton(
-                  visible: controller.isNotFirstPage(),
-                  onPressed: () => controller.previousPage(),
-                ),
-                actions: [
-                  skipButton(
-                    visible: controller.appearSkipButton,
-                    onPressed: () => controller.skip(),
-                  ),
-                ],
-              ),
+              // appBar: AppBar(
+              //   backgroundColor: ManagerColors.transparent,
+              //   leading: previousButton(
+              //     visible: controller.isNotFirstPage(),
+              //     onPressed: () => controller.previousPage(),
+              //   ),
+              //   // actions: [
+              //   //   skipButton(
+              //   //     visible: controller.appearSkipButton,
+              //   //     onPressed: () => controller.skip(),
+              //   //   ),
+              //   // ],
+              // ),
               body: Column(
                 children: [
                   Expanded(

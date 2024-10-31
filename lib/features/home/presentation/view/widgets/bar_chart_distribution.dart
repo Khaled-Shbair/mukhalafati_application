@@ -11,6 +11,7 @@ Widget barChartDistribution({
     primaryXAxis: const CategoryAxis(
       arrangeByIndex: true,
     ),
+    legend: Legend(isVisible: true),/////
     tooltipBehavior: tooltipBehavior,
     series: <CartesianSeries>[
       ColumnSeries<BarChartData, String>(

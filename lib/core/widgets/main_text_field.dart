@@ -6,7 +6,7 @@ Widget mainTextField({
   String? hintText,
   bool obscureText = false,
   bool isPassword = false,
-  TextInputType keyboardType = TextInputType.number,
+  TextInputType keyboardType = TextInputType.datetime,
   void Function()? changeObscureText,
   Color? color,
   double? fontSizeLabelText,

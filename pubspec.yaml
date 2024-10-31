@@ -59,14 +59,17 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
   flutter_launcher_icons: ^0.14.1
+  flutter_native_splash: ^2.4.2
 
 flutter_launcher_icons:
-  image_path: "assets/images/logo.png"
-  image_path_android: "assets/images/logo.png"
-  image_path_ios: "assets/images/logo.png"
-  adaptive_icon_background: "assets/images/logo.png"
   android: true
   ios: true
+  image_path: "assets/images/launcher_logo.png"
+  image_path_android: "assets/images/launcher_logo.png"
+  image_path_ios: "assets/images/launcher_logo.png"
+  adaptive_icon_foreground: "assets/images/launcher_logo.png"
+  #  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_background: "#FF0000"
   remove_alpha_ios: true
   min_sdk_android: 21
 
