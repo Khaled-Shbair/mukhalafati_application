@@ -16,6 +16,8 @@ class ViolationsDatabaseController extends DatabaseOperations<ViolationModel> {
   Future<List<ViolationModel>> read([int? id]) async {
     List<Map<String, dynamic>> rows = await _database.query(
       DatabaseConstants.violationsTableName,
+      where: '${DatabaseConstants.driverId} = ?',
+      whereArgs: [id],
     );
     return rows.map((row) => ViolationModel.fromMap(row)).toList();
   }
@@ -45,11 +47,12 @@ class ViolationsDatabaseController extends DatabaseOperations<ViolationModel> {
     }
     return 0;
   }
+
   Future<int> numberOfViolationsPaid(int driverId) async {
     List<Map<String, dynamic>> rows = await _database.query(
       DatabaseConstants.violationsTableName,
       where:
-      '${DatabaseConstants.driverId} = ? AND ${DatabaseConstants.violationState} = ?',
+          '${DatabaseConstants.driverId} = ? AND ${DatabaseConstants.violationState} = ?',
       whereArgs: [driverId, 1],
     );
     if (rows.isNotEmpty) {
@@ -57,11 +60,11 @@ class ViolationsDatabaseController extends DatabaseOperations<ViolationModel> {
     }
     return 0;
   }
+
   Future<int> totalViolationsOfPolice(int policeId) async {
     List<Map<String, dynamic>> rows = await _database.query(
       DatabaseConstants.violationsTableName,
-      where:
-      '${DatabaseConstants.policeId} = ?',
+      where: '${DatabaseConstants.policeId} = ?',
       whereArgs: [policeId],
     );
     if (rows.isNotEmpty) {
@@ -70,12 +73,11 @@ class ViolationsDatabaseController extends DatabaseOperations<ViolationModel> {
     return 0;
   }
 
-  Future<bool> paymentViolation(
-      int payed, String payedBy, int violationId) async {
+  Future<bool> paymentViolation(String payedBy, int violationId) async {
     int countOfUpdatedRows = await _database.update(
       DatabaseConstants.violationsTableName,
       {
-        DatabaseConstants.violationState: payed,
+        DatabaseConstants.violationState: 1,
         DatabaseConstants.violationPayedBy: payedBy
       },
       where: '${DatabaseConstants.violationId} = ?',

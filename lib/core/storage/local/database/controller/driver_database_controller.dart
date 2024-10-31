@@ -26,6 +26,18 @@ class DriverDatabaseController extends DatabaseOperations<DriverModel> {
     }
   }
 
+  Future<DriverModel?> driver(int id) async {
+    List<Map<String, dynamic>> rows = await _database.query(
+      DatabaseConstants.driverTableName,
+      where: '${DatabaseConstants.driverId} = ?',
+      whereArgs: [id],
+    );
+    if (rows.isNotEmpty) {
+      return DriverModel.fromMap(rows.first);
+    }
+    return null;
+  }
+
   Future<DriverModel?> getDriver(String licenseNumber) async {
     List<Map<String, dynamic>> rows = await _database.query(
       DatabaseConstants.driverTableName,
@@ -61,8 +73,8 @@ class DriverDatabaseController extends DatabaseOperations<DriverModel> {
   }
 
   @override
-  Future<DriverModel?> show(String id) {
-    // TODO: implement show
+  Future<DriverModel?> show(String id) async {
+    // TODO: implement read
     throw UnimplementedError();
   }
 

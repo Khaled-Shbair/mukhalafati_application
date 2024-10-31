@@ -42,7 +42,7 @@ Widget boxOfNumberOfViolationDriver({
               ),
         SizedBox(height: ManagerHeight.h5),
         Text(
-          '$counter ${isPaid ? ManagerStrings.paid : ManagerStrings.unpaid}',
+          '$counter ${isPaid ? ManagerStrings.paid : ManagerStrings.unPaid}',
           style: TextStyle(
             fontFamily: ManagerFontFamily.cairo,
             fontWeight: ManagerFontWeight.bold,

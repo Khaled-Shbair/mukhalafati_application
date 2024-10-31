@@ -2,6 +2,7 @@ import '/config/all_imports.dart';
 
 class DriverModel {
   late int driverId;
+  late int driverVerificationCode;
   late String driverImage;
   late String driverFirstNameEn;
   late String driverFirstNameAr;
@@ -20,6 +21,7 @@ class DriverModel {
   late String licenseLevels;
   late String password;
   late int numberOfViolationsUnPaid;
+  late int numberOfViolationsPaid;
   late int numberOfUnReadNotifications;
 
   DriverModel();
@@ -28,6 +30,7 @@ class DriverModel {
     driverId = map[DatabaseConstants.driverId];
     driverIdNumber = map[DatabaseConstants.driverIdNumber];
     password = map[DatabaseConstants.driverPassword];
+    driverVerificationCode = map[DatabaseConstants.driverVerificationCode];
     driverImage = map[DatabaseConstants.driverImage];
     driverFirstNameEn = map[DatabaseConstants.driverFirstNameEn];
     driverFirstNameAr = map[DatabaseConstants.driverFirstNameAr];
@@ -43,6 +46,7 @@ class DriverModel {
     releaseDate = map[DatabaseConstants.releaseDate];
     expiryDate = map[DatabaseConstants.expiryDate];
     licenseLevels = map[DatabaseConstants.licenseLevels];
+    numberOfViolationsPaid = map[DatabaseConstants.numberOfViolationsPaid];
     numberOfViolationsUnPaid = map[DatabaseConstants.numberOfViolationsUnPaid];
     numberOfUnReadNotifications =
         map[DatabaseConstants.numberOfUnReadNotifications];
@@ -52,6 +56,7 @@ class DriverModel {
     return <String, dynamic>{
       DatabaseConstants.driverIdNumber: driverIdNumber,
       DatabaseConstants.driverImage: driverImage,
+      DatabaseConstants.driverVerificationCode: driverVerificationCode,
       DatabaseConstants.driverPassword: password,
       DatabaseConstants.driverFirstNameEn: driverFirstNameEn,
       DatabaseConstants.driverFirstNameAr: driverFirstNameAr,
@@ -63,6 +68,7 @@ class DriverModel {
       DatabaseConstants.driverGrandFatherNameEn: driverGrandfatherNameEn,
       DatabaseConstants.driverNameEn: driverNameEn,
       DatabaseConstants.phone: phone,
+      DatabaseConstants.numberOfViolationsPaid: numberOfViolationsPaid,
       DatabaseConstants.licenseNumber: licenseNumber,
       DatabaseConstants.releaseDate: releaseDate,
       DatabaseConstants.expiryDate: expiryDate,

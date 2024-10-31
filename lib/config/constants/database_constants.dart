@@ -5,6 +5,7 @@ class DatabaseConstants {
   static const String driverTableName = 'driver_table';
   static const String driverId = 'driver_id';
   static const String driverIdNumber = 'driver_id_number';
+  static const String driverVerificationCode = 'driver_verification_code';
   static const String driverImage = 'driver_image';
   static const String phone = 'driver_name';
   static const String licenseNumber = 'license_number';
@@ -22,6 +23,7 @@ class DatabaseConstants {
   static const String driverNameEn = 'driver_name_en';
   static const String driverPassword = 'driver_password';
   static const String numberOfViolationsUnPaid = 'number_of_violations_un_paid';
+  static const String numberOfViolationsPaid = 'number_of_violations_paid';
   static const String numberOfUnReadNotifications =
       'number_of_un_read_notifications';
 
@@ -32,7 +34,7 @@ class DatabaseConstants {
   static const String dateOfIncidentOrProblem = 'date_of_incident_or_problem';
   static const String addressOfComplaint = 'address_of_complaint';
   static const String detailOfComplaint = 'detail_of_complaint';
-  static const String stateOfComplaint = 'detail_of_complaint';
+  static const String stateOfComplaint = 'state_of_complaint';
 
   //test result table
   static const String testResultTableName = 'test_result_table_name';
@@ -71,4 +73,5 @@ class DatabaseConstants {
   static const String policePassword = 'police_password';
   static const String policePhoneNumber = 'police_phone_number';
   static const String policeMilitaryRank = 'police_military_rank';
+  static const String policeVerificationCode = 'police_verification_code';
 }

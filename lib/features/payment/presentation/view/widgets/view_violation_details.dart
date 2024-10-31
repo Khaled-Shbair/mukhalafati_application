@@ -4,6 +4,7 @@ Widget viewViolationDetails({
   required Function() payNowButton,
   required Function() closeButton,
   required String date,
+  required bool isPaid,
   required String timeOfViolation,
   required String numberOfViolation,
   required String placeOfViolation,
@@ -111,18 +112,21 @@ Widget viewViolationDetails({
                 ),
               ),
               SizedBox(width: ManagerWidth.w10),
-              Expanded(
-                flex: 2,
-                child: mainButton(
-                  onPressed: payNowButton,
-                  minWidth: ManagerWidth.w169,
-                  child: Text(
-                    ManagerStrings.payNow,
-                    style: TextStyle(
-                      color: ManagerColors.white,
-                      fontFamily: ManagerFontFamily.cairo,
-                      fontWeight: ManagerFontWeight.bold,
-                      fontSize: ManagerFontsSizes.f15,
+              Visibility(
+                visible: isPaid == false,
+                child: Expanded(
+                  flex: 2,
+                  child: mainButton(
+                    onPressed: payNowButton,
+                    minWidth: ManagerWidth.w169,
+                    child: Text(
+                      ManagerStrings.payNow,
+                      style: TextStyle(
+                        color: ManagerColors.white,
+                        fontFamily: ManagerFontFamily.cairo,
+                        fontWeight: ManagerFontWeight.bold,
+                        fontSize: ManagerFontsSizes.f15,
+                      ),
                     ),
                   ),
                 ),

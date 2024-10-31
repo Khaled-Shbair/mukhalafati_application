@@ -23,7 +23,7 @@ class PaymentController extends GetxController with Helpers {
   late TextEditingController securityCode;
   late TextEditingController expiryDateCard;
 
-  late String paymentBy;
+  String paymentBy = ManagerStrings.visaCard;
 
   int currentPage = 0;
 
@@ -88,14 +88,13 @@ class PaymentController extends GetxController with Helpers {
   }
 
   void backButton() {
-    Get.back();
     disposePayment();
+    Get.back();
   }
 
   void paymentSelectionButton() {
     if (isPalPay == true || isVisaCard == true || isJawwalPay == true) {
       loading = true;
-      paymentBy = ManagerStrings.palPay;
       pageController.nextPage(
         duration: const Duration(milliseconds: 10),
         curve: Curves.easeIn,
@@ -121,7 +120,12 @@ class PaymentController extends GetxController with Helpers {
 
   void paymentConfirmationButton(int violationId) async {
     bool isSuccessful =
-        await _violationsDatabase.paymentViolation(1, paymentBy, violationId);
+        await _violationsDatabase.paymentViolation(paymentBy, violationId);
+    debugPrint(isSuccessful.toString());
+    ViolationModel? s = await _violationsDatabase.show(violationId.toString());
+    debugPrint(
+        '${s!.violationPayedBy} ${s.violationState} ${s.priceOfViolation}');
+
     showDialog(
       context: Get.context!,
       barrierColor: ManagerColors.white,
@@ -142,7 +146,10 @@ class PaymentController extends GetxController with Helpers {
   }
 
   void cancelButton() {
-    Get.offAndToNamed(Routes.violationPaymentScreen);
+    ViolationPaymentController.to.getDriverViolation();
+    Get.back();
+    Get.back();
+    Get.back();
     disposePayment();
   }
 

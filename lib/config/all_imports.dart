@@ -16,6 +16,8 @@ export '/routes/routes.dart';
 export '/routes/route_generator.dart';
 
 //config file
+export '/config/data_of_team.dart';
+
 export '/config/helper.dart';
 export '/config/all_imports.dart';
 export '/config/dependency_injection.dart';

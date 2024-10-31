@@ -46,13 +46,15 @@ class DatabaseProvider {
             ${DatabaseConstants.driverGrandFatherNameEn} TEXT NOT NULL,
             ${DatabaseConstants.driverNameEn} TEXT NOT NULL,
             ${DatabaseConstants.phone} TEXT NOT NULL,
-            ${DatabaseConstants.licenseNumber} INTEGER NOT NULL,
+            ${DatabaseConstants.licenseNumber} TEXT NOT NULL,
             ${DatabaseConstants.releaseDate} TEXT NOT NULL,
             ${DatabaseConstants.expiryDate} TEXT NOT NULL,
             ${DatabaseConstants.licenseLevels} TEXT NOT NULL,
             ${DatabaseConstants.driverPassword} TEXT NOT NULL,
             ${DatabaseConstants.driverIdNumber} TEXT NOT NULL,
+            ${DatabaseConstants.driverVerificationCode} INTEGER NOT NULL,
             ${DatabaseConstants.numberOfViolationsUnPaid} INTEGER NOT NULL,
+            ${DatabaseConstants.numberOfViolationsPaid} INTEGER NOT NULL,
             ${DatabaseConstants.numberOfUnReadNotifications} INTEGER NOT NULL
         )''');
         await db.execute('''
@@ -60,6 +62,7 @@ class DatabaseProvider {
             ${DatabaseConstants.policeId} INTEGER PRIMARY KEY AUTOINCREMENT,
             ${DatabaseConstants.policeFirstNameAr} TEXT NOT NULL,
             ${DatabaseConstants.policeLastNameAr} TEXT NOT NULL,
+            ${DatabaseConstants.policeVerificationCode} INTEGER NOT NULL,
             ${DatabaseConstants.policeFatherNameAr} TEXT NOT NULL,
             ${DatabaseConstants.policeGrandfatherNameAr} TEXT NOT NULL,
             ${DatabaseConstants.policeImage} TEXT NOT NULL,
@@ -76,7 +79,8 @@ class DatabaseProvider {
             ${DatabaseConstants.detailOfComplaint} TEXT NOT NULL,
             ${DatabaseConstants.dateOfIncidentOrProblem} TEXT NOT NULL,
             ${DatabaseConstants.stateOfComplaint} INTEGER NOT NULL,
-            FOREIGN KEY (${DatabaseConstants.complaintId}) REFERENCES ${DatabaseConstants.driverTableName} (${DatabaseConstants.driverId})
+            ${DatabaseConstants.driverId} INTEGER NOT NULL,
+            FOREIGN KEY (${DatabaseConstants.driverId}) REFERENCES ${DatabaseConstants.driverTableName} (${DatabaseConstants.driverId})
         )''');
 
         await db.execute('''
@@ -98,8 +102,10 @@ class DatabaseProvider {
             ${DatabaseConstants.violationReason} TEXT NOT NULL,
             ${DatabaseConstants.violationAddress} TEXT NOT NULL,
             ${DatabaseConstants.violationPayedBy} TEXT,
-            FOREIGN KEY (${DatabaseConstants.violationId}) REFERENCES ${DatabaseConstants.policeTableName} (${DatabaseConstants.policeId}),
-            FOREIGN KEY (${DatabaseConstants.violationId}) REFERENCES ${DatabaseConstants.driverTableName} (${DatabaseConstants.driverId})
+            ${DatabaseConstants.driverId} INTEGER NOT NULL,
+            ${DatabaseConstants.policeId} INTEGER NOT NULL,
+            FOREIGN KEY (${DatabaseConstants.driverId}) REFERENCES ${DatabaseConstants.driverTableName} (${DatabaseConstants.driverId}),
+            FOREIGN KEY (${DatabaseConstants.policeId}) REFERENCES ${DatabaseConstants.policeTableName} (${DatabaseConstants.policeId})
         )''');
 
         await db.execute('''
@@ -107,7 +113,8 @@ class DatabaseProvider {
             ${DatabaseConstants.notificationId} INTEGER PRIMARY KEY AUTOINCREMENT,
             ${DatabaseConstants.notificationText} TEXT NOT NULL,
             ${DatabaseConstants.notificationTime} TEXT NOT NULL,
-            FOREIGN KEY (${DatabaseConstants.notificationId}) REFERENCES ${DatabaseConstants.driverTableName} (${DatabaseConstants.driverId})
+            ${DatabaseConstants.driverId} INTEGER NOT NULL,
+            FOREIGN KEY (${DatabaseConstants.driverId}) REFERENCES ${DatabaseConstants.driverTableName} (${DatabaseConstants.driverId})
         )''');
       },
       onUpgrade: (db, oldVersion, newVersion) {},

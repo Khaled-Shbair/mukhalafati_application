@@ -38,7 +38,6 @@ class NotificationsDatabaseController
     return rows.map((row) => NotificationModel.fromMap(row)).toList();
   }
 
-  @override
   Future<int> numberOfNotifications() async {
     List<Map<String, dynamic>> rows = await _database.query(
       DatabaseConstants.notificationsTableName,

@@ -11,12 +11,14 @@ class PoliceModel {
   late String policeMilitaryRank;
   late String policePhoneNumber;
   late String policeJobNumber;
+  late int policeVerificationCode;
 
   PoliceModel();
 
   PoliceModel.fromMap(Map<String, dynamic> map) {
     policeId = map[DatabaseConstants.policeId];
     policeFirstNameAr = map[DatabaseConstants.policeFirstNameAr];
+    policeVerificationCode = map[DatabaseConstants.policeVerificationCode];
     policeLastNameAr = map[DatabaseConstants.policeLastNameAr];
     policeFatherNameAr = map[DatabaseConstants.policeFatherNameAr];
     policeGrandfatherNameAr = map[DatabaseConstants.policeGrandfatherNameAr];
@@ -29,10 +31,10 @@ class PoliceModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      DatabaseConstants.policeId: policeId,
       DatabaseConstants.policeFirstNameAr: policeFirstNameAr,
       DatabaseConstants.policeLastNameAr: policeLastNameAr,
       DatabaseConstants.policeFatherNameAr: policeFatherNameAr,
+      DatabaseConstants.policeVerificationCode: policeVerificationCode,
       DatabaseConstants.policeGrandfatherNameAr: policeGrandfatherNameAr,
       DatabaseConstants.policeImage: policeImage,
       DatabaseConstants.policePassword: policePassword,

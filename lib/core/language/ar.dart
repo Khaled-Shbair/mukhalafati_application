@@ -77,6 +77,7 @@ const Map<String, String> ar = {
   'documenting_the_violation': 'توثيق المخالفة',
   'status': 'الحالة',
   'unpaid': 'غير مدفوع',
+  'unPaid': 'غير مدفوعة',
   'title_head_violation':
       'دولة فلسطين\n وزارة الداخلــيــة\nالــإدارة العـــامة لشـــرطــة المــــرور',
   'vehicle_drivers': 'سائقي المركبات',

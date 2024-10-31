@@ -49,7 +49,10 @@ class DriverProfileController extends GetxController {
   void updateDataButton() {
     if (_checkDataDriver()) {
       createdSuccessfullyDialog(
-        closeButton: () => Get.offAllNamed(Routes.driverHomeScreen),
+        closeButton: () {
+          disposeDriverProfile();
+          Get.offAllNamed(Routes.driverHomeScreen);
+        },
         context: Get.context!,
         text: ManagerStrings.yourUpdateRequestHasBeenSubmittedSuccessfully,
         startPaddingText: ManagerWidth.w28,

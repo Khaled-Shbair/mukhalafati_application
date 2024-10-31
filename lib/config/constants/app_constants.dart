@@ -6,6 +6,9 @@ class AppConstants {
   static const double leadingWidthAppBarOnBoardingScreen = 80;
   static const double heightOfSubTitleWelcomeScreen = 1.8;
   static const int maxLinesOfTextOfComplaint = 13;
+  static const int maxLengthOfExpiryDateCard = 7;
+  static const int maxLengthOfSecurityCode = 4;
+  static const int maxLengthOfCardNumber = 16;
   static const String exclamationMark = '!';
   static const double expansionFactorOfSmoothPageIndicatorInOnBoardingScreen =
       2;
