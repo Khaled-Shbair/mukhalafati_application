@@ -31,21 +31,16 @@ class OnBoardingController extends GetxController {
     pageController = PageController();
   }
 
+  bool _isLastPage() => currentPage == pageViewItems.length - 1;
+
+  bool isNotFirstPage() => currentPage != 0;
+
   void _changeStateOfSkipButton() {
     if (_isLastPage()) {
       appearSkipButton = false;
     } else {
       appearSkipButton = true;
     }
-  }
-
-  void skip() {
-    pageController.animateToPage(
-      2,
-      duration: const Duration(seconds: 1),
-      curve: Curves.easeInCubic,
-    );
-    update();
   }
 
   void changeCurrentPage(int page) {
@@ -78,14 +73,6 @@ class OnBoardingController extends GetxController {
     update();
   }
 
-  void previousPage() {
-    pageController.previousPage(
-      duration: const Duration(seconds: 1),
-      curve: Curves.easeInCubic,
-    );
-    update();
-  }
-
   void _moveToWelcomeScreen() {
     createDoctorAccount();
     createSajaAccount();
@@ -99,11 +86,20 @@ class OnBoardingController extends GetxController {
     Get.offAllNamed(Routes.welcomeScreen);
   }
 
-  bool _isLastPage() {
-    return currentPage == pageViewItems.length - 1;
-  }
+// void skip() {
+//   pageController.animateToPage(
+//     2,
+//     duration: const Duration(seconds: 1),
+//     curve: Curves.easeInCubic,
+//   );
+//   update();
+// }
 
-  bool isNotFirstPage() {
-    return currentPage != 0;
-  }
+// void previousPage() {
+//   pageController.previousPage(
+//     duration: const Duration(seconds: 1),
+//     curve: Curves.easeInCubic,
+//   );
+//   update();
+// }
 }

@@ -188,7 +188,7 @@ class PaymentScreen extends StatelessWidget {
                           paymentBy: controller.paymentBy,
                           price: priceOfViolation,
                           cardHolderName: controller.cardHolderName,
-                          cardNumber: controller.cardHolderName,
+                          cardNumber: controller.cardNumber,
                           expiryDateCard: controller.expiryDateCard,
                           securityCode: controller.securityCode,
                         ),
