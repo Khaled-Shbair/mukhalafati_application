@@ -63,6 +63,7 @@ class OnBoardingController extends GetxController {
   void nextPage() {
     if (_isLastPage()) {
       _moveToWelcomeScreen();
+      _appSettingsSharedPreferences.setLanguage('ar');
       _appSettingsSharedPreferences.setOnBoardingViewed();
     } else {
       pageController.nextPage(
