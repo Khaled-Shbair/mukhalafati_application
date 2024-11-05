@@ -1,5 +1,7 @@
 const Map<String, String> ar = {
   'noRouteFound': 'الصفحة غير متوفرة',
+  'bad_request': 'عذراً!\n هناك خطا ما حصل\n يرجى المحاولة مرة اخرى',
+  'no_internet_connection': 'لا يوجد اتصال بالإنترنت',
   'skip': 'تخطي',
   'police_man': 'شرطي المرور',
   'sub_title_on_boarding_one':
@@ -195,6 +197,8 @@ const Map<String, String> ar = {
   'note_of_numbers_months_of_year':
       'يرجى ملاحظة أن الأرقام تمثل الأشهر من السنة، حيث 1 = يناير، 2 = فبراير، وهكذا.',
   'please_enter_the_required_data': 'يرجي ادخال البيانات المطلوبة',
+  'Please_enter_your_license_number_and_password': 'يرجي ادخال رقم الرخصة وكلمة المرور',
+  'Please_enter_your_job_number_and_password': 'يرجي ادخال رقم الوظيفي وكلمة المرور',
   'password_does_not_match': 'كلمة السر غير متطابقة',
   'address': 'العنوان',
   'date_of_incident_or_problem': 'تاريخ الحادث أو المشكلة',
