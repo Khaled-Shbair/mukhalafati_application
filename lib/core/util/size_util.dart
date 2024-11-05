@@ -1,6 +1,6 @@
 import '/config/all_imports.dart';
 
-class SizeUitl {
+class SizeUtil {
   static double setWidth(double width) {
     return width.w;
   }
