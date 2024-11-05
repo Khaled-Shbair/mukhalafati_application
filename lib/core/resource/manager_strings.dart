@@ -2,6 +2,8 @@ import '/config/all_imports.dart';
 
 class ManagerStrings {
   static String noRouteFound = 'noRouteFound'.tr;
+  static String badRequest = 'bad_request'.tr;
+  static String noInternetConnection = 'no_internet_connection'.tr;
   static String skip = 'skip'.tr;
   static String policeMan = 'police_man'.tr;
   static String subTitleOnBoardingOne = 'sub_title_on_boarding_one'.tr;
@@ -11,7 +13,8 @@ class ManagerStrings {
   static String violations = 'violations'.tr;
   static String subTitleOnBoardingThree = 'sub_title_on_boarding_three'.tr;
   static String welcome = 'welcome'.tr;
-  static String pleaseEnterPaymentCardDetails = 'please_enter_payment_card_details'.tr;
+  static String pleaseEnterPaymentCardDetails =
+      'please_enter_payment_card_details'.tr;
   static String address = 'address'.tr;
   static String pleaseSelectionPaymentWay = 'please_selection_payment_way'.tr;
   static String dateOfIncidentOrProblem = 'date_of_incident_or_problem'.tr;
@@ -200,10 +203,10 @@ class ManagerStrings {
   static String noteOfNumbersMonthsOfYear = 'note_of_numbers_months_of_year'.tr;
   static String youCanViewAllYourPaidAndUnpaidViolations =
       'you_can_view_all_your_paid_and_unpaid_violations'.tr;
-  static String pleaseEnterTheRequiredData =
-      'please_enter_the_required_data'.tr;
-  static String licenseNumberNotFound =
-      'license_number_not_found'.tr;
+  static String pleaseEnterTheRequiredData = 'please_enter_the_required_data'.tr;
+  static String pleaseEnterYourLicenseNumberAndPassword = 'Please_enter_your_license_number_and_password'.tr;
+  static String pleaseEnterYourJobNumberAndPassword = 'Please_enter_your_job_number_and_password'.tr;
+  static String licenseNumberNotFound = 'license_number_not_found'.tr;
   static String notifications = 'notifications'.tr;
   static String unReadMessages = 'un_read_messages'.tr;
   static String since = 'since'.tr;
@@ -213,8 +216,11 @@ class ManagerStrings {
       'notification_successfully_deleted'.tr;
   static String no = 'no'.tr;
   static String yes = 'yes'.tr;
-  static String notificationsSuccessfullyDeleted = 'notifications_successfully_deleted'.tr;
-  static String doYouWantToDeleteAllNotifications = 'do_you_want_to_delete_all_notifications'.tr;
+  static String notificationsSuccessfullyDeleted =
+      'notifications_successfully_deleted'.tr;
+  static String doYouWantToDeleteAllNotifications =
+      'do_you_want_to_delete_all_notifications'.tr;
+
 ///////////////////////////////////////////////////////////////////////////////
   static const String jawwalPay = 'Jawwal pay';
   static const String palPay = 'PalPay';
