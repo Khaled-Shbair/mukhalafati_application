@@ -2,6 +2,7 @@ import '/config/all_imports.dart';
 
 enum PrefKeys {
   onBoarding,
+  language,
   userId,
   rememberMeDriver,
   rememberMePolice,
@@ -37,7 +38,6 @@ class AppSettingsSharedPreferences {
     _sharedPreferences.remove(PrefKeys.rememberMeDriver.toString());
     _sharedPreferences.remove(PrefKeys.rememberMePolice.toString());
     _sharedPreferences.remove(PrefKeys.userId.toString());
-
     _sharedPreferences.remove(PrefKeys.policeMilitaryRank.toString());
     _sharedPreferences.remove(PrefKeys.numberOfUnReadNotifications.toString());
     _sharedPreferences.remove(PrefKeys.numberOfViolationsPaid.toString());
@@ -53,6 +53,10 @@ class AppSettingsSharedPreferences {
     await _sharedPreferences.setBool(PrefKeys.onBoarding.toString(), true);
   }
 
+  Future<void> setLanguage(String language) async {
+    await _sharedPreferences.setString(PrefKeys.language.toString(), language);
+  }
+
   Future<void> setRememberMeDriver(bool isRememberMe) async {
     await _sharedPreferences.setBool(
         PrefKeys.rememberMeDriver.toString(), isRememberMe);
@@ -63,60 +67,65 @@ class AppSettingsSharedPreferences {
         PrefKeys.rememberMePolice.toString(), isRememberMe);
   }
 
-  Future<void> setDriverData(DriverModel driver) async {
+  Future<void> setDriverData(DriverLoginModel driver) async {
     await _sharedPreferences.setInt(
         PrefKeys.numberOfUnReadNotifications.toString(),
-        driver.numberOfUnReadNotifications);
-    await _sharedPreferences.setInt(PrefKeys.numberOfViolationsPaid.toString(),
-        driver.numberOfViolationsPaid);
+        driver.numberOfUnReadNotifications.onNull());
+    await _sharedPreferences.setInt(
+        PrefKeys.numberOfViolationsPaid.toString(),
+        driver.numberOfViolationsPaid.onNull());
     await _sharedPreferences.setInt(
         PrefKeys.numberOfViolationsUnPaid.toString(),
-        driver.numberOfViolationsUnPaid);
+        driver.numberOfViolationsUnPaid.onNull());
     await _sharedPreferences.setInt(
-        PrefKeys.userId.toString(), driver.driverId);
+        PrefKeys.userId.toString(), driver.id.onNull());
     await _sharedPreferences.setString(
-        PrefKeys.expiryDateLicense.toString(), driver.expiryDate);
+        PrefKeys.expiryDateLicense.toString(), driver.expiryDate.onNull());
     await _sharedPreferences.setString(
-        PrefKeys.releaseDateLicense.toString(), driver.releaseDate);
+        PrefKeys.releaseDateLicense.toString(), driver.releaseDate.onNull());
     await _sharedPreferences.setString(
-        PrefKeys.idNumber.toString(), driver.driverIdNumber);
+        PrefKeys.idNumber.toString(), driver.idNumber.onNull());
     await _sharedPreferences.setString(
-        PrefKeys.licenseLevelsOfLicense.toString(), driver.licenseLevels);
+        PrefKeys.licenseLevelsOfLicense.toString(),
+        driver.licenseLevels.onNull());
     await _sharedPreferences.setString(
-        PrefKeys.firstName.toString(), driver.driverFirstNameAr);
+        PrefKeys.firstName.toString(), driver.firstNameAr.onNull());
     await _sharedPreferences.setString(
-        PrefKeys.lastName.toString(), driver.driverLastNameAr);
+        PrefKeys.lastName.toString(), driver.lastNameAr.onNull());
     await _sharedPreferences.setString(PrefKeys.fullNameAr.toString(),
-        '${driver.driverFirstNameAr} ${driver.driverFatherNameAr} ${driver.driverGrandfatherNameAr} ${driver.driverLastNameAr}');
+        '${driver.firstNameAr.onNull()} ${driver.fatherNameAr.onNull()} ${driver.grandFatherNameAr.onNull()} ${driver.lastNameAr.onNull()}');
+    await _sharedPreferences.setString(PrefKeys.fullNameEn.toString(),
+        '${driver.firstNameEn.onNull()} ${driver.fatherNameEn.onNull()} ${driver.grandFatherNameEn.onNull()} ${driver.lastNameEn.onNull()}');
     await _sharedPreferences.setString(
-        PrefKeys.fullNameEn.toString(), driver.driverNameEn);
+        PrefKeys.image.toString(), driver.image.onNull());
     await _sharedPreferences.setString(
-        PrefKeys.image.toString(), driver.driverImage);
+        PrefKeys.phoneNumber.toString(), driver.phone.onNull());
     await _sharedPreferences.setString(
-        PrefKeys.phoneNumber.toString(), driver.phone);
-    await _sharedPreferences.setString(
-        PrefKeys.licenseOrJobNumber.toString(), driver.licenseNumber);
+        PrefKeys.licenseOrJobNumber.toString(), driver.licenseNumber.onNull());
   }
 
-  Future<void> setPoliceData(PoliceModel police) async {
+  Future<void> setPoliceData(PoliceManLoginModel police) async {
     await _sharedPreferences.setString(
-        PrefKeys.image.toString(), police.policeImage);
+        PrefKeys.image.toString(), police.image.onNull());
     await _sharedPreferences.setString(
-        PrefKeys.phoneNumber.toString(), police.policePhoneNumber);
+        PrefKeys.phoneNumber.toString(), police.phoneNumber.onNull());
     await _sharedPreferences.setString(
-        PrefKeys.firstName.toString(), police.policeFirstNameAr);
+        PrefKeys.firstName.toString(), police.firstNameAr.onNull());
     await _sharedPreferences.setString(
-        PrefKeys.lastName.toString(), police.policeLastNameAr);
+        PrefKeys.lastName.toString(), police.lastNameAr.onNull());
     await _sharedPreferences.setString(
-        PrefKeys.licenseOrJobNumber.toString(), police.policeJobNumber);
+        PrefKeys.licenseOrJobNumber.toString(), police.jobNumber.onNull());
     await _sharedPreferences.setString(
-        PrefKeys.policeMilitaryRank.toString(), police.policeMilitaryRank);
+        PrefKeys.policeMilitaryRank.toString(), police.militaryRank.onNull());
     await _sharedPreferences.setInt(
-        PrefKeys.userId.toString(), police.policeId);
+        PrefKeys.userId.toString(), police.id.onNull());
   }
 
   bool getRememberMeDriver() =>
       _sharedPreferences.getBool(PrefKeys.rememberMeDriver.toString()).onNull();
+
+  String getLanguage() =>
+      _sharedPreferences.getString(PrefKeys.language.toString()).onNull();
 
   bool getRememberMePolice() =>
       _sharedPreferences.getBool(PrefKeys.rememberMePolice.toString()).onNull();
