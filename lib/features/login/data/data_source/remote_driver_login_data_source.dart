@@ -1,14 +1,14 @@
 import '/config/all_imports.dart';
 
-abstract class RemoteLoginDataSource {
+abstract class RemoteDriverLoginDataSource {
   Future<DriverLoginResponse> login(DriverLoginRequest request);
 }
 
-class RemoteLoginDataSourceImplementation extends RemoteLoginDataSource {
+class RemoteLoginDataSourceImpl extends RemoteDriverLoginDataSource {
   final AppApi _appApi;
   final AppSettingsSharedPreferences _sharedPreferences;
 
-  RemoteLoginDataSourceImplementation(this._appApi, this._sharedPreferences);
+  RemoteLoginDataSourceImpl(this._appApi, this._sharedPreferences);
 
   @override
   Future<DriverLoginResponse> login(DriverLoginRequest request) async {
