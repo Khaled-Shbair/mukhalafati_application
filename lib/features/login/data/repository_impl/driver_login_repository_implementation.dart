@@ -1,7 +1,7 @@
 import '/config/all_imports.dart';
 
 class DriverLoginRepositoryImplementation extends DriverLoginRepository {
-  final RemoteLoginDataSource _remoteLoginDataSource;
+  final RemoteDriverLoginDataSource _remoteLoginDataSource;
   final NetworkInfo _networkInfo;
 
   DriverLoginRepositoryImplementation(
@@ -12,7 +12,8 @@ class DriverLoginRepositoryImplementation extends DriverLoginRepository {
       DriverLoginRequest request) async {
     if (await _networkInfo.isConnected) {
       try {
-        final response = await _remoteLoginDataSource.login(request);
+        DriverLoginResponse response =
+            await _remoteLoginDataSource.login(request);
         return Right(response.toDomain());
       } catch (e) {
         return Left(ErrorHandler.handle(e).failure);
