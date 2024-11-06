@@ -109,6 +109,7 @@ export '/features/login/presentation/controller/welcome_controller.dart';
 export '/features/login/domain/repository/police_man_login_repository.dart';
 export '/features/login/data/data_source/remote_driver_login_data_source.dart';
 export '/features/login/data/data_source/remote_police_man_login_data_source.dart';
+export '/features/login/data/repository_impl/police_man_login_repository_impl.dart';
 export '/features/login/data/repository_impl/driver_login_repository_implementation.dart';
 
 //home feature
@@ -157,11 +158,19 @@ export '/features/driving_license_card/presentation/view/screens/driving_license
 export '/features/driving_license_card/presentation/controller/driving_license_card_controller.dart';
 
 //complaints feature
+export '/features/complaints/domain/model/send_complaint_model.dart';
+export '/features/complaints/data/mapper/send_complaint_mapper.dart';
 export '/features/complaints/presentation/model/complaint_model.dart';
+export '/features/complaints/data/request/send_complaint_request.dart';
+export '/features/complaints/data/response/send_complaint_response.dart';
+export '/features/complaints/domain/use_case/send_complaint_use_case.dart';
+export '/features/complaints/domain/repository/send_complaint_repository.dart';
 export '/features/complaints/presentation/view/widgets/table_of_complaints.dart';
+export '/features/complaints/data/data_source/remote_send_complaint_data_source.dart';
+export '/features/complaints/presentation/controller/send_complaints_controller.dart';
+export '/features/complaints/data/repository_impl/send_complaint_repository_impl.dart';
 export '/features/complaints/presentation/view/screens/list_of_complaints_screen.dart';
 export '/features/complaints/presentation/view/widgets/dialog_of_create_complaint.dart';
-export '/features/complaints/presentation/controller/create_complaints_controller.dart';
 export '/features/complaints/presentation/controller/list_of_complaints_controller.dart';
 export '/features/complaints/presentation/view/widgets/data_column_of_complaints_table.dart';
 

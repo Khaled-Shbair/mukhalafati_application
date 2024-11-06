@@ -2,13 +2,11 @@ import '/config/all_imports.dart';
 
 class LoginController extends GetxController
     with GetSingleTickerProviderStateMixin, Helpers {
-  final DriverDatabaseController _driverDatabase =
-      instance<DriverDatabaseController>();
-  final PoliceDatabaseController _policeDatabase =
-      instance<PoliceDatabaseController>();
   final AppSettingsSharedPreferences _sharedPreferences =
       instance<AppSettingsSharedPreferences>();
-
+  final PoliceManLoginUseCase _policeManLoginUseCase =
+      instance<PoliceManLoginUseCase>();
+  final DriverLoginUseCase _driverLoginUseCase = instance<DriverLoginUseCase>();
   late TabController tabController;
   late TextEditingController jobNumber;
   late TextEditingController passwordPoliceMan;
@@ -72,37 +70,44 @@ class LoginController extends GetxController
 
   void loginDriver() async {
     if (_checkDataDriver()) {
-      bool login =
-          await _driverDatabase.login(licenseNumber.text, passwordDriver.text);
-      debugPrint('Login :$login');
-      DriverModel? driverData =
-          await _driverDatabase.getDriver(licenseNumber.text);
-      if (login && driverData != null) {
-        await _sharedPreferences.setDriverData(driverData);
-        await _sharedPreferences.setRememberMeDriver(rememberMeDriver);
-        await Get.offAllNamed(Routes.driverHomeScreen);
-      } else {
-        showSnackBar(message: ManagerStrings.theEnteredDataIsIncorrect);
-      }
+      (await _driverLoginUseCase.execute(
+        DriverLoginInput(
+          licenseNumber: licenseNumber.text,
+          password: passwordDriver.text,
+        ),
+      ))
+          .fold(
+        (l) {
+          showSnackBar(message: l.message);
+        },
+        (r) async {
+          await _sharedPreferences.setDriverData(r);
+          await _sharedPreferences.setRememberMeDriver(rememberMeDriver);
+          await Get.offAllNamed(Routes.driverHomeScreen);
+        },
+      );
     } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+      showSnackBar(
+          message: ManagerStrings.pleaseEnterYourLicenseNumberAndPassword);
     }
   }
 
   void loginPoliceMan() async {
     if (_checkDataPolice()) {
-      bool login =
-          await _policeDatabase.login(jobNumber.text, passwordPoliceMan.text);
-      if (login) {
-        PoliceModel? police = await _policeDatabase.show(jobNumber.text);
-        _sharedPreferences.setPoliceData(police!);
-        _sharedPreferences.setRememberMePolice(rememberMePoliceMan);
-        Get.offAllNamed(Routes.policeManHomeScreen);
-      } else {
-        showSnackBar(message: ManagerStrings.theEnteredDataIsIncorrect);
-      }
+      (await _policeManLoginUseCase.execute(PoliceManLoginInput(
+              jobNumber: jobNumber.text, password: passwordPoliceMan.text)))
+          .fold(
+        (l) {
+          showSnackBar(message: l.message);
+        },
+        (r) {
+          _sharedPreferences.setPoliceData(r);
+          _sharedPreferences.setRememberMePolice(rememberMePoliceMan);
+          Get.offAllNamed(Routes.policeManHomeScreen);
+        },
+      );
     } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+      showSnackBar(message: ManagerStrings.pleaseEnterYourJobNumberAndPassword);
     }
   }
 
