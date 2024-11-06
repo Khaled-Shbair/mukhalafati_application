@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'all_imports.dart';
 
 final instance = GetIt.instance;
@@ -6,6 +7,8 @@ initModule() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _initDatabase();
   await _initSharedPreferences();
+  await _initDio();
+  await _initInterNetChecker();
 }
 
 Future<void> _initSharedPreferences() async {
@@ -15,6 +18,17 @@ Future<void> _initSharedPreferences() async {
     instance.registerLazySingleton<AppSettingsSharedPreferences>(
         () => AppSettingsSharedPreferences(instance()));
   }
+}
+
+Future<void> _initDio() async {
+  instance.registerLazySingleton<DioFactory>(() => DioFactory());
+  Dio dio = await instance<DioFactory>().getDio();
+  instance.registerLazySingleton<AppApi>(() => AppApi(dio));
+}
+
+Future<void> _initInterNetChecker() async {
+  instance.registerLazySingleton<NetworkInfo>(
+      () => NetworkInfoImplementation(InternetConnection()));
 }
 
 Future<void> _initDatabase() async {
@@ -43,8 +57,6 @@ Future<void> _initDatabase() async {
     instance.registerLazySingleton<NotificationsDatabaseController>(
         () => NotificationsDatabaseController());
   }
-
-  // final ComplaintDatabaseController _complaintDatabase = instance<ComplaintDatabaseController>();
 }
 
 initSplash() {
@@ -76,10 +88,64 @@ disposeWelcome() {
 initLogin() {
   disposeOnBoarding();
   disposeWelcome();
+  if (!GetIt.I.isRegistered<RemoteDriverLoginDataSource>()) {
+    instance.registerLazySingleton<RemoteDriverLoginDataSource>(
+        () => RemoteLoginDataSourceImplementation(
+              instance<AppApi>(),
+              instance<AppSettingsSharedPreferences>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<DriverLoginRepository>()) {
+    instance.registerLazySingleton<DriverLoginRepository>(
+        () => DriverLoginRepositoryImplementation(
+              instance<RemoteDriverLoginDataSource>(),
+              instance<NetworkInfo>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<DriverLoginUseCase>()) {
+    instance.registerLazySingleton<DriverLoginUseCase>(
+        () => DriverLoginUseCase(instance<DriverLoginRepository>()));
+  }
+  if (!GetIt.I.isRegistered<RemotePoliceManLoginDataSource>()) {
+    instance.registerLazySingleton<RemotePoliceManLoginDataSource>(
+        () => RemotePoliceManLoginDataSourceImpl(
+              instance<AppApi>(),
+              instance<AppSettingsSharedPreferences>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<PoliceManLoginRepository>()) {
+    instance.registerLazySingleton<PoliceManLoginRepository>(
+        () => PoliceManLoginRepositoryImpl(
+              instance<RemotePoliceManLoginDataSource>(),
+              instance<NetworkInfo>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<PoliceManLoginUseCase>()) {
+    instance.registerLazySingleton<PoliceManLoginUseCase>(
+        () => PoliceManLoginUseCase(instance<PoliceManLoginRepository>()));
+  }
   Get.put<LoginController>(LoginController());
 }
 
 disposeLogin() {
+  if (GetIt.I.isRegistered<RemoteDriverLoginDataSource>()) {
+    instance.unregister<RemoteDriverLoginDataSource>();
+  }
+  if (GetIt.I.isRegistered<DriverLoginRepository>()) {
+    instance.unregister<DriverLoginRepository>();
+  }
+  if (GetIt.I.isRegistered<DriverLoginUseCase>()) {
+    instance.unregister<DriverLoginUseCase>();
+  }
+  if (GetIt.I.isRegistered<RemotePoliceManLoginDataSource>()) {
+    instance.unregister<RemotePoliceManLoginDataSource>();
+  }
+  if (GetIt.I.isRegistered<PoliceManLoginRepository>()) {
+    instance.unregister<PoliceManLoginRepository>();
+  }
+  if (GetIt.I.isRegistered<PoliceManLoginUseCase>()) {
+    instance.unregister<PoliceManLoginUseCase>();
+  }
   Get.delete<LoginController>();
 }
 
@@ -177,11 +243,35 @@ disposeListOfComplaints() {
 }
 
 initCreateComplaints() {
-  Get.put<CreateComplaintsController>(CreateComplaintsController());
+  if (!GetIt.I.isRegistered<RemoteSendComplaintDataSource>()) {
+    instance.registerLazySingleton<RemoteSendComplaintDataSource>(
+        () => RemoteSendComplaintDataSourceImpl(instance<AppApi>()));
+  }
+  if (!GetIt.I.isRegistered<SendComplaintRepository>()) {
+    instance.registerLazySingleton<SendComplaintRepository>(
+        () => SendComplaintRepositoryImpl(
+              instance<RemoteSendComplaintDataSource>(),
+              instance<NetworkInfo>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<SendComplaintUseCase>()) {
+    instance.registerLazySingleton<SendComplaintUseCase>(
+        () => SendComplaintUseCase(instance<SendComplaintRepository>()));
+  }
+  Get.put<SendComplaintsController>(SendComplaintsController());
 }
 
 disposeCreateComplaints() {
-  Get.delete<CreateComplaintsController>();
+  if (GetIt.I.isRegistered<RemoteSendComplaintDataSource>()) {
+    instance.unregister<RemoteSendComplaintDataSource>();
+  }
+  if (GetIt.I.isRegistered<SendComplaintRepository>()) {
+    instance.unregister<SendComplaintRepository>();
+  }
+  if (GetIt.I.isRegistered<SendComplaintUseCase>()) {
+    instance.unregister<SendComplaintUseCase>();
+  }
+  Get.delete<SendComplaintsController>();
 }
 
 initForgotPasswordForDriver() {
