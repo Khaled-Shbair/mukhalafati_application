@@ -175,14 +175,49 @@ export '/features/complaints/presentation/controller/list_of_complaints_controll
 export '/features/complaints/presentation/view/widgets/data_column_of_complaints_table.dart';
 
 //change_password feature
+export '/features/change_password/data/mapper/driver_change_password_mapper.dart';
+export '/features/change_password/domain/model/driver_change_password_model.dart';
+export '/features/change_password/data/request/driver_change_password_request.dart';
+export '/features/change_password/data/mapper/police_man_change_password_mapper.dart';
+export '/features/change_password/data/response/driver_change_password_response.dart';
+export '/features/change_password/domain/model/police_man_change_password_model.dart';
+export '/features/change_password/domain/use_case/driver_change_password_use_case.dart';
+export '/features/change_password/data/request/police_man_change_password_request.dart';
 export '/features/change_password/presentation/view/screens/change_password_screen.dart';
+export '/features/change_password/data/response/police_man_change_password_response.dart';
 export '/features/change_password/presentation/controller/change_password_controller.dart';
+export '/features/change_password/domain/repository/driver_change_password_repository.dart';
+export '/features/change_password/domain/use_case/police_man_change_password_use_case.dart';
+export '/features/change_password/domain/repository/police_man_change_password_repository.dart';
+export '/features/change_password/data/data_source/remote_driver_change_password_data_source.dart';
+export '/features/change_password/data/repository_impl/driver_change_password_repository_impl.dart';
+export '/features/change_password/data/data_source/remote_police_man_change_password_data_source.dart';
+export '/features/change_password/data/repository_impl/police_man_change_password_repository_impl.dart';
+
+
+//forget_password feature
+export '/features/forget_password/data/mapper/driver_forgot_password_mapper.dart';
+export '/features/forget_password/domain/model/driver_forgot_password_model.dart';
+export '/features/forget_password/data/request/driver_forgot_password_request.dart';
+export '/features/forget_password/data/mapper/police_man_forgot_password_mapper.dart';
+export '/features/forget_password/data/response/driver_forgot_password_response.dart';
+export '/features/forget_password/domain/model/police_man_forgot_password_model.dart';
+export '/features/forget_password/domain/use_case/driver_forgot_password_use_case.dart';
+export '/features/forget_password/data/request/police_man_forgot_password_request.dart';
+export '/features/forget_password/data/response/police_man_forgot_password_response.dart';
 export '/features/forget_password/presentation/view/screens/verification_code_screen.dart';
+export '/features/forget_password/domain/use_case/police_man_forgot_password_use_case.dart';
+export '/features/forget_password/domain/repository/driver_forgot_password_repository.dart';
 export '/features/forget_password/presentation/controller/verification_code_controller.dart';
 export '/features/forget_password/presentation/view/widgets/filed_of_verification_code.dart';
+export '/features/forget_password/domain/repository/police_man_forgot_password_repository.dart';
+export '/features/forget_password/data/data_source/remote_driver_forgot_password_data_source.dart';
+export '/features/forget_password/data/repository_impl/driver_forgot_password_repository_impl.dart';
 export '/features/forget_password/presentation/view/screens/forgot_password_for_driver_screen.dart';
 export '/features/forget_password/presentation/controller/forgot_password_for_driver_controller.dart';
+export '/features/forget_password/data/data_source/remote_police_man_forgot_password_data_source.dart';
 export '/features/forget_password/presentation/view/screens/forgot_password_for_police_man_screen.dart';
+export '/features/forget_password/data/repository_impl/police_man_forgot_password_repository_impl.dart';
 export '/features/forget_password/presentation/controller/forgot_password_for_police_man_controller.dart';
 
 //profile feature
