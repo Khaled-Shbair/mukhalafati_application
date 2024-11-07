@@ -3,6 +3,7 @@ import '/config/all_imports.dart';
 class ManagerStrings {
   static String noRouteFound = 'noRouteFound'.tr;
   static String badRequest = 'bad_request'.tr;
+  static String pleaseEnterNewPassword = 'please_enter_new_password'.tr;
   static String noInternetConnection = 'no_internet_connection'.tr;
   static String skip = 'skip'.tr;
   static String policeMan = 'police_man'.tr;
@@ -13,6 +14,11 @@ class ManagerStrings {
   static String violations = 'violations'.tr;
   static String subTitleOnBoardingThree = 'sub_title_on_boarding_three'.tr;
   static String welcome = 'welcome'.tr;
+  static String pleaseEnterLicenseNumber = 'please_enter_license_number'.tr;
+  static String pleaseEnterJobNumber = 'please_enter_job_number'.tr;
+
+  static String pleaseEnterVerificationCode =
+      'please_enter_verification_code'.tr;
   static String pleaseEnterPaymentCardDetails =
       'please_enter_payment_card_details'.tr;
   static String address = 'address'.tr;
@@ -203,9 +209,12 @@ class ManagerStrings {
   static String noteOfNumbersMonthsOfYear = 'note_of_numbers_months_of_year'.tr;
   static String youCanViewAllYourPaidAndUnpaidViolations =
       'you_can_view_all_your_paid_and_unpaid_violations'.tr;
-  static String pleaseEnterTheRequiredData = 'please_enter_the_required_data'.tr;
-  static String pleaseEnterYourLicenseNumberAndPassword = 'Please_enter_your_license_number_and_password'.tr;
-  static String pleaseEnterYourJobNumberAndPassword = 'Please_enter_your_job_number_and_password'.tr;
+  static String pleaseEnterTheRequiredData =
+      'please_enter_the_required_data'.tr;
+  static String pleaseEnterYourLicenseNumberAndPassword =
+      'Please_enter_your_license_number_and_password'.tr;
+  static String pleaseEnterYourJobNumberAndPassword =
+      'Please_enter_your_job_number_and_password'.tr;
   static String licenseNumberNotFound = 'license_number_not_found'.tr;
   static String notifications = 'notifications'.tr;
   static String unReadMessages = 'un_read_messages'.tr;
