@@ -1,7 +1,11 @@
 const Map<String, String> ar = {
   'noRouteFound': 'الصفحة غير متوفرة',
   'bad_request': 'عذراً!\n هناك خطا ما حصل\n يرجى المحاولة مرة اخرى',
+  'please_enter_new_password':'يرجي ادخال كلمة السر الجديدة',
   'no_internet_connection': 'لا يوجد اتصال بالإنترنت',
+  'please_enter_verification_code': 'يرجي ادخال رمز التحقق',
+  'please_enter_license_number': 'يرجي ادخال رقم الرخصة',
+  'please_enter_job_number': 'يرجي ادخال الرقم الوظيفي',
   'skip': 'تخطي',
   'police_man': 'شرطي المرور',
   'sub_title_on_boarding_one':
