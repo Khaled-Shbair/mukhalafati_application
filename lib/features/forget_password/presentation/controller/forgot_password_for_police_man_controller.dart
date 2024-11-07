@@ -2,9 +2,8 @@ import '/config/all_imports.dart';
 
 class ForgotPasswordForPoliceManController extends GetxController with Helpers {
   late TextEditingController jobNumber;
-
-  final PoliceDatabaseController _policeDatabase =
-      instance<PoliceDatabaseController>();
+  final PoliceManForgotPasswordUseCase _useCase =
+      instance<PoliceManForgotPasswordUseCase>();
 
   @override
   void onInit() {
@@ -25,21 +24,30 @@ class ForgotPasswordForPoliceManController extends GetxController with Helpers {
 
   void sendButton() async {
     if (_checkDataDriver()) {
-      PoliceModel? police = await _policeDatabase.show(jobNumber.text);
-      if (police != null) {
-        String phoneNumber = police.policePhoneNumber;
-        phoneNumber =
-            // '${number.characters.characterAt(0)}${number.characters.characterAt(1)}${number.characters.characterAt(2)}*****${number.characters.characterAt(8)}${number.characters.characterAt(9)}';
-            '${phoneNumber.characters.characterAt(8)}${phoneNumber.characters.characterAt(9)}*****${phoneNumber.characters.characterAt(0)}${phoneNumber.characters.characterAt(1)}${phoneNumber.characters.characterAt(2)}';
-        Get.toNamed(
-          Routes.verificationCodeScreen,
-          arguments: [phoneNumber, police.policeId, true],
-        );
-      } else {
-        showSnackBar(message: ManagerStrings.licenseNumberNotFound);
-      }
+      (await _useCase.execute(
+              PoliceManForgotPasswordUseCaseInput(jobNumber: jobNumber.text)))
+          .fold(
+        (l) {
+          showSnackBar(message: l.message);
+        },
+        (r) {
+          String phoneNumber = r.phoneNumber!;
+          phoneNumber =
+              // '${number.characters.characterAt(0)}${number.characters.characterAt(1)}${number.characters.characterAt(2)}*****${number.characters.characterAt(8)}${number.characters.characterAt(9)}';
+              '${phoneNumber.characters.characterAt(8)}${phoneNumber.characters.characterAt(9)}*****${phoneNumber.characters.characterAt(0)}${phoneNumber.characters.characterAt(1)}${phoneNumber.characters.characterAt(2)}';
+          Get.toNamed(
+            Routes.verificationCodeScreen,
+            arguments: [
+              phoneNumber,
+              r.policeManId,
+              true,
+              0000,
+            ],
+          );
+        },
+      );
     } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+      showSnackBar(message: ManagerStrings.pleaseEnterJobNumber);
     }
   }
 

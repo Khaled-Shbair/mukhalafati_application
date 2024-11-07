@@ -1,10 +1,6 @@
 import '/config/all_imports.dart';
 
 class ChangePasswordController extends GetxController with Helpers {
-  final DriverDatabaseController _driverDatabase =
-      instance<DriverDatabaseController>();
-  final PoliceDatabaseController _policeDatabase =
-      instance<PoliceDatabaseController>();
   late TextEditingController newPassword;
   late TextEditingController confirmPassword;
   bool obscureNewPassword = true;
@@ -31,22 +27,58 @@ class ChangePasswordController extends GetxController with Helpers {
   void changePasswordButton(bool isDriver, int id) async {
     if (_checkDataDriver()) {
       if (isDriver) {
-        bool x = await _driverDatabase.changePassword(newPassword.text, id);
-        debugPrint('$x');
+        await initDriverChangePassword();
+        final DriverChangePasswordUseCase driverChangePasswordUseCase =
+            instance<DriverChangePasswordUseCase>();
+        (await driverChangePasswordUseCase.execute(
+          DriverChangePasswordUseCaseInput(
+            driverId: id,
+            confirmPassword: confirmPassword.text,
+            newPassword: newPassword.text,
+          ),
+        ))
+            .fold(
+          (l) {
+            showSnackBar(message: l.message);
+          },
+          (r) {
+            _changedPasswordSuccessfully();
+          },
+        );
       } else {
-        await _policeDatabase.changePassword(newPassword.text, id);
+        await initPoliceManChangePassword();
+        final PoliceManChangePasswordUseCase policeManChangePasswordUseCase =
+            instance<PoliceManChangePasswordUseCase>();
+        (await policeManChangePasswordUseCase.execute(
+          PoliceManChangePasswordUseCaseInput(
+            policeManId: id,
+            confirmPassword: confirmPassword.text,
+            newPassword: newPassword.text,
+          ),
+        ))
+            .fold(
+          (l) {
+            showSnackBar(message: l.message);
+          },
+          (r) {
+            _changedPasswordSuccessfully();
+          },
+        );
       }
-      createdSuccessfullyDialog(
-        closeButton: () {
-          disposeChangePassword();
-          Get.offAndToNamed(Routes.loginScreen);
-        },
-        context: Get.context!,
-        text: ManagerStrings.passwordHasBeenChangedSuccessfully,
-      );
     } else {
-      showSnackBar(message: ManagerStrings.passwordDoesNotMatch);
+      showSnackBar(message: ManagerStrings.pleaseEnterNewPassword);
     }
+  }
+
+  void _changedPasswordSuccessfully() {
+    createdSuccessfullyDialog(
+      closeButton: () {
+        disposeChangePassword();
+        Get.offAndToNamed(Routes.loginScreen);
+      },
+      context: Get.context!,
+      text: ManagerStrings.passwordHasBeenChangedSuccessfully,
+    );
   }
 
   void changeObscureNewPassword() {
