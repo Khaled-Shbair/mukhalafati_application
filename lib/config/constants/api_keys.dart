@@ -8,9 +8,13 @@ class ApiKeys {
   static const String inputLicenseNumber = 'input_license_number';
   static const String inputJobNumber = 'input_job_number';
   static const String inputPassword = 'input_password';
+  static const String newPassword = 'new_password';
+  static const String confirmPassword = 'confirm_password';
 
   // Driver and Police man Keys
   static const String id = 'id';
+  static const String driverId = 'driver_id';
+  static const String policeManId = 'police_man_id';
   static const String image = 'image';
   static const String firstNameEn = 'first_name_en';
   static const String firstNameAr = 'first_name_ar';
@@ -33,4 +37,9 @@ class ApiKeys {
   static const String militaryRank = 'military_rank';
   static const String jobNumber = 'job_number';
 
+  static const String complaintsName = 'complaints_name';
+  static const String addressOfComplaint = 'address_of_complaint';
+  static const String detailOfComplaint = 'detail_of_complaint';
+  static const String dateOfIncidentOrProblem = 'date_of_incident_or_problem';
+  static const String state = 'state';
 }
