@@ -85,7 +85,7 @@ class _AppApi implements AppApi {
     )
         .compose(
           _dio.options,
-          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/police_login',
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/police_man_login',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -98,6 +98,217 @@ class _AppApi implements AppApi {
     late PoliceManLoginResponse _value;
     try {
       _value = PoliceManLoginResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<SendComplaintResponse> sendComplaint(
+    dynamic complaintsName,
+    dynamic addressOfComplaint,
+    dynamic detailOfComplaint,
+    dynamic dateOfIncidentOrProblem,
+    dynamic state,
+    dynamic driverId,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'complaints_name': complaintsName,
+      'address_of_complaint': addressOfComplaint,
+      'detail_of_complaint': detailOfComplaint,
+      'date_of_incident_or_problem': dateOfIncidentOrProblem,
+      'state': state,
+      'driver_id': driverId,
+    };
+    final _options = _setStreamType<SendComplaintResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/send_complaint',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SendComplaintResponse _value;
+    try {
+      _value = SendComplaintResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<DriverForgotPasswordResponse> forgetPasswordDriver(
+    dynamic licenseNumber,
+    dynamic language,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'input_license_number': licenseNumber,
+      'language': language,
+    };
+    final _options = _setStreamType<DriverForgotPasswordResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/forget_password_driver',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late DriverForgotPasswordResponse _value;
+    try {
+      _value = DriverForgotPasswordResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<PoliceManForgotPasswordResponse> forgetPasswordPoliceMan(
+    dynamic jobNumber,
+    dynamic language,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'input_job_number': jobNumber,
+      'language': language,
+    };
+    final _options = _setStreamType<PoliceManForgotPasswordResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/forget_password_police_man',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late PoliceManForgotPasswordResponse _value;
+    try {
+      _value = PoliceManForgotPasswordResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<DriverChangePasswordResponse> changePasswordDriver(
+    dynamic driverId,
+    dynamic newPassword,
+    dynamic confirmPassword,
+    dynamic language,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'driver_id': driverId,
+      'new_password': newPassword,
+      'confirm_password': confirmPassword,
+      'language': language,
+    };
+    final _options = _setStreamType<DriverChangePasswordResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/driver_change_password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late DriverChangePasswordResponse _value;
+    try {
+      _value = DriverChangePasswordResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<PoliceManChangePasswordResponse> changePasswordPoliceMan(
+    dynamic policeManId,
+    dynamic newPassword,
+    dynamic confirmPassword,
+    dynamic language,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'police_man_id': policeManId,
+      'new_password': newPassword,
+      'confirm_password': confirmPassword,
+      'language': language,
+    };
+    final _options = _setStreamType<PoliceManChangePasswordResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/police_man_change_password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late PoliceManChangePasswordResponse _value;
+    try {
+      _value = PoliceManChangePasswordResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
