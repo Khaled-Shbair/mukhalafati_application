@@ -1,5 +1,5 @@
 class DriverChangePasswordModel {
-  String? message;
+  String message;
 
   DriverChangePasswordModel({
     required this.message,

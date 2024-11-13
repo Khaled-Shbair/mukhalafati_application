@@ -1,5 +1,5 @@
 class PoliceManChangePasswordModel {
-  String? message;
+  String message;
 
   PoliceManChangePasswordModel({
     required this.message,
