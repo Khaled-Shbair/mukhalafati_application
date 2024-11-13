@@ -40,7 +40,7 @@ Future<void> dialogOfCreateComplaint(context) async {
                 ),
                 SizedBox(height: ManagerHeight.h19),
                 mainTextField(
-                  controller: controller.name,
+                  controller: controller.complaintName,
                   labelText: ManagerStrings.fullName,
                   fontSizeLabelText: ManagerFontsSizes.f12,
                   fontWeightLabelText: ManagerFontWeight.medium,
@@ -49,7 +49,9 @@ Future<void> dialogOfCreateComplaint(context) async {
                 ),
                 SizedBox(height: ManagerHeight.h10),
                 mainTextField(
-                  controller: controller.date,
+                  readOnly: true,
+                  onTap: () async => await controller.selectDateTime(context),
+                  controller: controller.dateOfComplaint,
                   labelText: ManagerStrings.dateOfIncidentOrProblem,
                   fontSizeLabelText: ManagerFontsSizes.f12,
                   fontWeightLabelText: ManagerFontWeight.medium,
@@ -58,7 +60,7 @@ Future<void> dialogOfCreateComplaint(context) async {
                 ),
                 SizedBox(height: ManagerHeight.h10),
                 mainTextField(
-                  controller: controller.address,
+                  controller: controller.addressOfComplaint,
                   labelText: ManagerStrings.address,
                   fontSizeLabelText: ManagerFontsSizes.f12,
                   fontWeightLabelText: ManagerFontWeight.medium,
@@ -67,13 +69,14 @@ Future<void> dialogOfCreateComplaint(context) async {
                 ),
                 SizedBox(height: ManagerHeight.h10),
                 mainTextField(
-                  controller: controller.textOfComplaint,
+                  controller: controller.detailOfComplaint,
                   hintText: ManagerStrings.pleaseWriteTheDetailsOfTheComplaint,
                   fontSizeLabelText: ManagerFontsSizes.f12,
                   fontWeightLabelText: ManagerFontWeight.medium,
                   colorLabelText: ManagerColors.black50,
                   keyboardType: TextInputType.text,
                   maxLines: AppConstants.maxLinesOfTextOfComplaint,
+                  maxHeightConstraints: ManagerHeight.infinity, //TODO:
                 ),
                 SizedBox(height: ManagerHeight.h28),
                 Row(
