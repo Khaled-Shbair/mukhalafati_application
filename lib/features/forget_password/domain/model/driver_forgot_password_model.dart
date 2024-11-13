@@ -1,6 +1,6 @@
 class DriverForgotPasswordModel {
-  String? phoneNumber;
-  int? driverId;
+  String phoneNumber;
+  int driverId;
 
   DriverForgotPasswordModel({
     required this.phoneNumber,

@@ -1,23 +1,23 @@
 class DriverLoginModel {
-  int? id;
-  String? image;
-  String? firstNameEn;
-  String? firstNameAr;
-  String? fatherNameAr;
-  String? fatherNameEn;
-  String? lastNameEn;
-  String? lastNameAr;
-  String? grandFatherNameAr;
-  String? grandFatherNameEn;
-  String? phone;
-  String? licenseNumber;
-  String? releaseDate;
-  String? expiryDate;
-  String? licenseLevels;
-  String? idNumber;
-  int? numberOfViolationsUnPaid;
-  int? numberOfViolationsPaid;
-  int? numberOfUnReadNotifications;
+  int id;
+  String image;
+  String firstNameEn;
+  String firstNameAr;
+  String fatherNameAr;
+  String fatherNameEn;
+  String lastNameEn;
+  String lastNameAr;
+  String grandFatherNameAr;
+  String grandFatherNameEn;
+  String phone;
+  String licenseNumber;
+  String releaseDate;
+  String expiryDate;
+  String licenseLevels;
+  String idNumber;
+  int numberOfViolationsUnPaid;
+  int numberOfViolationsPaid;
+  int numberOfUnReadNotifications;
 
   DriverLoginModel({
     required this.licenseNumber,

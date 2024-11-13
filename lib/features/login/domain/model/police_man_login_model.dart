@@ -1,13 +1,13 @@
 class PoliceManLoginModel {
-  int? id;
-  String? image;
-  String? firstNameAr;
-  String? lastNameAr;
-  String? fatherNameAr;
-  String? grandFatherNameAr;
-  String? phoneNumber;
-  String? jobNumber;
-  String? militaryRank;
+  int id;
+  String image;
+  String firstNameAr;
+  String lastNameAr;
+  String fatherNameAr;
+  String grandFatherNameAr;
+  String phoneNumber;
+  String jobNumber;
+  String militaryRank;
 
   PoliceManLoginModel({
     required this.id,

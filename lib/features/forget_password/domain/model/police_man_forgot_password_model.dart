@@ -1,6 +1,6 @@
 class PoliceManForgotPasswordModel {
-  String? phoneNumber;
-  int? policeManId;
+  String phoneNumber;
+  int policeManId;
 
   PoliceManForgotPasswordModel({
     required this.phoneNumber,
