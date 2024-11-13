@@ -1,11 +1,15 @@
 class AppConstants {
   static const double deviceHeight = 812;
   static const double deviceWidth = 375;
+  static const int firstDate = 2015;
+  static const int lastDate = 3000;
   static const int durationSplashScreen = 3;
   static const double elevationAppBarOnBoardingScreen = 0;
   static const double leadingWidthAppBarOnBoardingScreen = 80;
   static const double heightOfSubTitleWelcomeScreen = 1.8;
-  static const int maxLinesOfTextOfComplaint = 13;
+  static const int maxLinesOfTextOfComplaint = 8;
+  static const int minLinesOfTextFormField = 1;
+  static const int maxLinesOfTextFormField = 1;
   static const int maxLengthOfExpiryDateCard = 7;
   static const int maxLengthOfSecurityCode = 4;
   static const int maxLengthOfCardNumber = 16;
@@ -36,7 +40,7 @@ class AppConstants {
   static const int maxLengthOfPhoneNumber = 10;
   static const int maxLengthOfJobNumber = 8;
   static const int maxLengthOfVehicleNumber = 8;
-  static const int maxLengthOfIDNumber = 8;
+  static const int maxLengthOfIDNumber = 9;
   static const int maxLengthOfVehicleColor = 8;
   static const int maxLengthOfVerificationCode = 1;
   static const double
