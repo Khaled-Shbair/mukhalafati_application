@@ -106,33 +106,33 @@ class _AppApi implements AppApi {
   }
 
   @override
-  Future<SendComplaintResponse> sendComplaint(
+  Future<CreateComplaintResponse> createComplaint(
     dynamic complaintsName,
     dynamic addressOfComplaint,
     dynamic detailOfComplaint,
     dynamic dateOfIncidentOrProblem,
-    dynamic state,
+    dynamic status,
     dynamic driverId,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
-      'complaints_name': complaintsName,
-      'address_of_complaint': addressOfComplaint,
+      'complainants_name': complaintsName,
+      'address': addressOfComplaint,
       'detail_of_complaint': detailOfComplaint,
       'date_of_incident_or_problem': dateOfIncidentOrProblem,
-      'state': state,
+      'status': status,
       'driver_id': driverId,
     };
-    final _options = _setStreamType<SendComplaintResponse>(Options(
+    final _options = _setStreamType<CreateComplaintResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/send_complaint',
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/create_complaint',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -142,9 +142,9 @@ class _AppApi implements AppApi {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late SendComplaintResponse _value;
+    late CreateComplaintResponse _value;
     try {
-      _value = SendComplaintResponse.fromJson(_result.data!);
+      _value = CreateComplaintResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -309,6 +309,202 @@ class _AppApi implements AppApi {
     late PoliceManChangePasswordResponse _value;
     try {
       _value = PoliceManChangePasswordResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<GetAllComplaintsForDriverResponse> getAllComplaintsForDriver(
+      dynamic driverId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'driver_id': driverId};
+    final _options = _setStreamType<GetAllComplaintsForDriverResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_all_complaints_for_driver',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetAllComplaintsForDriverResponse _value;
+    try {
+      _value = GetAllComplaintsForDriverResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<SearchForDriverResponse> searchForDriver(dynamic licenseNumber) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'license_number': licenseNumber};
+    final _options = _setStreamType<SearchForDriverResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/search_for_driver',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SearchForDriverResponse _value;
+    try {
+      _value = SearchForDriverResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<SearchOnResultsTestsOfLicenseResponse> searchOnResultsTestsOfLicense(
+      dynamic idNumber) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'id_number': idNumber};
+    final _options =
+        _setStreamType<SearchOnResultsTestsOfLicenseResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/search_on_results_tests_of_license',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SearchOnResultsTestsOfLicenseResponse _value;
+    try {
+      _value = SearchOnResultsTestsOfLicenseResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<CreateViolationResponse> createViolation(
+    dynamic priceOfViolation,
+    dynamic violationReason,
+    dynamic violationDate,
+    dynamic violationTime,
+    dynamic violationAddress,
+    dynamic driverIdNumber,
+    dynamic policeManId,
+    dynamic driverName,
+    dynamic ownerName,
+    dynamic ownerId,
+    dynamic vehicleNumber,
+    dynamic vehicleType,
+    dynamic vehicleColor,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'price_of_violation': priceOfViolation,
+      'violation_reason': violationReason,
+      'violation_date': violationDate,
+      'violation_time': violationTime,
+      'violation_address': violationAddress,
+      'driver_id_number': driverIdNumber,
+      'police_man_id': policeManId,
+      'driver_name': driverName,
+      'owner_name': ownerName,
+      'owner_id': ownerId,
+      'vehicle_number': vehicleNumber,
+      'vehicle_type': vehicleType,
+      'vehicle_color': vehicleColor,
+    };
+    final _options = _setStreamType<CreateViolationResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/create_violation',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late CreateViolationResponse _value;
+    try {
+      _value = CreateViolationResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ListOfReasonsOfViolationsResponse> listOfReasonsOfViolations() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<ListOfReasonsOfViolationsResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/list_of_reasons_of_violations',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ListOfReasonsOfViolationsResponse _value;
+    try {
+      _value = ListOfReasonsOfViolationsResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

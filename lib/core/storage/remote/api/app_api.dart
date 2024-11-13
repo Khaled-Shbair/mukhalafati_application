@@ -21,13 +21,13 @@ abstract class AppApi {
       @Field(ApiKeys.inputPassword) password,
       @Field(ApiKeys.language) language);
 
-  @POST(ApiConstants.sendComplaint)
-  Future<SendComplaintResponse> sendComplaint(
+  @POST(ApiConstants.createComplaint)
+  Future<CreateComplaintResponse> createComplaint(
     @Field(ApiKeys.complaintsName) complaintsName,
-    @Field(ApiKeys.addressOfComplaint) addressOfComplaint,
+    @Field(ApiKeys.address) addressOfComplaint,
     @Field(ApiKeys.detailOfComplaint) detailOfComplaint,
     @Field(ApiKeys.dateOfIncidentOrProblem) dateOfIncidentOrProblem,
-    @Field(ApiKeys.state) state,
+    @Field(ApiKeys.status) status,
     @Field(ApiKeys.driverId) driverId,
   );
 
@@ -58,4 +58,39 @@ abstract class AppApi {
     @Field(ApiKeys.confirmPassword) confirmPassword,
     @Field(ApiKeys.language) language,
   );
+
+  @POST(ApiConstants.getAllComplaintsForDriver)
+  Future<GetAllComplaintsForDriverResponse> getAllComplaintsForDriver(
+    @Field(ApiKeys.driverId) driverId,
+  );
+
+  @POST(ApiConstants.searchForDriver)
+  Future<SearchForDriverResponse> searchForDriver(
+    @Field(ApiKeys.licenseNumber) licenseNumber,
+  );
+
+  @POST(ApiConstants.searchOnResultsTestsOfLicense)
+  Future<SearchOnResultsTestsOfLicenseResponse> searchOnResultsTestsOfLicense(
+    @Field(ApiKeys.idNumber) idNumber,
+  );
+
+  @POST(ApiConstants.createViolation)
+  Future<CreateViolationResponse> createViolation(
+    @Field(ApiKeys.priceOfViolation) priceOfViolation,
+    @Field(ApiKeys.violationReason) violationReason,
+    @Field(ApiKeys.violationDate) violationDate,
+    @Field(ApiKeys.violationTime) violationTime,
+    @Field(ApiKeys.violationAddress) violationAddress,
+    @Field(ApiKeys.driverIdNumber) driverIdNumber,
+    @Field(ApiKeys.policeManId) policeManId,
+    @Field(ApiKeys.driverName) driverName,
+    @Field(ApiKeys.ownerName) ownerName,
+    @Field(ApiKeys.ownerId) ownerId,
+    @Field(ApiKeys.vehicleNumber) vehicleNumber,
+    @Field(ApiKeys.vehicleType) vehicleType,
+    @Field(ApiKeys.vehicleColor) vehicleColor,
+  );
+
+  @GET(ApiConstants.listOfReasonsOfViolations)
+  Future<ListOfReasonsOfViolationsResponse> listOfReasonsOfViolations();
 }
