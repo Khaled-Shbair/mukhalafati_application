@@ -37,9 +37,31 @@ class ApiKeys {
   static const String militaryRank = 'military_rank';
   static const String jobNumber = 'job_number';
 
-  static const String complaintsName = 'complaints_name';
+  static const String complaintsName = 'complainants_name';
   static const String addressOfComplaint = 'address_of_complaint';
+  static const String address = 'address';
   static const String detailOfComplaint = 'detail_of_complaint';
   static const String dateOfIncidentOrProblem = 'date_of_incident_or_problem';
-  static const String state = 'state';
+  static const String status = 'status';
+  static const String data = 'data';
+  static const String numberOfViolations = 'number_of_violations';
+  static const String nameAr = 'name_ar';
+  static const String nameEn = 'name_en';
+  static const String licenseTestResult = 'license_test_result';
+  static const String studentName = 'student_name';
+  static const String practicalTestResult = 'practical_test_result';
+  static const String violationReason = 'violation_reason';
+  static const String violationAddress = 'violation_address';
+  static const String priceOfViolation = 'price_of_violation';
+  static const String violationDate = 'violation_date';
+  static const String violationTime = 'violation_time';
+  static const String vehicleColor = 'vehicle_color';
+  static const String vehicleType = 'vehicle_type';
+  static const String vehicleNumber = 'vehicle_number';
+  static const String ownerId = 'owner_id';
+  static const String ownerName = 'owner_name';
+  static const String driverName = 'driver_name';
+  static const String driverIdNumber = 'driver_id_number';
+  static const String price = 'price';
+  static const String reason = 'reason';
 }
