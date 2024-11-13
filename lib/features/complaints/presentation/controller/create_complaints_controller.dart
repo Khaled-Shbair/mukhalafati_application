@@ -1,31 +1,31 @@
 import '/config/all_imports.dart';
 
 class CreateComplaintsController extends GetxController with Helpers {
-  final ComplaintDatabaseController _complaintDatabase =
-      instance<ComplaintDatabaseController>();
   final AppSettingsSharedPreferences _sharedPreferences =
       instance<AppSettingsSharedPreferences>();
-
-  late TextEditingController textOfComplaint;
-  late TextEditingController name;
-  late TextEditingController address;
-  late TextEditingController date;
+  final CreateComplaintUseCase _sendComplaintUseCase =
+      instance<CreateComplaintUseCase>();
+  late TextEditingController detailOfComplaint;
+  late TextEditingController complaintName;
+  late TextEditingController addressOfComplaint;
+  late TextEditingController dateOfComplaint;
+  DateTime _dateTime = DateTime.now();
 
   @override
   void onInit() {
     super.onInit();
-    textOfComplaint = TextEditingController();
-    name = TextEditingController();
-    address = TextEditingController();
-    date = TextEditingController();
+    detailOfComplaint = TextEditingController();
+    complaintName = TextEditingController();
+    addressOfComplaint = TextEditingController();
+    dateOfComplaint = TextEditingController();
   }
 
   @override
   void dispose() {
-    textOfComplaint.dispose();
-    name.dispose();
-    address.dispose();
-    date.dispose();
+    detailOfComplaint.dispose();
+    complaintName.dispose();
+    addressOfComplaint.dispose();
+    dateOfComplaint.dispose();
     super.dispose();
   }
 
@@ -36,37 +36,65 @@ class CreateComplaintsController extends GetxController with Helpers {
 
   void createComplaintsButton() async {
     if (_checkData()) {
-      ComplaintModel complaint = ComplaintModel();
-      complaint.complaintName = name.text;
-      complaint.detailOfComplaint = textOfComplaint.text;
-      complaint.addressOfComplaint = address.text;
-      complaint.dateOfIncidentOrProblem = date.text;
-      complaint.stateOfComplaint = 0;
-      complaint.driverId = _sharedPreferences.getUserId();
-      int newRowId = await _complaintDatabase.create(complaint);
-      if (newRowId != 0) {
-        complaint.complaintId = newRowId;
-        Get.back();
-        createdSuccessfullyDialog(
-          closeButton: () {
-            ListOfComplaintsController.to.getComplaints();
-            Get.back();
-            disposeCreateComplaints();
-          },
-          text: ManagerStrings.complaintCreatedSuccessfully,
-          context: Get.context!,
-        );
-      }
+      (await _sendComplaintUseCase.execute(
+        CreateComplaintInput(
+          driverId: _sharedPreferences.getUserId(),
+          addressOfComplaint: addressOfComplaint.text,
+          complaintsName: complaintName.text,
+          dateOfIncidentOrProblem: dateOfComplaint.text,
+          detailOfComplaint: detailOfComplaint.text,
+          statusOfComplaint: false,
+        ),
+      ))
+          .fold(
+        (l) {
+          showSnackBar(message: l.message);
+        },
+        (r) async {
+          Get.back();
+          disposeListOfComplaints();
+          Get.clearRouteTree();
+          createdSuccessfullyDialog(
+            closeButton: () async {
+              initListOfComplaints();
+              Get.back();
+              Get.offAllNamed(Routes.listOfComplaintsScreen);
+              disposeCreateComplaints();
+            },
+            text: ManagerStrings.complaintCreatedSuccessfully,
+            context: Get.context!,
+          );
+        },
+      );
     } else {
       showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
     }
   }
 
   bool _checkData() {
-    if (name.text.isNotEmpty) {
+    if (complaintName.text.isNotEmpty) {
       return true;
     } else {
       return false;
     }
+  }
+
+  Future<void> selectDateTime(BuildContext context) async {
+    final DateTime? selectedDateTime = await showDatePicker(
+      context: context,
+      initialDate: _dateTime,
+      firstDate: DateTime(AppConstants.firstDate),
+      lastDate: DateTime(AppConstants.lastDate),
+      barrierDismissible: false,
+    );
+    update();
+
+    if (selectedDateTime != null) {
+      _dateTime = selectedDateTime;
+      dateOfComplaint.text =
+          '${_dateTime.day}/${_dateTime.month}/${_dateTime.year}';
+    }
+
+    update();
   }
 }

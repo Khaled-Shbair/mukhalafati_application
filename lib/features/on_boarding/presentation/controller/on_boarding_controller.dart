@@ -75,32 +75,6 @@ class OnBoardingController extends GetxController {
   }
 
   void _moveToWelcomeScreen() {
-    createDoctorAccount();
-    createSajaAccount();
-    createMalakAccount();
-    createGeneenAccount();
-    createShahedAccount();
-    createPoliceAccount();
-    createTest();
-    createViolations();
-    createNotifications();
     Get.offAllNamed(Routes.welcomeScreen);
   }
-
-// void skip() {
-//   pageController.animateToPage(
-//     2,
-//     duration: const Duration(seconds: 1),
-//     curve: Curves.easeInCubic,
-//   );
-//   update();
-// }
-
-// void previousPage() {
-//   pageController.previousPage(
-//     duration: const Duration(seconds: 1),
-//     curve: Curves.easeInCubic,
-//   );
-//   update();
-// }
 }
