@@ -1,10 +1,9 @@
 import '/config/all_imports.dart';
 
-class SearchForDriverController extends GetxController {
+class SearchForDriverController extends GetxController with Helpers {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final DriverDatabaseController _driverDatabase =
-      instance<DriverDatabaseController>();
+  final SearchForDriverUseCase _searchForDriverUseCase =
+      instance<SearchForDriverUseCase>();
   final AppSettingsSharedPreferences _sharedPreferences =
       instance<AppSettingsSharedPreferences>();
 
@@ -23,8 +22,6 @@ class SearchForDriverController extends GetxController {
   late String licenseLevels;
 
   late String imageDriver;
-
-  // 'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
 
   late int numberOfViolations;
 
@@ -55,30 +52,36 @@ class SearchForDriverController extends GetxController {
 
   void searchButton() async {
     loading = true;
-    if (_checkDataPolice()) {
-      DriverModel? driver =
-          await _driverDatabase.getDriver(licenseNumberController.text);
-      if (driver != null) {
-        result = true;
-        licenseNumber = driver.licenseNumber;
-        expiryDate = driver.expiryDate;
-        releaseDate = driver.releaseDate;
-        idNumber = driver.driverIdNumber;
-        nameAr =
-            '${driver.driverFirstNameAr} ${driver.driverFatherNameAr} ${driver.driverGrandfatherNameAr} ${driver.driverLastNameAr}';
-        nameEn = driver.driverNameEn;
-        licenseLevels = driver.licenseLevels;
-        imageDriver = driver.driverImage;
-        numberOfViolations = driver.numberOfViolationsUnPaid;
-      }
+    update();
+    if (_checkData()) {
+      (await _searchForDriverUseCase.execute(
+        SearchForDriverInput(licenseNumber: licenseNumberController.text),
+      ))
+          .fold(
+        (l) {
+          showSnackBar(message: l.message);
+        },
+        (r) {
+          licenseNumber = r.licenseNumber;
+          expiryDate = r.expiryDate;
+          releaseDate = r.releaseDate;
+          idNumber = r.idNumber;
+          nameAr = r.nameAr;
+          nameEn = r.nameEn;
+          licenseLevels = r.licenseLevels;
+          imageDriver = r.imageDriver;
+          numberOfViolations = r.numberOfViolations;
+          result = true;
+        },
+      );
     } else {
-      result = false;
+      showSnackBar(message: ManagerStrings.pleaseEnterLicenseNumber);
     }
     loading = false;
     update();
   }
 
-  bool _checkDataPolice() {
+  bool _checkData() {
     if (licenseNumberController.text.isNotEmpty) {
       return true;
     } else {
