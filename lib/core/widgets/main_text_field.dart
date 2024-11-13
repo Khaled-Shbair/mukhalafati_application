@@ -19,14 +19,19 @@ Widget mainTextField({
   EdgeInsetsDirectional? contentPadding,
   FocusNode? focusNode,
   Function(String)? onChanged,
+  Function()? onTap,
   Color? colorInputText,
   FontWeight? fontWeightInputText,
   double? fontSizeInputText,
   bool autofocus = false,
+  double? minHeightConstraints,
+  double? maxHeightConstraints,
   TextAlign textAlign = TextAlign.start,
 }) {
   return TextFormField(
-    maxLines: maxLines ?? 1,
+    onTap: onTap,
+    minLines: AppConstants.minLinesOfTextFormField,
+    maxLines: maxLines ?? AppConstants.maxLinesOfTextFormField,
     autofocus: autofocus,
     readOnly: readOnly,
     controller: controller,
@@ -44,6 +49,10 @@ Widget mainTextField({
       fontSize: fontSizeInputText ?? ManagerFontsSizes.f11,
     ),
     decoration: InputDecoration(
+      constraints: BoxConstraints(
+        minHeight: minHeightConstraints ?? ManagerHeight.h48,
+        maxHeight: maxHeightConstraints ?? ManagerHeight.h48,
+      ),
       labelText: labelText,
       hintText: hintText,
       contentPadding: contentPadding,
