@@ -16,6 +16,7 @@ class DrivingLicenseCardScreen extends StatelessWidget {
             isDrivingLicenseCardScreen: true,
           ),
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: Text(ManagerStrings.electronicLicense),
             actions: [
               mainButton(
