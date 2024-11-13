@@ -1,13 +1,14 @@
 import '/config/all_imports.dart';
 
-class SearchOnResultsTestsOfLicenseController extends GetxController {
+class SearchOnResultsTestsOfLicenseController extends GetxController
+    with Helpers {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final SearchOnResultsTestsOfLicenseUseCase _useCase =
+      instance<SearchOnResultsTestsOfLicenseUseCase>();
   final AppSettingsSharedPreferences _sharedPreferences =
       instance<AppSettingsSharedPreferences>();
-  final TestResultDatabaseController _testResultDatabase =
-      instance<TestResultDatabaseController>();
 
-  late TextEditingController idNumberController;
+  late TextEditingController idNumber;
   late String resultName;
 
   late bool licenseTestResults;
@@ -27,13 +28,13 @@ class SearchOnResultsTestsOfLicenseController extends GetxController {
     driverName =
         '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
     driverImage = _sharedPreferences.getImage();
-    idNumberController = TextEditingController();
+    idNumber = TextEditingController();
   }
 
   @override
-  void onClose() {
-    idNumberController.dispose();
-    super.onClose();
+  void dispose() {
+    idNumber.dispose();
+    super.dispose();
   }
 
   void openEndDrawer() {
@@ -45,23 +46,34 @@ class SearchOnResultsTestsOfLicenseController extends GetxController {
 
   void searchButton() async {
     loading = true;
-    if (_checkData()) {
-      TestResultModel? testResult =
-          await _testResultDatabase.show(idNumberController.text);
-      if (testResult != null) {
-        result = true;
-        resultName = testResult.studentName;
-        practicalTestResult =
-            testResult.practicalTestResults == 0 ? false : true;
-        licenseTestResults = testResult.licenseTestResults == 0 ? false : true;
-      }
-    }
-    loading = false;
+    result = false;
     update();
+
+    if (_checkData()) {
+      (await _useCase.execute(
+        SearchOnResultsTestsOfLicenseUseCaseInput(idNumber: idNumber.text),
+      ))
+          .fold(
+        (l) {
+          result = false;
+          loading = false;
+          showSnackBar(message: l.message);
+          update();
+        },
+        (r) {
+          resultName = r.studentName;
+          practicalTestResult = r.practicalTestResult;
+          licenseTestResults = r.licenseTestResults;
+          loading = false;
+          result = true;
+          update();
+        },
+      );
+    }
   }
 
   bool _checkData() {
-    if (idNumberController.text.isNotEmpty) {
+    if (idNumber.text.isNotEmpty) {
       return true;
     } else {
       return false;
