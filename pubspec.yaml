@@ -35,15 +35,27 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+
+  #responsive design for all device
   flutter_screenutil: ^5.9.3
+
+  #state_management
   get: ^4.6.6
+
+  #image
   flutter_svg: ^2.0.10+1
-  get_it: ^8.0.0
-  smooth_page_indicator: ^1.2.0+3
+  cached_network_image: ^3.4.1
+
+  #storage data local (in device)
   shared_preferences: ^2.3.2
-  syncfusion_flutter_charts: ^27.1.52
+
+  #snackbar
   fluttertoast: ^8.2.8
-  #Required libraries to deal with remote database (Api) in dependencies
+
+  #dependency injection
+  get_it: ^8.0.0
+
+  #Networking
   internet_connection_checker_plus: ^2.5.2
   dartz: ^0.10.1
   json_annotation: ^4.9.0
@@ -51,6 +63,12 @@ dependencies:
   retrofit_generator: ^9.1.4
   dio: ^5.7.0
   pretty_dio_logger: ^1.4.0
+
+  #use to draw chart
+  syncfusion_flutter_charts: ^27.1.52
+
+  #use to draw indicator with beautiful animation
+  smooth_page_indicator: ^1.2.0+3
 
   #local database
   sqflite: ^2.4.0
@@ -65,7 +83,7 @@ dev_dependencies:
   #Required library to change icon launcher of application
   flutter_launcher_icons: ^0.14.1
 
-  #Required library to change splash of application
+  #use to change splash screen
   flutter_native_splash: ^2.4.2
 
   #Required libraries to deal with remote database (Api) in dev_dependencies
@@ -79,7 +97,6 @@ flutter_launcher_icons:
   image_path_android: "assets/images/launcher_logo.png"
   image_path_ios: "assets/images/launcher_logo.png"
   adaptive_icon_foreground: "assets/images/launcher_logo.png"
-  #  adaptive_icon_background: "#FFFFFF"
   adaptive_icon_background: "#FF0000"
   remove_alpha_ios: true
   min_sdk_android: 21
