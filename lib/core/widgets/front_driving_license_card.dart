@@ -160,6 +160,7 @@ Widget frontDrivingLicenseCard({
               ),
               height: ManagerHeight.h112,
               width: ManagerWidth.w85,
+              color: ManagerColors.white,
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -169,9 +170,7 @@ Widget frontDrivingLicenseCard({
                 ],
                 borderRadius: BorderRadius.circular(ManagerRadius.r5),
                 image: DecorationImage(
-                  //TODO: Add NetworkImage later
-                  // image: NetworkImage(imageDriver),
-                  image: AssetImage(imageDriver),
+                  image: cachedNetworkImageProvider(imageDriver),
                   fit: BoxFit.cover,
                 ),
               ),

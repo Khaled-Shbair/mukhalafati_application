@@ -51,8 +51,8 @@ class DriverProfileScreen extends StatelessWidget {
                   backgroundColor: ManagerColors.white,
                   child: CircleAvatar(
                     radius: ManagerRadius.r60,
-                    // backgroundImage: NetworkImage(controller.driverImage),
-                    backgroundImage: AssetImage(controller.driverImage),
+                    backgroundImage:
+                        cachedNetworkImageProvider(controller.driverImage),
                   ),
                 ),
               ),

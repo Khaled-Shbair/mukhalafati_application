@@ -26,8 +26,7 @@ Widget policeManDrawer({
           children: [
             CircleAvatar(
               radius: ManagerRadius.r40,
-              // backgroundImage: NetworkImage(policeImage),
-              backgroundImage: AssetImage(policeImage),
+              backgroundImage: cachedNetworkImageProvider(policeImage),
             ),
             SizedBox(width: ManagerWidth.w10),
             Text(
