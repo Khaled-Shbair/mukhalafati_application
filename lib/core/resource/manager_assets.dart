@@ -5,9 +5,6 @@ class ManagerAssets {
   static const String userIcon = '$_imagePath/user_icon.png';
   static const String createdSuccessfully =
       '$_imagePath/created_successfully.svg';
-  static const String logoSplash = '$_imagePath/splash/logo_splash.png';
-  static const String backgroundSplashScreen =
-      '$_imagePath/splash/background_splash_screen.png';
   static const String onBoardingOne =
       '$_imagePath/on_boarding/on_boarding_one.png';
   static const String onBoardingTwo =
