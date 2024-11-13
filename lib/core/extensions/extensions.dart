@@ -8,6 +8,16 @@ extension NonNullBool on bool? {
   }
 }
 
+extension NonNullList on List? {
+  List onNull() {
+    if (this == null) {
+      return [];
+    } else {
+      return this!;
+    }
+  }
+}
+
 extension NonNullString on String? {
   String onNull() {
     if (this == null) {
