@@ -24,6 +24,12 @@ class ApiConstants {
   static const String searchOnResultsTestsOfLicense =
       '$baseUrl/rest/v1/rpc/search_on_results_tests_of_license';
   static const String createViolation = '$baseUrl/rest/v1/rpc/create_violation';
+  static const String reasonOfViolation =
+      '$baseUrl/rest/v1/rpc/reason_of_violation';
+  static const String paymentViolation =
+      '$baseUrl/rest/v1/rpc/payment_violation';
   static const String listOfReasonsOfViolations =
       '$baseUrl/rest/v1/rpc/list_of_reasons_of_violations';
+  static const String getDriverViolations =
+      '$baseUrl/rest/v1/rpc/get_driver_violations';
 }
