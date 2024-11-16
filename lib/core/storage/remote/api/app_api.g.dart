@@ -512,6 +512,116 @@ class _AppApi implements AppApi {
     return _value;
   }
 
+  @override
+  Future<ReasonOfViolationResponse> reasonOfViolation(dynamic id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'input_id': id};
+    final _options = _setStreamType<ReasonOfViolationResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/reason_of_violation',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ReasonOfViolationResponse _value;
+    try {
+      _value = ReasonOfViolationResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<PaymentViolationResponse> paymentViolation(
+    dynamic violationId,
+    dynamic paymentDateAndTime,
+    dynamic violationState,
+    dynamic violationPayedBy,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'violation_id': violationId,
+      'payment_date_and_time': paymentDateAndTime,
+      'violation_state': violationState,
+      'violation_payed_by': violationPayedBy,
+    };
+    final _options = _setStreamType<PaymentViolationResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/payment_violation',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late PaymentViolationResponse _value;
+    try {
+      _value = PaymentViolationResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<DriverViolationsResponse> getViolationsByDriver(
+      dynamic driverId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'driver_id': driverId};
+    final _options = _setStreamType<DriverViolationsResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_driver_violations',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late DriverViolationsResponse _value;
+    try {
+      _value = DriverViolationsResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

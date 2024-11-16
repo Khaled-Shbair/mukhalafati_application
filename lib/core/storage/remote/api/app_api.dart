@@ -93,4 +93,22 @@ abstract class AppApi {
 
   @GET(ApiConstants.listOfReasonsOfViolations)
   Future<ListOfReasonsOfViolationsResponse> listOfReasonsOfViolations();
+
+  @POST(ApiConstants.reasonOfViolation)
+  Future<ReasonOfViolationResponse> reasonOfViolation(
+    @Field(ApiKeys.inputId) id,
+  );
+
+  @POST(ApiConstants.paymentViolation)
+  Future<PaymentViolationResponse> paymentViolation(
+    @Field(ApiKeys.violationId) violationId,
+    @Field(ApiKeys.paymentDateAndTime) paymentDateAndTime,
+    @Field(ApiKeys.violationState) violationState,
+    @Field(ApiKeys.violationPayedBy) violationPayedBy,
+  );
+
+  @POST(ApiConstants.getDriverViolations)
+  Future<DriverViolationsResponse> getViolationsByDriver(
+      @Field(ApiKeys.driverId) driverId,
+      );
 }
