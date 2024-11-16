@@ -64,4 +64,9 @@ class ApiKeys {
   static const String driverIdNumber = 'driver_id_number';
   static const String price = 'price';
   static const String reason = 'reason';
+  static const String inputId = 'input_id';
+  static const String violationId = 'violation_id';
+  static const String violationState = 'violation_state';
+  static const String violationPayedBy = 'violation_payed_by';
+  static const String paymentDateAndTime = 'payment_date_and_time';
 }
