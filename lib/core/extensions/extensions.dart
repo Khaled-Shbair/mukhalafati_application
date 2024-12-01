@@ -1,3 +1,5 @@
+import '/config/all_imports.dart';
+
 extension NonNullBool on bool? {
   bool onNull() {
     if (this == null) {
@@ -46,4 +48,27 @@ extension NonNullInt on int? {
       return this!;
     }
   }
+}
+
+extension Navigators on BuildContext {
+  pushNamed(String routeName, {Object? arguments}) {
+    return Navigator.of(this).pushNamed(routeName, arguments: arguments);
+  }
+
+  pushReplacementNamed(String routeName, {Object? arguments}) {
+    return Navigator.of(this)
+        .pushReplacementNamed(routeName, arguments: arguments);
+  }
+
+  pushNamedAndRemoveAllUntil(String routeName, {Object? arguments}) {
+    return Navigator.of(this).pushNamedAndRemoveUntil(
+        routeName, (route) => false,
+        arguments: arguments);
+  }
+
+  popAndPushNamed(String routeName, {Object? arguments}) {
+    return Navigator.of(this).popAndPushNamed(routeName, arguments: arguments);
+  }
+
+  pop() => Navigator.of(this).pop();
 }
