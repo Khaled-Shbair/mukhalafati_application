@@ -30,6 +30,7 @@ class ApiConstants {
       '$baseUrl/rest/v1/rpc/payment_violation';
   static const String listOfReasonsOfViolations =
       '$baseUrl/rest/v1/rpc/list_of_reasons_of_violations';
-  static const String getDriverViolations =
-      '$baseUrl/rest/v1/rpc/get_driver_violations';
+  static const String getDriverViolations = '$baseUrl/rest/v1/rpc/get_driver_violations';
+  static const String getListOfViolationsForPolice = '$baseUrl/rest/v1/rpc/get_list_of_violations_for_police';
+  static const String sendVerificationCode = '$baseUrl/rest/v1/rpc/send_verification_code';
 }

@@ -1,7 +1,7 @@
 import '/config/all_imports.dart';
 
 class ListOfReasonsOfViolationsRepositoryImpl
-    extends ListOfReasonsOfViolationsRepository {
+    extends ListReasonsOfViolationsRepository {
   final RemoteListOfReasonsOfViolationsDataSource _dataSource;
   final NetworkInfo _networkInfo;
 

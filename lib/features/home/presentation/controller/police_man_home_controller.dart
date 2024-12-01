@@ -4,10 +4,7 @@ class PoliceManHomeController extends GetxController
     with GetSingleTickerProviderStateMixin {
   late PageController pageController;
   late TooltipBehavior tooltipBehavior;
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
-  final ViolationsDatabaseController _violationsDatabase =
-      ViolationsDatabaseController();
+
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   late String policeName;
 
@@ -30,10 +27,14 @@ class PoliceManHomeController extends GetxController
   void onInit() async {
     super.onInit();
     getTotalViolationsFromDatabase();
-    policeFirstName = _sharedPreferences.getFirstName();
+
     policeName =
-        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
-    policeImage = _sharedPreferences.getImage();
+        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
+    policeImage =
+        SharedPreferencesController.getString(SharedPreferencesKeys.image);
+
+    policeFirstName =
+        SharedPreferencesController.getString(SharedPreferencesKeys.firstName);
     changeWelcome();
 
     pageController = PageController();
@@ -42,9 +43,9 @@ class PoliceManHomeController extends GetxController
   }
 
   void getTotalViolationsFromDatabase() {
-    totalViolations = _violationsDatabase
-        .totalViolationsOfPolice(_sharedPreferences.getUserId())
-        .toString();
+    // totalViolations = _violationsDatabase
+    //     .totalViolationsOfPolice(_sharedPreferences.getUserId())
+    //     .toString();
   }
 
   void changeWelcome() {

@@ -1,8 +1,6 @@
 import '/config/all_imports.dart';
 
 class CreateComplaintsController extends GetxController with Helpers {
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
   final CreateComplaintUseCase _sendComplaintUseCase =
       instance<CreateComplaintUseCase>();
   late TextEditingController detailOfComplaint;
@@ -38,7 +36,8 @@ class CreateComplaintsController extends GetxController with Helpers {
     if (_checkData()) {
       (await _sendComplaintUseCase.execute(
         CreateComplaintInput(
-          driverId: _sharedPreferences.getUserId(),
+          driverId:
+              SharedPreferencesController.getInt(SharedPreferencesKeys.userId),
           addressOfComplaint: addressOfComplaint.text,
           complaintsName: complaintName.text,
           dateOfIncidentOrProblem: dateOfComplaint.text,

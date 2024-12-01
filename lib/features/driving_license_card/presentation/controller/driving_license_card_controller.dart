@@ -3,9 +3,6 @@ import '/config/all_imports.dart';
 class DrivingLicenseCardController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
-
   late String licenseNumber;
   late String expiryDate;
 
@@ -29,16 +26,27 @@ class DrivingLicenseCardController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    licenseNumber = _sharedPreferences.getLicenseOrJobNumber();
-    expiryDate = _sharedPreferences.getExpiryDateLicense();
-    releaseDate = _sharedPreferences.getReleaseDateLicense();
-    idNumber = _sharedPreferences.getIdNumber();
-    nameAr = _sharedPreferences.getFullNameAr();
-    nameEn = _sharedPreferences.getFullNameEn();
-    licenseLevels = _sharedPreferences.getLicenseLevelsOfLicense();
-    imageDriver = _sharedPreferences.getImage();
+    licenseNumber = SharedPreferencesController.getString(
+        SharedPreferencesKeys.licenseOrJobNumber);
+    expiryDate = SharedPreferencesController.getString(
+        SharedPreferencesKeys.expiryDateLicense);
+
+    releaseDate = SharedPreferencesController.getString(
+        SharedPreferencesKeys.releaseDateLicense);
+
+    idNumber =
+        SharedPreferencesController.getString(SharedPreferencesKeys.idNumber);
+    nameAr =
+        SharedPreferencesController.getString(SharedPreferencesKeys.fullNameAr);
+    nameEn =
+        SharedPreferencesController.getString(SharedPreferencesKeys.fullNameEn);
+
+    licenseLevels = SharedPreferencesController.getString(
+        SharedPreferencesKeys.licenseLevelsOfLicense);
     driverName =
-        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
+        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
+    imageDriver =
+        SharedPreferencesController.getString(SharedPreferencesKeys.image);
   }
 
   void openEndDrawer() {

@@ -2,7 +2,7 @@ import '/config/all_imports.dart';
 
 class ListOfReasonsOfViolationsUseCase
     extends BaseOutUseCase<ListOfReasonsOfViolationsModel> {
-  final ListOfReasonsOfViolationsRepository _repository;
+  final ListReasonsOfViolationsRepository _repository;
 
   ListOfReasonsOfViolationsUseCase(this._repository);
 

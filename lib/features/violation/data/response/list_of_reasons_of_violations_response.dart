@@ -5,7 +5,7 @@ part 'list_of_reasons_of_violations_response.g.dart';
 @JsonSerializable()
 class ListOfReasonsOfViolationsResponse {
   @JsonKey(name: ApiKeys.data)
-  List<ReasonOfViolationDataResponse>? data;
+  List<ReasonOfViolationResponse>? data;
 
   ListOfReasonsOfViolationsResponse({
     required this.data,

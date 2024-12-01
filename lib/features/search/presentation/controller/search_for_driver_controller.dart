@@ -4,8 +4,6 @@ class SearchForDriverController extends GetxController with Helpers {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final SearchForDriverUseCase _searchForDriverUseCase =
       instance<SearchForDriverUseCase>();
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
 
   late TextEditingController licenseNumberController;
   bool loading = false;
@@ -32,8 +30,9 @@ class SearchForDriverController extends GetxController with Helpers {
   void onInit() {
     super.onInit();
     policeName =
-        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
-    policeImage = _sharedPreferences.getImage();
+    '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
+    policeImage =
+        SharedPreferencesController.getString(SharedPreferencesKeys.image);
     licenseNumberController = TextEditingController();
   }
 

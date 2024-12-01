@@ -29,9 +29,24 @@ Widget driverDrawer({
           children: [
             CircleAvatar(
               radius: ManagerRadius.r40,
-              // backgroundImage: NetworkImage(driverImage),
-              backgroundImage: AssetImage(driverImage),
+              backgroundImage: CachedNetworkImageProvider(driverImage),
+              backgroundColor: ManagerColors.white,
             ),
+            // CachedNetworkImage(
+            //   imageUrl:
+            //   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY5QpkHeEVJzI-D1FgkyVIEn4Tl_vLvsENnQ&s',
+            //   placeholder: (context, url) => myLoading(),
+            //   imageBuilder: (context, imageProvider) => CircleAvatar(
+            //     radius: ManagerRadius.r40,
+            //     backgroundImage: imageProvider,
+            //     backgroundColor: ManagerColors.white,
+            //   ),
+            //   errorWidget: (context, url, error) => CircleAvatar(
+            //     radius: ManagerRadius.r40,
+            //     backgroundColor: ManagerColors.white,
+            //   ),
+            // ),
+
             SizedBox(width: ManagerWidth.w10),
             Text(
               '${ManagerStrings.theDriver}: $driverName',

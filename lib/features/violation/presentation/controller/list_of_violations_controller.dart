@@ -2,10 +2,11 @@ import '/config/all_imports.dart';
 
 class ListOfViolationsController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final ViolationsDatabaseController _violationsDatabase =
-      instance<ViolationsDatabaseController>();
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
+
+  final ListOfReasonsOfViolationsUseCase _listOfReasonsOfViolationsUseCase =
+      instance<ListOfReasonsOfViolationsUseCase>();
+  final ReasonOfViolationUseCase _reasonsOfViolationsUseCase =
+      instance<ReasonOfViolationUseCase>();
 
   late String policeName;
 
@@ -13,13 +14,28 @@ class ListOfViolationsController extends GetxController {
   bool loading = false;
 
   List<ViolationModel> data = <ViolationModel>[];
+  List<ReasonOfViolationModel> reasonsViolations = <ReasonOfViolationModel>[];
 
   @override
   void onInit() {
     super.onInit();
+    _getReasonsOfViolations();
     policeName =
-        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
-    policeImage = _sharedPreferences.getImage();
+        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
+    policeImage =
+        SharedPreferencesController.getString(SharedPreferencesKeys.image);
+  }
+
+  void _getReasonsOfViolations() async {
+    loading = true;
+    (await _listOfReasonsOfViolationsUseCase.execute()).fold(
+      (l) {},
+      (r) {
+        reasonsViolations = r.data;
+      },
+    );
+    loading = false;
+    update();
   }
 
   void openEndDrawer() {
@@ -31,7 +47,7 @@ class ListOfViolationsController extends GetxController {
 
   void getViolationsOfPolice() async {
     loading = true;
-    data = await _violationsDatabase.read();
+    // data = await _violationsDatabase.read();
     loading = false;
     update();
   }

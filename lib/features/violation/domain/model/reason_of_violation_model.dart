@@ -1,9 +1,9 @@
-class ReasonOfViolationDataModel {
+class ReasonOfViolationModel {
   int id;
   double price;
   String reason;
 
-  ReasonOfViolationDataModel({
+  ReasonOfViolationModel({
     required this.id,
     required this.price,
     required this.reason,

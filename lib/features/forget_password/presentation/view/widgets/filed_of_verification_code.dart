@@ -9,7 +9,9 @@ Widget filedOfVerificationCode({
   return Expanded(
     child: Padding(
       padding: EdgeInsetsDirectional.only(
-        end: ManagerWidth.w20,
+        // end: ManagerWidth.w20,
+        end: ManagerWidth.w6,
+
         bottom: ManagerHeight.h10,
       ),
       child: mainTextField(
@@ -26,7 +28,7 @@ Widget filedOfVerificationCode({
             ? ManagerColors.primaryColor
             : ManagerColors.lightSilver,
         contentPadding: EdgeInsetsDirectional.only(
-          top: ManagerHeight.h10,
+          // top: ManagerHeight.h10,
           bottom: ManagerHeight.h10,
         ),
       ),

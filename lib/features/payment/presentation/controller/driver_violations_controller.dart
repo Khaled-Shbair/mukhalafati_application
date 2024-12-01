@@ -1,14 +1,12 @@
 import '/config/all_imports.dart';
 
-class ViolationPaymentController extends GetxController {
-  static ViolationPaymentController get to => Get.find();
+class DriverViolationsController extends GetxController {
+  static DriverViolationsController get to => Get.find();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   late ExpansionTileController expansionTileController;
+  final DriverViolationsUseCase _driverViolationsUseCase =
+      instance<DriverViolationsUseCase>();
 
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
-  final ViolationsDatabaseController _violationsDatabase =
-      instance<ViolationsDatabaseController>();
   late String driverName;
   late String driverImage;
   bool loading = false;
@@ -21,8 +19,9 @@ class ViolationPaymentController extends GetxController {
   @override
   void onInit() {
     driverName =
-        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
-    driverImage = _sharedPreferences.getImage();
+        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
+    driverImage =
+        SharedPreferencesController.getString(SharedPreferencesKeys.image);
     getDriverViolation();
     expansionTileController = ExpansionTileController();
     super.onInit();
@@ -124,9 +123,22 @@ class ViolationPaymentController extends GetxController {
     loading = true;
     allViolations = [];
     viewViolations = [];
-    allViolations =
-        await _violationsDatabase.read(_sharedPreferences.getUserId());
-    viewViolations = allViolations;
+    update();
+    (await _driverViolationsUseCase.execute(
+      DriverViolationsUseCaseInput(
+        driverId:
+            SharedPreferencesController.getInt(SharedPreferencesKeys.userId),
+      ),
+    ))
+        .fold(
+      (l) {
+        loading = false;
+      },
+      (r) {
+        allViolations = r.data;
+        viewViolations = allViolations;
+      },
+    );
     loading = false;
     update();
   }

@@ -7,16 +7,15 @@ abstract class RemotePoliceManLoginDataSource {
 class RemotePoliceManLoginDataSourceImpl
     extends RemotePoliceManLoginDataSource {
   final AppApi _appApi;
-  final AppSettingsSharedPreferences _sharedPreferences;
 
-  RemotePoliceManLoginDataSourceImpl(this._appApi, this._sharedPreferences);
+  RemotePoliceManLoginDataSourceImpl(this._appApi);
 
   @override
   Future<PoliceManLoginResponse> login(PoliceManLoginRequest request) async {
     return await _appApi.policeManLogin(
       request.jobNumber,
       request.password,
-      _sharedPreferences.getLanguage(),
+      SharedPreferencesController.getString(SharedPreferencesKeys.language),
     );
   }
 }

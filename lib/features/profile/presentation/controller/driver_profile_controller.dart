@@ -2,8 +2,6 @@ import '/config/all_imports.dart';
 
 class DriverProfileController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
 
   late String driverName;
 
@@ -18,16 +16,23 @@ class DriverProfileController extends GetxController {
   void onInit() {
     super.onInit();
     driverName =
-        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
-    driverImage = _sharedPreferences.getImage();
-    driverNameController =
-        TextEditingController(text: _sharedPreferences.getFullNameAr());
-    phoneNumberController =
-        TextEditingController(text: _sharedPreferences.getPhoneNumber());
-    idNumberController =
-        TextEditingController(text: _sharedPreferences.getIdNumber());
-    licenceNumberController =
-        TextEditingController(text: _sharedPreferences.getLicenseOrJobNumber());
+        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
+
+    driverImage =
+        SharedPreferencesController.getString(SharedPreferencesKeys.image);
+
+    driverNameController = TextEditingController(
+        text: SharedPreferencesController.getString(
+            SharedPreferencesKeys.fullNameAr));
+    phoneNumberController = TextEditingController(
+        text: SharedPreferencesController.getString(
+            SharedPreferencesKeys.phoneNumber));
+    idNumberController = TextEditingController(
+        text: SharedPreferencesController.getString(
+            SharedPreferencesKeys.idNumber));
+    licenceNumberController = TextEditingController(
+        text: SharedPreferencesController.getString(
+            SharedPreferencesKeys.licenseOrJobNumber));
   }
 
   @override
@@ -67,11 +72,18 @@ class DriverProfileController extends GetxController {
             phoneNumberController.text.isNotEmpty &&
             idNumberController.text.isNotEmpty &&
             licenceNumberController.text.isNotEmpty &&
-            driverNameController.text != _sharedPreferences.getFullNameAr() ||
-        phoneNumberController.text != _sharedPreferences.getPhoneNumber() ||
-        idNumberController.text != _sharedPreferences.getIdNumber() ||
+            driverNameController.text !=
+                SharedPreferencesController.getString(
+                    SharedPreferencesKeys.fullNameAr) ||
+        phoneNumberController.text !=
+            SharedPreferencesController.getString(
+                SharedPreferencesKeys.phoneNumber) ||
+        idNumberController.text !=
+            SharedPreferencesController.getString(
+                SharedPreferencesKeys.idNumber) ||
         licenceNumberController.text !=
-            _sharedPreferences.getLicenseOrJobNumber()) {
+            SharedPreferencesController.getString(
+                SharedPreferencesKeys.licenseOrJobNumber)) {
       return true;
     } else {
       return false;
