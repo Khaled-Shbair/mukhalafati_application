@@ -5,8 +5,6 @@ class SearchOnResultsTestsOfLicenseController extends GetxController
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final SearchOnResultsTestsOfLicenseUseCase _useCase =
       instance<SearchOnResultsTestsOfLicenseUseCase>();
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
 
   late TextEditingController idNumber;
   late String resultName;
@@ -26,8 +24,9 @@ class SearchOnResultsTestsOfLicenseController extends GetxController
   void onInit() {
     super.onInit();
     driverName =
-        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
-    driverImage = _sharedPreferences.getImage();
+        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
+    driverImage =
+        SharedPreferencesController.getString(SharedPreferencesKeys.image);
     idNumber = TextEditingController();
   }
 

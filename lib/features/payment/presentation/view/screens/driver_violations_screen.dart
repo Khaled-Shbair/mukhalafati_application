@@ -1,11 +1,11 @@
 import '/config/all_imports.dart';
 
-class ViolationPaymentScreen extends StatelessWidget {
-  const ViolationPaymentScreen({super.key});
+class DriverViolationsScreen extends StatelessWidget {
+  const DriverViolationsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ViolationPaymentController>(
+    return GetBuilder<DriverViolationsController>(
       builder: (controller) {
         return Scaffold(
           key: controller.scaffoldKey,

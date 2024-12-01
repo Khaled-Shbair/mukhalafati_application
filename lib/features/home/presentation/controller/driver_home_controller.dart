@@ -2,8 +2,6 @@ import '/config/all_imports.dart';
 
 class DriverHomeController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
 
   late String driverName;
 
@@ -26,15 +24,23 @@ class DriverHomeController extends GetxController {
   }
 
   void _data() {
-    paidViolation = _sharedPreferences.getNumberOfViolationsPaid();
-    counterOfNotification = _sharedPreferences.getNumberOfUnReadNotifications();
-    unPaidViolation = _sharedPreferences.getNumberOfViolationsUnPaid();
-    driverName =
-        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
-    driverImage = _sharedPreferences.getImage();
-    debugPrint(_sharedPreferences.getImage());
+    paidViolation = SharedPreferencesController.getInt(
+        SharedPreferencesKeys.numberOfViolationsPaid);
 
-    driverFirstName = _sharedPreferences.getFirstName();
+    counterOfNotification = SharedPreferencesController.getInt(
+        SharedPreferencesKeys.numberOfUnReadNotifications);
+
+    unPaidViolation = SharedPreferencesController.getInt(
+        SharedPreferencesKeys.numberOfUnReadNotifications);
+
+    driverFirstName =
+        SharedPreferencesController.getString(SharedPreferencesKeys.firstName);
+
+    driverName =
+        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
+    driverImage =
+        SharedPreferencesController.getString(SharedPreferencesKeys.image);
+
     update();
   }
 

@@ -1,6 +1,6 @@
 import '/config/all_imports.dart';
 
-abstract class ListOfReasonsOfViolationsRepository {
+abstract class ListReasonsOfViolationsRepository {
   Future<Either<Failure, ListOfReasonsOfViolationsModel>>
       listOfReasonsOfViolations();
 }

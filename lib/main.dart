@@ -2,7 +2,7 @@ import 'config/all_imports.dart';
 
 void main() async {
   await initModule();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -39,7 +39,16 @@ class MyApp extends StatelessWidget {
             ),
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.splashScreen,
+          initialRoute: SharedPreferencesController.getBool(
+                  SharedPreferencesKeys.onBoarding)
+              ? SharedPreferencesController.getBool(
+                      SharedPreferencesKeys.rememberMeDriver)
+                  ? Routes.driverHomeScreen
+                  : SharedPreferencesController.getBool(
+                          SharedPreferencesKeys.rememberMePolice)
+                      ? Routes.policeManHomeScreen
+                      : Routes.welcomeScreen
+              : Routes.onBoardingScreen,
           onGenerateRoute: RouteGenerator.getRoute,
           translations: Translation(),
           locale: const Locale(LocaleConstants.arabicLanguage),

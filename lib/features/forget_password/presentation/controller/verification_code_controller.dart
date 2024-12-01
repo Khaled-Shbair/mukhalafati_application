@@ -1,24 +1,38 @@
 import '/config/all_imports.dart';
 
 class VerificationCodeController extends GetxController with Helpers {
-  final DriverDatabaseController _driverDatabase =
-      instance<DriverDatabaseController>();
-  final PoliceDatabaseController _policeDatabase =
-      instance<PoliceDatabaseController>();
   late TextEditingController oneNumberOfCode;
   late TextEditingController twoNumberOfCode;
   late TextEditingController threeNumberOfCode;
   late TextEditingController fourNumberOfCode;
+  late TextEditingController fiveNumberOfCode;
+  late TextEditingController sexNumberOfCode;
   late FocusNode oneFocusNode;
   late FocusNode twoFocusNode;
   late FocusNode threeFocusNode;
   late FocusNode fourFocusNode;
+  late FocusNode fiveFocusNode;
+  late FocusNode sexFocusNode;
   bool changeBorderColorOneFiled = false;
   bool changeBorderColorTwoFiled = false;
   bool changeBorderColorThreeFiled = false;
   bool changeBorderColorFourFiled = false;
+  bool changeBorderColorFiveFiled = false;
+  bool changeBorderColorSexFiled = false;
 
   bool returnCodeIsInCorrect = false;
+  late int _verificationCodeInput;
+  final SendVerificationCodeUseCase _sendVerificationCodeUseCase =
+      instance<SendVerificationCodeUseCase>();
+
+  void sendVerificationCode(phoneNumber) async {
+    (await _sendVerificationCodeUseCase.execute(
+            SendVerificationInputCodeUseCase(phoneNumber: phoneNumber)))
+        .fold(
+      (l) {},
+      (r) {},
+    );
+  }
 
   @override
   void onInit() {
@@ -27,10 +41,14 @@ class VerificationCodeController extends GetxController with Helpers {
     twoNumberOfCode = TextEditingController();
     threeNumberOfCode = TextEditingController();
     fourNumberOfCode = TextEditingController();
+    fiveNumberOfCode = TextEditingController();
+    sexNumberOfCode = TextEditingController();
     oneFocusNode = FocusNode();
     twoFocusNode = FocusNode();
     threeFocusNode = FocusNode();
     fourFocusNode = FocusNode();
+    fiveFocusNode = FocusNode();
+    sexFocusNode = FocusNode();
   }
 
   @override
@@ -39,10 +57,14 @@ class VerificationCodeController extends GetxController with Helpers {
     twoNumberOfCode.dispose();
     threeNumberOfCode.dispose();
     fourNumberOfCode.dispose();
+    fiveNumberOfCode.dispose();
+    sexNumberOfCode.dispose();
     oneFocusNode.dispose();
     twoFocusNode.dispose();
     threeFocusNode.dispose();
     fourFocusNode.dispose();
+    fiveFocusNode.dispose();
+    sexFocusNode.dispose();
     super.dispose();
   }
 
@@ -51,13 +73,18 @@ class VerificationCodeController extends GetxController with Helpers {
     disposeVerificationCode();
   }
 
-  void _diverVerifyButton(int id, int driverVerificationCode) async {
+  void _verificationCode() {
+    _verificationCodeInput = int.parse(
+        '${oneNumberOfCode.text}${twoNumberOfCode.text}${threeNumberOfCode.text}${fourNumberOfCode.text}${fiveNumberOfCode.text}${sexNumberOfCode.text}');
+    update();
+  }
+
+  void _diverVerifyButton(int id, int verificationCode) async {
     if (_checkData()) {
-      int enterVerificationCode = int.parse(
-          '${oneNumberOfCode.text}${twoNumberOfCode.text}${threeNumberOfCode.text}${fourNumberOfCode.text}');
-      DriverModel? driver = await _driverDatabase.driver(id);
-      if (driver != null &&
-          driver.driverVerificationCode == enterVerificationCode) {
+      _verificationCode();
+      debugPrint('_verificationCodeInput:$_verificationCodeInput');
+      debugPrint('verificationCode:$verificationCode');
+      if (verificationCode == _verificationCodeInput) {
         Get.offAndToNamed(
           Routes.changePasswordScreen,
           arguments: [true, id],
@@ -66,18 +93,16 @@ class VerificationCodeController extends GetxController with Helpers {
         _incorrectEntered();
       }
     } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+      showSnackBar(message: ManagerStrings.pleaseEnterVerificationCode);
     }
-    update();
   }
 
-  void _policeVerifyButton(int id, int policeVerificationCode) async {
+  void _policeVerifyButton(int id, int verificationCode) async {
     if (_checkData()) {
-      int enterVerificationCode = int.parse(
-          '${oneNumberOfCode.text}${twoNumberOfCode.text}${threeNumberOfCode.text}${fourNumberOfCode.text}');
-      PoliceModel? police = await _policeDatabase.police(id);
-      if (police != null &&
-          police.policeVerificationCode == enterVerificationCode) {
+      _verificationCode();
+      debugPrint('_verificationCodeInput:$_verificationCodeInput');
+      debugPrint('verificationCode:$verificationCode');
+      if (verificationCode == _verificationCodeInput) {
         Get.offAndToNamed(
           Routes.changePasswordScreen,
           arguments: [false, id],
@@ -86,9 +111,8 @@ class VerificationCodeController extends GetxController with Helpers {
         _incorrectEntered();
       }
     } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+      showSnackBar(message: ManagerStrings.pleaseEnterVerificationCode);
     }
-    update();
   }
 
   void verifyButton(int id, bool isDriver, int verificationCode) async {
@@ -135,9 +159,31 @@ class VerificationCodeController extends GetxController with Helpers {
   void onChangeFourFiled(value) {
     if (value.isNotEmpty) {
       changeBorderColorFourFiled = true;
+      fiveFocusNode.requestFocus();
     } else {
       changeBorderColorFourFiled = false;
       threeFocusNode.requestFocus();
+    }
+    update();
+  }
+
+  void onChangeFiveFiled(value) {
+    if (value.isNotEmpty) {
+      changeBorderColorFiveFiled = true;
+      sexFocusNode.requestFocus();
+    } else {
+      changeBorderColorFiveFiled = false;
+      fourFocusNode.requestFocus();
+    }
+    update();
+  }
+
+  void onChangeSexFiled(value) {
+    if (value.isNotEmpty) {
+      changeBorderColorFourFiled = true;
+    } else {
+      changeBorderColorFourFiled = false;
+      fiveFocusNode.requestFocus();
     }
     update();
   }

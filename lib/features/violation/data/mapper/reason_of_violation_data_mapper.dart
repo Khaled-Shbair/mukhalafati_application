@@ -1,8 +1,8 @@
 import '/config/all_imports.dart';
 
-extension ReasonOfViolationDataMapper on ReasonOfViolationDataResponse {
+extension ReasonOfViolationDataMapper on ReasonOfViolationResponse {
   toDomain() {
-    return ReasonOfViolationDataModel(
+    return ReasonOfViolationModel(
       id: this.id.onNull(),
       price: price.onNull(),
       reason: reason.onNull(),

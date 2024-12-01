@@ -2,10 +2,9 @@ import '/config/all_imports.dart';
 
 class PaymentController extends GetxController with Helpers {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
-  final ViolationsDatabaseController _violationsDatabase =
-      instance<ViolationsDatabaseController>();
+
+  final PaymentViolationUseCase _paymentViolationUseCase =
+      instance<PaymentViolationUseCase>();
   late PageController pageController;
   int currentStep = 0;
   bool paymentSelectionDone = false;
@@ -30,9 +29,11 @@ class PaymentController extends GetxController with Helpers {
   @override
   void onInit() {
     super.onInit();
+
     driverName =
-        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
-    driverImage = _sharedPreferences.getImage();
+    '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
+    driverImage =
+        SharedPreferencesController.getString(SharedPreferencesKeys.image);
     cardHolderName = TextEditingController();
     cardNumber = TextEditingController();
     securityCode = TextEditingController();
@@ -119,13 +120,26 @@ class PaymentController extends GetxController with Helpers {
   }
 
   void paymentConfirmationButton(int violationId) async {
-    bool isSuccessful =
-        await _violationsDatabase.paymentViolation(paymentBy, violationId);
-    debugPrint(isSuccessful.toString());
-    ViolationModel? s = await _violationsDatabase.show(violationId.toString());
-    debugPrint(
-        '${s!.violationPayedBy} ${s.violationState} ${s.priceOfViolation}');
+    (await _paymentViolationUseCase.execute(
+      PaymentViolationUseCaseInput(
+        violationId: violationId,
+        violationState: true,
+        violationPayedBy: paymentBy,
+        paymentDateAndTime:
+            '${DetermineDateAndTime.dateNow} ${DetermineDateAndTime.timeNow}',
+      ),
+    ))
+        .fold(
+      (l) {
+        _successfulOrFallPaymentProcess(false);
+      },
+      (r) {
+        _successfulOrFallPaymentProcess(true);
+      },
+    );
+  }
 
+  void _successfulOrFallPaymentProcess(bool isSuccessful) {
     showDialog(
       context: Get.context!,
       barrierColor: ManagerColors.white,
@@ -146,7 +160,7 @@ class PaymentController extends GetxController with Helpers {
   }
 
   void cancelButton() {
-    ViolationPaymentController.to.getDriverViolation();
+    DriverViolationsController.to.getDriverViolation();
     Get.back();
     Get.back();
     Get.back();

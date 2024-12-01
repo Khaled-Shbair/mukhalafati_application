@@ -11,12 +11,12 @@ ListOfReasonsOfViolationsResponse _$ListOfReasonsOfViolationsResponseFromJson(
     ListOfReasonsOfViolationsResponse(
       data: (json['data'] as List<dynamic>?)
           ?.map((e) =>
-              ReasonOfViolationDataResponse.fromJson(e as Map<String, dynamic>))
+          ReasonOfViolationResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$ListOfReasonsOfViolationsResponseToJson(
-        ListOfReasonsOfViolationsResponse instance) =>
+    ListOfReasonsOfViolationsResponse instance) =>
     <String, dynamic>{
       'data': instance.data,
     };

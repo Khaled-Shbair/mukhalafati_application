@@ -8,11 +8,9 @@ abstract class RemoteDriverChangePasswordDataSource {
 class RemoteDriverChangePasswordDataSourceImpl
     extends RemoteDriverChangePasswordDataSource {
   final AppApi _appApi;
-  final AppSettingsSharedPreferences _sharedPreferences;
 
   RemoteDriverChangePasswordDataSourceImpl(
     this._appApi,
-    this._sharedPreferences,
   );
 
   @override
@@ -22,7 +20,7 @@ class RemoteDriverChangePasswordDataSourceImpl
       request.driverId,
       request.newPassword,
       request.confirmPassword,
-      _sharedPreferences.getLanguage(),
+      SharedPreferencesController.getString(SharedPreferencesKeys.language),
     );
   }
 }

@@ -3,55 +3,57 @@ import '/config/all_imports.dart';
 class CreateViolationController extends GetxController with Helpers {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  // final ViolationsDatabaseController _violationsDatabase = ViolationsDatabaseController();
-  final ViolationsDatabaseController _violationsDatabase =
-      instance<ViolationsDatabaseController>();
+  final CreateViolationUseCase _createViolationUseCase =
+      instance<CreateViolationUseCase>();
 
-  late TextEditingController driverNameController;
-  late TextEditingController driverIdController;
-  late TextEditingController ownerNameController;
-  late TextEditingController ownerIdController;
-  late TextEditingController vehicleNumberController;
-  late TextEditingController vehicleTypeController;
-  late TextEditingController vehicleColorController;
-  late TextEditingController violationTimeController;
-  late TextEditingController violationDateController;
-  late TextEditingController placeOfViolationController;
-  late TextEditingController reasonForViolationController;
+  late TextEditingController driverName;
+  late TextEditingController driverIdNumber;
+  late TextEditingController ownerName;
+  late TextEditingController ownerId;
+  late TextEditingController vehicleNumber;
+  late TextEditingController vehicleType;
+  late TextEditingController vehicleColor;
+  late TextEditingController violationTime;
+  late TextEditingController violationDate;
+  late TextEditingController placeOfViolation;
+  late TextEditingController reasonForViolation;
   int _hour = 0;
-  String policeName = 'خالد شبير';
-  String policeImage =
-      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
+  late String policeName;
+  late String policeImage;
 
   @override
   void onInit() {
-    driverNameController = TextEditingController();
-    driverIdController = TextEditingController();
-    ownerNameController = TextEditingController();
-    ownerIdController = TextEditingController();
-    vehicleNumberController = TextEditingController();
-    vehicleTypeController = TextEditingController();
-    vehicleColorController = TextEditingController();
-    violationTimeController = TextEditingController(text: _time());
-    violationDateController = TextEditingController(text: _date());
-    placeOfViolationController = TextEditingController();
-    reasonForViolationController = TextEditingController();
+    policeName =
+        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
+    policeImage =
+        SharedPreferencesController.getString(SharedPreferencesKeys.image);
+    driverName = TextEditingController();
+    driverIdNumber = TextEditingController();
+    ownerName = TextEditingController();
+    ownerId = TextEditingController();
+    vehicleNumber = TextEditingController();
+    vehicleType = TextEditingController();
+    vehicleColor = TextEditingController();
+    violationTime = TextEditingController(text: _time());
+    violationDate = TextEditingController(text: _date());
+    placeOfViolation = TextEditingController();
+    reasonForViolation = TextEditingController();
     super.onInit();
   }
 
   @override
   void dispose() {
-    driverNameController.dispose();
-    driverIdController.dispose();
-    ownerNameController.dispose();
-    ownerIdController.dispose();
-    vehicleNumberController.dispose();
-    vehicleTypeController.dispose();
-    vehicleColorController.dispose();
-    violationTimeController.dispose();
-    violationDateController.dispose();
-    placeOfViolationController.dispose();
-    reasonForViolationController.dispose();
+    driverName.dispose();
+    driverIdNumber.dispose();
+    ownerName.dispose();
+    ownerId.dispose();
+    vehicleNumber.dispose();
+    vehicleType.dispose();
+    vehicleColor.dispose();
+    violationTime.dispose();
+    violationDate.dispose();
+    placeOfViolation.dispose();
+    reasonForViolation.dispose();
     super.dispose();
   }
 
@@ -128,12 +130,37 @@ class CreateViolationController extends GetxController with Helpers {
     }
   }
 
-  void createViolation() async {
+  void createViolation(context) async {
     if (_checkDataViolation()) {
-      await confirmInformationDialog(
-        context: Get.context!,
-        text: ManagerStrings.theViolationWasSuccessfullyCreated,
-        closeButton: () => Get.offAllNamed(Routes.policeManHomeScreen),
+      (await _createViolationUseCase.execute(
+        CreateViolationUseCaseInput(
+            priceOfViolation: 2,
+            violationReason: '',
+            driverIdNumber: driverIdNumber.text,
+            driverName: driverName.text,
+            ownerName: ownerName.text,
+            ownerId: ownerId.text,
+            violationAddress: placeOfViolation.text,
+            reasonForViolation: reasonForViolation.text,
+            vehicleColor: vehicleColor.text,
+            vehicleNumber: vehicleNumber.text,
+            violationDate: violationDate.text,
+            vehicleType: vehicleType.text,
+            violationTime: violationTime.text,
+            policeManId: SharedPreferencesController.getInt(
+                SharedPreferencesKeys.userId)),
+      ))
+          .fold(
+        (l) {
+          showSnackBar(message: l.message);
+        },
+        (r) async {
+          await confirmInformationDialog(
+            context: context,
+            text: ManagerStrings.theViolationWasSuccessfullyCreated,
+            closeButton: () => Get.offAllNamed(Routes.policeManHomeScreen),
+          );
+        },
       );
     } else {
       showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
@@ -141,17 +168,17 @@ class CreateViolationController extends GetxController with Helpers {
   }
 
   bool _checkDataViolation() {
-    if (driverNameController.text.isNotEmpty &&
-        driverIdController.text.isNotEmpty &&
-        ownerNameController.text.isNotEmpty &&
-        ownerIdController.text.isNotEmpty &&
-        vehicleNumberController.text.isNotEmpty &&
-        vehicleTypeController.text.isNotEmpty &&
-        vehicleColorController.text.isNotEmpty &&
-        placeOfViolationController.text.isNotEmpty &&
-        reasonForViolationController.text.isNotEmpty &&
-        violationTimeController.text.isNotEmpty &&
-        violationDateController.text.isNotEmpty) {
+    if (driverName.text.isNotEmpty &&
+        driverIdNumber.text.isNotEmpty &&
+        ownerName.text.isNotEmpty &&
+        ownerId.text.isNotEmpty &&
+        vehicleNumber.text.isNotEmpty &&
+        vehicleType.text.isNotEmpty &&
+        vehicleColor.text.isNotEmpty &&
+        placeOfViolation.text.isNotEmpty &&
+        reasonForViolation.text.isNotEmpty &&
+        violationTime.text.isNotEmpty &&
+        violationDate.text.isNotEmpty) {
       return true;
     } else {
       return false;

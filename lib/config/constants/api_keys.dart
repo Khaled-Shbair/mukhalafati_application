@@ -10,6 +10,7 @@ class ApiKeys {
   static const String inputPassword = 'input_password';
   static const String newPassword = 'new_password';
   static const String confirmPassword = 'confirm_password';
+  static const String code = 'code';
 
   // Driver and Police man Keys
   static const String id = 'id';

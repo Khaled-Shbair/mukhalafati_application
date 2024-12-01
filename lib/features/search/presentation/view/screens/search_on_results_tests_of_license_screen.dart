@@ -71,7 +71,7 @@ class SearchOnResultsTestsOfLicenseScreen extends StatelessWidget {
                       Expanded(
                         child: mainTextField(
                           contentPadding: EdgeInsetsDirectional.zero,
-                          controller: controller.idNumberController,
+                          controller: controller.idNumber,
                           hintText: ManagerStrings.idNumber,
                           color: ManagerColors.lotion,
                           borderColor: ManagerColors.lotion,
@@ -82,8 +82,11 @@ class SearchOnResultsTestsOfLicenseScreen extends StatelessWidget {
                   ),
                 ),
                 if (controller.loading == true) ...{
+                  Spacer(),
                   myLoading(),
-                } else if (controller.result == true) ...{
+                  Spacer(),
+                } else if (controller.result == true &&
+                    controller.loading == false) ...{
                   resultOfLicense(
                     resultName: controller.resultName,
                     statusLicenseTest: controller.licenseTestResults,

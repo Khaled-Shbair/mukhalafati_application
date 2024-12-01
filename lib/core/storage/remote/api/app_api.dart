@@ -109,6 +109,15 @@ abstract class AppApi {
 
   @POST(ApiConstants.getDriverViolations)
   Future<DriverViolationsResponse> getViolationsByDriver(
-      @Field(ApiKeys.driverId) driverId,
+    @Field(ApiKeys.driverId) driverId,
+  );
+
+  @POST(ApiConstants.getListOfViolationsForPolice)
+  Future<ListOfViolationsForPoliceResponse> getListOfViolationsForPolice(
+    @Field(ApiKeys.policeManId) policeManId,
+  );
+  @POST(ApiConstants.sendVerificationCode)
+  Future<SendVerificationCodeResponse> sendVerificationCode(
+      @Field(ApiKeys.phoneNumber) phoneNumber,
       );
 }

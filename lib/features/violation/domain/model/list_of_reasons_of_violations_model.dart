@@ -1,7 +1,7 @@
 import '/config/all_imports.dart';
 
-class ListOfReasonsOfViolationsModel {
-  List<ReasonOfViolationDataModel> data;
+class ListOfReasonsOfViolationsModel  {
+  List<ReasonOfViolationModel> data;
 
   ListOfReasonsOfViolationsModel({
     required this.data,

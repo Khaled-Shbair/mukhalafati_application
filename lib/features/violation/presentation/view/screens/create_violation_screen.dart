@@ -69,25 +69,25 @@ class CreateViolationScreen extends StatelessWidget {
                     ),
                     SizedBox(height: ManagerHeight.h19),
                     mainTextField(
-                      controller: controller.driverNameController,
+                      controller: controller.driverName,
                       labelText: ManagerStrings.driverName,
                       keyboardType: TextInputType.name,
                     ),
                     mySizedBox(),
                     mainTextField(
-                      controller: controller.driverIdController,
+                      controller: controller.driverIdNumber,
                       labelText: ManagerStrings.driverId,
                       maxLength: AppConstants.maxLengthOfIDNumber,
                     ),
                     mySizedBox(),
                     mainTextField(
-                      controller: controller.ownerNameController,
+                      controller: controller.ownerName,
                       labelText: ManagerStrings.ownerName,
                       keyboardType: TextInputType.name,
                     ),
                     mySizedBox(),
                     mainTextField(
-                      controller: controller.ownerIdController,
+                      controller: controller.ownerId,
                       labelText: ManagerStrings.ownerId,
                       maxLength: AppConstants.maxLengthOfIDNumber,
                     ),
@@ -96,7 +96,7 @@ class CreateViolationScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: mainTextField(
-                            controller: controller.vehicleNumberController,
+                            controller: controller.vehicleNumber,
                             labelText: ManagerStrings.vehicleNumber,
                             maxLength: AppConstants.maxLengthOfVehicleNumber,
                           ),
@@ -104,7 +104,7 @@ class CreateViolationScreen extends StatelessWidget {
                         SizedBox(width: ManagerWidth.w10),
                         Expanded(
                           child: mainTextField(
-                            controller: controller.vehicleTypeController,
+                            controller: controller.vehicleType,
                             labelText: ManagerStrings.vehicleType,
                             keyboardType: TextInputType.text,
                           ),
@@ -112,7 +112,7 @@ class CreateViolationScreen extends StatelessWidget {
                         SizedBox(width: ManagerWidth.w10),
                         Expanded(
                           child: mainTextField(
-                            controller: controller.vehicleColorController,
+                            controller: controller.vehicleColor,
                             labelText: ManagerStrings.vehicleColor,
                             keyboardType: TextInputType.text,
                             maxLength: AppConstants.maxLengthOfVehicleColor,
@@ -125,7 +125,7 @@ class CreateViolationScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: mainTextField(
-                            controller: controller.violationTimeController,
+                            controller: controller.violationTime,
                             labelText: ManagerStrings.violationTime,
                             readOnly: true,
                           ),
@@ -133,7 +133,7 @@ class CreateViolationScreen extends StatelessWidget {
                         SizedBox(width: ManagerWidth.w10),
                         Expanded(
                           child: mainTextField(
-                            controller: controller.violationDateController,
+                            controller: controller.violationDate,
                             labelText: ManagerStrings.violationDate,
                             readOnly: true,
                           ),
@@ -142,13 +142,13 @@ class CreateViolationScreen extends StatelessWidget {
                     ),
                     mySizedBox(),
                     mainTextField(
-                      controller: controller.placeOfViolationController,
+                      controller: controller.placeOfViolation,
                       labelText: ManagerStrings.placeOfViolation,
                       keyboardType: TextInputType.text,
                     ),
                     mySizedBox(),
                     mainTextField(
-                      controller: controller.reasonForViolationController,
+                      controller: controller.reasonForViolation,
                       labelText: ManagerStrings.reasonForViolation,
                       keyboardType: TextInputType.text,
                     ),
@@ -156,7 +156,7 @@ class CreateViolationScreen extends StatelessWidget {
                 ),
               ),
               mainButton(
-                onPressed: () => controller.createViolation(),
+                onPressed: () => controller.createViolation(context),
                 child: Text(
                   ManagerStrings.createViolation,
                   style: TextStyle(

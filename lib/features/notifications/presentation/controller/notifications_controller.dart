@@ -2,10 +2,7 @@ import '/config/all_imports.dart';
 
 class NotificationsController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
-  final NotificationsDatabaseController _notificationsDatabase =
-      NotificationsDatabaseController();
+
   late String driverName;
   late String driverImage;
 
@@ -18,8 +15,9 @@ class NotificationsController extends GetxController {
   void onInit() {
     super.onInit();
     driverName =
-        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
-    driverImage = _sharedPreferences.getImage();
+        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
+    driverImage =
+        SharedPreferencesController.getString(SharedPreferencesKeys.image);
     getNotifications();
   }
 
@@ -35,7 +33,7 @@ class NotificationsController extends GetxController {
       textConfirmButton: ManagerStrings.yes,
       textCancelButton: ManagerStrings.no,
       confirmButton: () async {
-        _notificationsDatabase.clear();
+        // _notificationsDatabase.clear();
       },
       closeButton: () async {
         getNotifications();
@@ -63,7 +61,7 @@ class NotificationsController extends GetxController {
       textConfirmButton: ManagerStrings.yes,
       textCancelButton: ManagerStrings.no,
       confirmButton: () {
-        _notificationsDatabase.delete(notificationId);
+        // _notificationsDatabase.delete(notificationId);
       },
       closeButton: () {
         getNotifications();
@@ -84,7 +82,7 @@ class NotificationsController extends GetxController {
 
   void getNotifications() async {
     loading = true;
-    notifications = await _notificationsDatabase.read();
+    // notifications = await _notificationsDatabase.read();
     loading = false;
     update();
   }

@@ -3,9 +3,7 @@ import '/config/all_imports.dart';
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
-      case Routes.splashScreen:
-        initSplash();
-        return MaterialPageRoute(builder: (_) => const SplashScreen());
+
       case Routes.onBoardingScreen:
         initOnBoarding();
         return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
@@ -34,7 +32,7 @@ class RouteGenerator {
       case Routes.violationPaymentScreen:
         initViolationPayment();
         return MaterialPageRoute(
-            builder: (_) => const ViolationPaymentScreen());
+            builder: (_) => const DriverViolationsScreen());
       case Routes.searchForDriverScreen:
         initSearchForDriver();
         return MaterialPageRoute(builder: (_) => const SearchForDriverScreen());

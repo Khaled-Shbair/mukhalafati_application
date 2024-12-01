@@ -2,8 +2,6 @@ import '/config/all_imports.dart';
 
 class LoginController extends GetxController
     with GetSingleTickerProviderStateMixin, Helpers {
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
   final PoliceManLoginUseCase _policeManLoginUseCase =
       instance<PoliceManLoginUseCase>();
   final DriverLoginUseCase _driverLoginUseCase = instance<DriverLoginUseCase>();
@@ -81,8 +79,9 @@ class LoginController extends GetxController
           showSnackBar(message: l.message);
         },
         (r) async {
-          await _sharedPreferences.setDriverData(r);
-          await _sharedPreferences.setRememberMeDriver(rememberMeDriver);
+          await SharedPreferencesController.setData(
+              SharedPreferencesKeys.rememberMeDriver, false);
+          await AppSettingsSharedPreferences.setDriverData(r);
           await Get.offAllNamed(Routes.driverHomeScreen);
         },
       );
@@ -100,9 +99,10 @@ class LoginController extends GetxController
         (l) {
           showSnackBar(message: l.message);
         },
-        (r) {
-          _sharedPreferences.setPoliceData(r);
-          _sharedPreferences.setRememberMePolice(rememberMePoliceMan);
+        (r) async {
+          await AppSettingsSharedPreferences.setPoliceData(r);
+          SharedPreferencesController.setData(
+              SharedPreferencesKeys.rememberMePolice, true);
           Get.offAllNamed(Routes.policeManHomeScreen);
         },
       );

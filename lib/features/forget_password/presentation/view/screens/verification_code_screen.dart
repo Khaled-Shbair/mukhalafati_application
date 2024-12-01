@@ -103,6 +103,18 @@ class VerificationCodeScreen extends StatelessWidget {
                     onChanged: (value) => controller.onChangeFourFiled(value),
                     changeBorderColor: controller.changeBorderColorFourFiled,
                   ),
+                  filedOfVerificationCode(
+                    controller: controller.fiveNumberOfCode,
+                    focusNode: controller.fiveFocusNode,
+                    onChanged: (value) => controller.onChangeFiveFiled(value),
+                    changeBorderColor: controller.changeBorderColorFiveFiled,
+                  ),
+                  filedOfVerificationCode(
+                    controller: controller.sexNumberOfCode,
+                    focusNode: controller.sexFocusNode,
+                    onChanged: (value) => controller.onChangeSexFiled(value),
+                    changeBorderColor: controller.changeBorderColorSexFiled,
+                  ),
                 ],
               ),
               Visibility(

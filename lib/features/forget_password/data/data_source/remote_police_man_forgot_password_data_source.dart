@@ -8,11 +8,9 @@ abstract class RemotePoliceManForgotPasswordDataSource {
 class RemotePoliceManForgotPasswordDataSourceImpl
     extends RemotePoliceManForgotPasswordDataSource {
   final AppApi _appApi;
-  final AppSettingsSharedPreferences _sharedPreferences;
 
   RemotePoliceManForgotPasswordDataSourceImpl(
     this._appApi,
-    this._sharedPreferences,
   );
 
   @override
@@ -20,7 +18,7 @@ class RemotePoliceManForgotPasswordDataSourceImpl
       PoliceManForgotPasswordRequest request) async {
     return await _appApi.forgetPasswordPoliceMan(
       request.jobNumber,
-      _sharedPreferences.getLanguage(),
+      SharedPreferencesController.getString(SharedPreferencesKeys.language),
     );
   }
 }

@@ -1,8 +1,6 @@
 import '/config/all_imports.dart';
 
 class OnBoardingController extends GetxController {
-  final AppSettingsSharedPreferences _appSettingsSharedPreferences =
-      instance<AppSettingsSharedPreferences>();
   late PageController pageController;
   int currentPage = 0;
   double valueOfIndicator = 0.3;
@@ -63,8 +61,10 @@ class OnBoardingController extends GetxController {
   void nextPage() {
     if (_isLastPage()) {
       _moveToWelcomeScreen();
-      _appSettingsSharedPreferences.setLanguage('ar');
-      _appSettingsSharedPreferences.setOnBoardingViewed();
+
+      SharedPreferencesController.setData(SharedPreferencesKeys.language, 'ar');
+      SharedPreferencesController.setData(
+          SharedPreferencesKeys.onBoarding, true);
     } else {
       pageController.nextPage(
         duration: const Duration(seconds: 1),
