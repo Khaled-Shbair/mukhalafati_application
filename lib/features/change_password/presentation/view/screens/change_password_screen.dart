@@ -68,7 +68,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: ManagerHeight.h8),
-              mainTextField(
+              MainTextField(
                 controller: controller.newPassword,
                 labelText: ManagerStrings.newPassword,
                 colorLabelText: ManagerColors.quartz,
@@ -78,7 +78,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 changeObscureText: () => controller.changeObscureNewPassword(),
               ),
               SizedBox(height: ManagerHeight.h15),
-              mainTextField(
+              MainTextField(
                 controller: controller.confirmPassword,
                 labelText: ManagerStrings.confirmPassword,
                 colorLabelText: ManagerColors.quartz,

@@ -40,13 +40,13 @@ Widget enterDetailsStep({
           ),
         ),
       ),
-      mainTextField(
+      MainTextField(
         controller: cardHolderName,
         labelText: ManagerStrings.cardHolderName,
         keyboardType: TextInputType.name,
       ),
       SizedBox(height: ManagerHeight.h24),
-      mainTextField(
+      MainTextField(
         controller: cardNumber,
         labelText: ManagerStrings.cardNumber,
         maxLength: AppConstants.maxLengthOfCardNumber,
@@ -56,7 +56,7 @@ Widget enterDetailsStep({
         children: [
           Expanded(
             flex: 2,
-            child: mainTextField(
+            child: MainTextField(
               controller: expiryDateCard,
               labelText: ManagerStrings.expiryDateCard,
               keyboardType: TextInputType.text,
@@ -65,7 +65,7 @@ Widget enterDetailsStep({
           ),
           SizedBox(width: ManagerWidth.w10),
           Expanded(
-            child: mainTextField(
+            child: MainTextField(
               controller: securityCode,
               labelText: ManagerStrings.securityCode,
               maxLength: AppConstants.maxLengthOfSecurityCode,

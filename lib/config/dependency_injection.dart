@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'all_imports.dart';
 
@@ -15,11 +15,18 @@ initModule() async {
 }
 
 Future<void> _initFirebase() async {
-  await Firebase.initializeApp();
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    debugPrint("Firebase already initialized.");
+  }
   await FbNotifications.initNotifications();
   await FbNotifications.requestNotificationPermissions();
   FbNotifications.initializeForegroundNotificationForAndroid();
   FbNotifications.manageNotificationAction();
+  debugPrint('FCM: ${await FirebaseMessaging.instance.getToken()}');
   if (!GetIt.I.isRegistered<FirebaseAuth>()) {
     instance.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   }
@@ -55,7 +62,6 @@ disposeOnBoarding() {
 }
 
 initWelcome() {
-  disposeOnBoarding();
   Get.put<WelcomeController>(WelcomeController());
 }
 

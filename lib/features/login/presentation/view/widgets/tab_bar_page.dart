@@ -14,7 +14,7 @@ Widget tabBarPage({
   return Column(
     children: [
       SizedBox(height: ManagerHeight.h24),
-      mainTextField(
+      MainTextField(
         controller: userNumber,
         labelText: labelTextOfUserField,
         color: ManagerColors.white,
@@ -22,7 +22,7 @@ Widget tabBarPage({
         fontSizeLabelText: ManagerFontsSizes.f13,
       ),
       SizedBox(height: ManagerHeight.h20),
-      mainTextField(
+      MainTextField(
         controller: password,
         colorLabelText: ManagerColors.quartz,
         color: ManagerColors.white,

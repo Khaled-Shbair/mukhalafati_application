@@ -9,7 +9,9 @@ import '../../../../../config/all_imports.dart';
 Future<void> firebaseMessagingBackgroundHandler(
     RemoteMessage remoteMessage) async {
   //BACKGROUND Notifications - iOS & Android
-  await Firebase.initializeApp();
+   await Firebase.initializeApp(
+     options: DefaultFirebaseOptions.currentPlatform,
+   );
   debugPrint('Message: ${remoteMessage.messageId}');
   debugPrint('FCM: ${await FirebaseMessaging.instance.getToken()}');
 }

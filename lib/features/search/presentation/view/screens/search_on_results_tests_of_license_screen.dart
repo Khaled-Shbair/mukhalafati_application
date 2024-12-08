@@ -69,7 +69,7 @@ class SearchOnResultsTestsOfLicenseScreen extends StatelessWidget {
                         padding: EdgeInsetsDirectional.zero,
                       ),
                       Expanded(
-                        child: mainTextField(
+                        child: MainTextField(
                           contentPadding: EdgeInsetsDirectional.zero,
                           controller: controller.idNumber,
                           hintText: ManagerStrings.idNumber,

@@ -39,7 +39,7 @@ Future<void> dialogOfCreateComplaint(context) async {
                   height: AppConstants.heightOfDividerInCreateViolation,
                 ),
                 SizedBox(height: ManagerHeight.h19),
-                mainTextField(
+                MainTextField(
                   controller: controller.complaintName,
                   labelText: ManagerStrings.fullName,
                   fontSizeLabelText: ManagerFontsSizes.f12,
@@ -48,7 +48,7 @@ Future<void> dialogOfCreateComplaint(context) async {
                   keyboardType: TextInputType.text,
                 ),
                 SizedBox(height: ManagerHeight.h10),
-                mainTextField(
+                MainTextField(
                   readOnly: true,
                   onTap: () async => await controller.selectDateTime(context),
                   controller: controller.dateOfComplaint,
@@ -59,7 +59,7 @@ Future<void> dialogOfCreateComplaint(context) async {
                   keyboardType: TextInputType.text,
                 ),
                 SizedBox(height: ManagerHeight.h10),
-                mainTextField(
+                MainTextField(
                   controller: controller.addressOfComplaint,
                   labelText: ManagerStrings.address,
                   fontSizeLabelText: ManagerFontsSizes.f12,
@@ -68,7 +68,7 @@ Future<void> dialogOfCreateComplaint(context) async {
                   keyboardType: TextInputType.text,
                 ),
                 SizedBox(height: ManagerHeight.h10),
-                mainTextField(
+                MainTextField(
                   controller: controller.detailOfComplaint,
                   hintText: ManagerStrings.pleaseWriteTheDetailsOfTheComplaint,
                   fontSizeLabelText: ManagerFontsSizes.f12,
