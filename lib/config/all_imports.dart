@@ -7,6 +7,7 @@ export 'package:dartz/dartz.dart' hide State;
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:fluttertoast/fluttertoast.dart';
 export 'package:firebase_auth/firebase_auth.dart';
+export 'package:firebase_core/firebase_core.dart';
 export 'package:json_annotation/json_annotation.dart';
 export 'package:syncfusion_flutter_charts/charts.dart';
 export 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -16,12 +17,15 @@ export 'package:cached_network_image/cached_network_image.dart';
 export 'package:smooth_page_indicator/smooth_page_indicator.dart';
 export 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
+///firebase_options file
+export '/firebase_options.dart';
+
 ///routes file
 export '/routes/routes.dart';
 export '/routes/route_generator.dart';
 
 ///config file
-export '/config/helper.dart';
+export '/core/helper/helper.dart';
 export '/config/all_imports.dart';
 export '/config/constants/api_keys.dart';
 export '/config/dependency_injection.dart';
@@ -48,7 +52,9 @@ export '/core/resource/manager_fonts.dart';
 export '/core/resource/manager_assets.dart';
 export '/core/resource/manager_colors.dart';
 export '/core/widgets/main_text_field.dart';
+export '/core/theme/manager_dark_theme.dart';
 export '/core/resource/manager_strings.dart';
+export '/core/theme/manager_light_theme.dart';
 export '/core/widgets/police_man_drawer.dart';
 export '/core/storage/remote/api/app_api.dart';
 export '/core/error_handler/response_code.dart';
@@ -56,6 +62,8 @@ export '/core/error_handler/error_handler.dart';
 export '/core/widgets/cached_network_image.dart';
 export '/core/storage/remote/api/dio_factory.dart';
 export '/core/widgets/head_of_official_paper.dart';
+export '/core/resource/manager_text_theme_dark.dart';
+export '/core/resource/manager_text_theme_light.dart';
 export '/core/internet_checker/internet_checker.dart';
 export '/core/widgets/back_driving_license_card.dart';
 export '/core/widgets/front_driving_license_card.dart';

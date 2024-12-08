@@ -11,21 +11,7 @@ class OnBoardingScreen extends StatelessWidget {
           return Directionality(
             textDirection: TextDirection.ltr,
             child: Scaffold(
-              // extendBodyBehindAppBar: true,
               resizeToAvoidBottomInset: false,
-              // appBar: AppBar(
-              //   backgroundColor: ManagerColors.transparent,
-              //   leading: previousButton(
-              //     visible: controller.isNotFirstPage(),
-              //     onPressed: () => controller.previousPage(),
-              //   ),
-              //   // actions: [
-              //   //   skipButton(
-              //   //     visible: controller.appearSkipButton,
-              //   //     onPressed: () => controller.skip(),
-              //   //   ),
-              //   // ],
-              // ),
               body: Column(
                 children: [
                   Expanded(
@@ -37,7 +23,7 @@ class OnBoardingScreen extends StatelessWidget {
                       children: [
                         ...List.generate(
                           controller.pageViewItems.length,
-                          (index) => controller.pageViewItems[index],
+                              (index) => controller.pageViewItems[index],
                         ),
                       ],
                     ),
@@ -70,7 +56,7 @@ class OnBoardingScreen extends StatelessWidget {
                         ),
                       ),
                       mainButton(
-                        onPressed: () => controller.nextPage(),
+                        onPressed: () => controller.nextPage(context),
                         shape: const CircleBorder(),
                         height: ManagerHeight.h49,
                         child: Icon(

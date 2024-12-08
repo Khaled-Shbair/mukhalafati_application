@@ -49,27 +49,26 @@ class SharedPreferencesController {
   }
 
   /// Gets a bool value from SharedPreferences with given [key].
-  static getBool(String key) async {
+  static bool getBool(String key) {
     debugPrint('SharedPreferences : getBool with key: $key');
     return _sharedPreferences.getBool(key) ?? false;
   }
 
   /// Gets a int value from SharedPreferences with given [key].
-  static getInt(String key) async {
+  static int getInt(String key) {
     debugPrint('SharedPreferences : getInt with key: $key');
     return _sharedPreferences.getInt(key) ?? 0;
   }
 
   /// Gets a double value from SharedPreferences with given [key].
-  static getDouble(String key) async {
+  static double getDouble(String key) {
     debugPrint('SharedPreferences : getDouble with key: $key');
     return _sharedPreferences.getDouble(key) ?? 0.0;
   }
 
   /// Gets a String value from SharedPreferences with given [key].
-  static getString(String key) async {
+  static String getString(String key) {
     debugPrint('SharedPreferences : getString with key: $key');
     return _sharedPreferences.getString(key) ?? '';
   }
-
 }

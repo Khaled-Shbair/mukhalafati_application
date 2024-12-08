@@ -59,7 +59,7 @@ class ForgotPasswordForPoliceManScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              mainTextField(
+              MainTextField(
                 controller: controller.jobNumber,
                 labelText: ManagerStrings.jobNumber,
                 colorLabelText: ManagerColors.quartz,

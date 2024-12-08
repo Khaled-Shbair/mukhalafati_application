@@ -60,7 +60,7 @@ class ForgotPasswordForDriverScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              mainTextField(
+              MainTextField(
                 controller: controller.licenseNumber,
                 labelText: ManagerStrings.licenseNumber,
                 colorLabelText: ManagerColors.quartz,

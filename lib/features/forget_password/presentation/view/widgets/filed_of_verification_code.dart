@@ -14,7 +14,7 @@ Widget filedOfVerificationCode({
 
         bottom: ManagerHeight.h10,
       ),
-      child: mainTextField(
+      child: MainTextField(
         controller: controller,
         autofocus: true,
         maxLength: AppConstants.maxLengthOfVerificationCode,

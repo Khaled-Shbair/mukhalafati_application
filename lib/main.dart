@@ -1,3 +1,5 @@
+import 'package:mukhalafati_application/core/service/theme_service.dart';
+
 import 'config/all_imports.dart';
 
 void main() async {
@@ -6,7 +8,9 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key}) : themeService = ThemeService();
+
+  final ThemeService themeService;
 
   @override
   Widget build(BuildContext context) {
@@ -19,25 +23,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, child) {
         return GetMaterialApp(
-          theme: ThemeData(
-            scaffoldBackgroundColor: ManagerColors.white,
-            useMaterial3: true,
-            appBarTheme: AppBarTheme(
-              centerTitle: true,
-              surfaceTintColor: ManagerColors.white,
-              backgroundColor: ManagerColors.white,
-              titleTextStyle: TextStyle(
-                color: ManagerColors.black,
-                fontFamily: ManagerFontFamily.cairo,
-                fontWeight: ManagerFontWeight.bold,
-                fontSize: ManagerFontsSizes.f17,
-              ),
-              iconTheme: IconThemeData(
-                color: ManagerColors.primaryColor,
-                size: ManagerIconsSizes.i20,
-              ),
-            ),
-          ),
+          themeMode: themeService.getThemeMode(),
           debugShowCheckedModeBanner: false,
           initialRoute: SharedPreferencesController.getBool(
                   SharedPreferencesKeys.onBoarding)

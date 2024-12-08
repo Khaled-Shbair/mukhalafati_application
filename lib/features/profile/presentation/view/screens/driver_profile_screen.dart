@@ -57,7 +57,7 @@ class DriverProfileScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: ManagerHeight.h70),
-              mainTextField(
+              MainTextField(
                 controller: controller.driverNameController,
                 labelText: ManagerStrings.fullName,
                 borderColor: ManagerColors.primaryColor,
@@ -70,7 +70,7 @@ class DriverProfileScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: ManagerHeight.h22),
-              mainTextField(
+              MainTextField(
                 controller: controller.phoneNumberController,
                 labelText: ManagerStrings.phoneNumber,
                 maxLength: AppConstants.maxLengthOfPhoneNumber,
@@ -83,7 +83,7 @@ class DriverProfileScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: ManagerHeight.h22),
-              mainTextField(
+              MainTextField(
                 controller: controller.licenceNumberController,
                 labelText: ManagerStrings.licenseNumber,
                 borderColor: ManagerColors.primaryColor,
@@ -96,7 +96,7 @@ class DriverProfileScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: ManagerHeight.h22),
-              mainTextField(
+              MainTextField(
                 controller: controller.idNumberController,
                 labelText: ManagerStrings.idNumber,
                 borderColor: ManagerColors.primaryColor,
