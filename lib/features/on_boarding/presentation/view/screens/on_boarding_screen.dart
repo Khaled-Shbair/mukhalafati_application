@@ -23,7 +23,7 @@ class OnBoardingScreen extends StatelessWidget {
                       children: [
                         ...List.generate(
                           controller.pageViewItems.length,
-                              (index) => controller.pageViewItems[index],
+                          (index) => controller.pageViewItems[index],
                         ),
                       ],
                     ),
@@ -35,12 +35,13 @@ class OnBoardingScreen extends StatelessWidget {
                       dotHeight: ManagerHeight.h7,
                       dotWidth: ManagerWidth.w10,
                       spacing: ManagerWidth.w10,
-                      expansionFactor: 2,
-                      activeDotColor: ManagerColors.primaryColor,
-                      dotColor: ManagerColors.darkLiver,
+                      expansionFactor:
+                          AppConstants.expansionFactorOfSmoothPageIndicator,
+                      activeDotColor: context.theme.primaryColor,
+                      dotColor: context.theme.unselectedWidgetColor,
                     ),
                   ),
-                  SizedBox(height: ManagerHeight.h42),
+                  verticalSpace(ManagerHeight.h42),
                   Stack(
                     alignment: AlignmentDirectional.center,
                     children: [
@@ -48,8 +49,9 @@ class OnBoardingScreen extends StatelessWidget {
                         height: ManagerHeight.h55,
                         width: ManagerWidth.w55,
                         child: CircularProgressIndicator(
-                          color: ManagerColors.primaryColor,
-                          backgroundColor: ManagerColors.blanchedAlmond,
+                          color: context.theme.progressIndicatorTheme.color,
+                          backgroundColor: context.theme.progressIndicatorTheme
+                              .refreshBackgroundColor,
                           value: controller.valueOfIndicator,
                           strokeWidth: AppConstants
                               .strokeWidthOfCircularProgressIndicator,
@@ -61,13 +63,17 @@ class OnBoardingScreen extends StatelessWidget {
                         height: ManagerHeight.h49,
                         child: Icon(
                           Icons.arrow_forward,
-                          color: ManagerColors.white,
-                          size: ManagerIconsSizes.i20,
+                          color: context.theme.iconTheme.color,
+                          size: context.theme.iconTheme.size,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: ManagerHeight.h42),
+                  MoveButton(
+                    value: controller.valueOfIndicator,
+                    onPressed: () => controller.nextPage(context),
+                  ),
+                  verticalSpace(ManagerHeight.h42),
                 ],
               ),
             ),
