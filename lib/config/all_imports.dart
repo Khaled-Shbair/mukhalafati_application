@@ -38,6 +38,7 @@ export '/config/constants/database_constants.dart';
 export '/core/language/ar.dart';
 export '/core/language/en.dart';
 export '/core/util/size_util.dart';
+export '/core/widgets/my_spacing.dart';
 export '/core/widgets/my_loading.dart';
 export '/core/widgets/main_button.dart';
 export '/core/widgets/main_drawer.dart';
@@ -45,6 +46,7 @@ export '/core/widgets/menu_Button.dart';
 export '/core/language/translation.dart';
 export '/core/extensions/extensions.dart';
 export '/core/widgets/driver_drawer.dart';
+export '/core/service/theme_service.dart';
 export '/core/use_case/base_use_case.dart';
 export '/core/widgets/will_pop_scope.dart';
 export '/core/resource/manager_sizes.dart';
@@ -59,6 +61,8 @@ export '/core/widgets/police_man_drawer.dart';
 export '/core/storage/remote/api/app_api.dart';
 export '/core/error_handler/response_code.dart';
 export '/core/error_handler/error_handler.dart';
+export '/core/middleware/route_middleware.dart';
+export '/core/resource/manager_text_styles.dart';
 export '/core/widgets/cached_network_image.dart';
 export '/core/storage/remote/api/dio_factory.dart';
 export '/core/widgets/head_of_official_paper.dart';
@@ -77,8 +81,7 @@ export '/core/storage/local/shared_preferences/app_settings_shared_preferences.d
 
 ///features file
 //on_boarding feature
-export '/features/on_boarding/presentation/view/widgets/skip_button.dart';
-export '/features/on_boarding/presentation/view/widgets/previous_button.dart';
+export '/features/on_boarding/presentation/view/widgets/move_button.dart';
 export '/features/on_boarding/presentation/view/widgets/page_view_content.dart';
 export '/features/on_boarding/presentation/view/screens/on_boarding_screen.dart';
 export '/features/on_boarding/presentation/controller/on_boarding_controller.dart';
@@ -128,7 +131,6 @@ export '/features/violation/domain/model/create_violation_model.dart';
 export '/features/violation/data/mapper/create_violation_mapper.dart';
 export '/features/violation/data/request/create_violation_request.dart';
 export '/features/violation/domain/model/reason_of_violation_model.dart';
-export '/features/violation/presentation/view/widgets/my_sized_box.dart';
 export '/features/violation/data/response/create_violation_response.dart';
 export '/features/violation/data/request/reason_of_violation_request.dart';
 export '/features/violation/domain/use_case/create_violation_use_case.dart';
