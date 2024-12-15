@@ -11,10 +11,20 @@ class DriverViolationsController extends GetxController {
   late String driverImage;
   bool loading = false;
   String filter = ManagerStrings.filter;
+
+  final List<String> _namesOfColumns = [
+    AppConstants.hash,
+    ManagerStrings.date,
+    ManagerStrings.amount,
+    ManagerStrings.state,
+  ];
+
   List allViolations = <ViolationModel>[];
   List viewViolations = <ViolationModel>[];
   List paidViolations = <ViolationModel>[];
   List unpaidViolations = <ViolationModel>[];
+
+  List<String> get namesOfColumns => _namesOfColumns;
 
   @override
   void onInit() {
