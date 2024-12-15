@@ -2,6 +2,7 @@ class AppConstants {
   static const double deviceHeight = 812;
   static const double deviceWidth = 375;
   static const int firstDate = 2015;
+  static const double expansionFactorOfSmoothPageIndicator = 2;
   static const int lastDate = 3000;
   static const int durationSplashScreen = 3;
   static const double elevationAppBarOnBoardingScreen = 0;
