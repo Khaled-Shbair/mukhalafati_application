@@ -99,8 +99,15 @@ class DriverViolationsScreen extends StatelessWidget {
                         primary: false,
                         shrinkWrap: true,
                         children: [
-                          tableOfViolation(
-                            [
+                          CustomTable(
+                            columns: [
+                              ...List.generate(
+                                controller.namesOfColumns.length,
+                                (index) =>
+                                    dataColumn(controller.namesOfColumns[index]),
+                              ),
+                            ],
+                            rows: [
                               ...List.generate(
                                 controller.viewViolations.length,
                                 (index) {
@@ -131,63 +138,13 @@ class DriverViolationsScreen extends StatelessWidget {
                                 },
                               ),
                             ],
-                          ),
+                          )
                         ],
                       ),
                     } else ...{
-                      Container(
-                        width: ManagerWidth.w287,
-                        alignment: AlignmentDirectional.center,
-                        padding: EdgeInsetsDirectional.only(
-                          top: ManagerHeight.h10,
-                          bottom: ManagerHeight.h30,
-                        ),
-                        decoration: BoxDecoration(
-                          color: ManagerColors.transparent,
-                          border: Border.all(
-                            color: ManagerColors.platinum,
-                            width: ManagerWidth.w1,
-                          ),
-                          borderRadius: BorderRadius.circular(ManagerRadius.r5),
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.only(
-                                bottom: ManagerHeight.h4,
-                                start: ManagerWidth.w10,
-                                end: ManagerWidth.w20,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  textOfHeadViolationTable(AppConstants.hash),
-                                  textOfHeadViolationTable(ManagerStrings.date),
-                                  textOfHeadViolationTable(
-                                      ManagerStrings.amount),
-                                  textOfHeadViolationTable(
-                                      ManagerStrings.state),
-                                ],
-                              ),
-                            ),
-                            Divider(
-                              color: ManagerColors.platinum,
-                              thickness: ManagerHeight.h1,
-                            ),
-                            SizedBox(height: ManagerHeight.h20),
-                            Text(
-                              ManagerStrings.noRecordedViolations,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: ManagerColors.black,
-                                fontFamily: ManagerFontFamily.cairo,
-                                fontSize: ManagerFontsSizes.f12,
-                                fontWeight: ManagerFontWeight.semiBold,
-                              ),
-                            ),
-                          ],
-                        ),
+                      CustomEmptyTable(
+                        length: controller.namesOfColumns.length,
+                        nameOfColumns: controller.namesOfColumns,
                       ),
                     },
                     Row(
@@ -227,7 +184,6 @@ class DriverViolationsScreen extends StatelessWidget {
                                 ManagerAssets.filterIcon,
                                 height: ManagerHeight.h21,
                                 width: ManagerWidth.w21,
-
                               ),
                               title: Text(
                                 controller.filter,

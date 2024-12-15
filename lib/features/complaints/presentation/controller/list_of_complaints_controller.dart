@@ -12,6 +12,14 @@ class ListOfComplaintsController extends GetxController with Helpers {
   late String driverImage;
   bool loading = false;
   List<ComplaintDataModel> data = [];
+  final List<String> _namesOfColumns = [
+    AppConstants.hash,
+    ManagerStrings.date,
+    ManagerStrings.complaint,
+    ManagerStrings.state,
+  ];
+
+  List<String> get namesOfColumns => _namesOfColumns;
 
   @override
   void onInit() {
