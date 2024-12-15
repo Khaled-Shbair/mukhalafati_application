@@ -86,7 +86,7 @@ class OnBoardingController extends GetxController {
 
     //It sets marks the OnBoarding screen as completed, ensuring it will not
     //appear again on subsequent app launches.
-    SharedPreferencesController.setData(SharedPreferencesKeys.onBoarding, true);
+    SharedPreferencesController.setData(SharedPreferencesKeys.viewOnBoarding, true);
 
     //Dispose OnBoarding controller form memory
     disposeOnBoarding();
