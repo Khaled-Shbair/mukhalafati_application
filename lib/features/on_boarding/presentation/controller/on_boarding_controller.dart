@@ -34,21 +34,21 @@ class OnBoardingController extends GetxController {
     pageController = PageController();
   }
 
-  //This function check if this page is last page in OnBoarding screens
+  /// This function check if this page is last page in OnBoarding screens
   bool _isLastPage() => currentPage == pageViewItems.length - 1;
 
-  //This function check if this page is not first page in OnBoarding pages
+  /// This function check if this page is not first page in OnBoarding pages
   bool isNotFirstPage() => currentPage != 0;
 
-  //This function to change a value the page that go to it
+  /// This function to change a value the page that go to it
   void changeCurrentPage(int page) {
     currentPage = page;
     _valueOfIndicator();
     update();
   }
 
-  //This function to change a value of indicator when move between pages
-  //(as animation)
+  /// This function to change a value of indicator when move between pages
+  /// (as animation)
   void _valueOfIndicator() {
     if (currentPage == 0) {
       valueOfIndicator = 0.30;
@@ -59,7 +59,7 @@ class OnBoardingController extends GetxController {
     }
   }
 
-  //This function to move between pages of onBoarding screen
+  /// This function to move between pages of onBoarding screen
   void nextPage(BuildContext context) {
     if (_isLastPage()) {
       _moveToWelcomeScreen(context);
@@ -72,23 +72,20 @@ class OnBoardingController extends GetxController {
     update();
   }
 
-  //This function transitions the user to the Welcome screen after
-  //completing the OnBoarding.
+  /// This function transitions the user to the Welcome screen after
+  /// completing the OnBoarding.
   void _moveToWelcomeScreen(BuildContext context) {
-    //It sets the default language to Arabic.
-    SharedPreferencesController.setData(
-      SharedPreferencesKeys.language,
-      LocaleConstants.arabicLanguage,
-    );
+    /// It sets the default language to Arabic.
+    saveLanguage(LocaleConstants.arabicLanguage);
 
-    //Move to (Welcome Screen) and remove all previous screens
+    /// Move to (Welcome Screen) and remove all previous screens
     context.pushNamedAndRemoveAllUntil(Routes.welcomeScreen);
 
-    //It sets marks the OnBoarding screen as completed, ensuring it will not
-    //appear again on subsequent app launches.
-    SharedPreferencesController.setData(SharedPreferencesKeys.viewOnBoarding, true);
+    /// It sets marks the OnBoarding screen as completed, ensuring it will not
+    /// appear again on subsequent app launches.
+    saveOnBoardingViewed();
 
-    //Dispose OnBoarding controller form memory
+    /// Dispose OnBoarding controller form memory
     disposeOnBoarding();
   }
 }
