@@ -1,14 +1,22 @@
-import '../../config/all_imports.dart';
+import '/config/all_imports.dart';
 
 mixin Helpers {
-  void showSnackBar({required String message, bool error = true}) {
+  /// Appear [SnackBar] with message when success or failed process.
+  void showSnackBar({
+    required String message,
+    required BuildContext context,
+    bool error = true,
+  }) {
     Fluttertoast.showToast(
       msg: message,
-      backgroundColor:
-          error ? ManagerColors.redNotification : ManagerColors.mayGreen,
-      fontSize: ManagerFontsSizes.f14,
+      backgroundColor: error
+          ? context.theme.snackBarTheme.backgroundColor
+          : context.theme.snackBarTheme.actionBackgroundColor,
+      textColor: context.theme.snackBarTheme.contentTextStyle!.color ??
+          context.theme.snackBarTheme.actionTextColor,
+      fontSize: context.theme.snackBarTheme.contentTextStyle!.fontSize ??
+          ManagerFontsSizes.f14,
       gravity: ToastGravity.BOTTOM,
-      textColor: ManagerColors.white,
       toastLength: Toast.LENGTH_SHORT,
     );
   }
