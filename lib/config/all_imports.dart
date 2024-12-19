@@ -39,10 +39,11 @@ export '/core/language/ar.dart';
 export '/core/language/en.dart';
 export '/core/util/size_util.dart';
 export '/core/widgets/my_spacing.dart';
-export '/core/widgets/my_loading.dart';
+export '/core/widgets/custom_loading.dart';
 export '/core/widgets/main_button.dart';
 export '/core/widgets/main_drawer.dart';
 export '/core/widgets/menu_Button.dart';
+export '/core/widgets/custom_table.dart';
 export '/core/language/translation.dart';
 export '/core/extensions/extensions.dart';
 export '/core/widgets/driver_drawer.dart';
@@ -91,9 +92,9 @@ export '/features/login/data/mapper/police_man_mapper.dart';
 export '/features/login/data/mapper/driver_login_mapper.dart';
 export '/features/login/domain/model/driver_login_model.dart';
 export '/features/login/data/request/driver_login_request.dart';
-export '/features/login/presentation/view/widgets/richText.dart';
+export '../core/widgets/custom_rich_text.dart';
 export '/features/login/domain/model/police_man_login_model.dart';
-export '/features/login/presentation/view/widgets/check_box.dart';
+export '../core/widgets/custom_check_box.dart';
 export '/features/login/data/response/driver_login_response.dart';
 export '/features/login/domain/use_case/driver_login_use_case.dart';
 export '/features/login/data/request/police_man_login_request.dart';
@@ -101,7 +102,7 @@ export '/features/login/presentation/view/screens/login_screen.dart';
 export '/features/login/presentation/view/widgets/tab_bar_page.dart';
 export '/features/login/data/response/police_man_login_response.dart';
 export '/features/login/presentation/view/screens/welcome_screen.dart';
-export '/features/login/presentation/view/widgets/tab_bar_button.dart';
+export '/features/login/presentation/view/widgets/custom_tab_bar_button.dart';
 export '/features/login/presentation/controller/login_controller.dart';
 export '/features/login/domain/repository/driver_login_repository.dart';
 export '/features/login/domain/use_case/police_man_login_use_case.dart';
@@ -209,7 +210,6 @@ export '/features/complaints/data/request/get_all_complaints_request.dart';
 export '/features/complaints/domain/use_case/create_complaint_use_case.dart';
 export '/features/complaints/domain/use_case/get_all_complaints_use_case.dart';
 export '/features/complaints/domain/repository/create_complaint_repository.dart';
-export '/features/complaints/presentation/view/widgets/table_of_complaints.dart';
 export '/features/complaints/domain/repository/get_all_complaints_repository.dart';
 export '/features/complaints/presentation/view/screens/list_of_complaints_screen.dart';
 export '/features/complaints/presentation/view/widgets/dialog_of_create_complaint.dart';
@@ -220,7 +220,6 @@ export '/features/complaints/presentation/controller/list_of_complaints_controll
 export '/features/complaints/data/repository_impl/create_complaint_repository_impl.dart';
 export '/features/complaints/data/data_source/remote_get_all_complaints_data_source.dart';
 export '/features/complaints/data/repository_impl/get_all_complaints_repository_impl.dart';
-export '/features/complaints/presentation/view/widgets/data_column_of_complaints_table.dart';
 
 //change_password feature
 export '/features/change_password/data/mapper/driver_change_password_mapper.dart';
@@ -297,7 +296,6 @@ export '/features/payment/data/mapper/driver_violations_data_mapper.dart';
 export '/features/payment/domain/use_case/payment_violation_use_case.dart';
 export '/features/payment/presentation/controller/payment_controller.dart';
 export '/features/payment/domain/use_case/driver_violations_use_case.dart';
-export '/features/payment/presentation/view/widgets/table_of_violation.dart';
 export '/features/payment/presentation/view/widgets/enter_details_step.dart';
 export '/features/payment/data/response/driver_violations_data_response.dart';
 export '/features/payment/domain/repository/driver_violations_repository.dart';
@@ -312,8 +310,6 @@ export '/features/payment/presentation/view/widgets/data_row_of_violation_table.
 export '/features/payment/data/data_source/remote_payment_violation_data_source.dart';
 export '/features/payment/data/repository_impl/driver_violations_repository_impl.dart';
 export '/features/payment/data/repository_impl/payment_violation_repository_impl.dart';
-export '/features/payment/presentation/view/widgets/text_of_head_violation_table.dart';
-export '/features/payment/presentation/view/widgets/data_column_of_violation_table.dart';
 
 //notifications feature
 export '/features/notifications/presentation/model/notification_model.dart';
