@@ -63,4 +63,6 @@ class AppConstants {
   static const String eleven = '11';
   static const String twelve = '12';
   static const String hash = '#';
+
+  static const int lengthOfTabBarInLoginController=2;
 }
