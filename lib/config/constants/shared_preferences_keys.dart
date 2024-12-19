@@ -1,6 +1,7 @@
 class SharedPreferencesKeys {
-  static const String onBoarding = 'on_boarding';
+  static const String viewOnBoarding = 'view_on_boarding';
   static const String language = 'language';
+  static const String darkTheme = 'dark_theme';
   static const String userId = 'user_id';
   static const String rememberMeDriver = 'remember_me_driver';
   static const String rememberMePolice = 'remember_me_police';
