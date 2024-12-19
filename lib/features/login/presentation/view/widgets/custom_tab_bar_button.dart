@@ -15,7 +15,7 @@ Widget tabBarButton({
         width: widthImage ?? ManagerWidth.w24,
         fit: BoxFit.cover,
       ),
-      SizedBox(width: ManagerWidth.w8),
+      horizontalSpace(ManagerWidth.w8),
       Text(name),
     ],
   );
