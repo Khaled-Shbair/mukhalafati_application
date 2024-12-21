@@ -22,17 +22,6 @@ class VerificationCodeController extends GetxController with Helpers {
 
   bool returnCodeIsInCorrect = false;
   late int _verificationCodeInput;
-  final SendVerificationCodeUseCase _sendVerificationCodeUseCase =
-      instance<SendVerificationCodeUseCase>();
-
-  void sendVerificationCode(phoneNumber) async {
-    (await _sendVerificationCodeUseCase.execute(
-            SendVerificationInputCodeUseCase(phoneNumber: phoneNumber)))
-        .fold(
-      (l) {},
-      (r) {},
-    );
-  }
 
   @override
   void onInit() {
@@ -52,7 +41,7 @@ class VerificationCodeController extends GetxController with Helpers {
   }
 
   @override
-  void dispose() {
+  void onClose() {
     oneNumberOfCode.dispose();
     twoNumberOfCode.dispose();
     threeNumberOfCode.dispose();
@@ -65,65 +54,54 @@ class VerificationCodeController extends GetxController with Helpers {
     fourFocusNode.dispose();
     fiveFocusNode.dispose();
     sexFocusNode.dispose();
-    super.dispose();
+    super.onClose();
   }
 
   void backButton() {
-    Get.back();
     disposeVerificationCode();
+    Get.back();
   }
 
+  /// Parse code input form user
   void _verificationCode() {
     _verificationCodeInput = int.parse(
         '${oneNumberOfCode.text}${twoNumberOfCode.text}${threeNumberOfCode.text}${fourNumberOfCode.text}${fiveNumberOfCode.text}${sexNumberOfCode.text}');
     update();
   }
 
-  void _diverVerifyButton(int id, int verificationCode) async {
+  /// Check if input code is correct or incorrect.
+  /// is correct? Navigate to change password screen.
+  /// is incorrect? apply to [_incorrectEntered] function.
+  void verifyButton(
+    int id,
+    bool isDriver,
+    int verificationCode,
+    BuildContext context,
+  ) async {
     if (_checkData()) {
       _verificationCode();
       debugPrint('_verificationCodeInput:$_verificationCodeInput');
       debugPrint('verificationCode:$verificationCode');
       if (verificationCode == _verificationCodeInput) {
+        /// Navigate to change password screen
         Get.offAndToNamed(
           Routes.changePasswordScreen,
-          arguments: [true, id],
+          arguments: [isDriver, id],
         );
       } else {
         _incorrectEntered();
       }
     } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterVerificationCode);
-    }
-  }
-
-  void _policeVerifyButton(int id, int verificationCode) async {
-    if (_checkData()) {
-      _verificationCode();
-      debugPrint('_verificationCodeInput:$_verificationCodeInput');
-      debugPrint('verificationCode:$verificationCode');
-      if (verificationCode == _verificationCodeInput) {
-        Get.offAndToNamed(
-          Routes.changePasswordScreen,
-          arguments: [false, id],
-        );
-      } else {
-        _incorrectEntered();
-      }
-    } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterVerificationCode);
-    }
-  }
-
-  void verifyButton(int id, bool isDriver, int verificationCode) async {
-    if (isDriver) {
-      _diverVerifyButton(id, verificationCode);
-    } else {
-      _policeVerifyButton(id, verificationCode);
+      /// Appear message of error in SnackBar to user
+      showSnackBar(
+          message: ManagerStrings.pleaseEnterVerificationCode,
+          context: context);
     }
     update();
   }
 
+  /// Move to second field when fill first input field
+  /// and change color of border
   void onChangeOneFiled(value) {
     if (value.isNotEmpty) {
       changeBorderColorOneFiled = true;
@@ -134,6 +112,8 @@ class VerificationCodeController extends GetxController with Helpers {
     update();
   }
 
+  /// Move to third field when fill second input field
+  /// and change color of border
   void onChangeTwoFiled(value) {
     if (value.isNotEmpty) {
       changeBorderColorTwoFiled = true;
@@ -145,6 +125,8 @@ class VerificationCodeController extends GetxController with Helpers {
     update();
   }
 
+  /// Move to forth field when fill third input field
+  /// and change color of border
   void onChangeThreeFiled(value) {
     if (value.isNotEmpty) {
       changeBorderColorThreeFiled = true;
@@ -156,6 +138,8 @@ class VerificationCodeController extends GetxController with Helpers {
     update();
   }
 
+  /// Move to fifty field when fill forth input field
+  /// and change color of border
   void onChangeFourFiled(value) {
     if (value.isNotEmpty) {
       changeBorderColorFourFiled = true;
@@ -167,6 +151,8 @@ class VerificationCodeController extends GetxController with Helpers {
     update();
   }
 
+  /// Move to sixty field when fill fifty input field
+  /// and change color of border
   void onChangeFiveFiled(value) {
     if (value.isNotEmpty) {
       changeBorderColorFiveFiled = true;
@@ -178,16 +164,22 @@ class VerificationCodeController extends GetxController with Helpers {
     update();
   }
 
+  /// Return to fifty field when sixty field is un-fill
+  /// and change color of border
   void onChangeSexFiled(value) {
     if (value.isNotEmpty) {
-      changeBorderColorFourFiled = true;
+      changeBorderColorSexFiled = true;
     } else {
-      changeBorderColorFourFiled = false;
+      changeBorderColorSexFiled = false;
       fiveFocusNode.requestFocus();
     }
     update();
   }
 
+  /// When user enter incorrect code:-
+  /// appear error message and change image to incorrect image
+  /// add timer 3 seconds, then hide message, return to previous image and
+  /// clear field of input code.
   void _incorrectEntered() {
     returnCodeIsInCorrect = true;
     Future.delayed(
@@ -203,11 +195,14 @@ class VerificationCodeController extends GetxController with Helpers {
     );
   }
 
+  /// check inputs user data in not empty
   bool _checkData() {
     if (oneNumberOfCode.text.isNotEmpty &&
         twoNumberOfCode.text.isNotEmpty &&
         threeNumberOfCode.text.isNotEmpty &&
-        fourNumberOfCode.text.isNotEmpty) {
+        fourNumberOfCode.text.isNotEmpty &&
+        fiveNumberOfCode.text.isNotEmpty &&
+        sexNumberOfCode.text.isNotEmpty) {
       return true;
     } else {
       return false;
