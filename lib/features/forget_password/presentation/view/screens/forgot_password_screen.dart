@@ -1,11 +1,13 @@
 import '/config/all_imports.dart';
 
-class ForgotPasswordForDriverScreen extends StatelessWidget {
-  const ForgotPasswordForDriverScreen({super.key});
+class ForgotPasswordScreen extends StatelessWidget {
+  const ForgotPasswordScreen({required this.isDriver, super.key});
+
+  final bool isDriver;
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ForgotPasswordForDriverController>(
+    return GetBuilder<ForgotPasswordController>(
       builder: (controller) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -29,17 +31,13 @@ class ForgotPasswordForDriverScreen extends StatelessWidget {
                 height: ManagerHeight.h182,
                 width: ManagerWidth.infinity,
               ),
-              SizedBox(height: ManagerHeight.h50),
+              verticalSpace(ManagerHeight.h50),
               Text(
-                ManagerStrings.enterLicenseNumber,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: ManagerColors.black,
-                  fontFamily: ManagerFontFamily.cairo,
-                  fontWeight: ManagerFontWeight.bold,
-                  fontSize: ManagerFontsSizes.f15,
-                ),
-              ),
+                  isDriver
+                      ? ManagerStrings.enterLicenseNumber
+                      : ManagerStrings.enterTheJobNumber,
+                  textAlign: TextAlign.center,
+                  style: context.textTheme.titleMedium),
               Padding(
                 padding: EdgeInsetsDirectional.only(
                   top: ManagerHeight.h8,
@@ -48,35 +46,29 @@ class ForgotPasswordForDriverScreen extends StatelessWidget {
                   end: ManagerWidth.w14,
                 ),
                 child: Text(
-                  ManagerStrings
-                      .pleaseEnterYourLicenseNumberToRecoverYourPassword,
+                  isDriver
+                      ? ManagerStrings
+                          .pleaseEnterYourLicenseNumberToRecoverYourPassword
+                      : ManagerStrings
+                          .pleaseEnterYourJobNumberToRecoverYourPassword,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    height: 2,
-                    color: ManagerColors.davyGrey,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.medium,
-                    fontSize: ManagerFontsSizes.f13,
-                  ),
+                  style: context.textTheme.bodySmall,
                 ),
               ),
               MainTextField(
-                controller: controller.licenseNumber,
-                labelText: ManagerStrings.licenseNumber,
-                colorLabelText: ManagerColors.quartz,
+                controller:
+                    isDriver ? controller.licenseNumber : controller.jobNumber,
+                labelText: isDriver
+                    ? ManagerStrings.licenseNumber
+                    : ManagerStrings.jobNumber,
                 maxLength: AppConstants.maxLengthOfLicenseNumber,
               ),
-              SizedBox(height: ManagerHeight.h24),
+              verticalSpace(ManagerHeight.h24),
               mainButton(
-                onPressed: () => controller.sendButton(),
+                onPressed: () => controller.sendButton(isDriver, context),
                 child: Text(
                   ManagerStrings.send,
-                  style: TextStyle(
-                    color: ManagerColors.white,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.bold,
-                    fontSize: ManagerFontsSizes.f16,
-                  ),
+                  style: context.textTheme.labelMedium,
                 ),
               ),
             ],

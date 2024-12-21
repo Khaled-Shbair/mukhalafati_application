@@ -2,10 +2,10 @@ import '/config/all_imports.dart';
 
 class VerificationCodeScreen extends StatelessWidget {
   const VerificationCodeScreen({
-    required this.phoneNumber,
     required this.id,
-    required this.verificationCode,
     required this.isDriver,
+    required this.phoneNumber,
+    required this.verificationCode,
     super.key,
   });
 
@@ -34,29 +34,13 @@ class VerificationCodeScreen extends StatelessWidget {
               top: ManagerHeight.h64,
             ),
             children: [
-              Visibility(
-                visible: controller.returnCodeIsInCorrect,
-                replacement: SvgPicture.asset(
-                  ManagerAssets.verificationImage,
-                  height: ManagerHeight.h203,
-                  width: ManagerWidth.w290,
-                ),
-                child: Image.asset(
-                  ManagerAssets.inputIncorrect,
-                  height: ManagerHeight.h185,
-                  width: ManagerWidth.w187,
-                ),
-              ),
-              SizedBox(height: ManagerHeight.h30),
+              CustomVerificationImage(
+                  isIncorrect: controller.returnCodeIsInCorrect),
+              verticalSpace(ManagerHeight.h30),
               Text(
                 ManagerStrings.enterVerificationCode,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: ManagerColors.black,
-                  fontFamily: ManagerFontFamily.cairo,
-                  fontWeight: ManagerFontWeight.bold,
-                  fontSize: ManagerFontsSizes.f15,
-                ),
+                style: context.textTheme.titleMedium,
               ),
               Padding(
                 padding: EdgeInsetsDirectional.only(
@@ -68,48 +52,42 @@ class VerificationCodeScreen extends StatelessWidget {
                 child: Text(
                   '${ManagerStrings.pleaseEnterTheConfirmationCodeSentToYourMobileNumber} $phoneNumber',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    height: 2,
-                    color: ManagerColors.davyGrey,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.medium,
-                    fontSize: ManagerFontsSizes.f15,
-                  ),
+                  style: context.textTheme.bodySmall,
                 ),
               ),
               Row(
                 children: [
-                  filedOfVerificationCode(
+                  CustomFiledOfVerificationCode(
                     controller: controller.oneNumberOfCode,
                     focusNode: controller.oneFocusNode,
                     onChanged: (value) => controller.onChangeOneFiled(value),
                     changeBorderColor: controller.changeBorderColorOneFiled,
                   ),
-                  filedOfVerificationCode(
+                  CustomFiledOfVerificationCode(
                     controller: controller.twoNumberOfCode,
                     focusNode: controller.twoFocusNode,
                     onChanged: (value) => controller.onChangeTwoFiled(value),
                     changeBorderColor: controller.changeBorderColorTwoFiled,
                   ),
-                  filedOfVerificationCode(
+                  CustomFiledOfVerificationCode(
                     controller: controller.threeNumberOfCode,
                     focusNode: controller.threeFocusNode,
                     onChanged: (value) => controller.onChangeThreeFiled(value),
                     changeBorderColor: controller.changeBorderColorThreeFiled,
                   ),
-                  filedOfVerificationCode(
+                  CustomFiledOfVerificationCode(
                     controller: controller.fourNumberOfCode,
                     focusNode: controller.fourFocusNode,
                     onChanged: (value) => controller.onChangeFourFiled(value),
                     changeBorderColor: controller.changeBorderColorFourFiled,
                   ),
-                  filedOfVerificationCode(
+                  CustomFiledOfVerificationCode(
                     controller: controller.fiveNumberOfCode,
                     focusNode: controller.fiveFocusNode,
                     onChanged: (value) => controller.onChangeFiveFiled(value),
                     changeBorderColor: controller.changeBorderColorFiveFiled,
                   ),
-                  filedOfVerificationCode(
+                  CustomFiledOfVerificationCode(
                     controller: controller.sexNumberOfCode,
                     focusNode: controller.sexFocusNode,
                     onChanged: (value) => controller.onChangeSexFiled(value),
@@ -117,35 +95,20 @@ class VerificationCodeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Visibility(
-                visible: controller.returnCodeIsInCorrect,
-                maintainState: true,
-                maintainAnimation: true,
-                maintainSize: true,
-                maintainInteractivity: true,
-                maintainSemantics: true,
-                child: Text(
-                  ManagerStrings.theEnteredCodeIsIncorrect,
-                  style: TextStyle(
-                    color: ManagerColors.bittersweetShimmer,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.medium,
-                    fontSize: ManagerFontsSizes.f12,
-                  ),
-                ),
+              CustomIncorrectEnteredCodeMessage(
+                isIncorrect: controller.returnCodeIsInCorrect,
               ),
-              SizedBox(height: ManagerHeight.h10),
+              verticalSpace(ManagerHeight.h10),
               mainButton(
-                onPressed: () =>
-                    controller.verifyButton(id, isDriver, verificationCode),
+                onPressed: () => controller.verifyButton(
+                  id,
+                  isDriver,
+                  verificationCode,
+                  context,
+                ),
                 child: Text(
                   ManagerStrings.verify,
-                  style: TextStyle(
-                    color: ManagerColors.white,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.bold,
-                    fontSize: ManagerFontsSizes.f16,
-                  ),
+                  style: context.textTheme.labelMedium,
                 ),
               ),
             ],
