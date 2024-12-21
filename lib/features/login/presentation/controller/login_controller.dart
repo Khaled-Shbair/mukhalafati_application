@@ -2,9 +2,6 @@ import '/config/all_imports.dart';
 
 class LoginController extends GetxController
     with GetSingleTickerProviderStateMixin, Helpers {
-  final PoliceManLoginUseCase _policeManLoginUseCase =
-      instance<PoliceManLoginUseCase>();
-  final DriverLoginUseCase _driverLoginUseCase = instance<DriverLoginUseCase>();
   late TabController tabController;
   late TextEditingController jobNumber;
   late TextEditingController passwordPoliceMan;
@@ -20,7 +17,10 @@ class LoginController extends GetxController
   @override
   void onInit() {
     super.onInit();
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(
+      length: AppConstants.lengthOfTabBarInLoginController,
+      vsync: this,
+    );
     jobNumber = TextEditingController();
     passwordPoliceMan = TextEditingController();
     licenseNumber = TextEditingController();
@@ -28,21 +28,23 @@ class LoginController extends GetxController
     forgetPoliceManPasswordRecognizer = TapGestureRecognizer()
       ..onTap = () => Get.toNamed(Routes.forgetPoliceManPasswordScreen);
     forgetDriverPasswordRecognizer = TapGestureRecognizer()
-      ..onTap = () => Get.toNamed(Routes.forgetDriverPasswordScreen);
+      ..onTap = () => Get.toNamed(Routes.forgetPasswordScreen);
   }
 
   @override
-  void dispose() {
+  void onClose() {
     jobNumber.dispose();
     passwordPoliceMan.dispose();
     licenseNumber.dispose();
     passwordDriver.dispose();
     forgetPoliceManPasswordRecognizer.dispose();
     forgetDriverPasswordRecognizer.dispose();
-    super.dispose();
+    super.onClose();
   }
 
+  /// To back to welcome screen and remove login controller from memory
   void backButton() {
+    disposeLogin();
     Get.offAllNamed(Routes.welcomeScreen);
   }
 
@@ -66,51 +68,82 @@ class LoginController extends GetxController
     update();
   }
 
-  void loginDriver() async {
+  void loginDriver(BuildContext context) async {
     if (_checkDataDriver()) {
-      (await _driverLoginUseCase.execute(
+      await initDriverLogin();
+      final DriverLoginUseCase driverLoginUseCase =
+          instance<DriverLoginUseCase>();
+      (await driverLoginUseCase.execute(
         DriverLoginInput(
           licenseNumber: licenseNumber.text,
           password: passwordDriver.text,
         ),
       ))
           .fold(
+        /// Failed request login
         (l) {
-          showSnackBar(message: l.message);
+          /// Appear message of error in SnackBar to user
+          showSnackBar(message: l.message, context: context);
         },
+
+        /// Successfully request login
         (r) async {
+          /// Save account logged-in or not when close app
           await SharedPreferencesController.setData(
-              SharedPreferencesKeys.rememberMeDriver, false);
-          await AppSettingsSharedPreferences.setDriverData(r);
+              SharedPreferencesKeys.rememberMeDriver, rememberMeDriver);
+
+          /// Save data of driver when login
+          await saveDriverData(r);
+
+          /// Navigate to driver home screen
           await Get.offAllNamed(Routes.driverHomeScreen);
         },
       );
     } else {
+      /// Appear message of error in SnackBar to user
       showSnackBar(
-          message: ManagerStrings.pleaseEnterYourLicenseNumberAndPassword);
+          message: ManagerStrings.pleaseEnterYourLicenseNumberAndPassword,
+          context: context);
     }
   }
 
-  void loginPoliceMan() async {
+  /// login police man account
+  void loginPoliceMan(BuildContext context) async {
     if (_checkDataPolice()) {
-      (await _policeManLoginUseCase.execute(PoliceManLoginInput(
+      await initPoliceManLogin();
+      final PoliceManLoginUseCase policeManLoginUseCase =
+          instance<PoliceManLoginUseCase>();
+      (await policeManLoginUseCase.execute(PoliceManLoginInput(
               jobNumber: jobNumber.text, password: passwordPoliceMan.text)))
           .fold(
+        /// Failed login request
         (l) {
-          showSnackBar(message: l.message);
+          /// Appear message of error in SnackBar to user
+          showSnackBar(message: l.message, context: context);
         },
+
+        /// Successfully login request
         (r) async {
-          await AppSettingsSharedPreferences.setPoliceData(r);
+          /// Save account logged-in or not when close app
           SharedPreferencesController.setData(
-              SharedPreferencesKeys.rememberMePolice, true);
+              SharedPreferencesKeys.rememberMePolice, rememberMePoliceMan);
+
+          /// Save data of police man when login
+          await savePoliceData(r);
+
+          /// Navigate to police man home screen
           Get.offAllNamed(Routes.policeManHomeScreen);
         },
       );
     } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterYourJobNumberAndPassword);
+      /// Appear message of error in SnackBar to user
+      showSnackBar(
+          message: ManagerStrings.pleaseEnterYourJobNumberAndPassword,
+          context: context);
     }
   }
 
+  /// check inputs user data in not empty
   bool _checkDataDriver() {
     if (licenseNumber.text.isNotEmpty && passwordDriver.text.isNotEmpty) {
       return true;
@@ -119,6 +152,7 @@ class LoginController extends GetxController
     }
   }
 
+  /// check inputs user data in not empty
   bool _checkDataPolice() {
     if (jobNumber.text.isNotEmpty && passwordPoliceMan.text.isNotEmpty) {
       return true;
