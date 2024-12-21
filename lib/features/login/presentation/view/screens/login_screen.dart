@@ -28,64 +28,30 @@ class LoginScreen extends StatelessWidget {
                   width: ManagerWidth.w85,
                   fit: BoxFit.cover,
                 ),
-                SizedBox(height: ManagerHeight.h20),
-                Text(
-                  ManagerStrings.login,
-                  style: TextStyle(
-                    color: ManagerColors.black,
-                    fontSize: ManagerFontsSizes.f22,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: ManagerHeight.h8),
+                verticalSpace(ManagerHeight.h20),
+                Text(ManagerStrings.login, style: context.textTheme.titleLarge),
+                verticalSpace(ManagerHeight.h8),
                 Text(
                   ManagerStrings.welcomeBackToOurApp,
-                  style: TextStyle(
-                    color: ManagerColors.blackOlive,
-                    fontSize: ManagerFontsSizes.f14,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.medium,
-                  ),
+                  style: context.textTheme.bodyMedium,
                 ),
-                SizedBox(height: ManagerHeight.h16),
+                verticalSpace(ManagerHeight.h16),
                 Container(
                   height: ManagerHeight.h48,
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
-                    color: ManagerColors.ghostWhite,
+                    color: context.theme.colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(ManagerRadius.r5),
                   ),
                   child: TabBar(
                     controller: controller.tabController,
-                    indicatorColor: ManagerColors.primaryColor,
-                    dividerColor: ManagerColors.transparent,
-                    indicator: BoxDecoration(
-                      color: ManagerColors.primaryColor,
-                      borderRadius: BorderRadius.circular(ManagerRadius.r5),
-                    ),
-                    labelPadding: EdgeInsetsDirectional.only(
-                      top: ManagerHeight.h7,
-                      bottom: ManagerHeight.h7,
-                    ),
-                    // indicatorPadding: EdgeInsetsDirectional.only(
-                    //   bottom: ManagerHeight.h5,
-                    //   top: ManagerHeight.h5,
-                    //   start: ManagerWidth.w16,
-                    //   end: ManagerWidth.w16,
-                    // ),
-                    labelStyle: TextStyle(
-                      color: ManagerColors.white,
-                      fontFamily: ManagerFontFamily.cairo,
-                      fontWeight: ManagerFontWeight.medium,
-                      fontSize: ManagerFontsSizes.f15,
-                    ),
-                    unselectedLabelStyle: TextStyle(
-                      color: ManagerColors.black,
-                      fontFamily: ManagerFontFamily.cairo,
-                      fontWeight: ManagerFontWeight.medium,
-                      fontSize: ManagerFontsSizes.f15,
-                    ),
+                    indicatorColor: context.theme.tabBarTheme.indicatorColor,
+                    dividerColor: context.theme.tabBarTheme.dividerColor,
+                    indicator: context.theme.tabBarTheme.indicator,
+                    labelPadding: context.theme.tabBarTheme.labelPadding,
+                    labelStyle: context.theme.tabBarTheme.labelStyle,
+                    unselectedLabelStyle:
+                        context.theme.tabBarTheme.unselectedLabelStyle,
                     tabs: [
                       tabBarButton(
                         image: ManagerAssets.driverIcon,
@@ -103,7 +69,7 @@ class LoginScreen extends StatelessWidget {
                     controller: controller.tabController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
-                      tabBarPage(
+                      CustomTabBarPage(
                         changeRememberMe: (bool? v) =>
                             controller.changeRememberMeDriver(v!),
                         forgotPasswordRecognizer:
@@ -112,17 +78,17 @@ class LoginScreen extends StatelessWidget {
                         obscureText: controller.obscurePasswordDriver,
                         changeObscurePassword: () =>
                             controller.changeObscurePasswordDriver(),
-                        login: () => controller.loginDriver(),
+                        login: () => controller.loginDriver(context),
                         labelTextOfUserField: ManagerStrings.licenseNumber,
                         password: controller.passwordDriver,
                         userNumber: controller.licenseNumber,
                       ),
-                      tabBarPage(
+                      CustomTabBarPage(
                         changeRememberMe: (bool? v) =>
                             controller.changeRememberMePoliceMan(v!),
                         forgotPasswordRecognizer:
                             controller.forgetPoliceManPasswordRecognizer,
-                        login: () => controller.loginPoliceMan(),
+                        login: () => controller.loginPoliceMan(context),
                         rememberMe: controller.rememberMePoliceMan,
                         obscureText: controller.obscurePasswordPoliceMan,
                         changeObscurePassword: () =>
