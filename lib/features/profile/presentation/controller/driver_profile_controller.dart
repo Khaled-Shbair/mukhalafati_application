@@ -1,9 +1,7 @@
 import '/config/all_imports.dart';
 
-class DriverProfileController extends GetxController {
+class DriverProfileController extends GetxController with Helpers {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
-  late String driverName;
 
   late String driverImage;
 
@@ -15,8 +13,6 @@ class DriverProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    driverName =
-        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
 
     driverImage =
         SharedPreferencesController.getString(SharedPreferencesKeys.image);
@@ -36,14 +32,15 @@ class DriverProfileController extends GetxController {
   }
 
   @override
-  void dispose() {
+  void onClose() {
     driverNameController.dispose();
     phoneNumberController.dispose();
     idNumberController.dispose();
     licenceNumberController.dispose();
-    super.dispose();
+    super.onClose();
   }
 
+  /// Open [endDrawer], use this drawer as menu.
   void openEndDrawer() {
     if (scaffoldKey.currentState != null &&
         !scaffoldKey.currentState!.isEndDrawerOpen) {
@@ -51,11 +48,15 @@ class DriverProfileController extends GetxController {
     }
   }
 
+  /// Driver send request to update profile data when see error in data
   void updateDataButton() {
     if (_checkDataDriver()) {
       createdSuccessfullyDialog(
         closeButton: () {
+          /// Remove driver profile controller form memory
           disposeDriverProfile();
+
+          /// Navigate to driver home screen
           Get.offAllNamed(Routes.driverHomeScreen);
         },
         context: Get.context!,
@@ -67,6 +68,7 @@ class DriverProfileController extends GetxController {
     } else {}
   }
 
+  /// check inputs user data in not empty and not similar previous data
   bool _checkDataDriver() {
     if (driverNameController.text.isNotEmpty &&
             phoneNumberController.text.isNotEmpty &&
