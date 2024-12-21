@@ -7,7 +7,8 @@ class LogoutController extends GetxController {
   }
 
   void logoutButton() async {
-    await AppSettingsSharedPreferences.clear();
+    await clearData();
     Get.offAndToNamed(Routes.loginScreen);
+    disposeLogout();
   }
 }
