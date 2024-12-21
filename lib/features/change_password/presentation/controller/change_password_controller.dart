@@ -14,18 +14,23 @@ class ChangePasswordController extends GetxController with Helpers {
   }
 
   @override
-  void dispose() {
+  void onClose() {
     newPassword.dispose();
     confirmPassword.dispose();
-    super.dispose();
+    super.onClose();
   }
 
   void backButton() {
+    /// Remove change password controller form memory
+    disposeChangePassword();
     Get.back();
   }
 
-  void changePasswordButton(bool isDriver, int id) async {
-    if (_checkDataDriver()) {
+  /// Check is driver or police man is send request to change password.
+  /// if driver send request of this driver only.
+  /// if police man send request of this police man only.
+  void changePasswordButton(bool isDriver, int id, BuildContext context) async {
+    if (_checkData()) {
       if (isDriver) {
         await initDriverChangePassword();
         final DriverChangePasswordUseCase driverChangePasswordUseCase =
@@ -37,10 +42,15 @@ class ChangePasswordController extends GetxController with Helpers {
             newPassword: newPassword.text,
           ),
         ))
+
+            /// Failed change password for driver request
             .fold(
           (l) {
-            showSnackBar(message: l.message);
+            /// Appear message of error in SnackBar to user
+            showSnackBar(message: l.message, context: context);
           },
+
+          /// Successfully change password for driver request
           (r) {
             _changedPasswordSuccessfully();
           },
@@ -57,23 +67,33 @@ class ChangePasswordController extends GetxController with Helpers {
           ),
         ))
             .fold(
+          /// Failed change password for police man request
           (l) {
-            showSnackBar(message: l.message);
+            /// Appear message of error in SnackBar to user
+            showSnackBar(message: l.message, context: context);
           },
+
+          /// Successfully change password for police man request
           (r) {
             _changedPasswordSuccessfully();
           },
         );
       }
     } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterNewPassword);
+      /// Appear message of error in SnackBar to user
+      showSnackBar(
+          message: ManagerStrings.pleaseEnterNewPassword, context: context);
     }
   }
 
+  /// show dialog when return changed Password is Successfully
   void _changedPasswordSuccessfully() {
     createdSuccessfullyDialog(
       closeButton: () {
+        /// Remove change password controller form memory
         disposeChangePassword();
+
+        /// Navigate to login screen
         Get.offAndToNamed(Routes.loginScreen);
       },
       context: Get.context!,
@@ -91,7 +111,8 @@ class ChangePasswordController extends GetxController with Helpers {
     update();
   }
 
-  bool _checkDataDriver() {
+  /// check inputs user data in not empty
+  bool _checkData() {
     if (newPassword.text.isNotEmpty && confirmPassword.text.isNotEmpty) {
       return true;
     } else {

@@ -33,19 +33,14 @@ class ChangePasswordScreen extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 ManagerAssets.changePasswordImage,
-                height: ManagerHeight.h182,
+                height: ManagerHeight.h185,
                 width: ManagerWidth.infinity,
               ),
-              SizedBox(height: ManagerHeight.h50),
+              verticalSpace(ManagerHeight.h50),
               Text(
                 ManagerStrings.enterNewPassword,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: ManagerColors.black,
-                  fontFamily: ManagerFontFamily.cairo,
-                  fontWeight: ManagerFontWeight.bold,
-                  fontSize: ManagerFontsSizes.f15,
-                ),
+                style: context.textTheme.titleMedium,
               ),
               Padding(
                 padding: EdgeInsetsDirectional.only(
@@ -58,47 +53,35 @@ class ChangePasswordScreen extends StatelessWidget {
                   ManagerStrings
                       .pleaseEnterNewPasswordWhichMustBeDifferentFromTheOldPassword,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    height: 2,
-                    color: ManagerColors.davyGrey,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.medium,
-                    fontSize: ManagerFontsSizes.f13,
-                  ),
+                  style: context.textTheme.bodyMedium,
                 ),
               ),
-              SizedBox(height: ManagerHeight.h8),
+              verticalSpace(ManagerHeight.h8),
               MainTextField(
                 controller: controller.newPassword,
                 labelText: ManagerStrings.newPassword,
-                colorLabelText: ManagerColors.quartz,
                 isPassword: true,
                 obscureText: controller.obscureNewPassword,
                 keyboardType: TextInputType.visiblePassword,
                 changeObscureText: () => controller.changeObscureNewPassword(),
               ),
-              SizedBox(height: ManagerHeight.h15),
+              verticalSpace(ManagerHeight.h15),
               MainTextField(
                 controller: controller.confirmPassword,
                 labelText: ManagerStrings.confirmPassword,
-                colorLabelText: ManagerColors.quartz,
                 obscureText: controller.obscureConfirmPassword,
                 isPassword: true,
                 keyboardType: TextInputType.visiblePassword,
                 changeObscureText: () =>
                     controller.changeObscureConfirmPassword(),
               ),
-              SizedBox(height: ManagerHeight.h24),
+              verticalSpace(ManagerHeight.h24),
               mainButton(
-                onPressed: () => controller.changePasswordButton(isDriver, id),
+                onPressed: () =>
+                    controller.changePasswordButton(isDriver, id, context),
                 child: Text(
                   ManagerStrings.changePassword,
-                  style: TextStyle(
-                    color: ManagerColors.white,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.bold,
-                    fontSize: ManagerFontsSizes.f16,
-                  ),
+                  style: context.textTheme.labelMedium,
                 ),
               ),
             ],
