@@ -13,46 +13,43 @@ class CustomTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DataTable(
-      headingRowHeight: ManagerHeight.h40,
-      dataRowMinHeight: ManagerHeight.h40,
-      horizontalMargin: ManagerWidth.w10,
-      columnSpacing: ManagerWidth.w5,
-
-      //TODO: this line used form tableOfViolation (edit later)
-      // columnSpacing: rows.isNotEmpty ? ManagerWidth.w14 : null,
-
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: context.theme.dividerColor,
-          width: ManagerWidth.w1,
-        ),
-        borderRadius: BorderRadius.circular(ManagerRadius.r5),
-      ),
+      headingRowHeight: context.theme.dataTableTheme.headingRowHeight,
+      dataRowMinHeight: context.theme.dataTableTheme.dataRowMinHeight,
+      horizontalMargin: context.theme.dataTableTheme.horizontalMargin,
+      columnSpacing: context.theme.dataTableTheme.columnSpacing,
+      decoration: context.theme.dataTableTheme.decoration,
       columns: columns,
       rows: rows,
     );
   }
 }
 
-DataColumn dataColumn(String text) {
+DataColumn customDataColumn(String nameColumn, BuildContext context) {
   return DataColumn(
-    headingRowAlignment: MainAxisAlignment.center,
-    label: textDataColumn(text),
+    headingRowAlignment: context.theme.dataTableTheme.headingRowAlignment,
+    label: CustomNameColumnInTable(nameColumn: nameColumn),
   );
 }
 
-Widget textDataColumn(String text) {
-  return Text(
-    text,
-    style: TextStyle(
-      color: ManagerColors.black70,
-      fontFamily: ManagerFontFamily.cairo,
-      fontWeight: ManagerFontWeight.semiBold,
-      fontSize: ManagerFontsSizes.f12,
-    ),
-  );
+/// Custom name column (heading) used in table
+class CustomNameColumnInTable extends StatelessWidget {
+  const CustomNameColumnInTable({
+    required this.nameColumn,
+    super.key,
+  });
+
+  final String nameColumn;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      nameColumn,
+      style: context.theme.dataTableTheme.headingTextStyle,
+    );
+  }
 }
 
+/// Appear when no data return from [Api]
 class CustomEmptyTable extends StatelessWidget {
   const CustomEmptyTable({
     required this.length,
@@ -73,7 +70,7 @@ class CustomEmptyTable extends StatelessWidget {
         bottom: ManagerHeight.h30,
       ),
       decoration: BoxDecoration(
-        color: ManagerColors.transparent,
+        color: context.theme.unselectedWidgetColor,
         border: Border.all(
           color: context.theme.dividerColor,
           width: ManagerWidth.w1,
@@ -93,7 +90,8 @@ class CustomEmptyTable extends StatelessWidget {
               children: [
                 ...List.generate(
                   length,
-                  (index) => textDataColumn(nameOfColumns[index]),
+                  (index) =>
+                      CustomNameColumnInTable(nameColumn: nameOfColumns[index]),
                 ),
               ],
             ),
@@ -106,12 +104,7 @@ class CustomEmptyTable extends StatelessWidget {
           Text(
             ManagerStrings.noRecordedViolations,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: ManagerColors.black,
-              fontFamily: ManagerFontFamily.cairo,
-              fontSize: ManagerFontsSizes.f12,
-              fontWeight: ManagerFontWeight.semiBold,
-            ),
+            style: context.textTheme.titleListOfComplaintsScreenAndStyleOfTextInEmptyTable(context),
           ),
         ],
       ),

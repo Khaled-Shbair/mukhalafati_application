@@ -690,6 +690,51 @@ class _AppApi implements AppApi {
     return _value;
   }
 
+  @override
+  Future<SendRequestUpdateProfileResponse> sendRequestUpdateProfile(
+    dynamic driverId,
+    dynamic name,
+    dynamic idNumber,
+    dynamic licenseNumber,
+    dynamic phoneNumber,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'driver_id': driverId,
+      'name': name,
+      'id_number': idNumber,
+      'license_number': licenseNumber,
+      'phone_number': phoneNumber,
+    };
+    final _options = _setStreamType<SendRequestUpdateProfileResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/send_request_update_profile',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SendRequestUpdateProfileResponse _value;
+    try {
+      _value = SendRequestUpdateProfileResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

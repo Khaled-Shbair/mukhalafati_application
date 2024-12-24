@@ -29,11 +29,16 @@ class LoginScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
                 verticalSpace(ManagerHeight.h20),
-                Text(ManagerStrings.login, style: context.textTheme.titleLarge),
+                Text(
+                  ManagerStrings.login,
+                  style: context.textTheme
+                      .titleOnBoardingAndWelcomeAndLoginScreen(context),
+                ),
                 verticalSpace(ManagerHeight.h8),
                 Text(
                   ManagerStrings.welcomeBackToOurApp,
-                  style: context.textTheme.bodyMedium,
+                  style:
+                      context.textTheme.subTitleWelcomeAndLoginScreens(context),
                 ),
                 verticalSpace(ManagerHeight.h16),
                 Container(

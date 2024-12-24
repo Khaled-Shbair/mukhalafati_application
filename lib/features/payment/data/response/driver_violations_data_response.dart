@@ -12,7 +12,6 @@ class DriverViolationsDataResponse {
   String? violationReason;
   String? priceOfViolation;
 
-
   DriverViolationsDataResponse({
     required this.id,
     required this.violationState,
@@ -26,6 +25,5 @@ class DriverViolationsDataResponse {
   factory DriverViolationsDataResponse.fromJson(Map<String, dynamic> json) =>
       _$DriverViolationsDataResponseFromJson(json);
 
-  Map<String, dynamic> toJson(DriverViolationsDataResponse instance) =>
-      _$DriverViolationsDataResponseToJson(this);
+  Map<String, dynamic> toJson() => _$DriverViolationsDataResponseToJson(this);
 }

@@ -1,10 +1,11 @@
 import '/config/all_imports.dart';
 
-PreferredSizeWidget homeAppBar({
+PreferredSizeWidget customHomeAppBar({
   required String welcome,
   required String firstName,
   required Function() openEndDrawer,
   required Widget widget,
+  required BuildContext context,
 }) {
   return AppBar(
     leadingWidth: ManagerWidth.w199,
@@ -12,34 +13,24 @@ PreferredSizeWidget homeAppBar({
     automaticallyImplyLeading: false,
     leading: Row(
       children: [
-        SizedBox(width: ManagerWidth.w16),
+        horizontalSpace(ManagerWidth.w16),
         widget,
-        SizedBox(width: ManagerWidth.w9),
+        horizontalSpace(ManagerWidth.w9),
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               welcome,
-              style: TextStyle(
-                fontFamily: ManagerFontFamily.cairo,
-                fontWeight: ManagerFontWeight.bold,
-                fontSize: ManagerFontsSizes.f15,
-                color: ManagerColors.black,
-              ),
+              style: context.textTheme.textStyleOfWelcomeWord(context),
             ),
             Row(
               children: [
                 Text(
                   firstName,
-                  style: TextStyle(
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.bold,
-                    fontSize: ManagerFontsSizes.f15,
-                    color: ManagerColors.eerieBlack,
-                  ),
+                  style: context.textTheme.textStyleOfNameOfUser(context),
                 ),
-                SizedBox(width: ManagerWidth.w4),
+                horizontalSpace(ManagerWidth.w4),
                 SvgPicture.asset(
                   ManagerAssets.welcomeIcon,
                   height: ManagerHeight.h24,

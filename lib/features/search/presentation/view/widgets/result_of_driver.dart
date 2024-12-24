@@ -10,10 +10,11 @@ Widget resultOfDriver({
   required String licenseLevels,
   required String imageDriver,
   required int numberOfViolations,
+  required BuildContext context,
 }) {
   return Column(
     children: [
-      frontDrivingLicenseCard(
+      FrontDrivingLicenseCard(
         licenseNumber: licenseNumber,
         expiryDate: expiryDate,
         imageDriver: imageDriver,
@@ -47,23 +48,24 @@ Widget resultOfDriver({
             ),
           ],
         ),
-        child: RichText(
-          text: textSpan(
-            text: '${ManagerStrings.numberOfViolations}: ',
+        child: CustomRichText(
+          textStyle: TextStyle(
             color: ManagerColors.black,
             fontSize: ManagerFontsSizes.f12,
             fontWeight: ManagerFontWeight.bold,
-            fontFamily: ManagerFontFamily.cairo,
-            children: [
-              textSpan(
-                text: '$numberOfViolations ${ManagerStrings.violation}',
+          ),
+          title: '${ManagerStrings.numberOfViolations}: ',
+          children: [
+            customTextSpan(
+              context: context,
+              text: '$numberOfViolations ${ManagerStrings.violation}',
+              textStyle: TextStyle(
                 color: ManagerColors.black,
                 fontSize: ManagerFontsSizes.f12,
-                fontWeight: ManagerFontWeight.medium,
-                fontFamily: ManagerFontFamily.cairo,
+                fontWeight: ManagerFontWeight.regular,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     ],

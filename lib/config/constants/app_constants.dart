@@ -8,7 +8,8 @@ class AppConstants {
   static const double elevationAppBarOnBoardingScreen = 0;
   static const double leadingWidthAppBarOnBoardingScreen = 80;
   static const double heightOfSubTitleWelcomeScreen = 1.8;
-  static const int maxLinesOfTextOfComplaint = 8;
+  static const int maxLinesOfTextOfComplaint = 20;
+  static const int minLinesOfTextOfComplaint = 15;
   static const int minLinesOfTextFormField = 1;
   static const int maxLinesOfTextFormField = 1;
   static const int maxLengthOfExpiryDateCard = 7;
@@ -22,11 +23,13 @@ class AppConstants {
   static const double elevationOfStepperInPaymentScreen = 0;
   static const double splashRadiusOfCheckboxInLoginScreen = 0;
   static const double widthOfBorderSideOfMainTextField = 0.50;
-  static const double thicknessOfDividerInCreateViolation = 0.4;
-  static const double heightOfDividerInCreateViolation = 0;
+  static const double thicknessOfDividerThemeData = 0.4;
+  static const double heightOfDividerThemeData = 0;
   static const double blurRadiusOfBoxShadowInCreatedSuccessfullyWidget = 6;
   static const double spreadRadiusOfBoxShadowInCreatedSuccessfullyWidget = 6;
   static const double blurRadiusOfBoxShadowInConfirmInformationWidget = 6;
+  static const double spreadRadiusOfBoxShadowInCustomStatisticsBoxPoliceManWidget = 1;
+  static const double blurRadiusOfBoxShadowInCustomStatisticsBoxPoliceManWidget = 4;
   static const double blurRadiusOfBoxShadowInTabBarViewInPoliceManHomeScreen =
       4;
   static const double spreadRadiusOfBoxShadowInLogoutScreen = 6;
@@ -45,8 +48,6 @@ class AppConstants {
   static const int maxLengthOfVehicleColor = 8;
   static const int maxLengthOfVerificationCode = 1;
   static const double
-      heightOfTextOfTitleDrivingLicenseCardInDrivingLicenseCardScreen = 1.8;
-  static const double
       blurRadiusOfBoxShadowInNumberOfViolationsContainerInResultOfDriverWidget =
       2;
   static const double stepIconSizeOfStepperInPaymentScreen = 34;
@@ -64,5 +65,5 @@ class AppConstants {
   static const String twelve = '12';
   static const String hash = '#';
 
-  static const int lengthOfTabBarInLoginController=2;
+  static const int lengthOfTabBarInLoginController = 2;
 }

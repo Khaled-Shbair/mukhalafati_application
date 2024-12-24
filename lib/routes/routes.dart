@@ -7,8 +7,7 @@ class Routes {
   static const String registerDriverScreen = 'register_driver_Screen';
   static const String forgetPoliceManPasswordScreen =
       'forget_Police_man_password_Screen';
-  static const String forgetDriverPasswordScreen =
-      'forget_driver_password_Screen';
+  static const String forgetPasswordScreen = 'forget_password_Screen';
   static const String policeManHomeScreen = 'police_man_home_screen';
   static const String driverHomeScreen = 'driver_home_screen';
   static const String createViolationScreen = 'create_violation_screen';
@@ -21,10 +20,7 @@ class Routes {
   static const String listOfComplaintsScreen = 'list_of_complaints_screen';
   static const String driverProfileScreen = 'driver_profile_screen';
   static const String payViolationsScreen = 'pay_violations_screen';
-  static const String forgotPasswordForDriverScreen =
-      'forgot_password_for_driver_screen';
-  static const String forgotPasswordForPoliceManScreen =
-      'forgot_password_for_police_man_screen';
+
   static const String verificationCodeScreen = 'verification_code_screen';
   static const String changePasswordScreen = 'change_password_screen';
   static const String paymentScreen = 'payment_screen';

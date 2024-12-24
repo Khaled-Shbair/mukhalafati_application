@@ -17,10 +17,7 @@ class PaymentScreen extends StatelessWidget {
         return Scaffold(
           key: controller.scaffoldKey,
           resizeToAvoidBottomInset: false,
-          endDrawer: driverDrawer(
-            driverName: controller.driverName,
-            driverImage: controller.driverImage,
-          ),
+          endDrawer: CustomDriverDrawer(isPayViolationsScreen: true),
           appBar: AppBar(
             title: Text(ManagerStrings.payViolations),
             leading: IconButton(
@@ -28,20 +25,7 @@ class PaymentScreen extends StatelessWidget {
               onPressed: () => controller.backButton(),
             ),
             actions: [
-              mainButton(
-                onPressed: () => controller.openEndDrawer(),
-                minWidth: ManagerWidth.w30,
-                height: ManagerHeight.h30,
-                color: ManagerColors.transparent,
-                highlightColor: ManagerColors.transparent,
-                splashColor: ManagerColors.transparent,
-                side: BorderSide.none,
-                child: Icon(
-                  Icons.menu,
-                  color: ManagerColors.black,
-                  size: ManagerIconsSizes.i30,
-                ),
-              ),
+              menuButton(() => controller.openEndDrawer()),
             ],
           ),
           body: Padding(
@@ -161,7 +145,7 @@ class PaymentScreen extends StatelessWidget {
                 ),
                 SizedBox(height: ManagerHeight.h34),
                 if (controller.loading) ...{
-                  myLoading(),
+                  CustomLoading(),
                 } else ...{
                   Expanded(
                     child: PageView(
@@ -172,7 +156,7 @@ class PaymentScreen extends StatelessWidget {
                       children: [
                         paymentSelectionStep(
                           paymentSelectionButton: () =>
-                              controller.paymentSelectionButton(),
+                              controller.paymentSelectionButton(context),
                           paymentSelectionDone: controller.paymentSelectionDone,
                           selectJawwalPay: () => controller.selectJawwalPay(),
                           selectPalPay: () => controller.selectPalPay(),
@@ -184,7 +168,7 @@ class PaymentScreen extends StatelessWidget {
                         enterDetailsStep(
                           enterDetailsDone: controller.enterDetailsDone,
                           completePaymentButton: () =>
-                              controller.completePaymentButton(),
+                              controller.completePaymentButton(context),
                           paymentBy: controller.paymentBy,
                           price: priceOfViolation,
                           cardHolderName: controller.cardHolderName,

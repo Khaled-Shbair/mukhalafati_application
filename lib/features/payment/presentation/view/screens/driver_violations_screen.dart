@@ -10,28 +10,12 @@ class DriverViolationsScreen extends StatelessWidget {
         return Scaffold(
           key: controller.scaffoldKey,
           resizeToAvoidBottomInset: false,
-          endDrawer: driverDrawer(
-            driverName: controller.driverName,
-            driverImage: controller.driverImage,
-          ),
+          endDrawer: CustomDriverDrawer(isPayViolationsScreen: true),
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Text(ManagerStrings.payViolations),
             actions: [
-              mainButton(
-                onPressed: () => controller.openEndDrawer(),
-                minWidth: ManagerWidth.w30,
-                height: ManagerHeight.h30,
-                color: ManagerColors.transparent,
-                highlightColor: ManagerColors.transparent,
-                splashColor: ManagerColors.transparent,
-                side: BorderSide.none,
-                child: Icon(
-                  Icons.menu,
-                  color: ManagerColors.black,
-                  size: ManagerIconsSizes.i30,
-                ),
-              ),
+              menuButton(() => controller.openEndDrawer()),
             ],
           ),
           body: Container(
@@ -103,8 +87,10 @@ class DriverViolationsScreen extends StatelessWidget {
                             columns: [
                               ...List.generate(
                                 controller.namesOfColumns.length,
-                                (index) =>
-                                    dataColumn(controller.namesOfColumns[index]),
+                                (index) => customDataColumn(
+                                  controller.namesOfColumns[index],
+                                  context,
+                                ),
                               ),
                             ],
                             rows: [

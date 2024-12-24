@@ -23,7 +23,10 @@ class PageViewContent extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         verticalSpace(ManagerHeight.h5),
-        Text(title, style: context.theme.textTheme.titleLarge),
+        Text(
+          title, style: context.textTheme.titleOnBoardingAndWelcomeAndLoginScreen(context),
+          // context.theme.textTheme.titleLarge,
+        ),
         Container(
           margin: EdgeInsetsDirectional.only(
             start: ManagerWidth.w24,
@@ -34,7 +37,7 @@ class PageViewContent extends StatelessWidget {
           child: Text(
             subTitle,
             textAlign: TextAlign.center,
-            style: context.theme.textTheme.bodyMedium,
+            style: context.textTheme.subTitleOnBoardingScreen(context),
           ),
         ),
       ],

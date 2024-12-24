@@ -6,14 +6,12 @@ class PoliceManHomeController extends GetxController
   late TooltipBehavior tooltipBehavior;
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  late String policeName;
-
-  late String policeImage;
 
   late String policeFirstName;
   int currentPage = 0;
 
   late String totalViolations;
+  late String policeImage;
 
   String welcome = ManagerStrings.goodMorning;
 
@@ -28,8 +26,6 @@ class PoliceManHomeController extends GetxController
     super.onInit();
     getTotalViolationsFromDatabase();
 
-    policeName =
-        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
     policeImage =
         SharedPreferencesController.getString(SharedPreferencesKeys.image);
 
@@ -42,12 +38,21 @@ class PoliceManHomeController extends GetxController
     s();
   }
 
+  /// Open [endDrawer], use this drawer as menu.
+  void openEndDrawer() {
+    if (scaffoldKey.currentState != null &&
+        !scaffoldKey.currentState!.isEndDrawerOpen) {
+      scaffoldKey.currentState!.openEndDrawer();
+    }
+  }
+
   void getTotalViolationsFromDatabase() {
     // totalViolations = _violationsDatabase
     //     .totalViolationsOfPolice(_sharedPreferences.getUserId())
     //     .toString();
   }
 
+  /// Change the hello word based on time [goodEvening] and [goodMorning]
   void changeWelcome() {
     if (DateTime.now().hour >= 12) {
       welcome = ManagerStrings.goodEvening;
@@ -55,13 +60,6 @@ class PoliceManHomeController extends GetxController
       welcome = ManagerStrings.goodMorning;
     }
     update();
-  }
-
-  void openEndDrawer() {
-    if (scaffoldKey.currentState != null &&
-        !scaffoldKey.currentState!.isEndDrawerOpen) {
-      scaffoldKey.currentState!.openEndDrawer();
-    }
   }
 
   void buttonWeeklyViolations() {

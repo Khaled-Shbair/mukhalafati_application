@@ -12,9 +12,9 @@ class ListOfReasonsOfViolationsResponse {
   });
 
   factory ListOfReasonsOfViolationsResponse.fromJson(
-          Map<String, dynamic> json) =>
+      Map<String, dynamic> json) =>
       _$ListOfReasonsOfViolationsResponseFromJson(json);
 
-  Map<String, dynamic> toJson(ListOfReasonsOfViolationsResponse instance) =>
+  Map<String, dynamic> toJson() =>
       _$ListOfReasonsOfViolationsResponseToJson(this);
 }

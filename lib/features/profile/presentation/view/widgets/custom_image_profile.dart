@@ -16,11 +16,33 @@ class CustomImageProfile extends StatelessWidget {
       child: CircleAvatar(
         radius: ManagerRadius.r64,
         backgroundColor: context.theme.colorScheme.surface,
-        child: CircleAvatar(
-          radius: ManagerRadius.r60,
-          backgroundImage: customCachedNetworkImageProvider(imagePath),
+        child: Container(
+          margin: EdgeInsetsDirectional.only(
+            top: ManagerHeight.h3,
+            bottom: ManagerHeight.h3,
+            start: ManagerWidth.w3,
+            end: ManagerWidth.w3,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.red,
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: customCachedNetworkImageProvider(imagePath),
+              fit: BoxFit.fill,
+            ),
+          ),
         ),
       ),
     );
   }
 }
+/*
+ CircleAvatar(
+          child: CustomCachedNetworkImage(
+            imageUrl: imagePath,
+            fit: BoxFit.fill,
+          ),
+          radius: ManagerRadius.r60,
+          // backgroundImage: customCachedNetworkImageProvider(imagePath),
+        ),
+ */

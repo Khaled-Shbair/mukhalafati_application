@@ -29,12 +29,12 @@ class CustomTabBarPage extends StatelessWidget {
     return Column(
       children: [
         verticalSpace(ManagerHeight.h24),
-        MainTextField(
+        CustomTextField(
           controller: userNumber,
           labelText: labelTextOfUserField,
         ),
         verticalSpace(ManagerHeight.h20),
-        MainTextField(
+        CustomTextField(
           controller: password,
           labelText: ManagerStrings.password,
           obscureText: obscureText,
@@ -52,17 +52,19 @@ class CustomTabBarPage extends StatelessWidget {
               onChanged: changeRememberMe,
             ),
             CustomRichText(
+              textStyle:
+                  context.textTheme.forgotPasswordButtonAndTextOfCheckBoxInLoginScreen(context),
               title: ManagerStrings.forgotYourPassword,
               recognizer: forgotPasswordRecognizer,
             ),
           ],
         ),
         verticalSpace(ManagerHeight.h32),
-        mainButton(
+        CustomButton(
           onPressed: () => login(),
           child: Text(
             ManagerStrings.login,
-            style: context.textTheme.labelMedium,
+            style: context.textTheme.mainButtonTextStyle(context),
           ),
         ),
       ],

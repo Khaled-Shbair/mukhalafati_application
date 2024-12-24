@@ -23,56 +23,73 @@ class DriverProfileScreen extends StatelessWidget {
               start: ManagerWidth.w22,
               end: ManagerWidth.w22,
               top: ManagerHeight.h28,
+
             ),
             primary: true,
             children: [
               CustomImageProfile(imagePath: controller.driverImage),
               verticalSpace(ManagerHeight.h70),
-              MainTextField(
-                controller: controller.driverNameController,
+              CustomTextField(
+                borderColor: context.theme.primaryColor,
+                controller: controller.driverName,
                 labelText: ManagerStrings.fullName,
-                colorLabelText: context.theme.primaryColor,
+                labelStyle:
+                    context.textTheme.labelStyleOfDataInDriverProfile(context),
                 keyboardType: TextInputType.name,
+                inputTextStyle:
+                    context.textTheme.textStyleOfUserDataInProfile(context),
                 contentPadding: EdgeInsetsDirectional.only(
                   start: ManagerWidth.w23,
                 ),
               ),
               verticalSpace(ManagerHeight.h22),
-              MainTextField(
-                controller: controller.phoneNumberController,
+              CustomTextField(
+                controller: controller.driverPhone,
                 labelText: ManagerStrings.phoneNumber,
                 maxLength: AppConstants.maxLengthOfPhoneNumber,
-                colorLabelText: context.theme.primaryColor,
+                labelStyle:
+                    context.textTheme.labelStyleOfDataInDriverProfile(context),
+                inputTextStyle:
+                    context.textTheme.textStyleOfUserDataInProfile(context),
                 contentPadding: EdgeInsetsDirectional.only(
                   start: ManagerWidth.w23,
                 ),
+                borderColor: context.theme.primaryColor,
               ),
               verticalSpace(ManagerHeight.h22),
-              MainTextField(
-                controller: controller.licenceNumberController,
+              CustomTextField(
+                borderColor: context.theme.primaryColor,
+                controller: controller.licenceNumber,
                 labelText: ManagerStrings.licenseNumber,
-                colorLabelText: context.theme.primaryColor,
+                labelStyle:
+                    context.textTheme.labelStyleOfDataInDriverProfile(context),
                 maxLength: AppConstants.maxLengthOfLicenseNumber,
+                inputTextStyle:
+                    context.textTheme.textStyleOfUserDataInProfile(context),
                 contentPadding: EdgeInsetsDirectional.only(
                   start: ManagerWidth.w23,
                 ),
               ),
               verticalSpace(ManagerHeight.h22),
-              MainTextField(
-                controller: controller.idNumberController,
+              CustomTextField(
+                borderColor: context.theme.primaryColor,
+                labelStyle:
+                    context.textTheme.labelStyleOfDataInDriverProfile(context),
+                controller: controller.driverId,
                 labelText: ManagerStrings.idNumber,
-                colorLabelText: context.theme.primaryColor,
                 maxLength: AppConstants.maxLengthOfIDNumber,
+                inputTextStyle:
+                    context.textTheme.textStyleOfUserDataInProfile(context),
                 contentPadding: EdgeInsetsDirectional.only(
                   start: ManagerWidth.w23,
                 ),
               ),
               verticalSpace(ManagerHeight.h38),
-              mainButton(
-                onPressed: () => controller.updateDataButton(),
+              CustomButton(
+                onPressed: () => controller.updateDataButton(context),
                 child: Text(
                   ManagerStrings.updateData,
-                  style: context.textTheme.labelMedium,
+                  style: context.textTheme.mainButtonTextStyle(context),
                 ),
               ),
             ],

@@ -14,8 +14,6 @@ class PaymentController extends GetxController with Helpers {
   bool isPalPay = false;
   bool isVisaCard = false;
   bool loading = false;
-  late String driverName;
-  late String driverImage;
 
   late TextEditingController cardHolderName;
   late TextEditingController cardNumber;
@@ -29,11 +27,6 @@ class PaymentController extends GetxController with Helpers {
   @override
   void onInit() {
     super.onInit();
-
-    driverName =
-    '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
-    driverImage =
-        SharedPreferencesController.getString(SharedPreferencesKeys.image);
     cardHolderName = TextEditingController();
     cardNumber = TextEditingController();
     securityCode = TextEditingController();
@@ -81,6 +74,7 @@ class PaymentController extends GetxController with Helpers {
     update();
   }
 
+  /// Open [endDrawer], use this drawer as menu.
   void openEndDrawer() {
     if (scaffoldKey.currentState != null &&
         !scaffoldKey.currentState!.isEndDrawerOpen) {
@@ -93,7 +87,7 @@ class PaymentController extends GetxController with Helpers {
     Get.back();
   }
 
-  void paymentSelectionButton() {
+  void paymentSelectionButton(BuildContext context) {
     if (isPalPay == true || isVisaCard == true || isJawwalPay == true) {
       loading = true;
       pageController.nextPage(
@@ -102,19 +96,22 @@ class PaymentController extends GetxController with Helpers {
       );
       loading = false;
     } else {
-      showSnackBar(message: ManagerStrings.pleaseSelectionPaymentWay);
+      showSnackBar(
+          message: ManagerStrings.pleaseSelectionPaymentWay, context: context);
     }
     update();
   }
 
-  void completePaymentButton() {
+  void completePaymentButton(BuildContext context) {
     if (_checkData()) {
       loading = true;
       pageController.nextPage(
           duration: const Duration(milliseconds: 10), curve: Curves.easeIn);
       loading = false;
     } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterPaymentCardDetails);
+      showSnackBar(
+          message: ManagerStrings.pleaseEnterPaymentCardDetails,
+          context: context);
     }
     update();
   }

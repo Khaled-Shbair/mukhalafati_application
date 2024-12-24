@@ -22,16 +22,15 @@ class CustomFiledOfVerificationCode extends StatelessWidget {
           end: ManagerWidth.w6,
           bottom: ManagerHeight.h10,
         ),
-        child: MainTextField(
+        child: CustomTextField(
           controller: controller,
           autofocus: true,
           maxLength: AppConstants.maxLengthOfVerificationCode,
           textAlign: TextAlign.center,
           focusNode: focusNode,
           onChanged: onChanged,
-          colorInputText: context.theme.primaryColor,
-          fontWeightInputText: ManagerFontWeight.bold,
-          fontSizeInputText: ManagerFontsSizes.f25,
+          inputTextStyle: context.textTheme
+              .textInputInCustomFiledOfVerificationCode(context),
           borderColor: changeBorderColor
               ? context.theme.primaryColor
               : context.theme.inputDecorationTheme.border!.borderSide.color,

@@ -13,6 +13,5 @@ class DriverViolationsResponse {
   factory DriverViolationsResponse.fromJson(Map<String, dynamic> json) =>
       _$DriverViolationsResponseFromJson(json);
 
-  Map<String, dynamic> toJson(DriverViolationsResponse instance) =>
-      _$DriverViolationsResponseToJson(this);
+  Map<String, dynamic> toJson() => _$DriverViolationsResponseToJson(this);
 }

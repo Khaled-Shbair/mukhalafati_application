@@ -26,9 +26,15 @@ class LoginController extends GetxController
     licenseNumber = TextEditingController();
     passwordDriver = TextEditingController();
     forgetPoliceManPasswordRecognizer = TapGestureRecognizer()
-      ..onTap = () => Get.toNamed(Routes.forgetPoliceManPasswordScreen);
+      ..onTap = () async {
+        await initForgotPasswordForPoliceMan();
+        Get.toNamed(Routes.forgetPoliceManPasswordScreen, arguments: false);
+      };
     forgetDriverPasswordRecognizer = TapGestureRecognizer()
-      ..onTap = () => Get.toNamed(Routes.forgetPasswordScreen);
+      ..onTap = () async {
+        await initForgotPasswordForDriver();
+        Get.toNamed(Routes.forgetPasswordScreen, arguments: true);
+      };
   }
 
   @override

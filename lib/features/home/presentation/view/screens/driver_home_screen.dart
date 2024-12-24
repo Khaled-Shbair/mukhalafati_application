@@ -10,12 +10,9 @@ class DriverHomeScreen extends StatelessWidget {
         return Scaffold(
           key: controller.scaffoldKey,
           resizeToAvoidBottomInset: false,
-          endDrawer: driverDrawer(
-            driverName: controller.driverName,
-            driverImage: controller.driverImage,
-            isDriverHomeScreen: true,
-          ),
-          appBar: homeAppBar(
+          endDrawer: CustomDriverDrawer(isDriverHomeScreen: true),
+          appBar: customHomeAppBar(
+            context: context,
             welcome: controller.welcome,
             openEndDrawer: () => controller.openEndDrawer(),
             firstName: controller.driverFirstName,
@@ -23,15 +20,10 @@ class DriverHomeScreen extends StatelessWidget {
               onTap: () => controller.notificationButton(),
               child: Badge(
                 label: Text(
-                  '${controller.counterOfNotification}',
-                  style: TextStyle(
-                    color: ManagerColors.white,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontSize: ManagerFontsSizes.f10,
-                    fontWeight: ManagerFontWeight.semiBold,
-                  ),
+                  controller.counterOfNotification.toString(),
+                  style: context.textTheme.counterOfBadgeNotification(context),
                 ),
-                backgroundColor: ManagerColors.redNotification,
+                backgroundColor: context.theme.colorScheme.error,
                 child: SvgPicture.asset(
                   ManagerAssets.notificationIcon,
                   height: ManagerHeight.h24,
@@ -49,34 +41,34 @@ class DriverHomeScreen extends StatelessWidget {
             ),
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  boxOfNumberOfViolationDriver(
-                    isPaid: false,
-                    counter: controller.unPaidViolation,
+                  Expanded(
+                    child: CustomBoxOfNumberOfViolationDriver(
+                      isPaid: false,
+                      counter: controller.unPaidViolation,
+                    ),
                   ),
-                  boxOfNumberOfViolationDriver(
-                    isPaid: true,
-                    counter: controller.paidViolation,
+                  horizontalSpace(ManagerWidth.w19),
+                  Expanded(
+                    child: CustomBoxOfNumberOfViolationDriver(
+                      isPaid: true,
+                      counter: controller.paidViolation,
+                    ),
                   ),
                 ],
               ),
               Text(
                 ManagerStrings.instructionsAndGuidelines,
-                style: TextStyle(
-                  fontFamily: ManagerFontFamily.cairo,
-                  fontWeight: ManagerFontWeight.semiBold,
-                  fontSize: ManagerFontsSizes.f16,
-                  color: ManagerColors.black,
-                ),
+                style: context.textTheme
+                    .textStyleOfInstructionsAndGuidelines(context),
               ),
+              verticalSpace(ManagerHeight.h4),
               SvgPicture.asset(
                 ManagerAssets.instructionsAndGuidelines,
                 height: ManagerHeight.h252,
-                width: ManagerWidth.infinity,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
-              SizedBox(height: ManagerHeight.h15),
+              verticalSpace(ManagerHeight.h15),
               //TODO: Add map later
             ],
           ),

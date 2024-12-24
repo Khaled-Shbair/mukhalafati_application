@@ -10,29 +10,12 @@ class SearchForDriverScreen extends StatelessWidget {
         return Scaffold(
           key: controller.scaffoldKey,
           resizeToAvoidBottomInset: false,
-          endDrawer: policeManDrawer(
-            isSearchForDriverScreen: true,
-            policeImage: controller.policeImage,
-            policeName: controller.policeName,
-          ),
+          endDrawer: PoliceManDrawer(isSearchForDriverScreen: true),
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Text(ManagerStrings.vehicleDrivers),
             actions: [
-              mainButton(
-                onPressed: () => controller.openEndDrawer(),
-                minWidth: ManagerWidth.w30,
-                height: ManagerHeight.h30,
-                color: ManagerColors.transparent,
-                highlightColor: ManagerColors.transparent,
-                splashColor: ManagerColors.transparent,
-                side: BorderSide.none,
-                child: Icon(
-                  Icons.menu,
-                  color: ManagerColors.black,
-                  size: ManagerIconsSizes.i30,
-                ),
-              ),
+              menuButton(() => controller.openEndDrawer()),
             ],
           ),
           body: Padding(
@@ -51,28 +34,37 @@ class SearchForDriverScreen extends StatelessWidget {
                     bottom: ManagerHeight.h4,
                   ),
                   decoration: BoxDecoration(
-                    color: ManagerColors.lotion,
+                    /////////////////////////////////////////////////
+                    //TODO:
+                    color: context.theme.colorScheme.onPrimaryContainer,
+                    /////////////////////////////////////////////////
                     borderRadius: BorderRadius.circular(ManagerRadius.r5),
                   ),
                   child: Row(
                     children: [
-                      mainButton(
-                        onPressed: () => controller.searchButton(),
+                      CustomButton(
+                        onPressed: () => controller.searchButton(context),
                         minWidth: ManagerWidth.w24,
                         height: ManagerHeight.h24,
-                        color: ManagerColors.transparent,
-                        highlightColor: ManagerColors.transparent,
+                        backgroundColor: context.theme.unselectedWidgetColor,
+                        highlightColor: context.theme.unselectedWidgetColor,
                         side: BorderSide.none,
-                        child: SvgPicture.asset(ManagerAssets.searchIcon),
                         padding: EdgeInsetsDirectional.zero,
+                        child: SvgPicture.asset(ManagerAssets.searchIcon),
                       ),
                       Expanded(
-                        child: MainTextField(
+                        child: CustomTextField(
                           contentPadding: EdgeInsetsDirectional.zero,
                           controller: controller.licenseNumberController,
                           hintText: ManagerStrings.licenseNumber,
-                          color: ManagerColors.lotion,
-                          borderColor: ManagerColors.lotion,
+                          /////////////////////////////////////////////////
+                          //TODO:
+                          // color: context.theme.colorScheme.onPrimaryContainer,
+                          color: context.theme.unselectedWidgetColor,
+                          //TODO:
+                          // borderColor: context.theme.colorScheme.outline,
+                          borderColor: context.theme.unselectedWidgetColor,
+                          /////////////////////////////////////////////////
                           maxLength: AppConstants.maxLengthOfLicenseNumber,
                         ),
                       ),
@@ -80,10 +72,11 @@ class SearchForDriverScreen extends StatelessWidget {
                   ),
                 ),
                 if (controller.loading == true) ...{
-                  myLoading(),
+                  CustomLoading(),
                 } else if (controller.result) ...{
                   SizedBox(height: ManagerHeight.h24),
                   resultOfDriver(
+                    context: context,
                     licenseNumber: controller.licenseNumber,
                     nameAr: controller.nameAr,
                     nameEn: controller.nameEn,

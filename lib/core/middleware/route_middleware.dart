@@ -2,6 +2,7 @@ import '/config/all_imports.dart';
 
 class RouteMiddleware {
   RouteMiddleware._();
+
   static String initialRoute() {
     if (SharedPreferencesController.getBool(
             SharedPreferencesKeys.viewOnBoarding) ==

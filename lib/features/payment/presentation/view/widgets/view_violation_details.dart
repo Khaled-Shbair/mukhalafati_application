@@ -96,9 +96,9 @@ Widget viewViolationDetails({
           Row(
             children: [
               Expanded(
-                child: mainButton(
+                child: CustomButton(
                   onPressed: closeButton,
-                  color: ManagerColors.antiFlashWhite,
+                  backgroundColor: ManagerColors.antiFlashWhite,
                   side: BorderSide.none,
                   child: Text(
                     ManagerStrings.close,
@@ -116,7 +116,7 @@ Widget viewViolationDetails({
                 visible: isPaid == false,
                 child: Expanded(
                   flex: 2,
-                  child: mainButton(
+                  child: CustomButton(
                     onPressed: payNowButton,
                     minWidth: ManagerWidth.w169,
                     child: Text(

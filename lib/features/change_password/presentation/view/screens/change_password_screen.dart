@@ -40,7 +40,9 @@ class ChangePasswordScreen extends StatelessWidget {
               Text(
                 ManagerStrings.enterNewPassword,
                 textAlign: TextAlign.center,
-                style: context.textTheme.titleMedium,
+                style: context.textTheme
+                    .titleForgotAndChangePasswordAndVerificationCodeScreens(
+                        context),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.only(
@@ -53,11 +55,13 @@ class ChangePasswordScreen extends StatelessWidget {
                   ManagerStrings
                       .pleaseEnterNewPasswordWhichMustBeDifferentFromTheOldPassword,
                   textAlign: TextAlign.center,
-                  style: context.textTheme.bodyMedium,
+                  style: context.textTheme
+                      .subTitleForgotAndChangePasswordAndVerificationCodeScreens(
+                          context),
                 ),
               ),
               verticalSpace(ManagerHeight.h8),
-              MainTextField(
+              CustomTextField(
                 controller: controller.newPassword,
                 labelText: ManagerStrings.newPassword,
                 isPassword: true,
@@ -66,7 +70,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 changeObscureText: () => controller.changeObscureNewPassword(),
               ),
               verticalSpace(ManagerHeight.h15),
-              MainTextField(
+              CustomTextField(
                 controller: controller.confirmPassword,
                 labelText: ManagerStrings.confirmPassword,
                 obscureText: controller.obscureConfirmPassword,
@@ -76,12 +80,12 @@ class ChangePasswordScreen extends StatelessWidget {
                     controller.changeObscureConfirmPassword(),
               ),
               verticalSpace(ManagerHeight.h24),
-              mainButton(
+              CustomButton(
                 onPressed: () =>
                     controller.changePasswordButton(isDriver, id, context),
                 child: Text(
                   ManagerStrings.changePassword,
-                  style: context.textTheme.labelMedium,
+                  style: context.textTheme.mainButtonTextStyle(context),
                 ),
               ),
             ],

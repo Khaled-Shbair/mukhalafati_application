@@ -24,7 +24,7 @@ Widget resultOfTest({
           style: TextStyle(
             fontFamily: ManagerFontFamily.cairo,
             color: isSuccessful
-                ? ManagerColors.mayGreen
+                ? ManagerColors.successColor
                 : ManagerColors.bittersweetShimmer,
             fontWeight: ManagerFontWeight.bold,
             fontSize: ManagerFontsSizes.f13,
@@ -35,7 +35,7 @@ Widget resultOfTest({
           style: TextStyle(
             fontFamily: ManagerFontFamily.cairo,
             color: isSuccessful
-                ? ManagerColors.mayGreen
+                ? ManagerColors.successColor
                 : ManagerColors.bittersweetShimmer,
             fontWeight: ManagerFontWeight.bold,
             fontSize: ManagerFontsSizes.f18,

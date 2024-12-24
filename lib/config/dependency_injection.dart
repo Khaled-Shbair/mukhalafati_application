@@ -7,11 +7,11 @@ final instance = GetIt.instance;
 
 initModule() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await _initSharedPreferences();
   SharedPreferencesController.init();
   await _initDio();
   await _initFirebase();
-  await _initInterNetChecker();
+  instance.registerLazySingleton<NetworkInfo>(
+      () => NetworkInfoImplementation(InternetConnection()));
 }
 
 Future<void> _initFirebase() async {
@@ -31,16 +31,6 @@ Future<void> _initFirebase() async {
     instance.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   }
 }
-//
-// Future<void> _initSharedPreferences() async {
-//   SharedPreferencesController().init();
-//   if (!GetIt.I.isRegistered<SharedPreferencesController>()) {
-//     final SharedPreferences sharedPref = await SharedPreferences.getInstance();
-//     instance.registerLazySingleton<SharedPreferences>(() => sharedPref);
-//     instance.registerLazySingleton<SharedPreferencesController>(
-//         () => SharedPreferencesController(instance()));
-//   }
-// }
 
 Future<void> _initDio() async {
   instance.registerLazySingleton<DioFactory>(() => DioFactory());
@@ -48,11 +38,9 @@ Future<void> _initDio() async {
   instance.registerLazySingleton<AppApi>(() => AppApi(dio));
 }
 
-Future<void> _initInterNetChecker() async {
-  instance.registerLazySingleton<NetworkInfo>(
-      () => NetworkInfoImplementation(InternetConnection()));
-}
-
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/// [OnBoarding]
 initOnBoarding() {
   Get.put<OnBoardingController>(OnBoardingController());
 }
@@ -61,17 +49,18 @@ disposeOnBoarding() {
   Get.delete<OnBoardingController>();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/// [Welcome_controller], [Login_driver] and [login_police_man]
 initWelcome() {
   Get.put<WelcomeController>(WelcomeController());
 }
 
-disposeWelcome() {
-  Get.delete<WelcomeController>();
+initLogin() {
+  Get.put<LoginController>(LoginController());
 }
 
-initLogin() {
-  disposeOnBoarding();
-  disposeWelcome();
+initDriverLogin() {
   if (!GetIt.I.isRegistered<RemoteDriverLoginDataSource>()) {
     instance.registerLazySingleton<RemoteDriverLoginDataSource>(
         () => RemoteLoginDataSourceImpl(instance<AppApi>()));
@@ -87,6 +76,9 @@ initLogin() {
     instance.registerLazySingleton<DriverLoginUseCase>(
         () => DriverLoginUseCase(instance<DriverLoginRepository>()));
   }
+}
+
+initPoliceManLogin() {
   if (!GetIt.I.isRegistered<RemotePoliceManLoginDataSource>()) {
     instance.registerLazySingleton<RemotePoliceManLoginDataSource>(
         () => RemotePoliceManLoginDataSourceImpl(instance<AppApi>()));
@@ -102,7 +94,6 @@ initLogin() {
     instance.registerLazySingleton<PoliceManLoginUseCase>(
         () => PoliceManLoginUseCase(instance<PoliceManLoginRepository>()));
   }
-  Get.put<LoginController>(LoginController());
 }
 
 disposeLogin() {
@@ -127,14 +118,172 @@ disposeLogin() {
   Get.delete<LoginController>();
 }
 
+disposeWelcome() {
+  Get.delete<WelcomeController>();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/// [Forgot_password] and [Verification_code]
+initForgotPassword() {
+  Get.put<ForgotPasswordController>(ForgotPasswordController());
+}
+
+initForgotPasswordForDriver() {
+  if (!GetIt.I.isRegistered<RemoteDriverForgotPasswordDataSource>()) {
+    instance.registerLazySingleton<RemoteDriverForgotPasswordDataSource>(
+        () => RemoteDriverForgotPasswordDataSourceImpl(instance<AppApi>()));
+  }
+  if (!GetIt.I.isRegistered<DriverForgotPasswordRepository>()) {
+    instance.registerLazySingleton<DriverForgotPasswordRepository>(
+        () => DriverForgotPasswordRepositoryImpl(
+              instance<RemoteDriverForgotPasswordDataSource>(),
+              instance<NetworkInfo>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<DriverForgotPasswordUseCase>()) {
+    instance.registerLazySingleton<DriverForgotPasswordUseCase>(() =>
+        DriverForgotPasswordUseCase(
+            instance<DriverForgotPasswordRepository>()));
+  }
+}
+
+initForgotPasswordForPoliceMan() {
+  if (!GetIt.I.isRegistered<RemotePoliceManForgotPasswordDataSource>()) {
+    instance.registerLazySingleton<RemotePoliceManForgotPasswordDataSource>(
+        () => RemotePoliceManForgotPasswordDataSourceImpl(instance<AppApi>()));
+  }
+  if (!GetIt.I.isRegistered<PoliceManForgotPasswordRepository>()) {
+    instance.registerLazySingleton<PoliceManForgotPasswordRepository>(
+        () => PoliceManForgotPasswordRepositoryImpl(
+              instance<RemotePoliceManForgotPasswordDataSource>(),
+              instance<NetworkInfo>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<PoliceManForgotPasswordUseCase>()) {
+    instance.registerLazySingleton<PoliceManForgotPasswordUseCase>(() =>
+        PoliceManForgotPasswordUseCase(
+            instance<PoliceManForgotPasswordRepository>()));
+  }
+}
+
+disposeForgotPassword() {
+  if (GetIt.I.isRegistered<RemoteDriverForgotPasswordDataSource>()) {
+    instance.unregister<RemoteDriverForgotPasswordDataSource>();
+  }
+  if (GetIt.I.isRegistered<DriverForgotPasswordRepository>()) {
+    instance.unregister<DriverForgotPasswordRepository>();
+  }
+  if (GetIt.I.isRegistered<DriverForgotPasswordUseCase>()) {
+    instance.unregister<DriverForgotPasswordUseCase>();
+  }
+  if (GetIt.I.isRegistered<RemotePoliceManForgotPasswordDataSource>()) {
+    instance.unregister<RemotePoliceManForgotPasswordDataSource>();
+  }
+  if (GetIt.I.isRegistered<PoliceManForgotPasswordRepository>()) {
+    instance.unregister<PoliceManForgotPasswordRepository>();
+  }
+  if (GetIt.I.isRegistered<PoliceManForgotPasswordUseCase>()) {
+    instance.unregister<PoliceManForgotPasswordUseCase>();
+  }
+  Get.delete<ForgotPasswordController>();
+}
+
+initVerificationCode() {
+  Get.put<VerificationCodeController>(VerificationCodeController());
+}
+
+disposeVerificationCode() {
+  Get.delete<VerificationCodeController>();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/// [Change_Password]
+initChangePassword() {
+  Get.put<ChangePasswordController>(ChangePasswordController());
+}
+
+disposeChangePassword() {
+  if (GetIt.I.isRegistered<RemoteDriverChangePasswordDataSource>()) {
+    instance.unregister<RemoteDriverChangePasswordDataSource>();
+  }
+  if (GetIt.I.isRegistered<DriverChangePasswordRepository>()) {
+    instance.unregister<DriverChangePasswordRepository>();
+  }
+  if (GetIt.I.isRegistered<DriverChangePasswordUseCase>()) {
+    instance.unregister<DriverChangePasswordUseCase>();
+  }
+  if (GetIt.I.isRegistered<RemotePoliceManChangePasswordDataSource>()) {
+    instance.unregister<RemotePoliceManChangePasswordDataSource>();
+  }
+  if (GetIt.I.isRegistered<PoliceManChangePasswordRepository>()) {
+    instance.unregister<PoliceManChangePasswordRepository>();
+  }
+  if (GetIt.I.isRegistered<PoliceManChangePasswordUseCase>()) {
+    instance.unregister<PoliceManChangePasswordUseCase>();
+  }
+  Get.delete<ChangePasswordController>();
+}
+
+initDriverChangePassword() {
+  if (!GetIt.I.isRegistered<RemoteDriverChangePasswordDataSource>()) {
+    instance.registerLazySingleton<RemoteDriverChangePasswordDataSource>(
+        () => RemoteDriverChangePasswordDataSourceImpl(
+              instance<AppApi>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<DriverChangePasswordRepository>()) {
+    instance.registerLazySingleton<DriverChangePasswordRepository>(
+      () => DriverChangePasswordRepositoryImpl(
+          instance<RemoteDriverChangePasswordDataSource>(),
+          instance<NetworkInfo>()),
+    );
+  }
+  if (!GetIt.I.isRegistered<DriverChangePasswordUseCase>()) {
+    instance.registerLazySingleton<DriverChangePasswordUseCase>(() =>
+        DriverChangePasswordUseCase(
+            instance<DriverChangePasswordRepository>()));
+  }
+}
+
+initPoliceManChangePassword() {
+  if (!GetIt.I.isRegistered<RemotePoliceManChangePasswordDataSource>()) {
+    instance.registerLazySingleton<RemotePoliceManChangePasswordDataSource>(
+        () => RemotePoliceManChangePasswordDataSourceImpl(
+              instance<AppApi>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<PoliceManChangePasswordRepository>()) {
+    instance.registerLazySingleton<PoliceManChangePasswordRepository>(
+      () => PoliceManChangePasswordRepositoryImpl(
+          instance<RemotePoliceManChangePasswordDataSource>(),
+          instance<NetworkInfo>()),
+    );
+  }
+  if (!GetIt.I.isRegistered<PoliceManChangePasswordUseCase>()) {
+    instance.registerLazySingleton<PoliceManChangePasswordUseCase>(() =>
+        PoliceManChangePasswordUseCase(
+            instance<PoliceManChangePasswordRepository>()));
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/// [Logout]
+initLogout() {
+  Get.put<LogoutController>(LogoutController());
+}
+
+disposeLogout() {
+  Get.delete<LogoutController>();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/// [Driver_home] and [Police_man_home]
 initPoliceManHome() {
   Get.put<PoliceManHomeController>(PoliceManHomeController());
-  disposeLogin();
-  disposeWelcome();
-  disposeCreateViolation();
-  disposeListOfViolations();
-  disposeSearchForDriver();
-  disposeLogout();
 }
 
 disposePoliceManHome() {
@@ -142,14 +291,15 @@ disposePoliceManHome() {
 }
 
 initDriverHome() {
-  disposeLogin();
-  disposeWelcome();
   Get.put<DriverHomeController>(DriverHomeController());
 }
 
 disposeDriverHome() {
   Get.delete<DriverHomeController>();
 }
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 initCreateViolation() {
   if (!GetIt.I.isRegistered<RemoteCreateViolationDataSource>()) {
@@ -169,10 +319,6 @@ initCreateViolation() {
     instance.registerLazySingleton<CreateViolationUseCase>(
         () => CreateViolationUseCase(instance<CreateViolationRepository>()));
   }
-  disposePoliceManHome();
-  disposeListOfViolations();
-  disposeSearchForDriver();
-  disposeLogout();
   Get.put<CreateViolationController>(CreateViolationController());
 }
 
@@ -191,16 +337,15 @@ disposeCreateViolation() {
 
 initListOfViolations() {
   Get.put<ListOfViolationsController>(ListOfViolationsController());
-  disposePoliceManHome();
-  disposeCreateViolation();
-  disposeSearchForDriver();
-  disposeLogout();
 }
 
 disposeListOfViolations() {
   Get.delete<ListOfViolationsController>();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/// [Search_for_driver] and [Search_on_results_tests_of_license]
 initSearchForDriver() {
   if (!GetIt.I.isRegistered<RemoteSearchForDriverDataSource>()) {
     instance.registerLazySingleton<RemoteSearchForDriverDataSource>(
@@ -219,10 +364,6 @@ initSearchForDriver() {
   }
 
   Get.put<SearchForDriverController>(SearchForDriverController());
-  disposePoliceManHome();
-  disposeListOfViolations();
-  disposeCreateViolation();
-  disposeLogout();
 }
 
 disposeSearchForDriver() {
@@ -275,14 +416,9 @@ disposeSearchOnResultsTestsOfLicense() {
   Get.delete<SearchOnResultsTestsOfLicenseController>();
 }
 
-initLogout() {
-  Get.put<LogoutController>(LogoutController());
-}
-
-disposeLogout() {
-  Get.delete<LogoutController>();
-}
-
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/// [Electric_driving_license_card]
 initDrivingLicenseCard() {
   Get.put<DrivingLicenseCardController>(DrivingLicenseCardController());
 }
@@ -291,6 +427,9 @@ disposeDrivingLicenseCard() {
   Get.delete<DrivingLicenseCardController>();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/// [Complaints]
 initListOfComplaints() {
   if (!GetIt.I.isRegistered<RemoteGetAllComplaintsDataSource>()) {
     instance.registerLazySingleton<RemoteGetAllComplaintsDataSource>(
@@ -355,124 +494,9 @@ disposeCreateComplaints() {
   Get.delete<CreateComplaintsController>();
 }
 
-initForgotPasswordForDriver() {
-  if (!GetIt.I.isRegistered<RemoteDriverForgotPasswordDataSource>()) {
-    instance.registerLazySingleton<RemoteDriverForgotPasswordDataSource>(
-        () => RemoteDriverForgotPasswordDataSourceImpl(instance<AppApi>()));
-  }
-  if (!GetIt.I.isRegistered<DriverForgotPasswordRepository>()) {
-    instance.registerLazySingleton<DriverForgotPasswordRepository>(
-        () => DriverForgotPasswordRepositoryImpl(
-              instance<RemoteDriverForgotPasswordDataSource>(),
-              instance<NetworkInfo>(),
-            ));
-  }
-  if (!GetIt.I.isRegistered<DriverForgotPasswordUseCase>()) {
-    instance.registerLazySingleton<DriverForgotPasswordUseCase>(() =>
-        DriverForgotPasswordUseCase(
-            instance<DriverForgotPasswordRepository>()));
-  }
-  Get.put<ForgotPasswordForDriverController>(
-      ForgotPasswordForDriverController());
-}
-
-disposeForgotPasswordForDriver() {
-  if (GetIt.I.isRegistered<RemoteDriverForgotPasswordDataSource>()) {
-    instance.unregister<RemoteDriverForgotPasswordDataSource>();
-  }
-  if (GetIt.I.isRegistered<DriverForgotPasswordRepository>()) {
-    instance.unregister<DriverForgotPasswordRepository>();
-  }
-  if (GetIt.I.isRegistered<DriverForgotPasswordUseCase>()) {
-    instance.unregister<DriverForgotPasswordUseCase>();
-  }
-  Get.delete<ForgotPasswordForDriverController>();
-}
-
-initForgotPasswordForPoliceMan() {
-  if (!GetIt.I.isRegistered<RemotePoliceManForgotPasswordDataSource>()) {
-    instance.registerLazySingleton<RemotePoliceManForgotPasswordDataSource>(
-        () => RemotePoliceManForgotPasswordDataSourceImpl(instance<AppApi>()));
-  }
-  if (!GetIt.I.isRegistered<PoliceManForgotPasswordRepository>()) {
-    instance.registerLazySingleton<PoliceManForgotPasswordRepository>(
-        () => PoliceManForgotPasswordRepositoryImpl(
-              instance<RemotePoliceManForgotPasswordDataSource>(),
-              instance<NetworkInfo>(),
-            ));
-  }
-  if (!GetIt.I.isRegistered<PoliceManForgotPasswordUseCase>()) {
-    instance.registerLazySingleton<PoliceManForgotPasswordUseCase>(() =>
-        PoliceManForgotPasswordUseCase(
-            instance<PoliceManForgotPasswordRepository>()));
-  }
-  Get.put<ForgotPasswordForPoliceManController>(
-      ForgotPasswordForPoliceManController());
-}
-
-disposeForgotPasswordForPoliceMan() {
-  if (GetIt.I.isRegistered<RemotePoliceManForgotPasswordDataSource>()) {
-    instance.unregister<RemotePoliceManForgotPasswordDataSource>();
-  }
-  if (GetIt.I.isRegistered<PoliceManForgotPasswordRepository>()) {
-    instance.unregister<PoliceManForgotPasswordRepository>();
-  }
-  if (GetIt.I.isRegistered<PoliceManForgotPasswordUseCase>()) {
-    instance.unregister<PoliceManForgotPasswordUseCase>();
-  }
-  Get.delete<ForgotPasswordForPoliceManController>();
-}
-
-initVerificationCode() {
-  Get.put<VerificationCodeController>(VerificationCodeController());
-}
-
-disposeVerificationCode() {
-  Get.delete<VerificationCodeController>();
-}
-
-initDriverChangePassword() {
-  if (!GetIt.I.isRegistered<RemoteDriverChangePasswordDataSource>()) {
-    instance.registerLazySingleton<RemoteDriverChangePasswordDataSource>(
-        () => RemoteDriverChangePasswordDataSourceImpl(
-              instance<AppApi>(),
-            ));
-  }
-  if (!GetIt.I.isRegistered<DriverChangePasswordRepository>()) {
-    instance.registerLazySingleton<DriverChangePasswordRepository>(
-      () => DriverChangePasswordRepositoryImpl(
-          instance<RemoteDriverChangePasswordDataSource>(),
-          instance<NetworkInfo>()),
-    );
-  }
-  if (!GetIt.I.isRegistered<DriverChangePasswordUseCase>()) {
-    instance.registerLazySingleton<DriverChangePasswordUseCase>(() =>
-        DriverChangePasswordUseCase(
-            instance<DriverChangePasswordRepository>()));
-  }
-}
-
-initPoliceManChangePassword() {
-  if (!GetIt.I.isRegistered<RemotePoliceManChangePasswordDataSource>()) {
-    instance.registerLazySingleton<RemotePoliceManChangePasswordDataSource>(
-        () => RemotePoliceManChangePasswordDataSourceImpl(
-              instance<AppApi>(),
-            ));
-  }
-  if (!GetIt.I.isRegistered<PoliceManChangePasswordRepository>()) {
-    instance.registerLazySingleton<PoliceManChangePasswordRepository>(
-      () => PoliceManChangePasswordRepositoryImpl(
-          instance<RemotePoliceManChangePasswordDataSource>(),
-          instance<NetworkInfo>()),
-    );
-  }
-  if (!GetIt.I.isRegistered<PoliceManChangePasswordUseCase>()) {
-    instance.registerLazySingleton<PoliceManChangePasswordUseCase>(() =>
-        PoliceManChangePasswordUseCase(
-            instance<PoliceManChangePasswordRepository>()));
-  }
-}
-
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/// [Driver_payment]
 initPayment() {
   if (!GetIt.I.isRegistered<RemotePaymentViolationDataSource>()) {
     instance.registerLazySingleton<RemotePaymentViolationDataSource>(
@@ -537,45 +561,46 @@ disposeViolationPayment() {
   Get.delete<DriverViolationsController>();
 }
 
-initChangePassword() {
-  disposeVerificationCode();
-  disposeForgotPasswordForDriver();
-  disposeForgotPasswordForPoliceMan();
-  Get.put<ChangePasswordController>(ChangePasswordController());
-}
-
-disposeChangePassword() {
-  if (GetIt.I.isRegistered<RemoteDriverChangePasswordDataSource>()) {
-    instance.unregister<RemoteDriverChangePasswordDataSource>();
-  }
-  if (GetIt.I.isRegistered<DriverChangePasswordRepository>()) {
-    instance.unregister<DriverChangePasswordRepository>();
-  }
-  if (GetIt.I.isRegistered<DriverChangePasswordUseCase>()) {
-    instance.unregister<DriverChangePasswordUseCase>();
-  }
-  if (GetIt.I.isRegistered<RemotePoliceManChangePasswordDataSource>()) {
-    instance.unregister<RemotePoliceManChangePasswordDataSource>();
-  }
-  if (GetIt.I.isRegistered<PoliceManChangePasswordRepository>()) {
-    instance.unregister<PoliceManChangePasswordRepository>();
-  }
-  if (GetIt.I.isRegistered<PoliceManChangePasswordUseCase>()) {
-    instance.unregister<PoliceManChangePasswordUseCase>();
-  }
-  Get.delete<ChangePasswordController>();
-}
-
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/// [Driver_profile]
 initDriverProfile() {
+  if (!GetIt.I.isRegistered<RemoteSendRequestUpdateProfileDataSource>()) {
+    instance.registerLazySingleton<RemoteSendRequestUpdateProfileDataSource>(
+        () => RemoteSendRequestUpdateProfileDataSourceImpl(instance<AppApi>()));
+  }
+  if (!GetIt.I.isRegistered<SendRequestUpdateProfileRepository>()) {
+    instance.registerLazySingleton<SendRequestUpdateProfileRepository>(
+      () => SendRequestUpdateProfileRepositoryImpl(
+          instance<RemoteSendRequestUpdateProfileDataSource>(),
+          instance<NetworkInfo>()),
+    );
+  }
+  if (!GetIt.I.isRegistered<SendRequestUpdateProfileUseCase>()) {
+    instance.registerLazySingleton<SendRequestUpdateProfileUseCase>(() =>
+        SendRequestUpdateProfileUseCase(
+            instance<SendRequestUpdateProfileRepository>()));
+  }
   Get.put<DriverProfileController>(DriverProfileController());
 }
 
 disposeDriverProfile() {
+  if (GetIt.I.isRegistered<RemoteSendRequestUpdateProfileDataSource>()) {
+    instance.unregister<RemoteSendRequestUpdateProfileDataSource>();
+  }
+  if (GetIt.I.isRegistered<SendRequestUpdateProfileRepository>()) {
+    instance.unregister<SendRequestUpdateProfileRepository>();
+  }
+  if (GetIt.I.isRegistered<SendRequestUpdateProfileUseCase>()) {
+    instance.unregister<SendRequestUpdateProfileUseCase>();
+  }
   Get.delete<DriverProfileController>();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/// [Notification]
 initNotification() {
-  disposeDriverHome();
   Get.put<NotificationsController>(NotificationsController());
 }
 

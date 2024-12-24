@@ -40,13 +40,13 @@ Widget enterDetailsStep({
           ),
         ),
       ),
-      MainTextField(
+      CustomTextField(
         controller: cardHolderName,
         labelText: ManagerStrings.cardHolderName,
         keyboardType: TextInputType.name,
       ),
       SizedBox(height: ManagerHeight.h24),
-      MainTextField(
+      CustomTextField(
         controller: cardNumber,
         labelText: ManagerStrings.cardNumber,
         maxLength: AppConstants.maxLengthOfCardNumber,
@@ -56,7 +56,7 @@ Widget enterDetailsStep({
         children: [
           Expanded(
             flex: 2,
-            child: MainTextField(
+            child: CustomTextField(
               controller: expiryDateCard,
               labelText: ManagerStrings.expiryDateCard,
               keyboardType: TextInputType.text,
@@ -65,7 +65,7 @@ Widget enterDetailsStep({
           ),
           SizedBox(width: ManagerWidth.w10),
           Expanded(
-            child: MainTextField(
+            child: CustomTextField(
               controller: securityCode,
               labelText: ManagerStrings.securityCode,
               maxLength: AppConstants.maxLengthOfSecurityCode,
@@ -74,7 +74,7 @@ Widget enterDetailsStep({
         ],
       ),
       SizedBox(height: ManagerHeight.h30),
-      mainButton(
+      CustomButton(
         onPressed: completePaymentButton,
         child: Text(
           '${ManagerStrings.completePaymentBy} $price₪',

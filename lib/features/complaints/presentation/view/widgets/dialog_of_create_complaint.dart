@@ -1,122 +1,109 @@
 import '/config/all_imports.dart';
 
-Future<void> dialogOfCreateComplaint(context) async {
+Future<void> dialogOfCreateComplaint(BuildContext context) async {
   await showDialog(
     context: context,
-    barrierColor: ManagerColors.black50,
+    barrierColor: context.theme.dialogTheme.barrierColor,
     barrierDismissible: false,
     builder: (context) {
       return Container(
         padding: EdgeInsetsDirectional.only(
           start: ManagerWidth.w18,
           end: ManagerWidth.w18,
-          top: ManagerHeight.h10,
-          bottom: ManagerHeight.h26,
+          top: ManagerHeight.h20,
+          bottom: ManagerHeight.h20,
         ),
         margin: EdgeInsetsDirectional.only(
           top: ManagerHeight.h60,
-          bottom: ManagerHeight.h60,
+          bottom: ManagerHeight.h86,
           start: ManagerWidth.w20,
           end: ManagerWidth.w20,
         ),
         decoration: BoxDecoration(
-          color: ManagerColors.white,
+          color: context.theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(ManagerRadius.r5),
         ),
-        child: GetBuilder<CreateComplaintsController>(builder: (controller) {
-          return Material(
-            color: ManagerColors.transparent,
-            shadowColor: ManagerColors.transparent,
-            surfaceTintColor: ManagerColors.transparent,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                headOfOfficialPaper(),
-                SizedBox(height: ManagerHeight.h15),
-                const Divider(
-                  color: ManagerColors.black,
-                  thickness: AppConstants.thicknessOfDividerInCreateViolation,
-                  height: AppConstants.heightOfDividerInCreateViolation,
-                ),
-                SizedBox(height: ManagerHeight.h19),
-                MainTextField(
-                  controller: controller.complaintName,
-                  labelText: ManagerStrings.fullName,
-                  fontSizeLabelText: ManagerFontsSizes.f12,
-                  fontWeightLabelText: ManagerFontWeight.medium,
-                  colorLabelText: ManagerColors.black50,
-                  keyboardType: TextInputType.text,
-                ),
-                SizedBox(height: ManagerHeight.h10),
-                MainTextField(
-                  readOnly: true,
-                  onTap: () async => await controller.selectDateTime(context),
-                  controller: controller.dateOfComplaint,
-                  labelText: ManagerStrings.dateOfIncidentOrProblem,
-                  fontSizeLabelText: ManagerFontsSizes.f12,
-                  fontWeightLabelText: ManagerFontWeight.medium,
-                  colorLabelText: ManagerColors.black50,
-                  keyboardType: TextInputType.text,
-                ),
-                SizedBox(height: ManagerHeight.h10),
-                MainTextField(
-                  controller: controller.addressOfComplaint,
-                  labelText: ManagerStrings.address,
-                  fontSizeLabelText: ManagerFontsSizes.f12,
-                  fontWeightLabelText: ManagerFontWeight.medium,
-                  colorLabelText: ManagerColors.black50,
-                  keyboardType: TextInputType.text,
-                ),
-                SizedBox(height: ManagerHeight.h10),
-                MainTextField(
-                  controller: controller.detailOfComplaint,
-                  hintText: ManagerStrings.pleaseWriteTheDetailsOfTheComplaint,
-                  fontSizeLabelText: ManagerFontsSizes.f12,
-                  fontWeightLabelText: ManagerFontWeight.medium,
-                  colorLabelText: ManagerColors.black50,
-                  keyboardType: TextInputType.text,
-                  maxLines: AppConstants.maxLinesOfTextOfComplaint,
-                  maxHeightConstraints: ManagerHeight.infinity, //TODO:
-                ),
-                SizedBox(height: ManagerHeight.h28),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    mainButton(
-                      onPressed: () => controller.cancelButton(),
-                      color: ManagerColors.antiFlashWhite,
-                      minWidth: ManagerWidth.w122,
-                      side: BorderSide.none,
-                      child: Text(
-                        ManagerStrings.cancel,
-                        style: TextStyle(
-                          color: ManagerColors.black,
-                          fontWeight: ManagerFontWeight.semiBold,
-                          fontSize: ManagerFontsSizes.f14,
-                          fontFamily: ManagerFontFamily.cairo,
+        child: GetBuilder<CreateComplaintsController>(
+          builder: (controller) {
+            return Material(
+              color: context.theme.unselectedWidgetColor,
+              shadowColor: context.theme.unselectedWidgetColor,
+              surfaceTintColor: context.theme.unselectedWidgetColor,
+              child: ListView(
+                shrinkWrap: true,
+                primary: false,
+                children: [
+                  headOfOfficialPaper(),
+                  verticalSpace(ManagerHeight.h15),
+                  Divider(
+                    color: context.theme.dividerTheme.color,
+                    thickness: context.theme.dividerTheme.thickness,
+                  ),
+                  verticalSpace(ManagerHeight.h19),
+                  CustomTextField(
+                    controller: controller.complaintName,
+                    labelText: ManagerStrings.fullName,
+                    keyboardType: TextInputType.text,
+                  ),
+                  verticalSpace(ManagerHeight.h10),
+                  CustomTextField(
+                    readOnly: true,
+                    onTap: () async => await controller.selectDateTime(context),
+                    controller: controller.dateOfComplaint,
+                    labelText: ManagerStrings.dateOfIncidentOrProblem,
+                    keyboardType: TextInputType.text,
+                  ),
+                  verticalSpace(ManagerHeight.h10),
+                  CustomTextField(
+                    controller: controller.addressOfComplaint,
+                    labelText: ManagerStrings.address,
+                    keyboardType: TextInputType.text,
+                  ),
+                  verticalSpace(ManagerHeight.h10),
+                  SizedBox(
+                    height: ManagerHeight.h250,
+                    child: CustomTextField(
+                      controller: controller.detailOfComplaint,
+                      hintText:
+                          ManagerStrings.pleaseWriteTheDetailsOfTheComplaint,
+                      keyboardType: TextInputType.text,
+                      maxLines: AppConstants.maxLinesOfTextOfComplaint,
+                      minLines: AppConstants.minLinesOfTextOfComplaint,
+                    ),
+                  ),
+                  verticalSpace(ManagerHeight.h28),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomButton(
+                        onPressed: () => controller.cancelButton(),
+                        backgroundColor: ManagerColors.antiFlashWhite,
+                        minWidth: ManagerWidth.w122,
+                        side: BorderSide.none,
+                        child: Text(
+                          ManagerStrings.cancel,
+                          style: context.textTheme
+                              .cancelCreateComplaintButton(context),
                         ),
                       ),
-                    ),
-                    mainButton(
-                      onPressed: () => controller.createComplaintsButton(),
-                      minWidth: ManagerWidth.w169,
-                      side: BorderSide.none,
-                      child: Text(
-                        ManagerStrings.createComplaint,
-                        style: TextStyle(
-                          color: ManagerColors.white,
-                          fontWeight: ManagerFontWeight.bold,
-                          fontSize: ManagerFontsSizes.f14,
-                          fontFamily: ManagerFontFamily.cairo,
+                      CustomButton(
+                        onPressed: () =>
+                            controller.createComplaintsButton(context),
+                        minWidth: ManagerWidth.w169,
+                        side: BorderSide.none,
+                        child: Text(
+                          ManagerStrings.createComplaint,
+                          style:
+                              context.textTheme.logoutAndCreateComplaintAndNameDriverButton(context),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        }),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       );
     },
   );

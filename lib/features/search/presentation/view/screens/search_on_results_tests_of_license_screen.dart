@@ -12,31 +12,13 @@ class SearchOnResultsTestsOfLicenseScreen extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: Text(
-              ManagerStrings.licenseTestResults,
-            ),
+            title: Text(ManagerStrings.licenseTestResults),
             actions: [
-              mainButton(
-                onPressed: () => controller.openEndDrawer(),
-                minWidth: ManagerWidth.w30,
-                height: ManagerHeight.h30,
-                color: ManagerColors.transparent,
-                highlightColor: ManagerColors.transparent,
-                splashColor: ManagerColors.transparent,
-                side: BorderSide.none,
-                child: Icon(
-                  Icons.menu,
-                  color: ManagerColors.black,
-                  size: ManagerIconsSizes.i30,
-                ),
-              ),
+              menuButton(() => controller.openEndDrawer()),
             ],
           ),
-          endDrawer: driverDrawer(
-            isSearchOnResultsTestsOfLicenseScreen: true,
-            driverImage: controller.driverImage,
-            driverName: controller.driverName,
-          ),
+          endDrawer:
+              CustomDriverDrawer(isSearchOnResultsTestsOfLicenseScreen: true),
           body: Padding(
             padding: EdgeInsetsDirectional.only(
               start: ManagerWidth.w20,
@@ -53,28 +35,36 @@ class SearchOnResultsTestsOfLicenseScreen extends StatelessWidget {
                     bottom: ManagerHeight.h4,
                   ),
                   decoration: BoxDecoration(
-                    color: ManagerColors.lotion,
+                    /////////////////////////////////////////////////
+                    color: context.theme.colorScheme.onPrimaryContainer,
+                    /////////////////////////////////////////////////
                     borderRadius: BorderRadius.circular(ManagerRadius.r5),
                   ),
                   child: Row(
                     children: [
-                      mainButton(
-                        onPressed: () => controller.searchButton(),
+                      CustomButton(
+                        onPressed: () => controller.searchButton(context),
                         minWidth: ManagerWidth.w24,
                         height: ManagerHeight.h24,
-                        color: ManagerColors.transparent,
-                        highlightColor: ManagerColors.transparent,
+                        backgroundColor:  context.theme.unselectedWidgetColor,
+                        highlightColor: context.theme.unselectedWidgetColor,
                         side: BorderSide.none,
                         child: SvgPicture.asset(ManagerAssets.searchIcon),
                         padding: EdgeInsetsDirectional.zero,
                       ),
                       Expanded(
-                        child: MainTextField(
+                        child: CustomTextField(
                           contentPadding: EdgeInsetsDirectional.zero,
                           controller: controller.idNumber,
                           hintText: ManagerStrings.idNumber,
-                          color: ManagerColors.lotion,
-                          borderColor: ManagerColors.lotion,
+                          /////////////////////////////////////////////////
+                          //TODO:
+                          // color: context.theme.colorScheme.onPrimaryContainer,
+                          color: context.theme.unselectedWidgetColor,
+                          //TODO:
+                          // borderColor: context.theme.colorScheme.outline,
+                          borderColor: context.theme.unselectedWidgetColor,
+                          /////////////////////////////////////////////////
                           maxLength: AppConstants.maxLengthOfIDNumber,
                         ),
                       ),
@@ -83,7 +73,7 @@ class SearchOnResultsTestsOfLicenseScreen extends StatelessWidget {
                 ),
                 if (controller.loading == true) ...{
                   Spacer(),
-                  myLoading(),
+                  CustomLoading(),
                   Spacer(),
                 } else if (controller.result == true &&
                     controller.loading == false) ...{

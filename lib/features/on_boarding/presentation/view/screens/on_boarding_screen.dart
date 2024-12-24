@@ -23,7 +23,7 @@ class OnBoardingScreen extends StatelessWidget {
                       children: [
                         ...List.generate(
                           controller.pageViewItems.length,
-                              (index) => controller.pageViewItems[index],
+                          (index) => controller.pageViewItems[index],
                         ),
                       ],
                     ),
@@ -36,7 +36,7 @@ class OnBoardingScreen extends StatelessWidget {
                       dotWidth: ManagerWidth.w10,
                       spacing: ManagerWidth.w10,
                       expansionFactor:
-                      AppConstants.expansionFactorOfSmoothPageIndicator,
+                          AppConstants.expansionFactorOfSmoothPageIndicator,
                       activeDotColor: context.theme.primaryColor,
                       dotColor: context.theme.disabledColor,
                     ),

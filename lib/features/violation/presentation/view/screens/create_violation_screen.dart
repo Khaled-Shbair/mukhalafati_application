@@ -9,29 +9,12 @@ class CreateViolationScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           key: controller.scaffoldKey,
-          endDrawer: policeManDrawer(
-            isCreateViolationScreen: true,
-            policeName: controller.policeName,
-            policeImage: controller.policeImage,
-          ),
+          endDrawer: PoliceManDrawer(isCreateViolationScreen: true),
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Text(ManagerStrings.createViolation),
             actions: [
-              mainButton(
-                onPressed: () => controller.openEndDrawer(),
-                minWidth: ManagerWidth.w30,
-                height: ManagerHeight.h30,
-                color: ManagerColors.transparent,
-                highlightColor: ManagerColors.transparent,
-                splashColor: ManagerColors.transparent,
-                side: BorderSide.none,
-                child: Icon(
-                  Icons.menu,
-                  color: ManagerColors.black,
-                  size: ManagerIconsSizes.i30,
-                ),
-              ),
+              menuButton(() => controller.openEndDrawer()),
             ],
           ),
           body: ListView(
@@ -54,64 +37,63 @@ class CreateViolationScreen extends StatelessWidget {
                   bottom: ManagerHeight.h20,
                 ),
                 decoration: BoxDecoration(
-                  color: ManagerColors.lotion,
+                  color: context.theme.colorScheme.outline,
                   borderRadius: BorderRadius.circular(ManagerRadius.r5),
                 ),
                 child: Column(
                   children: [
                     headOfOfficialPaper(),
-                    SizedBox(height: ManagerHeight.h15),
-                    const Divider(
-                      color: ManagerColors.black,
-                      thickness:
-                          AppConstants.thicknessOfDividerInCreateViolation,
-                      height: AppConstants.heightOfDividerInCreateViolation,
+                    verticalSpace(ManagerHeight.h15),
+                    Divider(
+                      color: context.theme.dividerTheme.color,
+                      thickness: context.theme.dividerTheme.thickness,
+                      height: context.theme.dividerTheme.space,
                     ),
-                    SizedBox(height: ManagerHeight.h19),
-                    MainTextField(
+                    verticalSpace(ManagerHeight.h19),
+                    CustomTextField(
                       controller: controller.driverName,
                       labelText: ManagerStrings.driverName,
                       keyboardType: TextInputType.name,
                     ),
-                    mySizedBox(),
-                    MainTextField(
+                    verticalSpace(ManagerHeight.h10),
+                    CustomTextField(
                       controller: controller.driverIdNumber,
                       labelText: ManagerStrings.driverId,
                       maxLength: AppConstants.maxLengthOfIDNumber,
                     ),
-                    mySizedBox(),
-                    MainTextField(
+                    verticalSpace(ManagerHeight.h10),
+                    CustomTextField(
                       controller: controller.ownerName,
                       labelText: ManagerStrings.ownerName,
                       keyboardType: TextInputType.name,
                     ),
-                    mySizedBox(),
-                    MainTextField(
+                    verticalSpace(ManagerHeight.h10),
+                    CustomTextField(
                       controller: controller.ownerId,
                       labelText: ManagerStrings.ownerId,
                       maxLength: AppConstants.maxLengthOfIDNumber,
                     ),
-                    mySizedBox(),
+                    verticalSpace(ManagerHeight.h10),
                     Row(
                       children: [
                         Expanded(
-                          child: MainTextField(
+                          child: CustomTextField(
                             controller: controller.vehicleNumber,
                             labelText: ManagerStrings.vehicleNumber,
                             maxLength: AppConstants.maxLengthOfVehicleNumber,
                           ),
                         ),
-                        SizedBox(width: ManagerWidth.w10),
+                        horizontalSpace(ManagerWidth.w10),
                         Expanded(
-                          child: MainTextField(
+                          child: CustomTextField(
                             controller: controller.vehicleType,
                             labelText: ManagerStrings.vehicleType,
                             keyboardType: TextInputType.text,
                           ),
                         ),
-                        SizedBox(width: ManagerWidth.w10),
+                        horizontalSpace(ManagerWidth.w10),
                         Expanded(
-                          child: MainTextField(
+                          child: CustomTextField(
                             controller: controller.vehicleColor,
                             labelText: ManagerStrings.vehicleColor,
                             keyboardType: TextInputType.text,
@@ -120,19 +102,19 @@ class CreateViolationScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    mySizedBox(),
+                    verticalSpace(ManagerHeight.h10),
                     Row(
                       children: [
                         Expanded(
-                          child: MainTextField(
+                          child: CustomTextField(
                             controller: controller.violationTime,
                             labelText: ManagerStrings.violationTime,
                             readOnly: true,
                           ),
                         ),
-                        SizedBox(width: ManagerWidth.w10),
+                        horizontalSpace(ManagerWidth.w10),
                         Expanded(
-                          child: MainTextField(
+                          child: CustomTextField(
                             controller: controller.violationDate,
                             labelText: ManagerStrings.violationDate,
                             readOnly: true,
@@ -140,14 +122,14 @@ class CreateViolationScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    mySizedBox(),
-                    MainTextField(
+                    verticalSpace(ManagerHeight.h10),
+                    CustomTextField(
                       controller: controller.placeOfViolation,
                       labelText: ManagerStrings.placeOfViolation,
                       keyboardType: TextInputType.text,
                     ),
-                    mySizedBox(),
-                    MainTextField(
+                    verticalSpace(ManagerHeight.h10),
+                    CustomTextField(
                       controller: controller.reasonForViolation,
                       labelText: ManagerStrings.reasonForViolation,
                       keyboardType: TextInputType.text,
@@ -155,16 +137,11 @@ class CreateViolationScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              mainButton(
+              CustomButton(
                 onPressed: () => controller.createViolation(context),
                 child: Text(
                   ManagerStrings.createViolation,
-                  style: TextStyle(
-                    color: ManagerColors.white,
-                    fontSize: ManagerFontsSizes.f14,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.extraBold,
-                  ),
+                  style: context.textTheme.mainButtonTextStyle(context),
                 ),
               ),
             ],

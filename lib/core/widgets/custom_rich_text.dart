@@ -4,19 +4,15 @@ class CustomRichText extends StatelessWidget {
   const CustomRichText({
     this.children,
     this.recognizer,
-    this.fontWeight,
-    this.color,
-    this.fontSize,
     required this.title,
+    required this.textStyle,
     super.key,
   });
 
   final List<InlineSpan>? children;
   final GestureRecognizer? recognizer;
   final String title;
-  final Color? color;
-  final double? fontSize;
-  final FontWeight? fontWeight;
+  final TextStyle textStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +21,7 @@ class CustomRichText extends StatelessWidget {
         text: title,
         recognizer: recognizer,
         children: children,
-        color: color,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
+        textStyle: textStyle,
         context: context,
       ),
     );
@@ -38,19 +32,13 @@ TextSpan customTextSpan({
   required String text,
   GestureRecognizer? recognizer,
   List<InlineSpan>? children,
-  FontWeight? fontWeight,
-  double? fontSize,
-  Color? color,
+  required TextStyle textStyle,
   required BuildContext context,
 }) {
   return TextSpan(
     text: text,
     recognizer: recognizer,
-    style: context.textTheme.displaySmall!.copyWith(
-      fontWeight: fontWeight,
-      color: color,
-      fontSize: fontSize,
-    ),
+    style: textStyle,
     children: children,
   );
 }

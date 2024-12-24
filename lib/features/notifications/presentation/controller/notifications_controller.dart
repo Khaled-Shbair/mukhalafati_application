@@ -3,9 +3,6 @@ import '/config/all_imports.dart';
 class NotificationsController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  late String driverName;
-  late String driverImage;
-
   // int unReadMessagesNumber = 4;
   bool loading = false;
 
@@ -14,10 +11,6 @@ class NotificationsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    driverName =
-        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
-    driverImage =
-        SharedPreferencesController.getString(SharedPreferencesKeys.image);
     getNotifications();
   }
 

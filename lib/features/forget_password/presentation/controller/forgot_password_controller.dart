@@ -1,26 +1,19 @@
 import '/config/all_imports.dart';
 
 class ForgotPasswordController extends GetxController with Helpers {
-  final DriverForgotPasswordUseCase _useCaseDriverForgotPassword =
-      instance<DriverForgotPasswordUseCase>();
-  final PoliceManForgotPasswordUseCase _useCasePoliceManForgotPassword =
-      instance<PoliceManForgotPasswordUseCase>();
-  late TextEditingController licenseNumber;
-  late TextEditingController jobNumber;
+  late TextEditingController inputNumber;
 
   final FirebaseAuth _firebaseAuth = instance<FirebaseAuth>();
 
   @override
   void onInit() {
     super.onInit();
-    licenseNumber = TextEditingController();
-    jobNumber = TextEditingController();
+    inputNumber = TextEditingController();
   }
 
   @override
   void onClose() {
-    licenseNumber.dispose();
-    jobNumber.dispose();
+    inputNumber.dispose();
     super.onClose();
   }
 
@@ -35,11 +28,11 @@ class ForgotPasswordController extends GetxController with Helpers {
   /// if police man send request of this police man only.
   void sendButton(bool isDriver, BuildContext context) async {
     if (isDriver) {
-      if (_checkDataDriver()) {
-        await initForgotPasswordForDriver();
-        (await _useCaseDriverForgotPassword.execute(
-                DriverForgotPasswordUseCaseInput(
-                    licenseNumber: licenseNumber.text)))
+      if (_checkData()) {
+        final DriverForgotPasswordUseCase useCase =
+            instance<DriverForgotPasswordUseCase>();
+        (await useCase.execute(DriverForgotPasswordUseCaseInput(
+                licenseNumber: inputNumber.text)))
             .fold(
           /// Failed forgot password for driver request
           (l) {
@@ -55,17 +48,13 @@ class ForgotPasswordController extends GetxController with Helpers {
                 await _firebaseAuth.signInWithCredential(phoneAuthCredential);
               },
               verificationFailed: (e) {
+                debugPrint('verificationFailed: ${e.message}');
                 showSnackBar(
                     message:
                         '${ManagerStrings.verificationFailed}: ${e.message}',
                     context: context);
               },
               codeSent: (verificationId, forceResendingToken) {
-                /// Split phone number to appear part of number only
-                phoneNumber =
-                    // '${number.characters.characterAt(0)}${number.characters.characterAt(1)}${number.characters.characterAt(2)}*****${number.characters.characterAt(8)}${number.characters.characterAt(9)}';
-                    '${phoneNumber.characters.characterAt(8)}${phoneNumber.characters.characterAt(9)}*****${phoneNumber.characters.characterAt(0)}${phoneNumber.characters.characterAt(1)}${phoneNumber.characters.characterAt(2)}';
-
                 /// Remove forgot password controller form memory
                 disposeForgotPassword();
 
@@ -73,17 +62,17 @@ class ForgotPasswordController extends GetxController with Helpers {
                 Get.toNamed(
                   Routes.verificationCodeScreen,
                   arguments: [
-                    phoneNumber,
+                    /// Split phone number to appear part of number only
+                    // '${number.characters.characterAt(0)}${number.characters.characterAt(1)}${number.characters.characterAt(2)}*****${number.characters.characterAt(8)}${number.characters.characterAt(9)}',
+                    '${phoneNumber.characters.characterAt(8)}${phoneNumber.characters.characterAt(9)}*****${phoneNumber.characters.characterAt(0)}${phoneNumber.characters.characterAt(1)}${phoneNumber.characters.characterAt(2)}',
                     r.driverId,
                     true,
                     verificationId,
-                    //TODO: check if error
-                    // 000000,
                   ],
                 );
               },
               codeAutoRetrievalTimeout: (verificationId) {},
-              phoneNumber: phoneNumber,
+              phoneNumber: '+97$phoneNumber',
             );
           },
         );
@@ -93,10 +82,11 @@ class ForgotPasswordController extends GetxController with Helpers {
             message: ManagerStrings.pleaseEnterLicenseNumber, context: context);
       }
     } else {
-      if (_checkDataPoliceMan()) {
-        await initForgotPasswordForPoliceMan();
-        (await _useCasePoliceManForgotPassword.execute(
-                PoliceManForgotPasswordUseCaseInput(jobNumber: jobNumber.text)))
+      if (_checkData()) {
+        final PoliceManForgotPasswordUseCase useCase =
+            instance<PoliceManForgotPasswordUseCase>();
+        (await useCase.execute(PoliceManForgotPasswordUseCaseInput(
+                jobNumber: inputNumber.text)))
             .fold(
           /// Failed forgot password for police man request
           (l) {
@@ -120,11 +110,6 @@ class ForgotPasswordController extends GetxController with Helpers {
                     context: context);
               },
               codeSent: (verificationId, forceResendingToken) {
-                /// Split phone number to appear part of number only
-                phoneNumber =
-                    // '${number.characters.characterAt(0)}${number.characters.characterAt(1)}${number.characters.characterAt(2)}*****${number.characters.characterAt(8)}${number.characters.characterAt(9)}';
-                    '${phoneNumber.characters.characterAt(8)}${phoneNumber.characters.characterAt(9)}*****${phoneNumber.characters.characterAt(0)}${phoneNumber.characters.characterAt(1)}${phoneNumber.characters.characterAt(2)}';
-
                 /// Remove forgot password controller form memory
                 disposeForgotPassword();
 
@@ -132,7 +117,9 @@ class ForgotPasswordController extends GetxController with Helpers {
                 Get.toNamed(
                   Routes.verificationCodeScreen,
                   arguments: [
-                    phoneNumber,
+                    /// Split phone number to appear part of number only
+                    // '${number.characters.characterAt(0)}${number.characters.characterAt(1)}${number.characters.characterAt(2)}*****${number.characters.characterAt(8)}${number.characters.characterAt(9)}',
+                    '${phoneNumber.characters.characterAt(8)}${phoneNumber.characters.characterAt(9)}*****${phoneNumber.characters.characterAt(0)}${phoneNumber.characters.characterAt(1)}${phoneNumber.characters.characterAt(2)}',
                     r.policeManId,
                     true,
                     verificationId,
@@ -153,17 +140,8 @@ class ForgotPasswordController extends GetxController with Helpers {
   }
 
   /// check inputs user data in not empty
-  bool _checkDataDriver() {
-    if (licenseNumber.text.isNotEmpty) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  /// check inputs user data in not empty
-  bool _checkDataPoliceMan() {
-    if (jobNumber.text.isNotEmpty) {
+  bool _checkData() {
+    if (inputNumber.text.isNotEmpty) {
       return true;
     } else {
       return false;

@@ -14,6 +14,5 @@ class CreateViolationResponse {
   factory CreateViolationResponse.fromJson(Map<String, dynamic> json) =>
       _$CreateViolationResponseFromJson(json);
 
-  Map<String, dynamic> toJson(CreateViolationResponse instance) =>
-      _$CreateViolationResponseToJson(this);
+  Map<String, dynamic> toJson() => _$CreateViolationResponseToJson(this);
 }
