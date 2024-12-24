@@ -1,50 +1,60 @@
 import '/config/all_imports.dart';
 
-Widget mainDrawer({
-  required List<Widget> children,
-}) {
-  return Drawer(
-    backgroundColor: ManagerColors.white,
-    width: ManagerWidth.w290,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.zero,
-      side: BorderSide.none,
-    ),
-    child: ListView(
-      physics: const NeverScrollableScrollPhysics(),
-      padding: EdgeInsetsDirectional.zero,
-      children: children,
-    ),
-  );
+class CustomMainDrawer extends StatelessWidget {
+  const CustomMainDrawer({
+    required this.children,
+    super.key,
+  });
+
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      backgroundColor: context.theme.drawerTheme.backgroundColor,
+      width: context.theme.drawerTheme.width,
+      shape: context.theme.drawerTheme.shape,
+      child: ListView(
+        physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsetsDirectional.zero,
+        children: children,
+      ),
+    );
+  }
 }
 
-Widget buttonOfMyDrawer({
-  required Function() onPressed,
-  required String icon,
-  required String title,
-  double? heightIcon,
-  double? widthIcon,
-}) {
-  return ListTile(
-    onTap: onPressed,
-    leading: Image.asset(
-      icon,
-      height: heightIcon ?? ManagerHeight.h24,
-      width: widthIcon ?? ManagerWidth.w24,
-      fit: BoxFit.cover,
-    ),
-    title: Text(
-      title,
-      style: TextStyle(
-        color: ManagerColors.black,
-        fontSize: ManagerFontsSizes.f15,
-        fontWeight: ManagerFontWeight.semiBold,
-        fontFamily: ManagerFontFamily.cairo,
+class CustomButtonOfMainDrawer extends StatelessWidget {
+  const CustomButtonOfMainDrawer({
+    required this.onPressed,
+    required this.icon,
+    required this.title,
+    this.heightIcon,
+    this.widthIcon,
+    super.key,
+  });
+
+  final Function() onPressed;
+  final String icon;
+  final String title;
+  final double? heightIcon;
+  final double? widthIcon;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: onPressed,
+      leading: Image.asset(
+        icon,
+        height: heightIcon ?? ManagerHeight.h24,
+        width: widthIcon ?? ManagerWidth.w24,
+        fit: BoxFit.cover,
       ),
-    ),
-    style: ListTileStyle.drawer,
-    contentPadding: EdgeInsetsDirectional.only(
-      start: ManagerWidth.w33,
-    ),
-  );
+      title: Text(
+        title,
+        style: context.theme.listTileTheme.titleTextStyle,
+      ),
+      style: context.theme.listTileTheme.style,
+      contentPadding: context.theme.listTileTheme.contentPadding,
+    );
+  }
 }

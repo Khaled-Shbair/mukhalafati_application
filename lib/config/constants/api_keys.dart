@@ -47,6 +47,7 @@ class ApiKeys {
   static const String data = 'data';
   static const String numberOfViolations = 'number_of_violations';
   static const String nameAr = 'name_ar';
+  static const String name = 'name';
   static const String nameEn = 'name_en';
   static const String licenseTestResult = 'license_test_result';
   static const String studentName = 'student_name';

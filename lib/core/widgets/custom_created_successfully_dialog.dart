@@ -1,12 +1,11 @@
 import '/config/all_imports.dart';
 
-Future<void> createdSuccessfullyDialog({
+Future<void> customCreatedSuccessfullyDialog({
   required void Function() closeButton,
   required BuildContext context,
   required String text,
   double? startPaddingText,
   double? endPaddingText,
-  double? fontSizeText,
 }) async {
   await showDialog(
     context: context,
@@ -28,7 +27,7 @@ Future<void> createdSuccessfullyDialog({
               top: ManagerHeight.h10,
             ),
             decoration: BoxDecoration(
-              color: ManagerColors.white,
+              color: context.theme.dialogTheme.backgroundColor,
               borderRadius: BorderRadius.circular(ManagerRadius.r10),
               boxShadow: [
                 BoxShadow(
@@ -37,7 +36,7 @@ Future<void> createdSuccessfullyDialog({
                       .spreadRadiusOfBoxShadowInCreatedSuccessfullyWidget,
                   blurRadius: AppConstants
                       .blurRadiusOfBoxShadowInCreatedSuccessfullyWidget,
-                  color: ManagerColors.black5,
+                  color: context.theme.dialogTheme.shadowColor!,
                 ),
               ],
             ),
@@ -46,15 +45,15 @@ Future<void> createdSuccessfullyDialog({
               children: [
                 Stack(
                   children: [
-                    mainButton(
+                    CustomButton(
                       onPressed: closeButton,
                       shape: const CircleBorder(),
                       height: ManagerHeight.h24,
                       minWidth: ManagerWidth.w0,
                       child: Icon(
                         Icons.close,
-                        color: ManagerColors.white,
-                        size: ManagerIconsSizes.i18,
+                        color: context.theme.iconTheme.color,
+                        size: context.theme.iconTheme.size,
                       ),
                     ),
                     Align(
@@ -82,13 +81,7 @@ Future<void> createdSuccessfullyDialog({
                   child: Text(
                     text,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: ManagerColors.eerieBlack,
-                      fontSize: fontSizeText ?? ManagerFontsSizes.f20,
-                      fontFamily: ManagerFontFamily.cairo,
-                      fontWeight: ManagerFontWeight.semiBold,
-                      decoration: TextDecoration.none,
-                    ),
+                    style: context.theme.dialogTheme.titleTextStyle,
                   ),
                 ),
               ],

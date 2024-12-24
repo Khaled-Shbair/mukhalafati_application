@@ -2,41 +2,40 @@ import '/config/all_imports.dart';
 
 class DriverProfileController extends GetxController with Helpers {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
+  final SendRequestUpdateProfileUseCase _useCase =
+      instance<SendRequestUpdateProfileUseCase>();
   late String driverImage;
 
-  late TextEditingController driverNameController;
-  late TextEditingController phoneNumberController;
-  late TextEditingController idNumberController;
-  late TextEditingController licenceNumberController;
+  late TextEditingController driverName;
+  late TextEditingController driverPhone;
+  late TextEditingController driverId;
+  late TextEditingController licenceNumber;
 
   @override
   void onInit() {
     super.onInit();
-
     driverImage =
         SharedPreferencesController.getString(SharedPreferencesKeys.image);
-
-    driverNameController = TextEditingController(
+    driverName = TextEditingController(
         text: SharedPreferencesController.getString(
             SharedPreferencesKeys.fullNameAr));
-    phoneNumberController = TextEditingController(
+    driverPhone = TextEditingController(
         text: SharedPreferencesController.getString(
             SharedPreferencesKeys.phoneNumber));
-    idNumberController = TextEditingController(
+    driverId = TextEditingController(
         text: SharedPreferencesController.getString(
             SharedPreferencesKeys.idNumber));
-    licenceNumberController = TextEditingController(
+    licenceNumber = TextEditingController(
         text: SharedPreferencesController.getString(
             SharedPreferencesKeys.licenseOrJobNumber));
   }
 
   @override
   void onClose() {
-    driverNameController.dispose();
-    phoneNumberController.dispose();
-    idNumberController.dispose();
-    licenceNumberController.dispose();
+    driverName.dispose();
+    driverPhone.dispose();
+    driverId.dispose();
+    licenceNumber.dispose();
     super.onClose();
   }
 
@@ -49,41 +48,66 @@ class DriverProfileController extends GetxController with Helpers {
   }
 
   /// Driver send request to update profile data when see error in data
-  void updateDataButton() {
+  void updateDataButton(BuildContext context) async {
     if (_checkDataDriver()) {
-      createdSuccessfullyDialog(
-        closeButton: () {
-          /// Remove driver profile controller form memory
-          disposeDriverProfile();
-
-          /// Navigate to driver home screen
-          Get.offAllNamed(Routes.driverHomeScreen);
+      (await _useCase.execute(
+        SendRequestUpdateProfileInput(
+            phoneNumber: driverPhone.text,
+            idNumber: driverId.text,
+            driverId: SharedPreferencesController.getInt(
+                SharedPreferencesKeys.userId),
+            name: driverName.text,
+            licenseNumber: licenceNumber.text),
+      ))
+          .fold(
+        /// Failed request update profile
+        (l) {
+          /// Appear message of error in SnackBar to user
+          showSnackBar(message: l.message, context: context);
         },
-        context: Get.context!,
-        text: ManagerStrings.yourUpdateRequestHasBeenSubmittedSuccessfully,
-        startPaddingText: ManagerWidth.w28,
-        endPaddingText: ManagerWidth.w28,
-        fontSizeText: ManagerFontsSizes.f16,
+
+        /// Successfully request update profile
+
+        (r) {
+          customCreatedSuccessfullyDialog(
+            closeButton: () {
+              /// Remove driver profile controller form memory
+              disposeDriverProfile();
+
+              /// Navigate to driver home screen
+              Get.offAllNamed(Routes.driverHomeScreen);
+            },
+            context: Get.context!,
+            text: ManagerStrings.yourUpdateRequestHasBeenSubmittedSuccessfully,
+            startPaddingText: ManagerWidth.w28,
+            endPaddingText: ManagerWidth.w28,
+          );
+        },
       );
-    } else {}
+    } else {
+      /// Appear message of error in SnackBar to user
+      showSnackBar(
+          message: ManagerStrings.pleaseEnterDataThisNeedUpdated,
+          context: context);
+    }
   }
 
   /// check inputs user data in not empty and not similar previous data
   bool _checkDataDriver() {
-    if (driverNameController.text.isNotEmpty &&
-            phoneNumberController.text.isNotEmpty &&
-            idNumberController.text.isNotEmpty &&
-            licenceNumberController.text.isNotEmpty &&
-            driverNameController.text !=
+    if (driverName.text.isNotEmpty &&
+            driverPhone.text.isNotEmpty &&
+            driverId.text.isNotEmpty &&
+            licenceNumber.text.isNotEmpty &&
+            driverName.text !=
                 SharedPreferencesController.getString(
                     SharedPreferencesKeys.fullNameAr) ||
-        phoneNumberController.text !=
+        driverPhone.text !=
             SharedPreferencesController.getString(
                 SharedPreferencesKeys.phoneNumber) ||
-        idNumberController.text !=
+        driverId.text !=
             SharedPreferencesController.getString(
                 SharedPreferencesKeys.idNumber) ||
-        licenceNumberController.text !=
+        licenceNumber.text !=
             SharedPreferencesController.getString(
                 SharedPreferencesKeys.licenseOrJobNumber)) {
       return true;

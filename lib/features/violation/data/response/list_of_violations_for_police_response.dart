@@ -11,9 +11,10 @@ class ListOfViolationsForPoliceResponse {
     required this.message,
   });
 
-  factory ListOfViolationsForPoliceResponse.fromJson(Map<String, dynamic> json) =>
+  factory ListOfViolationsForPoliceResponse.fromJson(
+      Map<String, dynamic> json) =>
       _$ListOfViolationsForPoliceResponseFromJson(json);
 
-  Map<String, dynamic> toJson(ListOfViolationsForPoliceResponse instance) =>
+  Map<String, dynamic> toJson() =>
       _$ListOfViolationsForPoliceResponseToJson(this);
 }

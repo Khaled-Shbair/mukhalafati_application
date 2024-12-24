@@ -4,6 +4,9 @@ class ManagerStrings {
   static String noRouteFound = 'noRouteFound'.tr;
   static String badRequest = 'bad_request'.tr;
   static String pleaseEnterNewPassword = 'please_enter_new_password'.tr;
+  static String pleaseEnterIdNumber = 'please_enter_id_number'.tr;
+  static String pleaseEnterDataThisNeedUpdated =
+      'please_enter_data_this_need_updated'.tr;
   static String noInternetConnection = 'no_internet_connection'.tr;
   static String skip = 'skip'.tr;
   static String policeMan = 'police_man'.tr;
@@ -16,6 +19,7 @@ class ManagerStrings {
   static String welcome = 'welcome'.tr;
   static String pleaseEnterLicenseNumber = 'please_enter_license_number'.tr;
   static String pleaseEnterJobNumber = 'please_enter_job_number'.tr;
+  static String verificationFailed = 'verification_failed'.tr;
 
   static String pleaseEnterVerificationCode =
       'please_enter_verification_code'.tr;
@@ -124,7 +128,8 @@ class ManagerStrings {
   static String drivingLicenseCard = 'driving_license_card'.tr;
   static String showYourDrivingLicenseCard =
       'show_your_driving_license_card'.tr;
-  static String titleDrivingLicenseCard = 'title_driving_license_card'.tr;
+  static String subTitleDrivingLicenseCard =
+      'sub_title_driving_license_card'.tr;
   static String frontElectronicLicenseCard = 'front_electronic_license_card'.tr;
   static String backElectronicLicenseCard = 'back_electronic_license_card'.tr;
   static String fullElectronicLicenseCard = 'full_electronic_license_card'.tr;

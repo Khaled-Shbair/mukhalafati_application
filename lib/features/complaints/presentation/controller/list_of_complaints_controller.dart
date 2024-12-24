@@ -8,8 +8,6 @@ class ListOfComplaintsController extends GetxController with Helpers {
 
   static ListOfComplaintsController get to => Get.find();
 
-  late String driverName;
-  late String driverImage;
   bool loading = false;
   List<ComplaintDataModel> data = [];
   final List<String> _namesOfColumns = [
@@ -24,14 +22,10 @@ class ListOfComplaintsController extends GetxController with Helpers {
   @override
   void onInit() {
     getComplaints();
-    driverName =
-        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
-    driverImage =
-        SharedPreferencesController.getString(SharedPreferencesKeys.image);
-
     super.onInit();
   }
 
+  /// Open [endDrawer], use this drawer as menu.
   void openEndDrawer() {
     if (scaffoldKey.currentState != null &&
         !scaffoldKey.currentState!.isEndDrawerOpen) {
@@ -39,6 +33,7 @@ class ListOfComplaintsController extends GetxController with Helpers {
     }
   }
 
+  /// Appear dialog to create complaint
   void submitComplaintButton() {
     initCreateComplaints();
     dialogOfCreateComplaint(
@@ -47,9 +42,13 @@ class ListOfComplaintsController extends GetxController with Helpers {
     update();
   }
 
+  /// Get all complaints of user from Api and save in list [data]
   void getComplaints() async {
+    // First, appear loading until data comes from Api
     loading = true;
+    // Second, empty list from previous data
     data = [];
+    // send request to get data from api
     (await _allComplaintsUseCase.execute(
       GetAllComplaintsInput(
         driverId:
@@ -57,15 +56,21 @@ class ListOfComplaintsController extends GetxController with Helpers {
       ),
     ))
         .fold(
+      /// Failed request get complaints
       (l) {
         if (l.code == -1) {
-          showSnackBar(message: l.message);
+          /// Appear message of error in SnackBar to user
+          showSnackBar(message: l.message, context: Get.context!);
         }
       },
+
+      /// Successfully request get complaints
       (r) {
+        // save coming data in list [data]
         data = r.data;
       },
     );
+    // Hide loading and appear data
     loading = false;
     update();
   }

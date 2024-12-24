@@ -25,7 +25,6 @@ export '/routes/routes.dart';
 export '/routes/route_generator.dart';
 
 ///config file
-export '/core/helper/helper.dart';
 export '/config/all_imports.dart';
 export '/config/constants/api_keys.dart';
 export '/config/dependency_injection.dart';
@@ -35,12 +34,13 @@ export '/config/constants/locale_constants.dart';
 export '/config/constants/database_constants.dart';
 
 ///core file
+
 export '/core/language/ar.dart';
 export '/core/language/en.dart';
+export '/core/helper/helper.dart';
 export '/core/util/size_util.dart';
 export '/core/widgets/my_spacing.dart';
-export '/core/widgets/custom_loading.dart';
-export '/core/widgets/main_button.dart';
+export '/core/widgets/custom_button.dart';
 export '/core/widgets/main_drawer.dart';
 export '/core/widgets/menu_Button.dart';
 export '/core/widgets/custom_table.dart';
@@ -52,14 +52,16 @@ export '/core/use_case/base_use_case.dart';
 export '/core/widgets/will_pop_scope.dart';
 export '/core/resource/manager_sizes.dart';
 export '/core/resource/manager_fonts.dart';
+export '/core/widgets/custom_loading.dart';
 export '/core/resource/manager_assets.dart';
 export '/core/resource/manager_colors.dart';
-export '/core/widgets/main_text_field.dart';
+export '/core/widgets/custom_text_field.dart';
 export '/core/theme/manager_dark_theme.dart';
 export '/core/resource/manager_strings.dart';
 export '/core/theme/manager_light_theme.dart';
 export '/core/widgets/police_man_drawer.dart';
 export '/core/storage/remote/api/app_api.dart';
+export '/core/resource/manager_text_theme.dart';
 export '/core/error_handler/response_code.dart';
 export '/core/error_handler/error_handler.dart';
 export '/core/middleware/route_middleware.dart';
@@ -73,7 +75,7 @@ export '/core/internet_checker/internet_checker.dart';
 export '/core/widgets/back_driving_license_card.dart';
 export '/core/widgets/front_driving_license_card.dart';
 export '/core/widgets/confirm_information_dialog.dart';
-export '/core/widgets/created_successfully_dialog.dart';
+export '/core/widgets/custom_created_successfully_dialog.dart';
 export '/config/constants/shared_preferences_keys.dart';
 export '/core/determine_date_time/determine_date_and_time.dart';
 export '/core/storage/local/shared_preferences/shared_preferences_controller.dart';
@@ -99,7 +101,7 @@ export '/features/login/data/response/driver_login_response.dart';
 export '/features/login/domain/use_case/driver_login_use_case.dart';
 export '/features/login/data/request/police_man_login_request.dart';
 export '/features/login/presentation/view/screens/login_screen.dart';
-export '/features/login/presentation/view/widgets/tab_bar_page.dart';
+export '/features/login/presentation/view/widgets/custom_tab_bar_page.dart';
 export '/features/login/data/response/police_man_login_response.dart';
 export '/features/login/presentation/view/screens/welcome_screen.dart';
 export '/features/login/presentation/view/widgets/custom_tab_bar_button.dart';
@@ -115,16 +117,16 @@ export '/features/login/data/repository_impl/driver_login_repository_implementat
 
 //home feature
 export '/features/home/presentation/model/bar_chart_data.dart';
-export '/features/home/presentation/view/widgets/home_app_bar.dart';
-export '/features/home/presentation/view/widgets/page_view_item.dart';
+export '/features/home/presentation/view/widgets/custom_home_app_bar.dart';
+export '/features/home/presentation/view/widgets/custom_page_view_item.dart';
 export '/features/home/presentation/view/screens/driver_home_screen.dart';
 export '/features/home/presentation/controller/driver_home_controller.dart';
-export '/features/home/presentation/view/widgets/bar_chart_distribution.dart';
+export '/features/home/presentation/view/widgets/custom_bar_chart_distribution.dart';
 export '/features/home/presentation/view/screens/police_man_home_screen.dart';
 export '/features/home/presentation/controller/police_man_home_controller.dart';
-export '/features/home/presentation/view/widgets/statistics_box_of_police_man.dart';
-export '/features/home/presentation/view/widgets/box_of_number_of_violation_driver.dart';
-export '/features/home/presentation/view/widgets/button_for_violation_distribution_pages.dart';
+export '/features/home/presentation/view/widgets/custom_statistics_box_of_police_man.dart';
+export '/features/home/presentation/view/widgets/custom_box_of_number_of_violation_driver.dart';
+export '/features/home/presentation/view/widgets/custom_button_for_violation_distribution_pages.dart';
 
 //violation feature
 export '/features/violation/presentation/model/violation_model.dart';
@@ -154,8 +156,9 @@ export '/features/violation/data/repository_impl/create_violation_repository_imp
 export '/features/violation/presentation/controller/list_of_violations_controller.dart';
 export '/features/violation/domain/use_case/list_of_reasons_of_violations_use_case.dart';
 export '/features/violation/data/data_source/remote_reason_of_violation_data_source.dart';
-export '/features/violation/presentation/view/widgets/item_card_of_list_of_violation.dart';
 export '/features/violation/domain/repository/list_of_reasons_of_violations_repository.dart';
+export '/features/violation/presentation/view/widgets/custom_filter_list_violations_button.dart';
+export '/features/violation/presentation/view/widgets/custom_item_card_of_list_of_violation.dart';
 export '/features/violation/data/data_source/remote_list_of_reasons_of_violations_data_source.dart';
 
 //search feature
@@ -191,7 +194,7 @@ export '/features/logout/presentation/view/screens/logout_screen.dart';
 export '/features/logout/presentation/controller/logout_controller.dart';
 
 //driving_license_card feature
-export '/features/driving_license_card/presentation/view/widgets/expansion_tile_card.dart';
+export '/features/driving_license_card/presentation/view/widgets/custom_expansion_tile_card.dart';
 export '/features/driving_license_card/presentation/view/screens/driving_license_card_screen.dart';
 export '/features/driving_license_card/presentation/controller/driving_license_card_controller.dart';
 
@@ -210,6 +213,7 @@ export '/features/complaints/data/request/get_all_complaints_request.dart';
 export '/features/complaints/domain/use_case/create_complaint_use_case.dart';
 export '/features/complaints/domain/use_case/get_all_complaints_use_case.dart';
 export '/features/complaints/domain/repository/create_complaint_repository.dart';
+export '/features/complaints/presentation/view/widgets/custom_field_of_row.dart';
 export '/features/complaints/domain/repository/get_all_complaints_repository.dart';
 export '/features/complaints/presentation/view/screens/list_of_complaints_screen.dart';
 export '/features/complaints/presentation/view/widgets/dialog_of_create_complaint.dart';
@@ -248,6 +252,7 @@ export '/features/forget_password/domain/model/driver_forgot_password_model.dart
 export '/features/forget_password/data/mapper/send_verification_code_mapper.dart';
 export '/features/forget_password/data/request/send_verification_code_request.dart';
 export '/features/forget_password/data/request/driver_forgot_password_request.dart';
+export '/features/forget_password/presentation/view/widgets/custom_verification_image.dart';
 export '/features/forget_password/data/response/send_verification_code_response.dart';
 export '/features/forget_password/data/mapper/police_man_forgot_password_mapper.dart';
 export '/features/forget_password/data/response/driver_forgot_password_response.dart';
@@ -255,29 +260,37 @@ export '/features/forget_password/domain/model/police_man_forgot_password_model.
 export '/features/forget_password/domain/use_case/send_verification_code_use_case.dart';
 export '/features/forget_password/domain/use_case/driver_forgot_password_use_case.dart';
 export '/features/forget_password/data/request/police_man_forgot_password_request.dart';
+export '/features/forget_password/presentation/view/screens/forgot_password_screen.dart';
 export '/features/forget_password/data/response/police_man_forgot_password_response.dart';
+export '/features/forget_password/presentation/controller/forgot_password_controller.dart';
 export '/features/forget_password/presentation/view/screens/verification_code_screen.dart';
 export '/features/forget_password/domain/use_case/police_man_forgot_password_use_case.dart';
 export '/features/forget_password/domain/repository/driver_forgot_password_repository.dart';
 export '/features/forget_password/domain/repository/send_verification_code_repository.dart';
 export '/features/forget_password/presentation/controller/verification_code_controller.dart';
-export '/features/forget_password/presentation/view/widgets/filed_of_verification_code.dart';
+export '/features/forget_password/presentation/view/widgets/custom_filed_of_verification_code.dart';
 export '/features/forget_password/domain/repository/police_man_forgot_password_repository.dart';
+export '/features/forget_password/presentation/view/widgets/custom_incorrect_entered_code_message.dart';
 export '/features/forget_password/data/data_source/remote_driver_forgot_password_data_source.dart';
 export '/features/forget_password/data/data_source/remote_send_verification_code_data_source.dart';
 export '/features/forget_password/data/repository_impl/driver_forgot_password_repository_impl.dart';
-export '/features/forget_password/presentation/view/screens/forgot_password_for_driver_screen.dart';
-export '/features/forget_password/presentation/controller/forgot_password_for_driver_controller.dart';
 export '/features/forget_password/data/data_source/remote_police_man_forgot_password_data_source.dart';
-export '/features/forget_password/presentation/view/screens/forgot_password_for_police_man_screen.dart';
 export '/features/forget_password/data/repository_impl/police_man_forgot_password_repository_impl.dart';
-export '/features/forget_password/presentation/controller/forgot_password_for_police_man_controller.dart';
 
 //profile feature
 export '/features/profile/presentation/model/police_model.dart';
 export '/features/profile/presentation/model/driver_model.dart';
+export '/features/profile/presentation/view/widgets/custom_image_profile.dart';
+export '/features/profile/domain/model/send_request_update_profile_model.dart';
+export '/features/profile/data/mapper/send_request_update_profile_mapper.dart';
 export '/features/profile/presentation/view/screens/driver_profile_screen.dart';
+export '/features/profile/data/request/send_request_update_profile_request.dart';
 export '/features/profile/presentation/controller/driver_profile_controller.dart';
+export '/features/profile/data/response/send_request_update_profile_response.dart';
+export '/features/profile/domain/use_case/send_request_update_profile_use_case.dart';
+export '/features/profile/domain/repository/send_request_update_profile_repository.dart';
+export '/features/profile/data/data_source/remote_send_request_update_profile_data_source.dart';
+export '/features/profile/data/repository_impl/send_request_update_profile_repository_impl.dart';
 
 //payment feature
 export '/features/payment/data/mapper/driver_violations_mapper.dart';

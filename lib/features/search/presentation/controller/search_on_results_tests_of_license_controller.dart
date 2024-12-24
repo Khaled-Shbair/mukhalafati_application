@@ -7,6 +7,7 @@ class SearchOnResultsTestsOfLicenseController extends GetxController
       instance<SearchOnResultsTestsOfLicenseUseCase>();
 
   late TextEditingController idNumber;
+
   late String resultName;
 
   late bool licenseTestResults;
@@ -16,26 +17,19 @@ class SearchOnResultsTestsOfLicenseController extends GetxController
   bool loading = false;
   bool result = false;
 
-  late String driverName;
-
-  late String driverImage;
-
   @override
   void onInit() {
     super.onInit();
-    driverName =
-        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
-    driverImage =
-        SharedPreferencesController.getString(SharedPreferencesKeys.image);
     idNumber = TextEditingController();
   }
 
   @override
-  void dispose() {
+  void onClose() {
     idNumber.dispose();
-    super.dispose();
+    super.onClose();
   }
 
+  /// Open [endDrawer], use this drawer as menu.
   void openEndDrawer() {
     if (scaffoldKey.currentState != null &&
         !scaffoldKey.currentState!.isEndDrawerOpen) {
@@ -43,7 +37,7 @@ class SearchOnResultsTestsOfLicenseController extends GetxController
     }
   }
 
-  void searchButton() async {
+  void searchButton(BuildContext context) async {
     loading = true;
     result = false;
     update();
@@ -53,12 +47,17 @@ class SearchOnResultsTestsOfLicenseController extends GetxController
         SearchOnResultsTestsOfLicenseUseCaseInput(idNumber: idNumber.text),
       ))
           .fold(
+        /// Failed request search on results tests of license
         (l) {
           result = false;
           loading = false;
-          showSnackBar(message: l.message);
+
+          /// Appear message of error in SnackBar to user
+          showSnackBar(message: l.message, context: context);
           update();
         },
+
+        /// Successfully request search on results tests of license
         (r) {
           resultName = r.studentName;
           practicalTestResult = r.practicalTestResult;
@@ -68,6 +67,10 @@ class SearchOnResultsTestsOfLicenseController extends GetxController
           update();
         },
       );
+    } else {
+      /// Appear message of error in SnackBar to user
+      showSnackBar(
+          message: ManagerStrings.pleaseEnterIdNumber, context: context);
     }
   }
 

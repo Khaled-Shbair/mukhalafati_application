@@ -116,8 +116,18 @@ abstract class AppApi {
   Future<ListOfViolationsForPoliceResponse> getListOfViolationsForPolice(
     @Field(ApiKeys.policeManId) policeManId,
   );
+
   @POST(ApiConstants.sendVerificationCode)
   Future<SendVerificationCodeResponse> sendVerificationCode(
-      @Field(ApiKeys.phoneNumber) phoneNumber,
-      );
+    @Field(ApiKeys.phoneNumber) phoneNumber,
+  );
+
+  @POST(ApiConstants.sendRequestUpdateProfile)
+  Future<SendRequestUpdateProfileResponse> sendRequestUpdateProfile(
+    @Field(ApiKeys.driverId) driverId,
+    @Field(ApiKeys.name) name,
+    @Field(ApiKeys.idNumber) idNumber,
+    @Field(ApiKeys.licenseNumber) licenseNumber,
+    @Field(ApiKeys.phoneNumber) phoneNumber,
+  );
 }

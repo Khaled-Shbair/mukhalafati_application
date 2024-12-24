@@ -3,10 +3,6 @@ import '/config/all_imports.dart';
 class DriverHomeController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  late String driverName;
-
-  late String driverImage;
-
   late String driverFirstName;
 
   String welcome = ManagerStrings.goodMorning;
@@ -19,11 +15,6 @@ class DriverHomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    _data();
-    changeWelcome();
-  }
-
-  void _data() {
     paidViolation = SharedPreferencesController.getInt(
         SharedPreferencesKeys.numberOfViolationsPaid);
 
@@ -36,14 +27,10 @@ class DriverHomeController extends GetxController {
     driverFirstName =
         SharedPreferencesController.getString(SharedPreferencesKeys.firstName);
 
-    driverName =
-        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
-    driverImage =
-        SharedPreferencesController.getString(SharedPreferencesKeys.image);
-
-    update();
+    changeWelcome();
   }
 
+  /// Open [endDrawer], use this drawer as menu.
   void openEndDrawer() {
     if (scaffoldKey.currentState != null &&
         !scaffoldKey.currentState!.isEndDrawerOpen) {
@@ -51,6 +38,7 @@ class DriverHomeController extends GetxController {
     }
   }
 
+  /// Change the hello word based on time [goodEvening] and [goodMorning]
   void changeWelcome() {
     if (DateTime.now().hour >= 12) {
       welcome = ManagerStrings.goodEvening;
@@ -60,6 +48,7 @@ class DriverHomeController extends GetxController {
     update();
   }
 
+  /// Navigate to [NotificationScreen]
   void notificationButton() {
     Get.toNamed(Routes.notificationScreen);
   }

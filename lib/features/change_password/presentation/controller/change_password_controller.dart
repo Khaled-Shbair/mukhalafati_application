@@ -88,7 +88,7 @@ class ChangePasswordController extends GetxController with Helpers {
 
   /// show dialog when return changed Password is Successfully
   void _changedPasswordSuccessfully() {
-    createdSuccessfullyDialog(
+    customCreatedSuccessfullyDialog(
       closeButton: () {
         /// Remove change password controller form memory
         disposeChangePassword();

@@ -46,9 +46,12 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                     ),
                     Visibility(
                       visible: controller.appearText(),
-                      child: Text(ManagerStrings.showYourDrivingLicenseCard,
-                          textAlign: TextAlign.center,
-                          style: context.textTheme.titleMedium),
+                      child: Text(
+                        ManagerStrings.showYourDrivingLicenseCard,
+                        textAlign: TextAlign.center,
+                        style: context.textTheme
+                            .titleDrivingLicenseCardScreen(context),
+                      ),
                     ),
                     Visibility(
                       visible: controller.appearText(),
@@ -57,9 +60,10 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                     Visibility(
                       visible: controller.appearText(),
                       child: Text(
-                        ManagerStrings.titleDrivingLicenseCard,
+                        ManagerStrings.subTitleDrivingLicenseCard,
                         textAlign: TextAlign.center,
-                        style: context.textTheme.bodyMedium,
+                        style: context.textTheme
+                            .subTitleDrivingLicenseCardScreen(context),
                       ),
                     ),
                     Visibility(

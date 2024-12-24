@@ -19,7 +19,7 @@ class CustomIncorrectEnteredCodeMessage extends StatelessWidget {
       maintainSemantics: true,
       child: Text(
         ManagerStrings.theEnteredCodeIsIncorrect,
-        style: context.textTheme.labelSmall,
+        style: context.textTheme.customIncorrectEnteredCodeMessage(context),
       ),
     );
   }

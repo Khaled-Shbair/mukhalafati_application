@@ -26,7 +26,7 @@ class MoveButton extends StatelessWidget {
             strokeWidth: AppConstants.strokeWidthOfCircularProgressIndicator,
           ),
         ),
-        mainButton(
+        CustomButton(
           onPressed: onPressed,
           shape: const CircleBorder(),
           height: ManagerHeight.h49,

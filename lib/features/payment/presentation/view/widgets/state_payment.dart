@@ -57,7 +57,7 @@ Widget statePayment({
             ),
           ),
         ),
-        mainButton(
+        CustomButton(
           onPressed: button,
           child: Text(
             isSuccessful

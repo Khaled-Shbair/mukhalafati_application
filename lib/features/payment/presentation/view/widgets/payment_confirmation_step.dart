@@ -134,9 +134,9 @@ Widget paymentConfirmationStep({
       Row(
         children: [
           Expanded(
-            child: mainButton(
+            child: CustomButton(
               onPressed: cancelButton,
-              color: ManagerColors.antiFlashWhite,
+              backgroundColor: ManagerColors.antiFlashWhite,
               side: BorderSide.none,
               child: Text(
                 ManagerStrings.cancel,
@@ -152,7 +152,7 @@ Widget paymentConfirmationStep({
           SizedBox(width: ManagerWidth.w10),
           Expanded(
             flex: 2,
-            child: mainButton(
+            child: CustomButton(
               onPressed: paymentConfirmationButton,
               child: Text(
                 ManagerStrings.paymentConfirmation,

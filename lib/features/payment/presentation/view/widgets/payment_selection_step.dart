@@ -59,7 +59,7 @@ Widget paymentSelectionStep({
         onTap: selectJawwalPay,
       ),
       SizedBox(height: ManagerHeight.h20),
-      mainButton(
+      CustomButton(
         onPressed: paymentSelectionButton,
         child: Text(
           ManagerStrings.next,

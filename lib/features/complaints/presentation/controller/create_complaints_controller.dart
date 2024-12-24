@@ -32,7 +32,7 @@ class CreateComplaintsController extends GetxController with Helpers {
     disposeCreateComplaints();
   }
 
-  void createComplaintsButton() async {
+  void createComplaintsButton(BuildContext context) async {
     if (_checkData()) {
       (await _sendComplaintUseCase.execute(
         CreateComplaintInput(
@@ -47,13 +47,13 @@ class CreateComplaintsController extends GetxController with Helpers {
       ))
           .fold(
         (l) {
-          showSnackBar(message: l.message);
+          showSnackBar(message: l.message,context:context);
         },
         (r) async {
           Get.back();
           disposeListOfComplaints();
           Get.clearRouteTree();
-          createdSuccessfullyDialog(
+          customCreatedSuccessfullyDialog(
             closeButton: () async {
               initListOfComplaints();
               Get.back();
@@ -66,7 +66,7 @@ class CreateComplaintsController extends GetxController with Helpers {
         },
       );
     } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData,context: context);
     }
   }
 

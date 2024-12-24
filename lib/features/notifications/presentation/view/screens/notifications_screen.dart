@@ -9,10 +9,7 @@ class NotificationsScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           key: controller.scaffoldKey,
-          endDrawer: driverDrawer(
-            driverName: controller.driverName,
-            driverImage: controller.driverImage,
-          ),
+          endDrawer: CustomDriverDrawer(),
           appBar: AppBar(
             title: Text(ManagerStrings.notifications),
             leading: IconButton(
@@ -64,7 +61,7 @@ class NotificationsScreen extends StatelessWidget {
                     itemCount: controller.notifications.length,
                     itemBuilder: (context, index) {
                       if (controller.loading == true) {
-                        return myLoading();
+                        return CustomLoading();
                       } else {
                         return boxOfNotification(
                           onLongPress: () =>

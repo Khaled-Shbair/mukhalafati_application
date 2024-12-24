@@ -20,7 +20,7 @@ class CustomCheckBox extends StatelessWidget {
         ),
         Text(
           ManagerStrings.rememberMe,
-          style: context.textTheme.displaySmall,
+          style: context.textTheme.forgotPasswordButtonAndTextOfCheckBoxInLoginScreen(context),
         ),
       ],
     );

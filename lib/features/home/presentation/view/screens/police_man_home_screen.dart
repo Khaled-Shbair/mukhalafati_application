@@ -10,7 +10,8 @@ class PoliceManHomeScreen extends StatelessWidget {
         return Scaffold(
           key: controller.scaffoldKey,
           resizeToAvoidBottomInset: false,
-          appBar: homeAppBar(
+          appBar: customHomeAppBar(
+            context: context,
             firstName: controller.policeFirstName,
             openEndDrawer: () => controller.openEndDrawer(),
             welcome: controller.welcome,
@@ -18,21 +19,17 @@ class PoliceManHomeScreen extends StatelessWidget {
               height: ManagerHeight.h50,
               width: ManagerWidth.w50,
               decoration: BoxDecoration(
-                color: ManagerColors.primaryColor,
+                color: context.theme.primaryColor,
                 borderRadius: BorderRadius.circular(ManagerRadius.r5),
                 image: DecorationImage(
-                  // image: NetworkImage(controller.policeImage),
-                  image: AssetImage(controller.policeImage),
+                  image:
+                      customCachedNetworkImageProvider(controller.policeImage),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
-          endDrawer: policeManDrawer(
-            isPoliceManHomeScreen: true,
-            policeName: controller.policeName,
-            policeImage: controller.policeImage,
-          ),
+          endDrawer: PoliceManDrawer(isPoliceManHomeScreen: true),
           body: Padding(
             padding: EdgeInsetsDirectional.only(
               start: ManagerWidth.w19,
@@ -45,15 +42,15 @@ class PoliceManHomeScreen extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: buttonForViolationDistributionPages(
+                      child: CustomButtonForViolationDistributionPages(
                         text: ManagerStrings.weeklyViolations,
                         isSelected: controller.isSelectedButtonWeeklyViolations,
                         onTap: () => controller.buttonWeeklyViolations(),
                       ),
                     ),
-                    SizedBox(width: ManagerWidth.w11),
+                    horizontalSpace(ManagerWidth.w11),
                     Expanded(
-                      child: buttonForViolationDistributionPages(
+                      child: CustomButtonForViolationDistributionPages(
                         text: ManagerStrings.monthlyViolations,
                         isSelected:
                             controller.isSelectedButtonMonthlyViolations,
@@ -62,18 +59,18 @@ class PoliceManHomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: ManagerHeight.h28),
+                verticalSpace(ManagerHeight.h28),
                 Expanded(
                   child: PageView(
                     physics: const NeverScrollableScrollPhysics(),
                     controller: controller.pageController,
                     onPageChanged: (value) => controller.onPageChanged(value),
                     children: [
-                      pageViewItem(
+                      CustomPageViewItem(
                         highestViolations: controller.highestViolationsInWeek,
                         totalViolations: controller.totalViolations,
                         isTotalOfWeek: true,
-                        barChart: barChartDistribution(
+                        barChart: CustomBarChartDistribution(
                           tooltipBehavior: controller.tooltipBehavior,
                           dataSource: [
                             ...List.generate(
@@ -83,11 +80,11 @@ class PoliceManHomeScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      pageViewItem(
+                      CustomPageViewItem(
                         highestViolations: controller.highestViolationsInMonth,
                         totalViolations: controller.totalViolations,
                         isTotalOfWeek: false,
-                        barChart: barChartDistribution(
+                        barChart: CustomBarChartDistribution(
                           tooltipBehavior: controller.tooltipBehavior,
                           dataSource: [
                             ...List.generate(

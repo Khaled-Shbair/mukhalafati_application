@@ -20,6 +20,6 @@ class ReasonOfViolationResponse {
   factory ReasonOfViolationResponse.fromJson(Map<String, dynamic> json) =>
       _$ReasonOfViolationResponseFromJson(json);
 
-  Map<String, dynamic> toJson(ReasonOfViolationResponse instance) =>
+  Map<String, dynamic> toJson() =>
       _$ReasonOfViolationResponseToJson(this);
 }

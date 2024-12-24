@@ -1,192 +1,209 @@
 import '/config/all_imports.dart';
 
-Widget driverDrawer({
-  bool isListOfComplaintsScreen = false,
-  bool isDriverHomeScreen = false,
-  bool isProfileScreen = false,
-  bool isDrivingLicenseCardScreen = false,
-  bool isSearchForDriverScreen = false,
-  bool isSearchOnResultsTestsOfLicenseScreen = false,
-  bool isPayViolationsScreen = false,
-  required String driverName,
-  required String driverImage,
-}) {
-  return mainDrawer(
-    children: [
-      DrawerHeader(
-        margin: EdgeInsetsDirectional.only(bottom: ManagerHeight.h8),
-        padding: EdgeInsetsDirectional.only(bottom: ManagerHeight.h10),
-        decoration: const BoxDecoration(
-          color: ManagerColors.primaryColor,
-          image: DecorationImage(
-            image: AssetImage(ManagerAssets.backgroundDrawerImage),
-            fit: BoxFit.cover,
+class CustomDriverDrawer extends StatelessWidget {
+  const CustomDriverDrawer({
+    this.isListOfComplaintsScreen = false,
+    this.isDriverHomeScreen = false,
+    this.isProfileScreen = false,
+    this.isDrivingLicenseCardScreen = false,
+    this.isSearchForDriverScreen = false,
+    this.isSearchOnResultsTestsOfLicenseScreen = false,
+    this.isPayViolationsScreen = false,
+    super.key,
+  });
+
+  final bool isListOfComplaintsScreen;
+
+  final bool isDriverHomeScreen;
+
+  final bool isProfileScreen;
+
+  final bool isDrivingLicenseCardScreen;
+
+  final bool isSearchForDriverScreen;
+
+  final bool isSearchOnResultsTestsOfLicenseScreen;
+
+  final bool isPayViolationsScreen;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomMainDrawer(
+      children: [
+        DrawerHeader(
+          margin: EdgeInsetsDirectional.only(bottom: ManagerHeight.h8),
+          padding: EdgeInsetsDirectional.only(bottom: ManagerHeight.h10),
+          decoration: BoxDecoration(
+            color: context.theme.primaryColor,
+            image: DecorationImage(
+              image: AssetImage(ManagerAssets.backgroundDrawerImage),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsetsDirectional.only(
+              start: ManagerWidth.w10,
+              end: ManagerWidth.w10,
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: CircleAvatar(
+                    radius: ManagerRadius.r40,
+                    backgroundImage: customCachedNetworkImageProvider(
+                      SharedPreferencesController.getString(
+                          SharedPreferencesKeys.image),
+                    ),
+                    backgroundColor: context.theme.colorScheme.surface,
+                  ),
+                ),
+                horizontalSpace(ManagerWidth.w6),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    '${ManagerStrings.theDriver}: ${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}',
+                    style: context.textTheme
+                        .logoutAndCreateComplaintAndNameDriverButton(context),
+                    softWrap: true,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              radius: ManagerRadius.r40,
-              backgroundImage: CachedNetworkImageProvider(driverImage),
-              backgroundColor: ManagerColors.white,
-            ),
-            // CachedNetworkImage(
-            //   imageUrl:
-            //   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY5QpkHeEVJzI-D1FgkyVIEn4Tl_vLvsENnQ&s',
-            //   placeholder: (context, url) => myLoading(),
-            //   imageBuilder: (context, imageProvider) => CircleAvatar(
-            //     radius: ManagerRadius.r40,
-            //     backgroundImage: imageProvider,
-            //     backgroundColor: ManagerColors.white,
-            //   ),
-            //   errorWidget: (context, url, error) => CircleAvatar(
-            //     radius: ManagerRadius.r40,
-            //     backgroundColor: ManagerColors.white,
-            //   ),
-            // ),
-
-            SizedBox(width: ManagerWidth.w10),
-            Text(
-              '${ManagerStrings.theDriver}: $driverName',
-              style: TextStyle(
-                color: ManagerColors.white,
-                fontFamily: ManagerFontFamily.cairo,
-                fontWeight: ManagerFontWeight.bold,
-                fontSize: ManagerFontsSizes.f14,
-              ),
-            ),
-          ],
+        Divider(
+          color: context.theme.primaryColor,
+          height: ManagerHeight.h1,
         ),
-      ),
-      Divider(
-        color: ManagerColors.primaryColor,
-        height: ManagerHeight.h1,
-      ),
-      SizedBox(height: ManagerHeight.h15),
-      buttonOfMyDrawer(
-        onPressed: () {
-          if (isDriverHomeScreen) {
-            Get.back();
-          } else {
-            Get.offAndToNamed(Routes.driverHomeScreen);
+        verticalSpace(ManagerHeight.h15),
+        CustomButtonOfMainDrawer(
+          onPressed: () {
+            if (isDriverHomeScreen) {
+              Get.back();
+            } else {
+              context.popAndPushNamed(Routes.driverHomeScreen);
+              disposeDriverProfile();
+              disposeLogout();
+              disposeNotification();
+              disposeDrivingLicenseCard();
+              disposeListOfComplaints();
+              disposeViolationPayment();
+              disposeSearchOnResultsTestsOfLicense();
+            }
+          },
+          icon: ManagerAssets.homeIcon,
+          title: ManagerStrings.homePage,
+        ),
+        CustomButtonOfMainDrawer(
+          onPressed: () {
+            if (isProfileScreen) {
+              Get.back();
+            } else {
+              context.popAndPushNamed(Routes.driverProfileScreen);
+              disposeLogout();
+              disposeNotification();
+              disposeDrivingLicenseCard();
+              disposeListOfComplaints();
+              disposeViolationPayment();
+              disposeSearchOnResultsTestsOfLicense();
+              disposeDriverHome();
+            }
+          },
+          icon: ManagerAssets.userProfileIcon,
+          title: ManagerStrings.profile,
+        ),
+        CustomButtonOfMainDrawer(
+          onPressed: () {
+            if (isSearchOnResultsTestsOfLicenseScreen) {
+              Get.back();
+            } else {
+              context
+                  .popAndPushNamed(Routes.searchOnResultsTestsOfLicenseScreen);
+              disposeDriverProfile();
+              disposeNotification();
+              disposeLogout();
+              disposeDrivingLicenseCard();
+              disposeListOfComplaints();
+              disposeViolationPayment();
+              disposeDriverHome();
+            }
+          },
+          icon: ManagerAssets.resultOfTextLicenseIcon,
+          title: ManagerStrings.licenseTestResults,
+        ),
+        CustomButtonOfMainDrawer(
+          onPressed: () {
+            if (isPayViolationsScreen) {
+              Get.back();
+            } else {
+              context.popAndPushNamed(Routes.violationPaymentScreen);
+              disposeDriverProfile();
+              disposeLogout();
+              disposeNotification();
+              disposeDrivingLicenseCard();
+              disposeListOfComplaints();
+              disposeSearchOnResultsTestsOfLicense();
+              disposeDriverHome();
+            }
+          },
+          icon: ManagerAssets.paymentIcon,
+          title: ManagerStrings.payViolations,
+        ),
+        CustomButtonOfMainDrawer(
+          onPressed: () {
+            if (isListOfComplaintsScreen) {
+              Get.back();
+            } else {
+              context.popAndPushNamed(Routes.listOfComplaintsScreen);
+              disposeDriverProfile();
+              disposeLogout();
+              disposeNotification();
+              disposeDrivingLicenseCard();
+              disposeViolationPayment();
+              disposeSearchOnResultsTestsOfLicense();
+              disposeDriverHome();
+            }
+          },
+          icon: ManagerAssets.listOfComplaintsIcon,
+          title: ManagerStrings.listOfComplaints,
+        ),
+        CustomButtonOfMainDrawer(
+          onPressed: () {
+            if (isDrivingLicenseCardScreen) {
+              Get.back();
+            } else {
+              context.popAndPushNamed(Routes.drivingLicenseCardScreen);
+              disposeDriverProfile();
+              disposeLogout();
+              disposeNotification();
+              disposeListOfComplaints();
+              disposeViolationPayment();
+              disposeSearchOnResultsTestsOfLicense();
+              disposeDriverHome();
+            }
+          },
+          icon: ManagerAssets.drivingLicenseIcon,
+          title: ManagerStrings.electronicLicense,
+        ),
+        CustomButtonOfMainDrawer(
+          onPressed: () {
+            Get.toNamed(Routes.logoutScreen);
             disposeDriverProfile();
-            disposeLogout();
-            disposeNotification();
             disposeDrivingLicenseCard();
             disposeListOfComplaints();
             disposeViolationPayment();
-            disposeSearchOnResultsTestsOfLicense();
-          }
-        },
-        icon: ManagerAssets.homeIcon,
-        title: ManagerStrings.homePage,
-      ),
-      buttonOfMyDrawer(
-        onPressed: () {
-          if (isProfileScreen) {
-            Get.back();
-          } else {
-            Get.offAndToNamed(Routes.driverProfileScreen);
-            disposeLogout();
             disposeNotification();
-            disposeDrivingLicenseCard();
-            disposeListOfComplaints();
-            disposeViolationPayment();
             disposeSearchOnResultsTestsOfLicense();
             disposeDriverHome();
-          }
-        },
-        icon: ManagerAssets.userProfileIcon,
-        title: ManagerStrings.profile,
-      ),
-      buttonOfMyDrawer(
-        onPressed: () {
-          if (isSearchOnResultsTestsOfLicenseScreen) {
-            Get.back();
-          } else {
-            Get.offAndToNamed(Routes.searchOnResultsTestsOfLicenseScreen);
-            disposeDriverProfile();
-            disposeNotification();
-            disposeLogout();
-            disposeDrivingLicenseCard();
-            disposeListOfComplaints();
-            disposeViolationPayment();
-            disposeDriverHome();
-          }
-        },
-        icon: ManagerAssets.resultOfTextLicenseIcon,
-        title: ManagerStrings.licenseTestResults,
-      ),
-      buttonOfMyDrawer(
-        onPressed: () {
-          if (isPayViolationsScreen) {
-            Get.back();
-          } else {
-            Get.offAndToNamed(Routes.violationPaymentScreen);
-            disposeDriverProfile();
-            disposeLogout();
-            disposeNotification();
-            disposeDrivingLicenseCard();
-            disposeListOfComplaints();
-            disposeSearchOnResultsTestsOfLicense();
-            disposeDriverHome();
-          }
-        },
-        icon: ManagerAssets.paymentIcon,
-        title: ManagerStrings.payViolations,
-      ),
-      buttonOfMyDrawer(
-        onPressed: () {
-          if (isListOfComplaintsScreen) {
-            Get.back();
-          } else {
-            Get.offAndToNamed(Routes.listOfComplaintsScreen);
-            disposeDriverProfile();
-            disposeLogout();
-            disposeNotification();
-            disposeDrivingLicenseCard();
-            disposeViolationPayment();
-            disposeSearchOnResultsTestsOfLicense();
-            disposeDriverHome();
-          }
-        },
-        icon: ManagerAssets.listOfComplaintsIcon,
-        title: ManagerStrings.listOfComplaints,
-      ),
-      buttonOfMyDrawer(
-        onPressed: () {
-          if (isDrivingLicenseCardScreen) {
-            Get.back();
-          } else {
-            Get.offAndToNamed(Routes.drivingLicenseCardScreen);
-            disposeDriverProfile();
-            disposeLogout();
-            disposeNotification();
-            disposeListOfComplaints();
-            disposeViolationPayment();
-            disposeSearchOnResultsTestsOfLicense();
-            disposeDriverHome();
-          }
-        },
-        icon: ManagerAssets.drivingLicenseIcon,
-        title: ManagerStrings.electronicLicense,
-      ),
-      buttonOfMyDrawer(
-        onPressed: () {
-          Get.toNamed(Routes.logoutScreen, arguments: false);
-          disposeDriverProfile();
-          disposeDrivingLicenseCard();
-          disposeListOfComplaints();
-          disposeViolationPayment();
-          disposeNotification();
-          disposeSearchOnResultsTestsOfLicense();
-          disposeDriverHome();
-        },
-        icon: ManagerAssets.logoutIcon,
-        title: ManagerStrings.logout,
-      ),
-    ],
-  );
+          },
+          icon: ManagerAssets.logoutIcon,
+          title: ManagerStrings.logout,
+        ),
+      ],
+    );
+  }
 }

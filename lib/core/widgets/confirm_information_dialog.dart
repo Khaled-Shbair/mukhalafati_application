@@ -48,7 +48,7 @@ Future<void> confirmInformationDialog({
               children: [
                 Align(
                   alignment: Alignment.topRight,
-                  child: mainButton(
+                  child: CustomButton(
                     onPressed: cancelButton ?? () => Get.back(),
                     shape: const CircleBorder(),
                     height: ManagerHeight.h24,
@@ -87,12 +87,12 @@ Future<void> confirmInformationDialog({
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      mainButton(
+                      CustomButton(
                         onPressed: cancelButton ?? () => Get.back(),
                         borderRadius: ManagerRadius.r8,
                         height: ManagerHeight.h40,
                         minWidth: ManagerWidth.w85,
-                        color: ManagerColors.antiFlashWhite,
+                        backgroundColor: ManagerColors.antiFlashWhite,
                         side: BorderSide.none,
                         child: Text(
                           textCancelButton ?? ManagerStrings.back,
@@ -104,13 +104,13 @@ Future<void> confirmInformationDialog({
                           ),
                         ),
                       ),
-                      mainButton(
+                      CustomButton(
                         onPressed: () async {
                           Get.back();
                           if (confirmButton != null) {
                             confirmButton();
                           }
-                          await createdSuccessfullyDialog(
+                          await customCreatedSuccessfullyDialog(
                             context: context,
                             closeButton: closeButton,
                             text: text,

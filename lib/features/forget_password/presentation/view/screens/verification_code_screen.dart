@@ -40,7 +40,8 @@ class VerificationCodeScreen extends StatelessWidget {
               Text(
                 ManagerStrings.enterVerificationCode,
                 textAlign: TextAlign.center,
-                style: context.textTheme.titleMedium,
+                style: context.textTheme
+                    .titleForgotAndChangePasswordAndVerificationCodeScreens(context),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.only(
@@ -52,7 +53,8 @@ class VerificationCodeScreen extends StatelessWidget {
                 child: Text(
                   '${ManagerStrings.pleaseEnterTheConfirmationCodeSentToYourMobileNumber} $phoneNumber',
                   textAlign: TextAlign.center,
-                  style: context.textTheme.bodySmall,
+                  style: context.textTheme
+                      .subTitleForgotAndChangePasswordAndVerificationCodeScreens(context),
                 ),
               ),
               Row(
@@ -99,7 +101,7 @@ class VerificationCodeScreen extends StatelessWidget {
                 isIncorrect: controller.returnCodeIsInCorrect,
               ),
               verticalSpace(ManagerHeight.h10),
-              mainButton(
+              CustomButton(
                 onPressed: () => controller.verifyButton(
                   id,
                   isDriver,
@@ -108,7 +110,7 @@ class VerificationCodeScreen extends StatelessWidget {
                 ),
                 child: Text(
                   ManagerStrings.verify,
-                  style: context.textTheme.labelMedium,
+                  style: context.textTheme.mainButtonTextStyle(context),
                 ),
               ),
             ],

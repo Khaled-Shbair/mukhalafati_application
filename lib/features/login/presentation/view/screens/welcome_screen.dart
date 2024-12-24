@@ -21,13 +21,13 @@ class WelcomeScreen extends StatelessWidget {
               Text(
                 ManagerStrings.welcome,
                 textAlign: TextAlign.center,
-                style: context.textTheme.titleLarge,
+                style: context.textTheme.titleOnBoardingAndWelcomeAndLoginScreen(context),
               ),
               verticalSpace(ManagerHeight.h10),
               Text(
                 ManagerStrings.subTitleWelcome,
                 textAlign: TextAlign.center,
-                style: context.textTheme.bodyMedium,
+                style: context.textTheme.subTitleWelcomeAndLoginScreens(context),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.only(
@@ -36,11 +36,11 @@ class WelcomeScreen extends StatelessWidget {
                   bottom: ManagerHeight.h16,
                   top: ManagerHeight.h30,
                 ),
-                child: mainButton(
+                child: CustomButton(
                   onPressed: () => controller.loginButton(context),
                   child: Text(
                     ManagerStrings.login,
-                    style: context.textTheme.labelMedium,
+                    style: context.textTheme.mainButtonTextStyle(context),
                   ),
                 ),
               ),

@@ -23,16 +23,9 @@ class SearchForDriverController extends GetxController with Helpers {
 
   late int numberOfViolations;
 
-  late String policeName;
-  late String policeImage;
-
   @override
   void onInit() {
     super.onInit();
-    policeName =
-    '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
-    policeImage =
-        SharedPreferencesController.getString(SharedPreferencesKeys.image);
     licenseNumberController = TextEditingController();
   }
 
@@ -42,6 +35,7 @@ class SearchForDriverController extends GetxController with Helpers {
     super.onClose();
   }
 
+  /// Open [endDrawer], use this drawer as menu.
   void openEndDrawer() {
     if (scaffoldKey.currentState != null &&
         !scaffoldKey.currentState!.isEndDrawerOpen) {
@@ -49,17 +43,22 @@ class SearchForDriverController extends GetxController with Helpers {
     }
   }
 
-  void searchButton() async {
+  void searchButton(BuildContext context) async {
     loading = true;
     update();
     if (_checkData()) {
       (await _searchForDriverUseCase.execute(
         SearchForDriverInput(licenseNumber: licenseNumberController.text),
       ))
+
+          /// Failed request search for driver
           .fold(
         (l) {
-          showSnackBar(message: l.message);
+          /// Appear message of error in SnackBar to user
+          showSnackBar(message: l.message, context: context);
         },
+
+        /// Successfully request search for driver
         (r) {
           licenseNumber = r.licenseNumber;
           expiryDate = r.expiryDate;
@@ -74,12 +73,15 @@ class SearchForDriverController extends GetxController with Helpers {
         },
       );
     } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterLicenseNumber);
+      /// Appear message of error in SnackBar to user
+      showSnackBar(
+          message: ManagerStrings.pleaseEnterLicenseNumber, context: context);
     }
     loading = false;
     update();
   }
 
+  /// check inputs user data in not empty
   bool _checkData() {
     if (licenseNumberController.text.isNotEmpty) {
       return true;

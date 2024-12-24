@@ -7,8 +7,6 @@ class DriverViolationsController extends GetxController {
   final DriverViolationsUseCase _driverViolationsUseCase =
       instance<DriverViolationsUseCase>();
 
-  late String driverName;
-  late String driverImage;
   bool loading = false;
   String filter = ManagerStrings.filter;
 
@@ -28,15 +26,12 @@ class DriverViolationsController extends GetxController {
 
   @override
   void onInit() {
-    driverName =
-        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
-    driverImage =
-        SharedPreferencesController.getString(SharedPreferencesKeys.image);
     getDriverViolation();
     expansionTileController = ExpansionTileController();
     super.onInit();
   }
 
+  /// Open [endDrawer], use this drawer as menu.
   void openEndDrawer() {
     if (scaffoldKey.currentState != null &&
         !scaffoldKey.currentState!.isEndDrawerOpen) {

@@ -18,15 +18,9 @@ class CreateViolationController extends GetxController with Helpers {
   late TextEditingController placeOfViolation;
   late TextEditingController reasonForViolation;
   int _hour = 0;
-  late String policeName;
-  late String policeImage;
 
   @override
   void onInit() {
-    policeName =
-        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
-    policeImage =
-        SharedPreferencesController.getString(SharedPreferencesKeys.image);
     driverName = TextEditingController();
     driverIdNumber = TextEditingController();
     ownerName = TextEditingController();
@@ -130,7 +124,7 @@ class CreateViolationController extends GetxController with Helpers {
     }
   }
 
-  void createViolation(context) async {
+  void createViolation(BuildContext context) async {
     if (_checkDataViolation()) {
       (await _createViolationUseCase.execute(
         CreateViolationUseCaseInput(
@@ -152,7 +146,7 @@ class CreateViolationController extends GetxController with Helpers {
       ))
           .fold(
         (l) {
-          showSnackBar(message: l.message);
+          showSnackBar(message: l.message, context: context);
         },
         (r) async {
           await confirmInformationDialog(
@@ -163,7 +157,8 @@ class CreateViolationController extends GetxController with Helpers {
         },
       );
     } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+      showSnackBar(
+          message: ManagerStrings.pleaseEnterTheRequiredData, context: context);
     }
   }
 

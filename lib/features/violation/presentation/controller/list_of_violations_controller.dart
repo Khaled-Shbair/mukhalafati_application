@@ -8,9 +8,6 @@ class ListOfViolationsController extends GetxController {
   final ReasonOfViolationUseCase _reasonsOfViolationsUseCase =
       instance<ReasonOfViolationUseCase>();
 
-  late String policeName;
-
-  late String policeImage;
   bool loading = false;
 
   List<ViolationModel> data = <ViolationModel>[];
@@ -20,10 +17,6 @@ class ListOfViolationsController extends GetxController {
   void onInit() {
     super.onInit();
     _getReasonsOfViolations();
-    policeName =
-        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
-    policeImage =
-        SharedPreferencesController.getString(SharedPreferencesKeys.image);
   }
 
   void _getReasonsOfViolations() async {
@@ -38,6 +31,7 @@ class ListOfViolationsController extends GetxController {
     update();
   }
 
+  /// Open [endDrawer], use this drawer as menu.
   void openEndDrawer() {
     if (scaffoldKey.currentState != null &&
         !scaffoldKey.currentState!.isEndDrawerOpen) {

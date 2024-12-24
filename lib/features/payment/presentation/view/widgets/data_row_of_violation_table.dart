@@ -11,7 +11,7 @@ DataRow dataRowOfViolationTable({
     cells: [
       _myDataCell(numberOfRow),
       _myDataCell(date, ManagerWidth.w74),
-      _myDataCell('$priceشيكل', ManagerWidth.w80),
+      _myDataCell('$price ${ManagerStrings.shekel}', ManagerWidth.w80),
       DataCell(
         onTap: onTap,
         Container(
@@ -27,7 +27,7 @@ DataRow dataRowOfViolationTable({
             isPaid ? ManagerStrings.paid : ManagerStrings.unpaid,
             style: TextStyle(
               color: isPaid
-                  ? ManagerColors.mayGreen
+                  ? ManagerColors.successColor
                   : ManagerColors.bittersweetShimmer,
               fontFamily: ManagerFontFamily.cairo,
               fontSize: ManagerFontsSizes.f9, //12

@@ -33,11 +33,14 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
               verticalSpace(ManagerHeight.h50),
               Text(
-                  isDriver
-                      ? ManagerStrings.enterLicenseNumber
-                      : ManagerStrings.enterTheJobNumber,
-                  textAlign: TextAlign.center,
-                  style: context.textTheme.titleMedium),
+                isDriver
+                    ? ManagerStrings.enterLicenseNumber
+                    : ManagerStrings.enterTheJobNumber,
+                textAlign: TextAlign.center,
+                style: context.textTheme
+                    .titleForgotAndChangePasswordAndVerificationCodeScreens(
+                        context),
+              ),
               Padding(
                 padding: EdgeInsetsDirectional.only(
                   top: ManagerHeight.h8,
@@ -52,23 +55,24 @@ class ForgotPasswordScreen extends StatelessWidget {
                       : ManagerStrings
                           .pleaseEnterYourJobNumberToRecoverYourPassword,
                   textAlign: TextAlign.center,
-                  style: context.textTheme.bodySmall,
+                  style: context.textTheme
+                      .subTitleForgotAndChangePasswordAndVerificationCodeScreens(
+                          context),
                 ),
               ),
-              MainTextField(
-                controller:
-                    isDriver ? controller.licenseNumber : controller.jobNumber,
+              CustomTextField(
+                controller: controller.inputNumber,
                 labelText: isDriver
                     ? ManagerStrings.licenseNumber
                     : ManagerStrings.jobNumber,
                 maxLength: AppConstants.maxLengthOfLicenseNumber,
               ),
               verticalSpace(ManagerHeight.h24),
-              mainButton(
+              CustomButton(
                 onPressed: () => controller.sendButton(isDriver, context),
                 child: Text(
                   ManagerStrings.send,
-                  style: context.textTheme.labelMedium,
+                  style: context.textTheme.mainButtonTextStyle(context),
                 ),
               ),
             ],
