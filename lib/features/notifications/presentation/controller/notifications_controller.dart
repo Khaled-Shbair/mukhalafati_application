@@ -2,12 +2,6 @@ import '/config/all_imports.dart';
 
 class NotificationsController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
-  final NotificationsDatabaseController _notificationsDatabase =
-      NotificationsDatabaseController();
-  late String driverName;
-  late String driverImage;
 
   // int unReadMessagesNumber = 4;
   bool loading = false;
@@ -17,9 +11,6 @@ class NotificationsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    driverName =
-        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
-    driverImage = _sharedPreferences.getImage();
     getNotifications();
   }
 
@@ -29,13 +20,21 @@ class NotificationsController extends GetxController {
   }
 
   void deleteNotifications() async {
-    confirmInformationDialog(
+    customConfirmInformationDialog(
       title: ManagerStrings.doYouWantToDeleteAllNotifications,
       text: ManagerStrings.notificationsSuccessfullyDeleted,
       textConfirmButton: ManagerStrings.yes,
       textCancelButton: ManagerStrings.no,
       confirmButton: () async {
-        _notificationsDatabase.clear();
+        // await customCreatedSuccessfullyDialog(
+        //   context: context,
+        //   closeButton: () {
+        //     context
+        //         .pushNamedAndRemoveAllUntil(Routes.policeManHomeScreen);
+        //     disposeCreateViolation();
+        //   },
+        //   text: ManagerStrings.theViolationWasSuccessfullyCreated,
+        // );
       },
       closeButton: () async {
         getNotifications();
@@ -57,13 +56,13 @@ class NotificationsController extends GetxController {
     notifications[index].boxColor = ManagerColors.primaryColor;
     notifications[index].textColor = ManagerColors.white;
     notifications[index].timeColor = ManagerColors.white80;
-    confirmInformationDialog(
+    customConfirmInformationDialog(
       title: ManagerStrings.doYouWantToDeleteNotification,
       text: ManagerStrings.notificationSuccessfullyDeleted,
       textConfirmButton: ManagerStrings.yes,
       textCancelButton: ManagerStrings.no,
       confirmButton: () {
-        _notificationsDatabase.delete(notificationId);
+        // _notificationsDatabase.delete(notificationId);
       },
       closeButton: () {
         getNotifications();
@@ -84,7 +83,7 @@ class NotificationsController extends GetxController {
 
   void getNotifications() async {
     loading = true;
-    notifications = await _notificationsDatabase.read();
+    // notifications = await _notificationsDatabase.read();
     loading = false;
     update();
   }

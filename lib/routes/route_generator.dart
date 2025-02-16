@@ -3,9 +3,6 @@ import '/config/all_imports.dart';
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
-      case Routes.splashScreen:
-        initSplash();
-        return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.onBoardingScreen:
         initOnBoarding();
         return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
@@ -18,6 +15,34 @@ class RouteGenerator {
       case Routes.logoutScreen:
         initLogout();
         return MaterialPageRoute(builder: (_) => const LogoutScreen());
+      case Routes.forgetPasswordScreen:
+        initForgotPassword();
+        final isDriver = settings.arguments as bool;
+        return MaterialPageRoute(
+            builder: (_) => ForgotPasswordScreen(isDriver: isDriver));
+      case Routes.verificationCodeScreen:
+        initVerificationCode();
+        final args = settings.arguments as List;
+        final phoneNumber = args[0] as String;
+        final id = args[1] as int;
+        final isDriver = args[2] as bool;
+        final verificationId  = args[3] as String;
+        return MaterialPageRoute(
+          builder: (_) => VerificationCodeScreen(
+            phoneNumber: phoneNumber,
+            id: id,
+            isDriver: isDriver,
+            verificationCode: verificationId,
+          ),
+        );
+
+      case Routes.changePasswordScreen:
+        initChangePassword();
+        final args = settings.arguments as List;
+        final isDriver = args[0] as bool;
+        final id = args[1] as int;
+        return MaterialPageRoute(
+            builder: (_) => ChangePasswordScreen(id: id, isDriver: isDriver));
       case Routes.driverHomeScreen:
         initDriverHome();
         return MaterialPageRoute(builder: (_) => const DriverHomeScreen());
@@ -34,7 +59,7 @@ class RouteGenerator {
       case Routes.violationPaymentScreen:
         initViolationPayment();
         return MaterialPageRoute(
-            builder: (_) => const ViolationPaymentScreen());
+            builder: (_) => const DriverViolationsScreen());
       case Routes.searchForDriverScreen:
         initSearchForDriver();
         return MaterialPageRoute(builder: (_) => const SearchForDriverScreen());
@@ -50,21 +75,7 @@ class RouteGenerator {
         initListOfComplaints();
         return MaterialPageRoute(
             builder: (_) => const ListOfComplaintsScreen());
-      case Routes.forgetDriverPasswordScreen:
-        initForgotPasswordForDriver();
-        return MaterialPageRoute(
-            builder: (_) => const ForgotPasswordForDriverScreen());
-      case Routes.forgetPoliceManPasswordScreen:
-        initForgotPasswordForPoliceMan();
-        return MaterialPageRoute(
-            builder: (_) => const ForgotPasswordForPoliceManScreen());
-      case Routes.changePasswordScreen:
-        initChangePassword();
-        final args = settings.arguments as List;
-        final isDriver = args[0] as bool;
-        final id = args[1] as int;
-        return MaterialPageRoute(
-            builder: (_) => ChangePasswordScreen(id: id, isDriver: isDriver));
+
       case Routes.driverProfileScreen:
         initDriverProfile();
         return MaterialPageRoute(builder: (_) => const DriverProfileScreen());
@@ -78,21 +89,7 @@ class RouteGenerator {
                   priceOfViolation: priceOfViolation,
                   violationId: violationId,
                 ));
-      case Routes.verificationCodeScreen:
-        initVerificationCode();
-        final args = settings.arguments as List;
-        final phoneNumber = args[0] as String;
-        final id = args[1] as int;
-        final isDriver = args[2] as bool;
-        final verificationCode = args[3] as int;
-        return MaterialPageRoute(
-          builder: (_) => VerificationCodeScreen(
-            phoneNumber: phoneNumber,
-            id: id,
-            isDriver: isDriver,
-            verificationCode: verificationCode,
-          ),
-        );
+
       case Routes.notificationScreen:
         initNotification();
         return MaterialPageRoute(builder: (_) => const NotificationsScreen());

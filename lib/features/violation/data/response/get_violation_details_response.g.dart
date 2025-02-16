@@ -1,0 +1,43 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'get_violation_details_response.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+GetViolationDetailsResponse _$GetViolationDetailsResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetViolationDetailsResponse(
+      vehicleNumber: json['vehicle_number'] as String?,
+      vehicleType: json['vehicle_type'] as String?,
+      vehicleColor: json['vehicle_color'] as String?,
+      violationAddress: json['violation_address'] as String?,
+      violationReason: json['violation_reason'] as String?,
+      driverIdNumber: json['driver_id_number'] as String?,
+      violationTime: json['violation_time'] as String?,
+      violationDate: json['violation_date'] as String?,
+      policeName: json['police_name'] as String?,
+      driverName: json['driver_name'] as String?,
+      ownerIdNumber: json['owner_id_number'] as String?,
+      ownerName: json['owner_name'] as String?,
+      id: (json['id'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$GetViolationDetailsResponseToJson(
+        GetViolationDetailsResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'owner_name': instance.ownerName,
+      'owner_id_number': instance.ownerIdNumber,
+      'driver_name': instance.driverName,
+      'police_name': instance.policeName,
+      'violation_date': instance.violationDate,
+      'violation_time': instance.violationTime,
+      'driver_id_number': instance.driverIdNumber,
+      'violation_reason': instance.violationReason,
+      'violation_address': instance.violationAddress,
+      'vehicle_color': instance.vehicleColor,
+      'vehicle_type': instance.vehicleType,
+      'vehicle_number': instance.vehicleNumber,
+    };

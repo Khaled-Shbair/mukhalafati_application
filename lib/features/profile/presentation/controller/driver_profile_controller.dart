@@ -1,44 +1,43 @@
 import '/config/all_imports.dart';
 
-class DriverProfileController extends GetxController {
+class DriverProfileController extends GetxController with CustomToast {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
-
-  late String driverName;
+  final _useCase = instance<SendRequestUpdateProfileUseCase>();
+  final _sharedPrefController = instance<SharedPreferencesController>();
 
   late String driverImage;
 
-  late TextEditingController driverNameController;
-  late TextEditingController phoneNumberController;
-  late TextEditingController idNumberController;
-  late TextEditingController licenceNumberController;
+  late TextEditingController driverName;
+  late TextEditingController driverPhone;
+  late TextEditingController driverId;
+  late TextEditingController licenceNumber;
 
   @override
   void onInit() {
     super.onInit();
-    driverName =
-        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
-    driverImage = _sharedPreferences.getImage();
-    driverNameController =
-        TextEditingController(text: _sharedPreferences.getFullNameAr());
-    phoneNumberController =
-        TextEditingController(text: _sharedPreferences.getPhoneNumber());
-    idNumberController =
-        TextEditingController(text: _sharedPreferences.getIdNumber());
-    licenceNumberController =
-        TextEditingController(text: _sharedPreferences.getLicenseOrJobNumber());
+    driverImage = _sharedPrefController.getString(SharedPreferencesKeys.image);
+    driverName = TextEditingController(
+        text: _sharedPrefController.getString(SharedPreferencesKeys.nameAr));
+    driverPhone = TextEditingController(
+        text:
+            _sharedPrefController.getString(SharedPreferencesKeys.phoneNumber));
+    driverId = TextEditingController(
+        text: _sharedPrefController.getString(SharedPreferencesKeys.idNumber));
+    licenceNumber = TextEditingController(
+        text: _sharedPrefController
+            .getString(SharedPreferencesKeys.licenseOrJobNumber));
   }
 
   @override
-  void dispose() {
-    driverNameController.dispose();
-    phoneNumberController.dispose();
-    idNumberController.dispose();
-    licenceNumberController.dispose();
-    super.dispose();
+  void onClose() {
+    driverName.dispose();
+    driverPhone.dispose();
+    driverId.dispose();
+    licenceNumber.dispose();
+    super.onClose();
   }
 
+  /// Open [endDrawer], use this drawer as menu.
   void openEndDrawer() {
     if (scaffoldKey.currentState != null &&
         !scaffoldKey.currentState!.isEndDrawerOpen) {
@@ -46,32 +45,67 @@ class DriverProfileController extends GetxController {
     }
   }
 
-  void updateDataButton() {
+  /// Driver send request to update profile data when see error in data
+  void updateDataButton(BuildContext context) async {
     if (_checkDataDriver()) {
-      createdSuccessfullyDialog(
-        closeButton: () {
-          disposeDriverProfile();
-          Get.offAllNamed(Routes.driverHomeScreen);
+      (await _useCase.execute(
+        SendRequestUpdateProfileInput(
+            phoneNumber: driverPhone.text,
+            idNumber: driverId.text,
+            driverId:
+                _sharedPrefController.getInt(SharedPreferencesKeys.userId),
+            name: driverName.text,
+            licenseNumber: licenceNumber.text),
+      ))
+          .fold(
+        /// Failed request update profile
+        (l) {
+          /// Appear message of error in SnackBar to user
+          showToast(message: l.message, context: context);
         },
-        context: Get.context!,
-        text: ManagerStrings.yourUpdateRequestHasBeenSubmittedSuccessfully,
-        startPaddingText: ManagerWidth.w28,
-        endPaddingText: ManagerWidth.w28,
-        fontSizeText: ManagerFontsSizes.f16,
+
+        /// Successfully request update profile
+
+        (r) {
+          customCreatedSuccessfullyDialog(
+            closeButton: () {
+              /// Remove driver profile controller form memory
+              disposeDriverProfile();
+
+              /// Navigate to driver home screen
+              Get.offAllNamed(Routes.driverHomeScreen);
+            },
+            context: Get.context!,
+            text: ManagerStrings.yourUpdateRequestHasBeenSubmittedSuccessfully,
+            startPaddingText: ManagerWidth.w28,
+            endPaddingText: ManagerWidth.w28,
+          );
+        },
       );
-    } else {}
+    } else {
+      /// Appear message of error in SnackBar to user
+      showToast(
+          message: ManagerStrings.pleaseEnterDataThisNeedUpdated,
+          context: context);
+    }
   }
 
+  /// check inputs user data in not empty and not similar previous data
   bool _checkDataDriver() {
-    if (driverNameController.text.isNotEmpty &&
-            phoneNumberController.text.isNotEmpty &&
-            idNumberController.text.isNotEmpty &&
-            licenceNumberController.text.isNotEmpty &&
-            driverNameController.text != _sharedPreferences.getFullNameAr() ||
-        phoneNumberController.text != _sharedPreferences.getPhoneNumber() ||
-        idNumberController.text != _sharedPreferences.getIdNumber() ||
-        licenceNumberController.text !=
-            _sharedPreferences.getLicenseOrJobNumber()) {
+    if (driverName.text.isNotEmpty &&
+            driverPhone.text.isNotEmpty &&
+            driverId.text.isNotEmpty &&
+            licenceNumber.text.isNotEmpty &&
+            driverName.text !=
+                _sharedPrefController.getString(SharedPreferencesKeys.nameAr) ||
+        driverPhone.text !=
+            _sharedPrefController
+                .getString(SharedPreferencesKeys.phoneNumber) ||
+        driverId.text !=
+            _sharedPrefController.getString(SharedPreferencesKeys.idNumber) ||
+        licenceNumber.text !=
+            _sharedPrefController
+                .getString(SharedPreferencesKeys.licenseOrJobNumber)) {
       return true;
     } else {
       return false;

@@ -1,12 +1,16 @@
 import '/config/all_imports.dart';
 
 class OnBoardingController extends GetxController {
-  final AppSettingsSharedPreferences _appSettingsSharedPreferences =
-      instance<AppSettingsSharedPreferences>();
   late PageController pageController;
+  final _sharedPreferencesController = instance<SharedPreferencesController>();
+
+  //Current page
   int currentPage = 0;
+
+  //Value of indicator widget
   double valueOfIndicator = 0.3;
-  bool appearSkipButton = true;
+
+  //List to save pages of onboarding screens
   List<PageViewContent> pageViewItems = [
     PageViewContent(
       image: ManagerAssets.onBoardingOne,
@@ -31,25 +35,21 @@ class OnBoardingController extends GetxController {
     pageController = PageController();
   }
 
+  /// This function check if this page is last page in OnBoarding screens
   bool _isLastPage() => currentPage == pageViewItems.length - 1;
 
+  /// This function check if this page is not first page in OnBoarding pages
   bool isNotFirstPage() => currentPage != 0;
 
-  void _changeStateOfSkipButton() {
-    if (_isLastPage()) {
-      appearSkipButton = false;
-    } else {
-      appearSkipButton = true;
-    }
-  }
-
+  /// This function to change a value the page that go to it
   void changeCurrentPage(int page) {
     currentPage = page;
     _valueOfIndicator();
-    _changeStateOfSkipButton();
     update();
   }
 
+  /// This function to change a value of indicator when move between pages
+  /// (as animation)
   void _valueOfIndicator() {
     if (currentPage == 0) {
       valueOfIndicator = 0.30;
@@ -60,10 +60,10 @@ class OnBoardingController extends GetxController {
     }
   }
 
-  void nextPage() {
+  /// This function to move between pages of onBoarding screen
+  void nextPage(BuildContext context) {
     if (_isLastPage()) {
-      _moveToWelcomeScreen();
-      _appSettingsSharedPreferences.setOnBoardingViewed();
+      _moveToWelcomeScreen(context);
     } else {
       pageController.nextPage(
         duration: const Duration(seconds: 1),
@@ -73,33 +73,34 @@ class OnBoardingController extends GetxController {
     update();
   }
 
-  void _moveToWelcomeScreen() {
-    createDoctorAccount();
-    createSajaAccount();
-    createMalakAccount();
-    createGeneenAccount();
-    createShahedAccount();
-    createPoliceAccount();
-    createTest();
-    createViolations();
-    createNotifications();
-    Get.offAllNamed(Routes.welcomeScreen);
+  /// This function transitions the user to the Welcome screen after
+  /// completing the OnBoarding.
+  void _moveToWelcomeScreen(BuildContext context) {
+    /// It sets the default language to Arabic.
+    _saveLanguage(LocaleConstants.arabicLanguage);
+
+    /// Move to (Welcome Screen) and remove all previous screens
+    context.pushNamedAndRemoveAllUntil(Routes.welcomeScreen);
+
+    /// It sets marks the OnBoarding screen as completed, ensuring it will not
+    /// appear again on subsequent app launches.
+    _saveOnBoardingViewed();
+
+    /// Dispose OnBoarding controller form memory
+    disposeOnBoarding();
   }
 
-// void skip() {
-//   pageController.animateToPage(
-//     2,
-//     duration: const Duration(seconds: 1),
-//     curve: Curves.easeInCubic,
-//   );
-//   update();
-// }
+  _saveOnBoardingViewed() async {
+    await _sharedPreferencesController.setData(
+      SharedPreferencesKeys.viewOnBoarding,
+      true,
+    );
+  }
 
-// void previousPage() {
-//   pageController.previousPage(
-//     duration: const Duration(seconds: 1),
-//     curve: Curves.easeInCubic,
-//   );
-//   update();
-// }
+  _saveLanguage(String language) async {
+    await _sharedPreferencesController.setData(
+      SharedPreferencesKeys.language,
+      language,
+    );
+  }
 }

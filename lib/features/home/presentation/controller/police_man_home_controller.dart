@@ -1,74 +1,90 @@
 import '/config/all_imports.dart';
 
 class PoliceManHomeController extends GetxController
-    with GetSingleTickerProviderStateMixin {
-  late PageController pageController;
-  late TooltipBehavior tooltipBehavior;
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
-  final ViolationsDatabaseController _violationsDatabase =
-      ViolationsDatabaseController();
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  late String policeName;
+    with GetSingleTickerProviderStateMixin, CustomToast {
+  final _sharedPref = instance<SharedPreferencesController>();
+  final _homePoliceManUseCase = instance<HomePoliceManUseCase>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  HomePoliceManModel? _homeData;
 
-  late String policeImage;
+  late PageController _pageController;
+  late TooltipBehavior _tooltipBehavior;
+  bool _loading = false;
+  int _currentPage = 0;
+  String _policeFirstName = '';
+  String _policeImage = '';
+  String currentMonth = FormatDateAndTimeHelper.currentMonth;
+  String currentDay = FormatDateAndTimeHelper.currentDay;
+  String _welcome = ManagerStrings.goodMorning;
 
-  late String policeFirstName;
-  int currentPage = 0;
+  bool _isSelectedButtonWeeklyViolations = true;
+  bool _isSelectedButtonMonthlyViolations = false;
 
-  late String totalViolations;
+  bool get isSelectedButtonWeeklyViolations =>
+      _isSelectedButtonWeeklyViolations;
 
-  String welcome = ManagerStrings.goodMorning;
+  bool get loading => _loading;
 
-  String highestViolationsInMonth = 'يناير';
-  String highestViolationsInWeek = ManagerStrings.saturday;
+  HomePoliceManModel? get homeData => _homeData;
 
-  bool isSelectedButtonWeeklyViolations = true;
-  bool isSelectedButtonMonthlyViolations = false;
+  bool get isSelectedButtonMonthlyViolations =>
+      _isSelectedButtonMonthlyViolations;
+
+  String get welcome => _welcome;
+
+  String get policeFirstName => _policeFirstName;
+
+  String get policeImage => _policeImage;
+
+  TooltipBehavior get tooltipBehavior => _tooltipBehavior;
+
+  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
+
+  PageController get pageController => _pageController;
 
   @override
   void onInit() async {
     super.onInit();
-    getTotalViolationsFromDatabase();
-    policeFirstName = _sharedPreferences.getFirstName();
-    policeName =
-        '${_sharedPreferences.getFirstName()} ${_sharedPreferences.getLastName()}';
-    policeImage = _sharedPreferences.getImage();
-    changeWelcome();
+    _policeImage = _sharedPref.getString(SharedPreferencesKeys.image);
+    _policeFirstName = FormatNameHelper.firstNameAr(
+        _sharedPref.getString(SharedPreferencesKeys.nameAr));
 
-    pageController = PageController();
-    tooltipBehavior = TooltipBehavior(enable: true);
-    s();
+    getHomePoliceManData();
+    getTotalViolationsFromDatabase();
+    changeWelcome();
+    _pageController = PageController();
+    _tooltipBehavior = TooltipBehavior(enable: true);
+  }
+
+  /// Open [endDrawer], use this drawer as menu.
+  void openEndDrawer() {
+    if (_scaffoldKey.currentState != null &&
+        !_scaffoldKey.currentState!.isEndDrawerOpen) {
+      _scaffoldKey.currentState!.openEndDrawer();
+    }
   }
 
   void getTotalViolationsFromDatabase() {
-    totalViolations = _violationsDatabase
-        .totalViolationsOfPolice(_sharedPreferences.getUserId())
-        .toString();
+    // totalViolations = _violationsDatabase
+    //     .totalViolationsOfPolice(_sharedPreferences.getUserId())
+    //     .toString();
   }
 
+  /// Change the hello word based on time [goodEvening] and [goodMorning]
   void changeWelcome() {
     if (DateTime.now().hour >= 12) {
-      welcome = ManagerStrings.goodEvening;
+      _welcome = ManagerStrings.goodEvening;
     } else {
-      welcome = ManagerStrings.goodMorning;
+      _welcome = ManagerStrings.goodMorning;
     }
     update();
   }
 
-  void openEndDrawer() {
-    if (scaffoldKey.currentState != null &&
-        !scaffoldKey.currentState!.isEndDrawerOpen) {
-      scaffoldKey.currentState!.openEndDrawer();
-    }
-  }
-
   void buttonWeeklyViolations() {
-    if (currentPage == 1) {
-      isSelectedButtonMonthlyViolations = false;
-      isSelectedButtonWeeklyViolations = true;
-      s();
-      pageController.previousPage(
+    if (_currentPage == 1) {
+      _isSelectedButtonMonthlyViolations = false;
+      _isSelectedButtonWeeklyViolations = true;
+      _pageController.previousPage(
         duration: const Duration(seconds: 1),
         curve: Curves.fastLinearToSlowEaseIn,
       );
@@ -77,11 +93,10 @@ class PoliceManHomeController extends GetxController
   }
 
   void buttonMonthlyViolations() {
-    if (currentPage == 0) {
-      isSelectedButtonMonthlyViolations = true;
-      isSelectedButtonWeeklyViolations = false;
-      s();
-      pageController.nextPage(
+    if (_currentPage == 0) {
+      _isSelectedButtonMonthlyViolations = true;
+      _isSelectedButtonWeeklyViolations = false;
+      _pageController.nextPage(
         duration: const Duration(seconds: 1),
         curve: Curves.fastLinearToSlowEaseIn,
       );
@@ -90,56 +105,21 @@ class PoliceManHomeController extends GetxController
   }
 
   void onPageChanged(int page) {
-    currentPage = page;
+    _currentPage = page;
     update();
   }
 
-  void s() {
-    // for (int x = 0; x < monthlyViolations.length; x++) {
-    //   totalViolations =
-    //       '${monthlyViolations[x].y + monthlyViolations[x + 1].y}';
-    // }
+  void getHomePoliceManData() async {
+    _loading = true;
+    (await _homePoliceManUseCase.execute()).fold(
+      (l) {
+        showToast(message: l.message, context: Get.context!);
+      },
+      (r) {
+        _homeData = r;
+      },
+    );
+    _loading = false;
+    update();
   }
-
-  List weeklyViolations = <BarChartData>[
-    BarChartData(ManagerStrings.saturday, 10),
-    BarChartData(ManagerStrings.sunday, 20),
-    BarChartData(ManagerStrings.monday, 30),
-    BarChartData(ManagerStrings.tuesday, 40),
-    BarChartData(ManagerStrings.wednesday, 50),
-    BarChartData(ManagerStrings.thursday, 50),
-  ];
-
-  List monthlyViolations = <BarChartData>[
-    BarChartData(AppConstants.one, 10),
-    BarChartData(AppConstants.two, 20),
-    BarChartData(AppConstants.three, 30),
-    BarChartData(AppConstants.four, 40),
-    BarChartData(AppConstants.five, 50),
-    BarChartData(AppConstants.sex, 60),
-    BarChartData(AppConstants.seven, 70),
-    BarChartData(AppConstants.eight, 80),
-    BarChartData(AppConstants.nine, 90),
-    BarChartData(AppConstants.three, 100),
-    BarChartData(AppConstants.eleven, 110),
-    BarChartData(AppConstants.twelve, 120),
-  ];
-
-//////////////////////////
-// void image(int? noteId) async {
-//   final picker = ImagePicker();
-//   final imageFile = await picker.pickImage(
-//     source: ImageSource.camera,
-//     maxHeight: 600,
-//   );
-//   if (imageFile != null) {
-//     _file = File(imageFile.path);
-//   }
-//   Directory directory = await getApplicationDocumentsDirectory();
-//   final fileName = path.basename(imageFile!.path);
-//   _saveImage = await _file!.copy('${directory.path}/$fileName');
-//   _save(noteId);
-// }
-
-//   void returnImage(int noteId) => _imagesNote.value = _allImagesNotes.where((image) => image.noteId == noteId).toList();
 }

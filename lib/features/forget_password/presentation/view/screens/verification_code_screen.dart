@@ -2,16 +2,16 @@ import '/config/all_imports.dart';
 
 class VerificationCodeScreen extends StatelessWidget {
   const VerificationCodeScreen({
-    required this.phoneNumber,
     required this.id,
-    required this.verificationCode,
     required this.isDriver,
+    required this.phoneNumber,
+    required this.verificationCode,
     super.key,
   });
 
   final String phoneNumber;
   final int id;
-  final int verificationCode;
+  final String verificationCode;
   final bool isDriver;
 
   @override
@@ -31,32 +31,17 @@ class VerificationCodeScreen extends StatelessWidget {
             padding: EdgeInsetsDirectional.only(
               start: ManagerWidth.w28,
               end: ManagerWidth.w28,
-              top: ManagerHeight.h64,
+              top: ManagerHeight.h40,
             ),
             children: [
-              Visibility(
-                visible: controller.returnCodeIsInCorrect,
-                replacement: SvgPicture.asset(
-                  ManagerAssets.verificationImage,
-                  height: ManagerHeight.h203,
-                  width: ManagerWidth.w290,
-                ),
-                child: Image.asset(
-                  ManagerAssets.inputIncorrect,
-                  height: ManagerHeight.h185,
-                  width: ManagerWidth.w187,
-                ),
-              ),
-              SizedBox(height: ManagerHeight.h30),
+              CustomVerificationImage(
+                  isIncorrect: controller.returnCodeIsInCorrect),
+              verticalSpace(ManagerHeight.h30),
               Text(
                 ManagerStrings.enterVerificationCode,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: ManagerColors.black,
-                  fontFamily: ManagerFontFamily.cairo,
-                  fontWeight: ManagerFontWeight.bold,
-                  fontSize: ManagerFontsSizes.f15,
-                ),
+                style: context.textTheme
+                    .titleForgotAndChangePasswordAndVerificationCodeScreens(context),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.only(
@@ -68,72 +53,64 @@ class VerificationCodeScreen extends StatelessWidget {
                 child: Text(
                   '${ManagerStrings.pleaseEnterTheConfirmationCodeSentToYourMobileNumber} $phoneNumber',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    height: 2,
-                    color: ManagerColors.davyGrey,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.medium,
-                    fontSize: ManagerFontsSizes.f15,
-                  ),
+                  style: context.textTheme
+                      .subTitleForgotAndChangePasswordAndVerificationCodeScreens(context),
                 ),
               ),
               Row(
                 children: [
-                  filedOfVerificationCode(
+                  CustomFiledOfVerificationCode(
                     controller: controller.oneNumberOfCode,
                     focusNode: controller.oneFocusNode,
                     onChanged: (value) => controller.onChangeOneFiled(value),
                     changeBorderColor: controller.changeBorderColorOneFiled,
                   ),
-                  filedOfVerificationCode(
+                  CustomFiledOfVerificationCode(
                     controller: controller.twoNumberOfCode,
                     focusNode: controller.twoFocusNode,
                     onChanged: (value) => controller.onChangeTwoFiled(value),
                     changeBorderColor: controller.changeBorderColorTwoFiled,
                   ),
-                  filedOfVerificationCode(
+                  CustomFiledOfVerificationCode(
                     controller: controller.threeNumberOfCode,
                     focusNode: controller.threeFocusNode,
                     onChanged: (value) => controller.onChangeThreeFiled(value),
                     changeBorderColor: controller.changeBorderColorThreeFiled,
                   ),
-                  filedOfVerificationCode(
+                  CustomFiledOfVerificationCode(
                     controller: controller.fourNumberOfCode,
                     focusNode: controller.fourFocusNode,
                     onChanged: (value) => controller.onChangeFourFiled(value),
                     changeBorderColor: controller.changeBorderColorFourFiled,
                   ),
+                  CustomFiledOfVerificationCode(
+                    controller: controller.fiveNumberOfCode,
+                    focusNode: controller.fiveFocusNode,
+                    onChanged: (value) => controller.onChangeFiveFiled(value),
+                    changeBorderColor: controller.changeBorderColorFiveFiled,
+                  ),
+                  CustomFiledOfVerificationCode(
+                    controller: controller.sexNumberOfCode,
+                    focusNode: controller.sexFocusNode,
+                    onChanged: (value) => controller.onChangeSexFiled(value),
+                    changeBorderColor: controller.changeBorderColorSexFiled,
+                  ),
                 ],
               ),
-              Visibility(
-                visible: controller.returnCodeIsInCorrect,
-                maintainState: true,
-                maintainAnimation: true,
-                maintainSize: true,
-                maintainInteractivity: true,
-                maintainSemantics: true,
-                child: Text(
-                  ManagerStrings.theEnteredCodeIsIncorrect,
-                  style: TextStyle(
-                    color: ManagerColors.bittersweetShimmer,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.medium,
-                    fontSize: ManagerFontsSizes.f12,
-                  ),
-                ),
+              CustomIncorrectEnteredCodeMessage(
+                isIncorrect: controller.returnCodeIsInCorrect,
               ),
-              SizedBox(height: ManagerHeight.h10),
-              mainButton(
-                onPressed: () =>
-                    controller.verifyButton(id, isDriver, verificationCode),
+              verticalSpace(ManagerHeight.h10),
+              CustomButton(
+                onPressed: () => controller.verifyButton(
+                  id,
+                  isDriver,
+                  verificationCode,
+                  context,
+                ),
                 child: Text(
                   ManagerStrings.verify,
-                  style: TextStyle(
-                    color: ManagerColors.white,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.bold,
-                    fontSize: ManagerFontsSizes.f16,
-                  ),
+                  style: context.textTheme.mainButtonTextStyle(context),
                 ),
               ),
             ],

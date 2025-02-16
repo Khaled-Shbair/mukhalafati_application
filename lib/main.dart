@@ -1,8 +1,12 @@
 import 'config/all_imports.dart';
+import 'package:device_preview/device_preview.dart';
 
 void main() async {
   await initModule();
-  runApp(const MyApp());
+  runApp(
+    MyApp(),
+    // DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,28 +23,12 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, child) {
         return GetMaterialApp(
-          theme: ThemeData(
-            scaffoldBackgroundColor: ManagerColors.white,
-            useMaterial3: true,
-            appBarTheme: AppBarTheme(
-              centerTitle: true,
-              surfaceTintColor: ManagerColors.white,
-              backgroundColor: ManagerColors.white,
-              titleTextStyle: TextStyle(
-                color: ManagerColors.black,
-                fontFamily: ManagerFontFamily.cairo,
-                fontWeight: ManagerFontWeight.bold,
-                fontSize: ManagerFontsSizes.f17,
-              ),
-              iconTheme: IconThemeData(
-                color: ManagerColors.primaryColor,
-                size: ManagerIconsSizes.i20,
-              ),
-            ),
-          ),
+          themeMode: ThemeService.themeMode,
+          theme: ThemeService.themeData,
+          darkTheme: ThemeService.darkTheme,
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.splashScreen,
           onGenerateRoute: RouteGenerator.getRoute,
+          initialRoute: RouteMiddleware.initialRoute(),
           translations: Translation(),
           locale: const Locale(LocaleConstants.arabicLanguage),
           fallbackLocale: const Locale(LocaleConstants.arabicLanguage),

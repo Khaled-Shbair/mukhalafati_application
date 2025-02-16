@@ -8,6 +8,7 @@ TableRow rowOfTable({
   String? dataRowTwo,
   bool isRow = false,
   bool isName = false,
+  required BuildContext context,
 }) {
   return TableRow(
     children: [
@@ -25,16 +26,24 @@ TableRow rowOfTable({
                   RichText(
                     text: _myTextSpan(
                       data: '$nameRow: ',
+                      context: context,
                       children: [
-                        _myTextSpan(data: dataAr),
+                        _myTextSpan(
+                          data: dataAr,
+                          context: context,
+                        ),
                       ],
                     ),
                   ),
                   RichText(
                     text: _myTextSpan(
+                      context: context,
                       data: '${nameRowTwo.onNull()}: ',
                       children: [
-                        _myTextSpan(data: dataRowTwo.onNull()),
+                        _myTextSpan(
+                          data: dataRowTwo.onNull(),
+                          context: context,
+                        ),
                       ],
                     ),
                   ),
@@ -48,17 +57,24 @@ TableRow rowOfTable({
                       RichText(
                         text: _myTextSpan(
                           data: '$nameRow: ',
+                          context: context,
                         ),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           RichText(
-                            text: _myTextSpan(data: dataAr),
+                            text: _myTextSpan(
+                              data: dataAr,
+                              context: context,
+                            ),
                           ),
                           RichText(
                             textDirection: TextDirection.ltr,
-                            text: _myTextSpan(data: ' ${dataEn.onNull()}'),
+                            text: _myTextSpan(
+                              data: ' ${dataEn.onNull()}',
+                              context: context,
+                            ),
                           ),
                         ],
                       ),
@@ -67,8 +83,12 @@ TableRow rowOfTable({
                 : RichText(
                     text: _myTextSpan(
                       data: '$nameRow: ',
+                      context: context,
                       children: [
-                        _myTextSpan(data: dataAr),
+                        _myTextSpan(
+                          data: dataAr,
+                          context: context,
+                        ),
                       ],
                     ),
                   ),
@@ -80,13 +100,16 @@ TableRow rowOfTable({
 TextSpan _myTextSpan({
   required String data,
   List<InlineSpan>? children,
+  required BuildContext context,
 }) {
-  return textSpan(
+  return customTextSpan(
     text: data,
-    color: ManagerColors.black,
-    fontFamily: ManagerFontFamily.cairo,
-    fontWeight: ManagerFontWeight.medium,
-    fontSize: ManagerFontsSizes.f9,
+    context: context,
+    textStyle: TextStyle(
+      color: ManagerColors.black,
+      fontSize: ManagerFontsSizes.f9,
+      fontWeight: ManagerFontWeight.regular,
+    ),
     children: children,
   );
 }

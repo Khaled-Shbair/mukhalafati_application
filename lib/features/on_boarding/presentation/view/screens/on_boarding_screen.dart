@@ -5,27 +5,13 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return willPopScope(
+    return CustomPopScope(
       child: GetBuilder<OnBoardingController>(
         builder: (controller) {
           return Directionality(
             textDirection: TextDirection.ltr,
             child: Scaffold(
-              // extendBodyBehindAppBar: true,
               resizeToAvoidBottomInset: false,
-              // appBar: AppBar(
-              //   backgroundColor: ManagerColors.transparent,
-              //   leading: previousButton(
-              //     visible: controller.isNotFirstPage(),
-              //     onPressed: () => controller.previousPage(),
-              //   ),
-              //   // actions: [
-              //   //   skipButton(
-              //   //     visible: controller.appearSkipButton,
-              //   //     onPressed: () => controller.skip(),
-              //   //   ),
-              //   // ],
-              // ),
               body: Column(
                 children: [
                   Expanded(
@@ -49,39 +35,18 @@ class OnBoardingScreen extends StatelessWidget {
                       dotHeight: ManagerHeight.h7,
                       dotWidth: ManagerWidth.w10,
                       spacing: ManagerWidth.w10,
-                      expansionFactor: 2,
-                      activeDotColor: ManagerColors.primaryColor,
-                      dotColor: ManagerColors.darkLiver,
+                      expansionFactor:
+                          AppConstants.expansionFactorOfSmoothPageIndicator,
+                      activeDotColor: context.theme.primaryColor,
+                      dotColor: context.theme.disabledColor,
                     ),
                   ),
-                  SizedBox(height: ManagerHeight.h42),
-                  Stack(
-                    alignment: AlignmentDirectional.center,
-                    children: [
-                      SizedBox(
-                        height: ManagerHeight.h55,
-                        width: ManagerWidth.w55,
-                        child: CircularProgressIndicator(
-                          color: ManagerColors.primaryColor,
-                          backgroundColor: ManagerColors.blanchedAlmond,
-                          value: controller.valueOfIndicator,
-                          strokeWidth: AppConstants
-                              .strokeWidthOfCircularProgressIndicator,
-                        ),
-                      ),
-                      mainButton(
-                        onPressed: () => controller.nextPage(),
-                        shape: const CircleBorder(),
-                        height: ManagerHeight.h49,
-                        child: Icon(
-                          Icons.arrow_forward,
-                          color: ManagerColors.white,
-                          size: ManagerIconsSizes.i20,
-                        ),
-                      ),
-                    ],
+                  verticalSpace(ManagerHeight.h42),
+                  MoveButton(
+                    value: controller.valueOfIndicator,
+                    onPressed: () => controller.nextPage(context),
                   ),
-                  SizedBox(height: ManagerHeight.h42),
+                  verticalSpace(ManagerHeight.h42),
                 ],
               ),
             ),

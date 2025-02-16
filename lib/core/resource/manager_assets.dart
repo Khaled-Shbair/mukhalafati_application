@@ -1,20 +1,17 @@
 const String _imagePath = 'assets/images';
+const String _jsonPath = 'assets/json';
 
 class ManagerAssets {
   static const String logo = '$_imagePath/logo.png';
   static const String userIcon = '$_imagePath/user_icon.png';
   static const String createdSuccessfully =
       '$_imagePath/created_successfully.svg';
-  static const String logoSplash = '$_imagePath/splash/logo_splash.png';
-  static const String backgroundSplashScreen =
-      '$_imagePath/splash/background_splash_screen.png';
   static const String onBoardingOne =
       '$_imagePath/on_boarding/on_boarding_one.png';
   static const String onBoardingTwo =
       '$_imagePath/on_boarding/on_boarding_two.png';
   static const String onBoardingThree =
       '$_imagePath/on_boarding/on_boarding_three.png';
-  static const String welcomeImage = '$_imagePath/login/welcome_image.svg';
   static const String backgroundWelcomeScreen =
       '$_imagePath/login/background_welcome_screen.png';
   static const String driverIcon = '$_imagePath/login/driver_icon.png';
@@ -73,11 +70,6 @@ class ManagerAssets {
   static const String cancelFilterIcon =
       '$_imagePath/payment/cancel_filter_icon.png';
 
-  ///////////////////////////////////
-  static const String geneen = '$_imagePath/team/geneen.jpeg';
-  static const String malak = '$_imagePath/team/malak.jpeg';
-  static const String saja = '$_imagePath/team/saja.jpeg';
-  static const String shahed = '$_imagePath/team/shahed.jpeg';
-  static const String doctor = '$_imagePath/team/doctor.jpg';
-  static const String policeImage = '$_imagePath/team/police_image.jpg';
+//////////////////////////////////////////
+  static const String googleServiceKey = '$_jsonPath/notification_json/mukhalafati-62f02eada005.json';
 }

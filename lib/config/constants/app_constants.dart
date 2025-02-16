@@ -1,11 +1,17 @@
 class AppConstants {
   static const double deviceHeight = 812;
   static const double deviceWidth = 375;
+  static const int firstDate = 2015;
+  static const double expansionFactorOfSmoothPageIndicator = 2;
+  static const int lastDate = 3000;
   static const int durationSplashScreen = 3;
   static const double elevationAppBarOnBoardingScreen = 0;
   static const double leadingWidthAppBarOnBoardingScreen = 80;
   static const double heightOfSubTitleWelcomeScreen = 1.8;
-  static const int maxLinesOfTextOfComplaint = 13;
+  static const int maxLinesOfTextOfComplaint = 20;
+  static const int minLinesOfTextOfComplaint = 15;
+  static const int minLinesOfTextFormField = 1;
+  static const int maxLinesOfTextFormField = 1;
   static const int maxLengthOfExpiryDateCard = 7;
   static const int maxLengthOfSecurityCode = 4;
   static const int maxLengthOfCardNumber = 16;
@@ -17,11 +23,13 @@ class AppConstants {
   static const double elevationOfStepperInPaymentScreen = 0;
   static const double splashRadiusOfCheckboxInLoginScreen = 0;
   static const double widthOfBorderSideOfMainTextField = 0.50;
-  static const double thicknessOfDividerInCreateViolation = 0.4;
-  static const double heightOfDividerInCreateViolation = 0;
+  static const double thicknessOfDividerThemeData = 0.4;
+  static const double heightOfDividerThemeData = 0;
   static const double blurRadiusOfBoxShadowInCreatedSuccessfullyWidget = 6;
   static const double spreadRadiusOfBoxShadowInCreatedSuccessfullyWidget = 6;
   static const double blurRadiusOfBoxShadowInConfirmInformationWidget = 6;
+  static const double spreadRadiusOfBoxShadowInCustomStatisticsBoxPoliceManWidget = 1;
+  static const double blurRadiusOfBoxShadowInCustomStatisticsBoxPoliceManWidget = 4;
   static const double blurRadiusOfBoxShadowInTabBarViewInPoliceManHomeScreen =
       4;
   static const double spreadRadiusOfBoxShadowInLogoutScreen = 6;
@@ -36,11 +44,9 @@ class AppConstants {
   static const int maxLengthOfPhoneNumber = 10;
   static const int maxLengthOfJobNumber = 8;
   static const int maxLengthOfVehicleNumber = 8;
-  static const int maxLengthOfIDNumber = 8;
+  static const int maxLengthOfIDNumber = 9;
   static const int maxLengthOfVehicleColor = 8;
   static const int maxLengthOfVerificationCode = 1;
-  static const double
-      heightOfTextOfTitleDrivingLicenseCardInDrivingLicenseCardScreen = 1.8;
   static const double
       blurRadiusOfBoxShadowInNumberOfViolationsContainerInResultOfDriverWidget =
       2;
@@ -58,4 +64,6 @@ class AppConstants {
   static const String eleven = '11';
   static const String twelve = '12';
   static const String hash = '#';
+
+  static const int lengthOfTabBarInLoginController = 2;
 }

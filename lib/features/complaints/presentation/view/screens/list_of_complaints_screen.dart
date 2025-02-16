@@ -10,16 +10,12 @@ class ListOfComplaintsScreen extends StatelessWidget {
         return Scaffold(
           key: controller.scaffoldKey,
           resizeToAvoidBottomInset: false,
-          endDrawer: driverDrawer(
-            isListOfComplaintsScreen: true,
-            driverName: controller.driverName,
-            driverImage: controller.driverImage,
-          ),
+          endDrawer: CustomDriverDrawer(isListOfComplaintsScreen: true),
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Text(ManagerStrings.listOfComplaints),
             actions: [
-              menuButton(() => controller.openEndDrawer()),
+              CustomMenuButton(() => controller.openEndDrawer()),
             ],
           ),
           body: Container(
@@ -36,11 +32,11 @@ class ListOfComplaintsScreen extends StatelessWidget {
               bottom: ManagerWidth.w32,
             ),
             decoration: BoxDecoration(
-              color: ManagerColors.white,
+              color: context.theme.colorScheme.surface,
               borderRadius: BorderRadius.circular(ManagerRadius.r5),
               boxShadow: [
                 BoxShadow(
-                  color: ManagerColors.black5,
+                  color: context.theme.colorScheme.shadow,
                   offset: Offset(ManagerWidth.w0, ManagerHeight.h4),
                   blurRadius: AppConstants
                       .blurRadiusOfBoxShadowInListOfComplaintsScreen,
@@ -49,213 +45,103 @@ class ListOfComplaintsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            child: ListView(
-              primary: false,
-              shrinkWrap: true,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        ManagerStrings.complaintsSubmitted,
-                        style: TextStyle(
-                          color: ManagerColors.black,
-                          fontFamily: ManagerFontFamily.cairo,
-                          fontWeight: ManagerFontWeight.semiBold,
-                          fontSize: ManagerFontsSizes.f12,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: ManagerWidth.w48),
-                    Expanded(
-                      child: mainButton(
-                        height: ManagerHeight.h16,
-                        padding: EdgeInsetsDirectional.only(
-                          start: ManagerWidth.w6,
-                          end: ManagerWidth.w12,
-                        ),
-                        onPressed: () => controller.submitComplaintButton(),
-                        child: ListTile(
-                          minTileHeight: ManagerHeight.h0,
-                          minLeadingWidth: ManagerWidth.w0,
-                          horizontalTitleGap: ManagerWidth.w4,
-                          contentPadding: EdgeInsetsDirectional.zero,
-                          leading: Icon(
-                            Icons.add,
-                            color: ManagerColors.white,
-                            size: ManagerIconsSizes.i18,
-                          ),
-                          title: Text(
-                            ManagerStrings.submitComplaint,
-                            style: TextStyle(
-                              color: ManagerColors.white,
-                              fontFamily: ManagerFontFamily.cairo,
-                              fontWeight: ManagerFontWeight.bold,
-                              fontSize: ManagerFontsSizes.f11,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                CustomTitleAndCreateComplaint(
+                  createComplaint: controller.submitComplaintButton,
                 ),
-                SizedBox(height: ManagerHeight.h20),
-                if (controller.loading) ...{
-                  myLoading(),
-                } else if (controller.data.isNotEmpty &&
-                    controller.loading == false) ...{
-                  tableOfComplaints(
-                    rows: [
-                      ...List.generate(
-                        controller.data.length,
-                        (index) {
-                          return DataRow(
-                            cells: [
-                              DataCell(
-                                Text(
-                                  '${index + 1}',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: ManagerColors.black50,
-                                    fontFamily: ManagerFontFamily.cairo,
-                                    fontSize: ManagerFontsSizes.f12,
-                                    fontWeight: ManagerFontWeight.semiBold,
-                                  ),
-                                ),
+                verticalSpace(ManagerHeight.h20),
+                Flexible(
+                  child: ListView(
+                    controller: controller.scrollController,
+                    shrinkWrap: true,
+                    children: [
+
+                      if (controller.loading == true&& controller.data.isEmpty) ...{
+                        SizedBox(
+                          height: ManagerHeight.h154,
+                          child: CustomLoading(),
+                        ),
+                      } else if (controller.data.isNotEmpty &&
+                          controller.loading == false) ...{
+                        CustomTable(
+                          columns: [
+                            ...List.generate(
+                              controller.namesOfColumns.length,
+                              (index) => customDataColumn(
+                                controller.namesOfColumns[index],
+                                context,
                               ),
-                              DataCell(
-                                Padding(
-                                  padding: EdgeInsetsDirectional.only(
-                                    start: ManagerWidth.w6,
-                                    end: ManagerWidth.w4,
-                                  ),
-                                  child: Text(
-                                    textAlign: TextAlign.center,
-                                    controller
-                                        .data[index].dateOfIncidentOrProblem,
-                                    style: TextStyle(
-                                      color: ManagerColors.black50,
-                                      fontFamily: ManagerFontFamily.cairo,
-                                      fontSize: ManagerFontsSizes.f12,
-                                      fontWeight: ManagerFontWeight.semiBold,
+                            ),
+                          ],
+                          rows: [
+                            ...List.generate(
+                              controller.data.length,
+                              (index) {
+                                return DataRow(
+                                  cells: [
+                                    customFieldOfRow(
+                                      '${index + 1}',
+                                      context: context,
                                     ),
-                                  ),
-                                ),
-                              ),
-                              DataCell(
-                                placeholder: true,
-                                Padding(
-                                  padding: EdgeInsetsDirectional.only(
-                                    start: ManagerWidth.w4,
-                                    end: ManagerWidth.w1,
-                                  ),
-                                  child: Text(
-                                    controller.data[index].detailOfComplaint,
-                                    style: TextStyle(
-                                      color: ManagerColors.black50,
-                                      fontFamily: ManagerFontFamily.cairo,
-                                      fontSize: ManagerFontsSizes.f12,
-                                      fontWeight: ManagerFontWeight.semiBold,
+                                    customFieldOfRow(
+                                      context: context,
+                                      controller
+                                          .data[index].dateOfIncidentOrProblem,
+                                      start: ManagerWidth.w6,
+                                      end: ManagerWidth.w4,
                                     ),
-                                  ),
-                                ),
-                              ),
-                              DataCell(
-                                Container(
-                                  alignment: AlignmentDirectional.center,
-                                  height: ManagerHeight.h26,
-                                  width: ManagerWidth.w50,
-                                  margin: EdgeInsetsDirectional.only(
-                                    start: ManagerWidth.w4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: controller
-                                                .data[index].stateOfComplaint ==
-                                            1
-                                        ? ManagerColors.grannySmithApple
-                                        : ManagerColors.peach,
-                                    borderRadius:
-                                        BorderRadius.circular(ManagerRadius.r5),
-                                  ),
-                                  child: Text(
-                                    controller.data[index].stateOfComplaint == 1
-                                        ? ManagerStrings.solved
-                                        : ManagerStrings.inProgress,
-                                    style: TextStyle(
-                                      color: controller.data[index]
-                                                  .stateOfComplaint ==
-                                              1
-                                          ? ManagerColors.mayGreen
-                                          : ManagerColors.harvestGold,
-                                      fontFamily: ManagerFontFamily.cairo,
-                                      fontSize: ManagerFontsSizes.f9,
-                                      fontWeight: ManagerFontWeight.semiBold,
+                                    customFieldOfRow(
+                                      context: context,
+                                      controller.data[index].detailOfComplaint,
+                                      start: ManagerWidth.w4,
+                                      end: ManagerWidth.w1,
+                                      placeholder: true,
                                     ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      ),
+                                    DataCell(
+                                      SizedBox(
+                                        height: ManagerHeight.h34,
+                                        width: ManagerWidth.w60,
+                                        child: Card(
+                                          color: controller.data[index].status
+                                              ? ManagerColors.grannySmithApple
+                                              : ManagerColors.peach,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                ManagerRadius.r5),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              controller.data[index].status
+                                                  ? ManagerStrings.solved
+                                                  : ManagerStrings.inProgress,
+                                              textAlign: TextAlign.center,
+                                              style: context.textTheme
+                                                  .statusOfComplaint(
+                                                      context,
+                                                      controller
+                                                          .data[index].status),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      } else ...{
+                        CustomEmptyTable(
+                          length: controller.namesOfColumns.length,
+                          nameOfColumns: controller.namesOfColumns,
+                        ),
+                      },
                     ],
                   ),
-                } else ...{
-                  Container(
-                    width: ManagerWidth.w287,
-                    alignment: AlignmentDirectional.center,
-                    padding: EdgeInsetsDirectional.only(
-                      top: ManagerHeight.h10,
-                      bottom: ManagerHeight.h30,
-                    ),
-                    decoration: BoxDecoration(
-                      color: ManagerColors.transparent,
-                      border: Border.all(
-                        color: ManagerColors.platinum,
-                        width: ManagerWidth.w1,
-                      ),
-                      borderRadius: BorderRadius.circular(ManagerRadius.r5),
-                    ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.only(
-                            bottom: ManagerHeight.h4,
-                            start: ManagerWidth.w10,
-                            end: ManagerWidth.w20,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              textOfHeadViolationTable(AppConstants.hash),
-                              textOfHeadViolationTable(ManagerStrings.date),
-                              textOfHeadViolationTable(
-                                  ManagerStrings.complaint),
-                              textOfHeadViolationTable(ManagerStrings.state),
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          color: ManagerColors.platinum,
-                          thickness: ManagerHeight.h1,
-                        ),
-                        SizedBox(height: ManagerHeight.h20),
-                        Text(
-                          ManagerStrings.noComplaintsSubmitted,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: ManagerColors.black,
-                            fontFamily: ManagerFontFamily.cairo,
-                            fontSize: ManagerFontsSizes.f12,
-                            fontWeight: ManagerFontWeight.semiBold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                },
+                ),
               ],
             ),
           ),

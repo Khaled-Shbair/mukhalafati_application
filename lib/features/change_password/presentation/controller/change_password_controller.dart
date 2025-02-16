@@ -1,10 +1,9 @@
 import '/config/all_imports.dart';
 
-class ChangePasswordController extends GetxController with Helpers {
-  final DriverDatabaseController _driverDatabase =
-      instance<DriverDatabaseController>();
-  final PoliceDatabaseController _policeDatabase =
-      instance<PoliceDatabaseController>();
+class ChangePasswordController extends GetxController with CustomToast {
+  final _formKey = GlobalKey<FormState>();
+
+  GlobalKey<FormState> get formKey => _formKey;
   late TextEditingController newPassword;
   late TextEditingController confirmPassword;
   bool obscureNewPassword = true;
@@ -18,35 +17,96 @@ class ChangePasswordController extends GetxController with Helpers {
   }
 
   @override
-  void dispose() {
+  void onClose() {
     newPassword.dispose();
     confirmPassword.dispose();
-    super.dispose();
+    super.onClose();
   }
 
-  void backButton() {
-    Get.back();
+  void backButton(BuildContext context) {
+    context.pop();
+
+    /// Remove change password controller form memory
+    disposeChangePassword();
   }
 
-  void changePasswordButton(bool isDriver, int id) async {
-    if (_checkDataDriver()) {
+  /// Check is driver or police man is send request to change password.
+  /// if driver send request of this driver only.
+  /// if police man send request of this police man only.
+  void changePasswordButton(bool isDriver, int id, BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
       if (isDriver) {
-        bool x = await _driverDatabase.changePassword(newPassword.text, id);
-        debugPrint('$x');
+        _changePasswordDriver(context, id);
       } else {
-        await _policeDatabase.changePassword(newPassword.text, id);
+        _changePasswordPoliceMan(context, id);
       }
-      createdSuccessfullyDialog(
-        closeButton: () {
-          disposeChangePassword();
-          Get.offAndToNamed(Routes.loginScreen);
-        },
-        context: Get.context!,
-        text: ManagerStrings.passwordHasBeenChangedSuccessfully,
-      );
-    } else {
-      showSnackBar(message: ManagerStrings.passwordDoesNotMatch);
     }
+  }
+
+  void _changePasswordDriver(BuildContext context, int id) async {
+    await initDriverChangePassword();
+    final DriverChangePasswordUseCase driverChangePasswordUseCase =
+        instance<DriverChangePasswordUseCase>();
+    (await driverChangePasswordUseCase.execute(
+      DriverChangePasswordUseCaseInput(
+        driverId: id,
+        confirmPassword: confirmPassword.text,
+        newPassword: newPassword.text,
+      ),
+    ))
+
+        /// Failed change password for driver request
+        .fold(
+      (l) {
+        /// Appear message of error in SnackBar to user
+        showToast(message: l.message, context: context);
+      },
+
+      /// Successfully change password for driver request
+      (r) {
+        _changedPasswordSuccessfully();
+      },
+    );
+  }
+
+  void _changePasswordPoliceMan(BuildContext context, int id) async {
+    await initPoliceManChangePassword();
+    final PoliceManChangePasswordUseCase policeManChangePasswordUseCase =
+        instance<PoliceManChangePasswordUseCase>();
+    (await policeManChangePasswordUseCase.execute(
+      PoliceManChangePasswordUseCaseInput(
+        policeManId: id,
+        confirmPassword: confirmPassword.text,
+        newPassword: newPassword.text,
+      ),
+    ))
+        .fold(
+      /// Failed change password for police man request
+      (l) {
+        /// Appear message of error in SnackBar to user
+        showToast(message: l.message, context: context);
+      },
+
+      /// Successfully change password for police man request
+      (r) {
+        _changedPasswordSuccessfully();
+      },
+    );
+  }
+
+  /// show dialog when return changed Password is Successfully
+  void _changedPasswordSuccessfully() {
+    customCreatedSuccessfullyDialog(
+      closeButton: () {
+        /// Remove change password controller form memory
+        disposeChangePassword();
+
+        /// Navigate to login screen
+        Get.offAndToNamed(Routes.loginScreen);
+      },
+      context: Get.context!,
+      text: ManagerStrings.passwordHasBeenChangedSuccessfully,
+    );
   }
 
   void changeObscureNewPassword() {
@@ -57,13 +117,5 @@ class ChangePasswordController extends GetxController with Helpers {
   void changeObscureConfirmPassword() {
     obscureConfirmPassword = !obscureConfirmPassword;
     update();
-  }
-
-  bool _checkDataDriver() {
-    if (newPassword.text.isNotEmpty && confirmPassword.text.isNotEmpty) {
-      return true;
-    } else {
-      return false;
-    }
   }
 }

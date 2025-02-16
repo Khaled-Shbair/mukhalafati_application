@@ -1,0 +1,35 @@
+class ApiConstants {
+  static const String baseUrl = 'https://zcknvmsialjyofywmiac.supabase.co';
+  static const String completeBaseUrl = '$baseUrl/rest/v1/rpc';
+  static const String googleapisUrl = 'https://www.googleapis.com/auth/firebase.messaging';
+  static const fcmUrl = "https://fcm.googleapis.com/v1/projects/mukhalafati/messages:send";
+  static const int sendTimeoutSeconds = 60;
+  static const int receiveTimeoutSeconds = 60;
+  static const String bearer = 'Bearer';
+  static const String applicationJson = 'application/json';
+  static const String apikey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpja252bXNpYWxqeW9meXdtaWFjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyOTQxNjMxNywiZXhwIjoyMDQ0OTkyMzE3fQ.sw_U8RZMKxWBsYNPtTpVf1LH4vbBgYkeEG5KR_Rbq_k';
+  static const String driverLogin = '$completeBaseUrl/driver_login';
+  static const String policeManLogin = '$completeBaseUrl/police_man_login';
+  static const String createComplaint = '$completeBaseUrl/create_complaint';
+  static const String forgetPasswordDriver = '$completeBaseUrl/forget_password_driver';
+  static const String forgetPasswordPoliceMan = '$completeBaseUrl/forget_password_police_man';
+  static const String changePasswordDriver = '$completeBaseUrl/driver_change_password';
+  static const String changePasswordPoliceMan = '$completeBaseUrl/police_man_change_password';
+  static const String getAllComplaintsForDriver = '$completeBaseUrl/get_all_complaints_for_driver';
+  static const String searchForDriver = '$completeBaseUrl/search_for_driver';
+  static const String searchOnResultsTestsOfLicense = '$completeBaseUrl/search_on_results_tests_of_license';
+  static const String createViolation = '$completeBaseUrl/create_violation';
+  static const String reasonOfViolation = '$completeBaseUrl/reason_of_violation';
+  static const String paymentViolation = '$completeBaseUrl/payment_violation';
+  static const String listOfReasonsOfViolations = '$completeBaseUrl/list_of_reasons_of_violations';
+  static const String getDriverViolations = '$completeBaseUrl/get_driver_violations';
+  static const String getAllViolation = '$completeBaseUrl/get_all_violation';
+  static const String sendVerificationCode = '$completeBaseUrl/send_verification_code';
+  static const String sendRequestUpdateProfile = '$completeBaseUrl/send_request_update_profile';
+  static const String updateDriverFcmToken = '$completeBaseUrl/update_driver_fcm_token';
+  static const String saveNotification = '$completeBaseUrl/save_notification';
+  static const String updateNotificationStatus='$completeBaseUrl/update_notification_status';
+  static const String getAllNotification = '$completeBaseUrl/get_all_notification';
+  static const String getViolationDetailsById = '$completeBaseUrl/get_violation_details_by_id';
+  static const String homePoliceMan = '$completeBaseUrl/get_police_man_statistics';
+}

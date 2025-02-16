@@ -9,165 +9,163 @@ class CreateViolationScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           key: controller.scaffoldKey,
-          endDrawer: policeManDrawer(
-            isCreateViolationScreen: true,
-            policeName: controller.policeName,
-            policeImage: controller.policeImage,
-          ),
+          endDrawer: CustomPoliceManDrawer(isCreateViolationScreen: true),
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Text(ManagerStrings.createViolation),
             actions: [
-              mainButton(
-                onPressed: () => controller.openEndDrawer(),
-                minWidth: ManagerWidth.w30,
-                height: ManagerHeight.h30,
-                color: ManagerColors.transparent,
-                highlightColor: ManagerColors.transparent,
-                splashColor: ManagerColors.transparent,
-                side: BorderSide.none,
-                child: Icon(
-                  Icons.menu,
-                  color: ManagerColors.black,
-                  size: ManagerIconsSizes.i30,
-                ),
-              ),
+              CustomMenuButton(() => controller.openEndDrawer()),
             ],
           ),
-          body: ListView(
-            padding: EdgeInsetsDirectional.only(
-              start: ManagerWidth.w20,
-              end: ManagerWidth.w20,
-              top: ManagerHeight.h10,
-            ),
-            primary: false,
-            children: [
-              Container(
-                width: ManagerWidth.infinity,
-                padding: EdgeInsetsDirectional.only(
-                  start: ManagerWidth.w18,
-                  end: ManagerWidth.w18,
-                  top: ManagerHeight.h8,
-                  bottom: ManagerHeight.h15,
-                ),
-                margin: EdgeInsetsDirectional.only(
-                  bottom: ManagerHeight.h20,
-                ),
-                decoration: BoxDecoration(
-                  color: ManagerColors.lotion,
-                  borderRadius: BorderRadius.circular(ManagerRadius.r5),
-                ),
-                child: Column(
-                  children: [
-                    headOfOfficialPaper(),
-                    SizedBox(height: ManagerHeight.h15),
-                    const Divider(
-                      color: ManagerColors.black,
-                      thickness:
-                          AppConstants.thicknessOfDividerInCreateViolation,
-                      height: AppConstants.heightOfDividerInCreateViolation,
-                    ),
-                    SizedBox(height: ManagerHeight.h19),
-                    mainTextField(
-                      controller: controller.driverNameController,
-                      labelText: ManagerStrings.driverName,
-                      keyboardType: TextInputType.name,
-                    ),
-                    mySizedBox(),
-                    mainTextField(
-                      controller: controller.driverIdController,
-                      labelText: ManagerStrings.driverId,
-                      maxLength: AppConstants.maxLengthOfIDNumber,
-                    ),
-                    mySizedBox(),
-                    mainTextField(
-                      controller: controller.ownerNameController,
-                      labelText: ManagerStrings.ownerName,
-                      keyboardType: TextInputType.name,
-                    ),
-                    mySizedBox(),
-                    mainTextField(
-                      controller: controller.ownerIdController,
-                      labelText: ManagerStrings.ownerId,
-                      maxLength: AppConstants.maxLengthOfIDNumber,
-                    ),
-                    mySizedBox(),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: mainTextField(
-                            controller: controller.vehicleNumberController,
-                            labelText: ManagerStrings.vehicleNumber,
-                            maxLength: AppConstants.maxLengthOfVehicleNumber,
-                          ),
-                        ),
-                        SizedBox(width: ManagerWidth.w10),
-                        Expanded(
-                          child: mainTextField(
-                            controller: controller.vehicleTypeController,
-                            labelText: ManagerStrings.vehicleType,
-                            keyboardType: TextInputType.text,
-                          ),
-                        ),
-                        SizedBox(width: ManagerWidth.w10),
-                        Expanded(
-                          child: mainTextField(
-                            controller: controller.vehicleColorController,
-                            labelText: ManagerStrings.vehicleColor,
-                            keyboardType: TextInputType.text,
-                            maxLength: AppConstants.maxLengthOfVehicleColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                    mySizedBox(),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: mainTextField(
-                            controller: controller.violationTimeController,
-                            labelText: ManagerStrings.violationTime,
-                            readOnly: true,
-                          ),
-                        ),
-                        SizedBox(width: ManagerWidth.w10),
-                        Expanded(
-                          child: mainTextField(
-                            controller: controller.violationDateController,
-                            labelText: ManagerStrings.violationDate,
-                            readOnly: true,
-                          ),
-                        ),
-                      ],
-                    ),
-                    mySizedBox(),
-                    mainTextField(
-                      controller: controller.placeOfViolationController,
-                      labelText: ManagerStrings.placeOfViolation,
-                      keyboardType: TextInputType.text,
-                    ),
-                    mySizedBox(),
-                    mainTextField(
-                      controller: controller.reasonForViolationController,
-                      labelText: ManagerStrings.reasonForViolation,
-                      keyboardType: TextInputType.text,
-                    ),
-                  ],
-                ),
+          body: Form(
+            key: controller.formKey,
+            child: ListView(
+              padding: EdgeInsetsDirectional.only(
+                start: ManagerWidth.w20,
+                end: ManagerWidth.w20,
+                top: ManagerHeight.h10,
               ),
-              mainButton(
-                onPressed: () => controller.createViolation(),
-                child: Text(
-                  ManagerStrings.createViolation,
-                  style: TextStyle(
-                    color: ManagerColors.white,
-                    fontSize: ManagerFontsSizes.f14,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.extraBold,
+              primary: false,
+              children: [
+                Container(
+                  width: ManagerWidth.infinity,
+                  padding: EdgeInsetsDirectional.only(
+                    start: ManagerWidth.w18,
+                    end: ManagerWidth.w18,
+                    top: ManagerHeight.h8,
+                    bottom: ManagerHeight.h15,
+                  ),
+                  margin: EdgeInsetsDirectional.only(
+                    bottom: ManagerHeight.h20,
+                  ),
+                  decoration: BoxDecoration(
+                    color: context.theme.colorScheme.outline,
+                    borderRadius: BorderRadius.circular(ManagerRadius.r5),
+                  ),
+                  child: Column(
+                    children: [
+                      CustomHeadOfOfficialPaper(),
+                      verticalSpace(ManagerHeight.h15),
+                      Divider(
+                        color: context.theme.dividerTheme.color,
+                        thickness: context.theme.dividerTheme.thickness,
+                        height: context.theme.dividerTheme.space,
+                      ),
+                      verticalSpace(ManagerHeight.h19),
+                      CustomTextField(
+                        controller: controller.driverName,
+                        labelText: ManagerStrings.driverName,
+                        keyboardType: TextInputType.name,
+                        validator: (v) => Validator.fullNameValidator(v),
+                      ),
+                      verticalSpace(ManagerHeight.h10),
+                      CustomTextField(
+                        validator: (v) => Validator.idNumberValidator(v),
+                        controller: controller.driverIdNumber,
+                        labelText: ManagerStrings.driverId,
+                        maxLength: AppConstants.maxLengthOfIDNumber,
+                      ),
+                      verticalSpace(ManagerHeight.h10),
+                      CustomTextField(
+                        validator: (v) => Validator.fullNameValidator(v),
+                        controller: controller.ownerName,
+                        labelText: ManagerStrings.ownerName,
+                        keyboardType: TextInputType.name,
+                      ),
+                      verticalSpace(ManagerHeight.h10),
+                      CustomTextField(
+                        validator: (v) => Validator.idNumberValidator(v),
+                        controller: controller.ownerId,
+                        labelText: ManagerStrings.ownerId,
+                        maxLength: AppConstants.maxLengthOfIDNumber,
+                      ),
+                      verticalSpace(ManagerHeight.h10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CustomTextField(
+                              controller: controller.vehicleNumber,
+                              labelText: ManagerStrings.vehicleNumber,
+                              maxLength: AppConstants.maxLengthOfVehicleNumber,
+                              validator: (v) =>
+                                  Validator.vehicleNumberValidator(v),
+                            ),
+                          ),
+                          horizontalSpace(ManagerWidth.w10),
+                          Expanded(
+                            child: CustomTextField(
+                              controller: controller.vehicleType,
+                              labelText: ManagerStrings.vehicleType,
+                              keyboardType: TextInputType.text,
+                              validator: (v) =>
+                                  Validator.vehicleTypeValidator(v),
+                            ),
+                          ),
+                          horizontalSpace(ManagerWidth.w10),
+                          Expanded(
+                            child: CustomTextField(
+                              validator: (v) =>
+                                  Validator.vehicleColorValidator(v),
+                              controller: controller.vehicleColor,
+                              labelText: ManagerStrings.vehicleColor,
+                              keyboardType: TextInputType.text,
+                              maxLength: AppConstants.maxLengthOfVehicleColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      verticalSpace(ManagerHeight.h10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CustomTextField(
+                              controller: controller.violationTime,
+                              labelText: ManagerStrings.violationTime,
+                              readOnly: true,
+                            ),
+                          ),
+                          horizontalSpace(ManagerWidth.w10),
+                          Expanded(
+                            child: CustomTextField(
+                              controller: controller.violationDate,
+                              labelText: ManagerStrings.violationDate,
+                              readOnly: true,
+                            ),
+                          ),
+                        ],
+                      ),
+                      verticalSpace(ManagerHeight.h10),
+                      CustomTextField(
+                        controller: controller.placeOfViolation,
+                        labelText: ManagerStrings.placeOfViolation,
+                        keyboardType: TextInputType.text,
+                        validator: (v) =>
+                            Validator.placeOfViolationValidator(v),
+                      ),
+                      verticalSpace(ManagerHeight.h10),
+                      CustomSearchDropDown(
+                        validator: (v) =>
+                            Validator.reasonOfViolationValidator(v),
+                        selectedItem: controller.reasonOfViolation,
+                        items:
+                            controller.allReasons.map((e) => e.reason).toList(),
+                        labelText: ManagerStrings.reasonForViolation,
+                        labelStyle:
+                            context.theme.inputDecorationTheme.labelStyle,
+                        onChangedFunction: controller.changeReasonOfViolation,
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
+                CustomButton(
+                  onPressed: () => controller.createViolation(context),
+                  child: Text(
+                    ManagerStrings.createViolation,
+                    style: context.textTheme.mainButtonTextStyle(context),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

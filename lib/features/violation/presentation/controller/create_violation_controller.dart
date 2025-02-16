@@ -1,160 +1,257 @@
+import 'dart:async';
+
 import '/config/all_imports.dart';
 
-class CreateViolationController extends GetxController with Helpers {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+class CreateViolationController extends GetxController with CustomToast {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _formKey = GlobalKey<FormState>();
+  final _reasonsOfViolationUseCase = instance<AllReasonOfViolationUseCase>();
+  final _fbNotifications = instance<FbNotifications>();
+  final _createViolationUseCase = instance<CreateViolationUseCase>();
+  final _saveNotificationUseCase = instance<SaveNotificationUseCase>();
+  bool _loading = false;
 
-  // final ViolationsDatabaseController _violationsDatabase = ViolationsDatabaseController();
-  final ViolationsDatabaseController _violationsDatabase =
-      instance<ViolationsDatabaseController>();
+  String? _reasonOfViolation;
+  late int _reasonOfViolationId;
+  List<ReasonOfViolationModel> _allReasons = [];
 
-  late TextEditingController driverNameController;
-  late TextEditingController driverIdController;
-  late TextEditingController ownerNameController;
-  late TextEditingController ownerIdController;
-  late TextEditingController vehicleNumberController;
-  late TextEditingController vehicleTypeController;
-  late TextEditingController vehicleColorController;
-  late TextEditingController violationTimeController;
-  late TextEditingController violationDateController;
-  late TextEditingController placeOfViolationController;
-  late TextEditingController reasonForViolationController;
-  int _hour = 0;
-  String policeName = 'خالد شبير';
-  String policeImage =
-      'https://the-stock-products.s3.us-east-2.amazonaws.com/display_images/displayf004fcf1ed2fceb7dbb63496564d0386.jpg';
+  late TextEditingController _driverName;
+  late TextEditingController _driverIdNumber;
+  late TextEditingController _ownerName;
+  late TextEditingController _ownerId;
+  late TextEditingController _vehicleNumber;
+  late TextEditingController _vehicleType;
+  late TextEditingController _vehicleColor;
+  late TextEditingController _violationTime;
+  late TextEditingController _violationDate;
+  late TextEditingController _placeOfViolation;
+  late TextEditingController _searchForViolation;
+
+  TextEditingController get driverName => _driverName;
+
+  TextEditingController get driverIdNumber => _driverIdNumber;
+
+  TextEditingController get ownerName => _ownerName;
+
+  TextEditingController get ownerId => _ownerId;
+
+  TextEditingController get vehicleNumber => _vehicleNumber;
+
+  TextEditingController get vehicleType => _vehicleType;
+
+  TextEditingController get vehicleColor => _vehicleColor;
+
+  TextEditingController get violationTime => _violationTime;
+
+  TextEditingController get violationDate => _violationDate;
+
+  TextEditingController get placeOfViolation => _placeOfViolation;
+
+  TextEditingController get searchForViolation => _searchForViolation;
+
+  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
+
+  GlobalKey<FormState> get formKey => _formKey;
+
+  bool get loading => _loading;
+
+  String? get reasonOfViolation => _reasonOfViolation;
+
+  List<ReasonOfViolationModel> get allReasons => _allReasons;
 
   @override
   void onInit() {
-    driverNameController = TextEditingController();
-    driverIdController = TextEditingController();
-    ownerNameController = TextEditingController();
-    ownerIdController = TextEditingController();
-    vehicleNumberController = TextEditingController();
-    vehicleTypeController = TextEditingController();
-    vehicleColorController = TextEditingController();
-    violationTimeController = TextEditingController(text: _time());
-    violationDateController = TextEditingController(text: _date());
-    placeOfViolationController = TextEditingController();
-    reasonForViolationController = TextEditingController();
     super.onInit();
+    _getReasonsOfViolations();
+    _driverName = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_driverName);
+        },
+      );
+    _driverIdNumber = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_driverIdNumber);
+        },
+      );
+    _ownerName = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_ownerName);
+        },
+      );
+    _ownerId = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_ownerId);
+        },
+      );
+    _vehicleNumber = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_vehicleNumber);
+        },
+      );
+    _vehicleType = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_vehicleType);
+        },
+      );
+    _vehicleColor = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_vehicleColor);
+        },
+      );
+    _violationTime =
+        TextEditingController(text: FormatDateAndTimeHelper.timeNow);
+    _violationDate =
+        TextEditingController(text: FormatDateAndTimeHelper.dateNow);
+    _placeOfViolation = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_placeOfViolation);
+        },
+      );
+    _searchForViolation = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_searchForViolation);
+        },
+      );
   }
 
   @override
-  void dispose() {
-    driverNameController.dispose();
-    driverIdController.dispose();
-    ownerNameController.dispose();
-    ownerIdController.dispose();
-    vehicleNumberController.dispose();
-    vehicleTypeController.dispose();
-    vehicleColorController.dispose();
-    violationTimeController.dispose();
-    violationDateController.dispose();
-    placeOfViolationController.dispose();
-    reasonForViolationController.dispose();
-    super.dispose();
-  }
-
-  String _date() {
-    return '${DateTime.now().day.toString()}/${DateTime.now().month.toString()}/${DateTime.now().year.toString()}';
-  }
-
-  String _time() {
-    _formatHour();
-    if (DateTime.now().hour >= 12) {
-      return 'PM ${_hour.toString()}:${DateTime.now().minute.toString()}:${DateTime.now().second.toString()}';
-    } else {
-      return 'AM ${_hour.toString()}:${DateTime.now().minute.toString()}:${DateTime.now().second.toString()}';
-    }
-  }
-
-  void _formatHour() {
-    switch (DateTime.now().hour) {
-      case 1:
-        _hour = 1;
-      case 2:
-        _hour = 2;
-      case 3:
-        _hour = 3;
-      case 4:
-        _hour = 4;
-      case 5:
-        _hour = 5;
-      case 6:
-        _hour = 6;
-      case 7:
-        _hour = 7;
-      case 8:
-        _hour = 8;
-      case 9:
-        _hour = 9;
-      case 10:
-        _hour = 10;
-      case 11:
-        _hour = 11;
-      case 12:
-        _hour = 12;
-      case 13:
-        _hour = 1;
-      case 14:
-        _hour = 2;
-      case 15:
-        _hour = 3;
-      case 16:
-        _hour = 4;
-      case 17:
-        _hour = 5;
-      case 18:
-        _hour = 6;
-      case 19:
-        _hour = 7;
-      case 20:
-        _hour = 8;
-      case 21:
-        _hour = 9;
-      case 22:
-        _hour = 10;
-      case 23:
-        _hour = 11;
-      case 24:
-        _hour = 12;
-    }
+  void onClose() {
+    _driverName.dispose();
+    _driverIdNumber.dispose();
+    _ownerName.dispose();
+    _ownerId.dispose();
+    _vehicleNumber.dispose();
+    _vehicleType.dispose();
+    _vehicleColor.dispose();
+    _violationTime.dispose();
+    _violationDate.dispose();
+    _placeOfViolation.dispose();
+    _searchForViolation.dispose();
+    super.onClose();
   }
 
   void openEndDrawer() {
-    if (scaffoldKey.currentState != null &&
-        !scaffoldKey.currentState!.isEndDrawerOpen) {
-      scaffoldKey.currentState!.openEndDrawer();
+    if (_scaffoldKey.currentState != null &&
+        !_scaffoldKey.currentState!.isEndDrawerOpen) {
+      _scaffoldKey.currentState!.openEndDrawer();
     }
   }
 
-  void createViolation() async {
-    if (_checkDataViolation()) {
-      await confirmInformationDialog(
-        context: Get.context!,
+  void changeReasonOfViolation(String? reason) {
+    if (reason != null) {
+      _reasonOfViolation = reason;
+      _selectPriceOfViolation();
+      update();
+    }
+  }
+
+  void _selectPriceOfViolation() {
+    for (var e in _allReasons) {
+      if (e.reason == _reasonOfViolation) {
+        _reasonOfViolationId = e.id;
+      }
+    }
+  }
+
+  Future<void> _getReasonsOfViolations() async {
+    _loading = true;
+    (await _reasonsOfViolationUseCase.execute()).fold(
+      (l) {},
+      (r) {
+        _allReasons = r.data;
+      },
+    );
+    _loading = false;
+    update();
+  }
+
+  void createViolation(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      await customConfirmInformationDialog(
+        context: context,
+        confirmButton: () async {
+          context.pop();
+          customLoading(context);
+          (await _createViolationUseCase.execute(_violationDataInput())).fold(
+            (l) {
+              context.pop();
+              showToast(message: l.message, context: context);
+            },
+            (r) async {
+              context.pop();
+              if (r.fcmToken != null || r.fcmToken.isNotEmpty) {
+                _sendNotification(r.fcmToken);
+                _saveNotification(r.driverId);
+              }
+              _showSuccessfullyDialog(context);
+            },
+          );
+        },
         text: ManagerStrings.theViolationWasSuccessfullyCreated,
-        closeButton: () => Get.offAllNamed(Routes.policeManHomeScreen),
+        closeButton: () {
+          context.pushNamedAndRemoveAllUntil(Routes.policeManHomeScreen);
+          disposeCreateViolation();
+        },
       );
-    } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
     }
   }
 
-  bool _checkDataViolation() {
-    if (driverNameController.text.isNotEmpty &&
-        driverIdController.text.isNotEmpty &&
-        ownerNameController.text.isNotEmpty &&
-        ownerIdController.text.isNotEmpty &&
-        vehicleNumberController.text.isNotEmpty &&
-        vehicleTypeController.text.isNotEmpty &&
-        vehicleColorController.text.isNotEmpty &&
-        placeOfViolationController.text.isNotEmpty &&
-        reasonForViolationController.text.isNotEmpty &&
-        violationTimeController.text.isNotEmpty &&
-        violationDateController.text.isNotEmpty) {
-      return true;
-    } else {
-      return false;
-    }
+  void _sendNotification(String fcmToken) async {
+    await _fbNotifications.sendNotification(
+      fcmToken: fcmToken,
+      title: ManagerStrings.violationHasBeenRegistered,
+      body: _reasonOfViolation.onNull(),
+      data: {
+        ApiKeys.route: Routes.violationPaymentScreen,
+      },
+    );
+  }
+
+  void _saveNotification(int driverId) async {
+    await _saveNotificationUseCase.execute(
+      SaveNotificationUseCaseInput(
+        driverId: driverId,
+        title: ManagerStrings.violationHasBeenRegistered,
+        content: _reasonOfViolation.onNull(),
+        dateSend: FormatDateAndTimeHelper.dateNow,
+        timeSend: FormatDateAndTimeHelper.timeNow,
+      ),
+    );
+  }
+
+  void _showSuccessfullyDialog(BuildContext context) async {
+    await customCreatedSuccessfullyDialog(
+      context: context,
+      closeButton: () {
+        context.pushNamedAndRemoveAllUntil(Routes.policeManHomeScreen);
+        disposeCreateViolation();
+      },
+      text: ManagerStrings.theViolationWasSuccessfullyCreated,
+    );
+  }
+
+  CreateViolationUseCaseInput _violationDataInput() {
+    return CreateViolationUseCaseInput(
+      reasonOfViolationId: _reasonOfViolationId,
+      driverIdNumber: _driverIdNumber.text,
+      driverName: _driverName.text,
+      ownerName: _ownerName.text,
+      ownerIdNumber: _ownerId.text,
+      violationAddress: _placeOfViolation.text,
+      vehicleColor: _vehicleColor.text,
+      vehicleNumber: _vehicleNumber.text,
+      violationDate: _violationDate.text,
+      vehicleType: _vehicleType.text,
+      violationTime: _violationTime.text,
+    );
   }
 }

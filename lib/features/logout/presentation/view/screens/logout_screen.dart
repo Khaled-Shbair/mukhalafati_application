@@ -9,7 +9,6 @@ class LogoutScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
-          backgroundColor: ManagerColors.white,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -25,7 +24,7 @@ class LogoutScreen extends StatelessWidget {
                   bottom: ManagerHeight.h34,
                 ),
                 decoration: BoxDecoration(
-                  color: ManagerColors.white,
+                  color: context.theme.colorScheme.surface,
                   borderRadius: BorderRadius.circular(ManagerRadius.r15),
                   boxShadow: [
                     BoxShadow(
@@ -34,7 +33,7 @@ class LogoutScreen extends StatelessWidget {
                           AppConstants.blurRadiusOfBoxShadowInLogoutScreen,
                       spreadRadius:
                           AppConstants.spreadRadiusOfBoxShadowInLogoutScreen,
-                      color: ManagerColors.black5,
+                      color: context.theme.colorScheme.shadow,
                     ),
                   ],
                 ),
@@ -45,52 +44,38 @@ class LogoutScreen extends StatelessWidget {
                       height: ManagerHeight.h120,
                       width: ManagerWidth.w120,
                     ),
-                    SizedBox(height: ManagerHeight.h20),
+                    verticalSpace(ManagerHeight.h20),
                     Text(
                       ManagerStrings.doYouWantToLogoutOfTheApplication,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: ManagerColors.eerieBlack,
-                        fontWeight: ManagerFontWeight.semiBold,
-                        fontFamily: ManagerFontFamily.cairo,
-                        fontSize: ManagerFontsSizes.f20,
-                        decoration: TextDecoration.none,
-                      ),
+                      style: context.textTheme.titleLogoutScreen(context),
                     ),
-                    SizedBox(height: ManagerHeight.h20),
+                    verticalSpace(ManagerHeight.h20),
                     Row(
                       children: [
-                        mainButton(
-                          onPressed: () => controller.cancelButton(),
-                          borderRadius: ManagerRadius.r5,
+                        CustomButton(
+                          onPressed: () => controller.cancelButton(context),
                           height: ManagerHeight.h40,
-                          minWidth: ManagerWidth.w99,
-                          color: ManagerColors.antiFlashWhite,
+                          minWidth: ManagerWidth.w85,
+                          backgroundColor:
+                              context.theme.colorScheme.primaryContainer,
                           side: BorderSide.none,
                           child: Text(
                             ManagerStrings.cancel,
-                            style: TextStyle(
-                              color: ManagerColors.darkGunmetal,
-                              fontWeight: ManagerFontWeight.semiBold,
-                              fontFamily: ManagerFontFamily.cairo,
-                              fontSize: ManagerFontsSizes.f14,
-                            ),
+                            style:
+                                context.textTheme.cancelLogoutButton(context),
                           ),
                         ),
-                        SizedBox(width: ManagerWidth.w7),
-                        mainButton(
-                          onPressed: () => controller.logoutButton(),
-                          borderRadius: ManagerRadius.r5,
+                        horizontalSpace(ManagerWidth.w7),
+                        CustomButton(
+                          onPressed: () => controller.logoutButton(context),
                           height: ManagerHeight.h40,
                           minWidth: ManagerWidth.w122,
                           child: Text(
                             ManagerStrings.logout,
-                            style: TextStyle(
-                              color: ManagerColors.white,
-                              fontWeight: ManagerFontWeight.bold,
-                              fontFamily: ManagerFontFamily.cairo,
-                              fontSize: ManagerFontsSizes.f12,
-                            ),
+                            style: context.textTheme
+                                .logoutAndCreateComplaintAndNameDriverButton(
+                                    context),
                           ),
                         ),
                       ],

@@ -1,72 +1,100 @@
 import '/config/all_imports.dart';
 
-class CreateComplaintsController extends GetxController with Helpers {
-  final ComplaintDatabaseController _complaintDatabase =
-      instance<ComplaintDatabaseController>();
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
+class CreateComplaintsController extends GetxController with CustomToast {
+  final _createComplaintUseCase = instance<CreateComplaintUseCase>();
+  final _sharedPrefController = instance<SharedPreferencesController>();
+  final _formKey = GlobalKey<FormState>();
 
-  late TextEditingController textOfComplaint;
-  late TextEditingController name;
-  late TextEditingController address;
-  late TextEditingController date;
+  late TextEditingController _detailOfComplaint;
+  late TextEditingController _complaintName;
+  late TextEditingController _addressOfComplaint;
+  late TextEditingController _dateOfComplaint;
+
+  GlobalKey<FormState> get formKey => _formKey;
+
+  TextEditingController get detailOfComplaint => _detailOfComplaint;
+
+  TextEditingController get complaintName => _complaintName;
+
+  TextEditingController get addressOfComplaint => _addressOfComplaint;
+
+  TextEditingController get dateOfComplaint => _dateOfComplaint;
+  DateTime _dateTime = DateTime.now();
 
   @override
   void onInit() {
     super.onInit();
-    textOfComplaint = TextEditingController();
-    name = TextEditingController();
-    address = TextEditingController();
-    date = TextEditingController();
+    _detailOfComplaint = TextEditingController();
+    _complaintName = TextEditingController();
+    _addressOfComplaint = TextEditingController();
+    _dateOfComplaint = TextEditingController();
   }
 
   @override
   void dispose() {
-    textOfComplaint.dispose();
-    name.dispose();
-    address.dispose();
-    date.dispose();
+    _detailOfComplaint.dispose();
+    _complaintName.dispose();
+    _addressOfComplaint.dispose();
+    _dateOfComplaint.dispose();
     super.dispose();
   }
 
-  void cancelButton() {
-    Get.back();
+  void cancelButton(BuildContext context) {
+    context.pop();
     disposeCreateComplaints();
   }
 
-  void createComplaintsButton() async {
-    if (_checkData()) {
-      ComplaintModel complaint = ComplaintModel();
-      complaint.complaintName = name.text;
-      complaint.detailOfComplaint = textOfComplaint.text;
-      complaint.addressOfComplaint = address.text;
-      complaint.dateOfIncidentOrProblem = date.text;
-      complaint.stateOfComplaint = 0;
-      complaint.driverId = _sharedPreferences.getUserId();
-      int newRowId = await _complaintDatabase.create(complaint);
-      if (newRowId != 0) {
-        complaint.complaintId = newRowId;
-        Get.back();
-        createdSuccessfullyDialog(
-          closeButton: () {
-            ListOfComplaintsController.to.getComplaints();
-            Get.back();
-            disposeCreateComplaints();
-          },
-          text: ManagerStrings.complaintCreatedSuccessfully,
-          context: Get.context!,
-        );
-      }
-    } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+  void createComplaintsButton(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      (await _createComplaintUseCase.execute(
+        CreateComplaintInput(
+          driverId: _sharedPrefController.getInt(SharedPreferencesKeys.userId),
+          addressOfComplaint: _addressOfComplaint.text,
+          complaintsName: _complaintName.text,
+          dateOfIncidentOrProblem: _dateOfComplaint.text,
+          detailOfComplaint: _detailOfComplaint.text,
+          statusOfComplaint: false,
+        ),
+      ))
+          .fold(
+        (l) {
+          showToast(message: l.message, context: context);
+        },
+        (r) async {
+          disposeListOfComplaints();
+          context.pop();
+          initListOfComplaints();
+          customCreatedSuccessfullyDialog(
+            closeButton: () {
+              context.pop();
+              ListOfComplaintsController.to.getComplaints();
+              // context.pushNamedAndRemoveAllUntil(Routes.listOfComplaintsScreen);
+              disposeCreateComplaints();
+            },
+            text: ManagerStrings.complaintCreatedSuccessfully,
+            context: context,
+          );
+        },
+      );
     }
   }
 
-  bool _checkData() {
-    if (name.text.isNotEmpty) {
-      return true;
-    } else {
-      return false;
+  Future<void> selectDateTime(BuildContext context) async {
+    final DateTime? selectedDateTime = await showDatePicker(
+      context: context,
+      initialDate: _dateTime,
+      firstDate: DateTime(AppConstants.firstDate),
+      lastDate: DateTime(AppConstants.lastDate),
+      barrierDismissible: false,
+    );
+    update();
+
+    if (selectedDateTime != null) {
+      _dateTime = selectedDateTime;
+      _dateOfComplaint.text =
+          '${_dateTime.day}/${_dateTime.month}/${_dateTime.year}';
     }
+
+    update();
   }
 }

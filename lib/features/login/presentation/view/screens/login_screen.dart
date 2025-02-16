@@ -20,121 +20,99 @@ class LoginScreen extends StatelessWidget {
               start: ManagerWidth.w28,
               end: ManagerWidth.w28,
             ),
-            child: Column(
-              children: [
-                Image.asset(
-                  ManagerAssets.logo,
-                  height: ManagerHeight.h71,
-                  width: ManagerWidth.w85,
-                  fit: BoxFit.cover,
-                ),
-                SizedBox(height: ManagerHeight.h20),
-                Text(
-                  ManagerStrings.login,
-                  style: TextStyle(
-                    color: ManagerColors.black,
-                    fontSize: ManagerFontsSizes.f22,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.bold,
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+              child: Column(
+                children: [
+                  Image.asset(
+                    ManagerAssets.logo,
+                    height: ManagerHeight.h71,
+                    width: ManagerWidth.w85,
+                    fit: BoxFit.cover,
                   ),
-                ),
-                SizedBox(height: ManagerHeight.h8),
-                Text(
-                  ManagerStrings.welcomeBackToOurApp,
-                  style: TextStyle(
-                    color: ManagerColors.blackOlive,
-                    fontSize: ManagerFontsSizes.f14,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.medium,
+                  verticalSpace(ManagerHeight.h20),
+                  Text(
+                    ManagerStrings.login,
+                    style: context.textTheme
+                        .titleOnBoardingAndWelcomeAndLoginScreen(context),
                   ),
-                ),
-                SizedBox(height: ManagerHeight.h16),
-                Container(
-                  height: ManagerHeight.h48,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    color: ManagerColors.ghostWhite,
-                    borderRadius: BorderRadius.circular(ManagerRadius.r5),
+                  verticalSpace(ManagerHeight.h8),
+                  Text(
+                    ManagerStrings.welcomeBackToOurApp,
+                    style: context.textTheme
+                        .subTitleWelcomeAndLoginScreens(context),
                   ),
-                  child: TabBar(
-                    controller: controller.tabController,
-                    indicatorColor: ManagerColors.primaryColor,
-                    dividerColor: ManagerColors.transparent,
-                    indicator: BoxDecoration(
-                      color: ManagerColors.primaryColor,
+                  verticalSpace(ManagerHeight.h16),
+                  Container(
+                    height: ManagerHeight.h48,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: context.theme.colorScheme.secondaryContainer,
                       borderRadius: BorderRadius.circular(ManagerRadius.r5),
                     ),
-                    labelPadding: EdgeInsetsDirectional.only(
-                      top: ManagerHeight.h7,
-                      bottom: ManagerHeight.h7,
+                    child: TabBar(
+                      controller: controller.tabController,
+                      indicatorColor: context.theme.tabBarTheme.indicatorColor,
+                      dividerColor: context.theme.tabBarTheme.dividerColor,
+                      indicator: context.theme.tabBarTheme.indicator,
+                      labelPadding: context.theme.tabBarTheme.labelPadding,
+                      labelStyle: context.theme.tabBarTheme.labelStyle,
+                      unselectedLabelStyle:
+                          context.theme.tabBarTheme.unselectedLabelStyle,
+                      tabs: [
+                        tabBarButton(
+                          image: ManagerAssets.driverIcon,
+                          name: ManagerStrings.driver,
+                        ),
+                        tabBarButton(
+                          image: ManagerAssets.policeIcon,
+                          name: ManagerStrings.police,
+                        ),
+                      ],
                     ),
-                    // indicatorPadding: EdgeInsetsDirectional.only(
-                    //   bottom: ManagerHeight.h5,
-                    //   top: ManagerHeight.h5,
-                    //   start: ManagerWidth.w16,
-                    //   end: ManagerWidth.w16,
-                    // ),
-                    labelStyle: TextStyle(
-                      color: ManagerColors.white,
-                      fontFamily: ManagerFontFamily.cairo,
-                      fontWeight: ManagerFontWeight.medium,
-                      fontSize: ManagerFontsSizes.f15,
-                    ),
-                    unselectedLabelStyle: TextStyle(
-                      color: ManagerColors.black,
-                      fontFamily: ManagerFontFamily.cairo,
-                      fontWeight: ManagerFontWeight.medium,
-                      fontSize: ManagerFontsSizes.f15,
-                    ),
-                    tabs: [
-                      tabBarButton(
-                        image: ManagerAssets.driverIcon,
-                        name: ManagerStrings.driver,
-                      ),
-                      tabBarButton(
-                        image: ManagerAssets.policeIcon,
-                        name: ManagerStrings.police,
-                      ),
-                    ],
                   ),
-                ),
-                Expanded(
-                  child: TabBarView(
-                    controller: controller.tabController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      tabBarPage(
-                        changeRememberMe: (bool? v) =>
-                            controller.changeRememberMeDriver(v!),
-                        forgotPasswordRecognizer:
-                            controller.forgetDriverPasswordRecognizer,
-                        rememberMe: controller.rememberMeDriver,
-                        obscureText: controller.obscurePasswordDriver,
-                        changeObscurePassword: () =>
-                            controller.changeObscurePasswordDriver(),
-                        login: () => controller.loginDriver(),
-                        labelTextOfUserField: ManagerStrings.licenseNumber,
-                        password: controller.passwordDriver,
-                        userNumber: controller.licenseNumber,
-                      ),
-                      tabBarPage(
-                        changeRememberMe: (bool? v) =>
-                            controller.changeRememberMePoliceMan(v!),
-                        forgotPasswordRecognizer:
-                            controller.forgetPoliceManPasswordRecognizer,
-                        login: () => controller.loginPoliceMan(),
-                        rememberMe: controller.rememberMePoliceMan,
-                        obscureText: controller.obscurePasswordPoliceMan,
-                        changeObscurePassword: () =>
-                            controller.changeObscurePasswordPoliceMan(),
-                        labelTextOfUserField: ManagerStrings.jobNumber,
-                        password: controller.passwordPoliceMan,
-                        userNumber: controller.jobNumber,
-                      ),
-                    ],
+                  Expanded(
+                    child: TabBarView(
+                      controller: controller.tabController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        CustomTabBarPage(
+                          formKey: controller.driverFormKey,
+                          validatorNumber: Validator.licenseNumberValidator,
+                          changeRememberMe: (bool? v) =>
+                              controller.changeRememberMeDriver(v!),
+                          forgotPasswordRecognizer:
+                              controller.forgetDriverPasswordRecognizer,
+                          rememberMe: controller.rememberMeDriver,
+                          obscureText: controller.obscurePasswordDriver,
+                          changeObscurePassword: () =>
+                              controller.changeObscurePasswordDriver(),
+                          login: () => controller.loginDriver(context),
+                          labelTextOfUserField: ManagerStrings.licenseNumber,
+                          password: controller.passwordDriver,
+                          userNumber: controller.licenseNumber,
+                        ),
+                        CustomTabBarPage(
+                          formKey: controller.policeFormKey,
+                          validatorNumber: Validator.jobNumberValidator,
+                          changeRememberMe: (bool? v) =>
+                              controller.changeRememberMePoliceMan(v!),
+                          forgotPasswordRecognizer:
+                              controller.forgetPoliceManPasswordRecognizer,
+                          login: () => controller.loginPoliceMan(context),
+                          rememberMe: controller.rememberMePoliceMan,
+                          obscureText: controller.obscurePasswordPoliceMan,
+                          changeObscurePassword: () =>
+                              controller.changeObscurePasswordPoliceMan(),
+                          labelTextOfUserField: ManagerStrings.jobNumber,
+                          password: controller.passwordPoliceMan,
+                          userNumber: controller.jobNumber,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

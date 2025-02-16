@@ -1,124 +1,269 @@
 import '/config/all_imports.dart';
 
 class LoginController extends GetxController
-    with GetSingleTickerProviderStateMixin, Helpers {
-  final DriverDatabaseController _driverDatabase =
-      instance<DriverDatabaseController>();
-  final PoliceDatabaseController _policeDatabase =
-      instance<PoliceDatabaseController>();
-  final AppSettingsSharedPreferences _sharedPreferences =
-      instance<AppSettingsSharedPreferences>();
+    with GetSingleTickerProviderStateMixin, CustomToast {
+  final _sharedPrefController = instance<SharedPreferencesController>();
+  final _driverFormKey = GlobalKey<FormState>();
+  final _policeFormKey = GlobalKey<FormState>();
+  late TabController _tabController;
+  late TextEditingController _jobNumber;
+  late TextEditingController _passwordPoliceMan;
+  late TextEditingController _licenseNumber;
+  late TextEditingController _passwordDriver;
+  late GestureRecognizer _forgetPoliceManPasswordRecognizer;
+  late GestureRecognizer _forgetDriverPasswordRecognizer;
+  bool _rememberMePoliceMan = false;
+  bool _rememberMeDriver = false;
+  bool _obscurePasswordPoliceMan = true;
+  bool _obscurePasswordDriver = true;
 
-  late TabController tabController;
-  late TextEditingController jobNumber;
-  late TextEditingController passwordPoliceMan;
-  late TextEditingController licenseNumber;
-  late TextEditingController passwordDriver;
-  late GestureRecognizer forgetPoliceManPasswordRecognizer;
-  late GestureRecognizer forgetDriverPasswordRecognizer;
-  bool rememberMePoliceMan = false;
-  bool rememberMeDriver = false;
-  bool obscurePasswordPoliceMan = false;
-  bool obscurePasswordDriver = false;
+  GlobalKey<FormState> get driverFormKey => _driverFormKey;
+
+  GlobalKey<FormState> get policeFormKey => _policeFormKey;
+
+  TabController get tabController => _tabController;
+
+  TextEditingController get jobNumber => _jobNumber;
+
+  TextEditingController get passwordPoliceMan => _passwordPoliceMan;
+
+  TextEditingController get licenseNumber => _licenseNumber;
+
+  TextEditingController get passwordDriver => _passwordDriver;
+
+  GestureRecognizer get forgetPoliceManPasswordRecognizer =>
+      _forgetPoliceManPasswordRecognizer;
+
+  GestureRecognizer get forgetDriverPasswordRecognizer =>
+      _forgetDriverPasswordRecognizer;
+
+  bool get rememberMePoliceMan => _rememberMePoliceMan;
+
+  bool get rememberMeDriver => _rememberMeDriver;
+
+  bool get obscurePasswordPoliceMan => _obscurePasswordPoliceMan;
+
+  bool get obscurePasswordDriver => _obscurePasswordDriver;
 
   @override
   void onInit() {
     super.onInit();
-    tabController = TabController(length: 2, vsync: this);
-    jobNumber = TextEditingController();
-    passwordPoliceMan = TextEditingController();
-    licenseNumber = TextEditingController();
-    passwordDriver = TextEditingController();
-    forgetPoliceManPasswordRecognizer = TapGestureRecognizer()
-      ..onTap = () => Get.toNamed(Routes.forgetPoliceManPasswordScreen);
-    forgetDriverPasswordRecognizer = TapGestureRecognizer()
-      ..onTap = () => Get.toNamed(Routes.forgetDriverPasswordScreen);
+    _tabController = TabController(
+      length: AppConstants.lengthOfTabBarInLoginController,
+      vsync: this,
+    );
+    _jobNumber = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_jobNumber);
+        },
+      );
+    _passwordPoliceMan = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_passwordPoliceMan);
+        },
+      );
+    _licenseNumber = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_licenseNumber);
+        },
+      );
+    _passwordDriver = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_passwordDriver);
+        },
+      );
+    _forgetPoliceManPasswordRecognizer = TapGestureRecognizer()
+      ..onTap = () async {
+        await initForgotPasswordForPoliceMan();
+        Get.toNamed(Routes.forgetPoliceManPasswordScreen, arguments: false);
+      };
+    _forgetDriverPasswordRecognizer = TapGestureRecognizer()
+      ..onTap = () async {
+        await initForgotPasswordForDriver();
+        Get.toNamed(Routes.forgetPasswordScreen, arguments: true);
+      };
   }
 
   @override
-  void dispose() {
-    jobNumber.dispose();
-    passwordPoliceMan.dispose();
-    licenseNumber.dispose();
-    passwordDriver.dispose();
-    forgetPoliceManPasswordRecognizer.dispose();
-    forgetDriverPasswordRecognizer.dispose();
-    super.dispose();
+  void onClose() {
+    _jobNumber.dispose();
+    _passwordPoliceMan.dispose();
+    _licenseNumber.dispose();
+    _passwordDriver.dispose();
+    _forgetPoliceManPasswordRecognizer.dispose();
+    _forgetDriverPasswordRecognizer.dispose();
+    super.onClose();
   }
 
+  /// To back to welcome screen and remove login controller from memory
   void backButton() {
+    disposeLogin();
     Get.offAllNamed(Routes.welcomeScreen);
   }
 
   void changeRememberMePoliceMan(bool isRememberMe) {
-    rememberMePoliceMan = isRememberMe;
+    _rememberMePoliceMan = isRememberMe;
     update();
   }
 
   void changeRememberMeDriver(bool isRememberMe) {
-    rememberMeDriver = isRememberMe;
+    _rememberMeDriver = isRememberMe;
     update();
   }
 
   void changeObscurePasswordPoliceMan() {
-    obscurePasswordPoliceMan = !obscurePasswordPoliceMan;
+    _obscurePasswordPoliceMan = !_obscurePasswordPoliceMan;
     update();
   }
 
   void changeObscurePasswordDriver() {
-    obscurePasswordDriver = !obscurePasswordDriver;
+    _obscurePasswordDriver = !_obscurePasswordDriver;
     update();
   }
 
-  void loginDriver() async {
-    if (_checkDataDriver()) {
-      bool login =
-          await _driverDatabase.login(licenseNumber.text, passwordDriver.text);
-      debugPrint('Login :$login');
-      DriverModel? driverData =
-          await _driverDatabase.getDriver(licenseNumber.text);
-      if (login && driverData != null) {
-        await _sharedPreferences.setDriverData(driverData);
-        await _sharedPreferences.setRememberMeDriver(rememberMeDriver);
-        await Get.offAllNamed(Routes.driverHomeScreen);
-      } else {
-        showSnackBar(message: ManagerStrings.theEnteredDataIsIncorrect);
-      }
+  void loginDriver(BuildContext context) async {
+    if (_driverFormKey.currentState!.validate()) {
+      customLoading(context);
+      await initDriverLogin();
+      final DriverLoginUseCase driverLoginUseCase =
+          instance<DriverLoginUseCase>();
+      (await driverLoginUseCase.execute(
+        DriverLoginInput(
+          licenseNumber: _licenseNumber.text,
+          password: _passwordDriver.text,
+        ),
+      ))
+          .fold(
+        /// Failed request login
+        (l) {
+          /// Close loading dialog
+          context.pop();
+
+          /// Appear message of error in SnackBar to user
+          showToast(message: l.message, context: context);
+        },
+
+        /// Successfully request login
+        (r) async {
+          /// Save account logged-in or not when close app
+          await _sharedPrefController.setData(
+              SharedPreferencesKeys.rememberMeDriver, _rememberMeDriver);
+
+          /// Save data of driver when login
+          await _saveDriverDataInSharedPref(r);
+
+          if (context.mounted) {
+            /// Close loading dialog && Navigate to driver home screen
+            context.popAndPushNamed(Routes.driverHomeScreen);
+          }
+
+          disposeLogin();
+        },
+      );
     } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+      /// Appear message of error in SnackBar to user
+      showToast(
+          message: ManagerStrings.pleaseEnterYourLicenseNumberAndPassword,
+          context: context);
     }
+    update();
   }
 
-  void loginPoliceMan() async {
-    if (_checkDataPolice()) {
-      bool login =
-          await _policeDatabase.login(jobNumber.text, passwordPoliceMan.text);
-      if (login) {
-        PoliceModel? police = await _policeDatabase.show(jobNumber.text);
-        _sharedPreferences.setPoliceData(police!);
-        _sharedPreferences.setRememberMePolice(rememberMePoliceMan);
-        Get.offAllNamed(Routes.policeManHomeScreen);
-      } else {
-        showSnackBar(message: ManagerStrings.theEnteredDataIsIncorrect);
-      }
+  /// login police man account
+  void loginPoliceMan(BuildContext context) async {
+    if (_policeFormKey.currentState!.validate()) {
+      customLoading(context);
+      await initPoliceManLogin();
+      final PoliceManLoginUseCase policeManLoginUseCase =
+          instance<PoliceManLoginUseCase>();
+      (await policeManLoginUseCase.execute(PoliceManLoginInput(
+              jobNumber: _jobNumber.text, password: _passwordPoliceMan.text)))
+          .fold(
+        /// Failed login request
+        (l) {
+          context.pop();
+
+          /// Appear message of error in SnackBar to user
+          showToast(message: l.message, context: context);
+        },
+
+        /// Successfully login request
+        (r) async {
+          /// Save account logged-in or not when close app
+          await _sharedPrefController.setData(
+              SharedPreferencesKeys.rememberMePolice, _rememberMePoliceMan);
+
+          /// Save data of police man when login
+          await _savePoliceDataInSharedPref(r);
+
+          if (context.mounted) {
+            /// Close loading dialog && Navigate to police man home screen
+            context.popAndPushNamed(Routes.policeManHomeScreen);
+          }
+          disposeLogin();
+        },
+      );
     } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData);
+      context.pop();
+
+      /// Appear message of error in SnackBar to user
+      showToast(
+          message: ManagerStrings.pleaseEnterYourJobNumberAndPassword,
+          context: context);
     }
+    update();
   }
 
-  bool _checkDataDriver() {
-    if (licenseNumber.text.isNotEmpty && passwordDriver.text.isNotEmpty) {
-      return true;
-    } else {
-      return false;
-    }
+  Future<void> _savePoliceDataInSharedPref(PoliceManLoginModel police) async {
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.image, police.image);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.phoneNumber, police.phoneNumber);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.nameAr, police.nameAr);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.nameEn, police.nameEn);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.licenseOrJobNumber, police.jobNumber);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.policeMilitaryRank, police.militaryRank);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.userId, police.id);
   }
 
-  bool _checkDataPolice() {
-    if (jobNumber.text.isNotEmpty && passwordPoliceMan.text.isNotEmpty) {
-      return true;
-    } else {
-      return false;
-    }
+  Future<void> _saveDriverDataInSharedPref(DriverLoginModel driver) async {
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.numberOfUnReadNotifications,
+        driver.numberOfUnReadNotifications);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.numberOfViolationsPaid,
+        driver.numberOfViolationsPaid);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.numberOfViolationsUnPaid,
+        driver.numberOfViolationsUnPaid);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.userId, driver.id);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.expiryDateLicense, driver.expiryDate);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.releaseDateLicense, driver.releaseDate);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.idNumber, driver.idNumber);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.licenseLevelsOfLicense, driver.licenseLevels);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.nameAr, driver.nameAr);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.nameEn, driver.nameEn);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.image, driver.image);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.phoneNumber, driver.phone);
+    await _sharedPrefController.setData(
+        SharedPreferencesKeys.licenseOrJobNumber, driver.licenseNumber);
   }
 }

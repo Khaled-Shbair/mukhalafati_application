@@ -22,15 +22,10 @@ class PageViewContent extends StatelessWidget {
           height: ManagerHeight.h405,
           fit: BoxFit.cover,
         ),
-        SizedBox(height: ManagerHeight.h5),
+        verticalSpace(ManagerHeight.h5),
         Text(
-          title,
-          style: TextStyle(
-            fontSize: ManagerFontsSizes.f22,
-            fontWeight: ManagerFontWeight.bold,
-            fontFamily: ManagerFontFamily.cairo,
-            color: ManagerColors.black,
-          ),
+          title, style: context.textTheme.titleOnBoardingAndWelcomeAndLoginScreen(context),
+          // context.theme.textTheme.titleLarge,
         ),
         Container(
           margin: EdgeInsetsDirectional.only(
@@ -42,13 +37,7 @@ class PageViewContent extends StatelessWidget {
           child: Text(
             subTitle,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: ManagerFontsSizes.f15,
-              fontWeight: ManagerFontWeight.regular,
-              fontFamily: ManagerFontFamily.cairo,
-              color: ManagerColors.davyGrey,
-              height: 1.8,
-            ),
+            style: context.textTheme.subTitleOnBoardingScreen(context),
           ),
         ),
       ],

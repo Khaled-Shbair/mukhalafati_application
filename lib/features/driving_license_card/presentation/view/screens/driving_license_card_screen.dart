@@ -10,28 +10,12 @@ class DrivingLicenseCardScreen extends StatelessWidget {
         return Scaffold(
           key: controller.scaffoldKey,
           resizeToAvoidBottomInset: false,
-          endDrawer: driverDrawer(
-            driverName: controller.driverName,
-            driverImage: controller.imageDriver,
-            isDrivingLicenseCardScreen: true,
-          ),
+          endDrawer: CustomDriverDrawer(isDrivingLicenseCardScreen: true),
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: Text(ManagerStrings.electronicLicense),
             actions: [
-              mainButton(
-                onPressed: () => controller.openEndDrawer(),
-                minWidth: ManagerWidth.w30,
-                height: ManagerHeight.h30,
-                color: ManagerColors.transparent,
-                highlightColor: ManagerColors.transparent,
-                splashColor: ManagerColors.transparent,
-                side: BorderSide.none,
-                child: Icon(
-                  Icons.menu,
-                  color: ManagerColors.black,
-                  size: ManagerIconsSizes.i30,
-                ),
-              ),
+              CustomMenuButton(() => controller.openEndDrawer()),
             ],
           ),
           body: GetBuilder<DrivingLicenseCardController>(
@@ -45,7 +29,7 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                   children: [
                     Visibility(
                       visible: controller.appearImageDrivingLicenseCard(),
-                      child: SizedBox(height: ManagerHeight.h10),
+                      child: verticalSpace(ManagerHeight.h10),
                     ),
                     Visibility(
                       visible: controller.appearImageDrivingLicenseCard(),
@@ -58,49 +42,39 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                     ),
                     Visibility(
                       visible: controller.appearImageDrivingLicenseCard(),
-                      child: SizedBox(height: ManagerHeight.h24),
+                      child: verticalSpace(ManagerHeight.h24),
                     ),
                     Visibility(
                       visible: controller.appearText(),
                       child: Text(
                         ManagerStrings.showYourDrivingLicenseCard,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: ManagerColors.black,
-                          fontFamily: ManagerFontFamily.cairo,
-                          fontWeight: ManagerFontWeight.bold,
-                          fontSize: ManagerFontsSizes.f15,
-                        ),
+                        style: context.textTheme
+                            .titleDrivingLicenseCardScreen(context),
                       ),
                     ),
                     Visibility(
                       visible: controller.appearText(),
-                      child: SizedBox(height: ManagerHeight.h8),
+                      child: verticalSpace(ManagerHeight.h8),
                     ),
                     Visibility(
                       visible: controller.appearText(),
                       child: Text(
-                        ManagerStrings.titleDrivingLicenseCard,
+                        ManagerStrings.subTitleDrivingLicenseCard,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: ManagerColors.davyGrey,
-                          fontFamily: ManagerFontFamily.cairo,
-                          fontWeight: ManagerFontWeight.medium,
-                          fontSize: ManagerFontsSizes.f15,
-                          height: AppConstants
-                              .heightOfTextOfTitleDrivingLicenseCardInDrivingLicenseCardScreen,
-                        ),
+                        style: context.textTheme
+                            .subTitleDrivingLicenseCardScreen(context),
                       ),
                     ),
                     Visibility(
                       visible: controller.appearText(),
-                      child: SizedBox(height: ManagerHeight.h24),
+                      child: verticalSpace(ManagerHeight.h24),
                     ),
                     Expanded(
                       child: ListView(
                         primary: false,
                         children: [
-                          expansionTileCard(
+                          CustomExpansionTileCard(
                             title: ManagerStrings.frontElectronicLicenseCard,
                             isOpen: controller.openFrontElectronicLicenseCard,
                             onExpansionChanged: (value) {
@@ -108,7 +82,7 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                                   .changeOpenFrontElectronicLicenseCard(value);
                             },
                             children: [
-                              frontDrivingLicenseCard(
+                              CustomFrontDrivingLicenseCard(
                                 licenseNumber: controller.licenseNumber,
                                 nameAr: controller.nameAr,
                                 nameEn: controller.nameEn,
@@ -120,8 +94,8 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                               )
                             ],
                           ),
-                          SizedBox(height: ManagerHeight.h10),
-                          expansionTileCard(
+                          verticalSpace(ManagerHeight.h10),
+                          CustomExpansionTileCard(
                             title: ManagerStrings.backElectronicLicenseCard,
                             isOpen: controller.openBackElectronicLicenseCard,
                             onExpansionChanged: (value) {
@@ -129,11 +103,11 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                                   .changeOpenBackElectronicLicenseCard(value);
                             },
                             children: [
-                              backDrivingLicenseCard(),
+                              CustomBackDrivingLicenseCard(),
                             ],
                           ),
-                          SizedBox(height: ManagerHeight.h10),
-                          expansionTileCard(
+                          verticalSpace(ManagerHeight.h10),
+                          CustomExpansionTileCard(
                             title: ManagerStrings.fullElectronicLicenseCard,
                             isOpen: controller.openFullElectronicLicenseCard,
                             onExpansionChanged: (value) {
@@ -141,7 +115,7 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                                   .changeOpenFullElectronicLicenseCard(value);
                             },
                             children: [
-                              frontDrivingLicenseCard(
+                              CustomFrontDrivingLicenseCard(
                                 licenseNumber: controller.licenseNumber,
                                 nameAr: controller.nameAr,
                                 nameEn: controller.nameEn,
@@ -155,17 +129,19 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                               Container(
                                 height: ManagerHeight.h6,
                                 decoration: BoxDecoration(
-                                  color: ManagerColors.white,
+                                  color: context.theme.colorScheme.surface,
                                   boxShadow: [
                                     BoxShadow(
                                       offset: Offset(
-                                          ManagerWidth.w0, ManagerHeight.h4),
-                                      color: ManagerColors.white,
+                                        ManagerWidth.w0,
+                                        ManagerHeight.h4,
+                                      ),
+                                      color: context.theme.colorScheme.surface,
                                     ),
                                   ],
                                 ),
                               ),
-                              backDrivingLicenseCard(),
+                              CustomBackDrivingLicenseCard(),
                             ],
                           ),
                         ],

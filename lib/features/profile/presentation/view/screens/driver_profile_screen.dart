@@ -10,29 +10,12 @@ class DriverProfileScreen extends StatelessWidget {
         return Scaffold(
           key: controller.scaffoldKey,
           resizeToAvoidBottomInset: false,
-          endDrawer: driverDrawer(
-            driverName: controller.driverName,
-            driverImage: controller.driverImage,
-            isProfileScreen: true,
-          ),
+          endDrawer: CustomDriverDrawer(isProfileScreen: true),
           appBar: AppBar(
             title: Text(ManagerStrings.profile),
             automaticallyImplyLeading: false,
             actions: [
-              mainButton(
-                onPressed: () => controller.openEndDrawer(),
-                minWidth: ManagerWidth.w30,
-                height: ManagerHeight.h30,
-                color: ManagerColors.transparent,
-                highlightColor: ManagerColors.transparent,
-                splashColor: ManagerColors.transparent,
-                side: BorderSide.none,
-                child: Icon(
-                  Icons.menu,
-                  color: ManagerColors.black,
-                  size: ManagerIconsSizes.i30,
-                ),
-              ),
+              CustomMenuButton(() => controller.openEndDrawer()),
             ],
           ),
           body: ListView(
@@ -40,85 +23,73 @@ class DriverProfileScreen extends StatelessWidget {
               start: ManagerWidth.w22,
               end: ManagerWidth.w22,
               top: ManagerHeight.h28,
+
             ),
             primary: true,
             children: [
-              CircleAvatar(
-                radius: ManagerRadius.r66,
-                backgroundColor: ManagerColors.primaryColor,
-                child: CircleAvatar(
-                  radius: ManagerRadius.r64,
-                  backgroundColor: ManagerColors.white,
-                  child: CircleAvatar(
-                    radius: ManagerRadius.r60,
-                    // backgroundImage: NetworkImage(controller.driverImage),
-                    backgroundImage: AssetImage(controller.driverImage),
-                  ),
-                ),
-              ),
-              SizedBox(height: ManagerHeight.h70),
-              mainTextField(
-                controller: controller.driverNameController,
+              CustomImageProfile(imagePath: controller.driverImage),
+              verticalSpace(ManagerHeight.h70),
+              CustomTextField(
+                borderColor: context.theme.primaryColor,
+                controller: controller.driverName,
                 labelText: ManagerStrings.fullName,
-                borderColor: ManagerColors.primaryColor,
-                colorLabelText: ManagerColors.primaryColor,
-                fontSizeLabelText: ManagerFontsSizes.f14,
-                fontWeightLabelText: ManagerFontWeight.bold,
+                labelStyle:
+                    context.textTheme.labelStyleOfDataInDriverProfile(context),
                 keyboardType: TextInputType.name,
+                inputTextStyle:
+                    context.textTheme.textStyleOfUserDataInProfile(context),
                 contentPadding: EdgeInsetsDirectional.only(
                   start: ManagerWidth.w23,
                 ),
               ),
-              SizedBox(height: ManagerHeight.h22),
-              mainTextField(
-                controller: controller.phoneNumberController,
+              verticalSpace(ManagerHeight.h22),
+              CustomTextField(
+                controller: controller.driverPhone,
                 labelText: ManagerStrings.phoneNumber,
                 maxLength: AppConstants.maxLengthOfPhoneNumber,
-                borderColor: ManagerColors.primaryColor,
-                colorLabelText: ManagerColors.primaryColor,
-                fontSizeLabelText: ManagerFontsSizes.f14,
-                fontWeightLabelText: ManagerFontWeight.bold,
+                labelStyle:
+                    context.textTheme.labelStyleOfDataInDriverProfile(context),
+                inputTextStyle:
+                    context.textTheme.textStyleOfUserDataInProfile(context),
                 contentPadding: EdgeInsetsDirectional.only(
                   start: ManagerWidth.w23,
                 ),
+                borderColor: context.theme.primaryColor,
               ),
-              SizedBox(height: ManagerHeight.h22),
-              mainTextField(
-                controller: controller.licenceNumberController,
+              verticalSpace(ManagerHeight.h22),
+              CustomTextField(
+                borderColor: context.theme.primaryColor,
+                controller: controller.licenceNumber,
                 labelText: ManagerStrings.licenseNumber,
-                borderColor: ManagerColors.primaryColor,
-                colorLabelText: ManagerColors.primaryColor,
-                fontSizeLabelText: ManagerFontsSizes.f14,
-                fontWeightLabelText: ManagerFontWeight.bold,
+                labelStyle:
+                    context.textTheme.labelStyleOfDataInDriverProfile(context),
                 maxLength: AppConstants.maxLengthOfLicenseNumber,
+                inputTextStyle:
+                    context.textTheme.textStyleOfUserDataInProfile(context),
                 contentPadding: EdgeInsetsDirectional.only(
                   start: ManagerWidth.w23,
                 ),
               ),
-              SizedBox(height: ManagerHeight.h22),
-              mainTextField(
-                controller: controller.idNumberController,
+              verticalSpace(ManagerHeight.h22),
+              CustomTextField(
+                borderColor: context.theme.primaryColor,
+                labelStyle:
+                    context.textTheme.labelStyleOfDataInDriverProfile(context),
+                controller: controller.driverId,
                 labelText: ManagerStrings.idNumber,
-                borderColor: ManagerColors.primaryColor,
-                colorLabelText: ManagerColors.primaryColor,
-                fontSizeLabelText: ManagerFontsSizes.f14,
-                fontWeightLabelText: ManagerFontWeight.bold,
                 maxLength: AppConstants.maxLengthOfIDNumber,
+                inputTextStyle:
+                    context.textTheme.textStyleOfUserDataInProfile(context),
                 contentPadding: EdgeInsetsDirectional.only(
                   start: ManagerWidth.w23,
                 ),
               ),
-              SizedBox(height: ManagerHeight.h38),
-              mainButton(
-                onPressed: () => controller.updateDataButton(),
+              verticalSpace(ManagerHeight.h38),
+              CustomButton(
+                onPressed: () => controller.updateDataButton(context),
                 child: Text(
                   ManagerStrings.updateData,
-                  style: TextStyle(
-                    color: ManagerColors.white,
-                    fontSize: ManagerFontsSizes.f15,
-                    fontWeight: ManagerFontWeight.bold,
-                    fontFamily: ManagerFontFamily.cairo,
-                  ),
+                  style: context.textTheme.mainButtonTextStyle(context),
                 ),
               ),
             ],

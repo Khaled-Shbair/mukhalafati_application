@@ -1,11 +1,9 @@
 import '/config/all_imports.dart';
 
 class WelcomeController extends GetxController {
-  void loginButton() {
-    Get.toNamed(Routes.loginScreen);
-  }
 
-  void createAccountButton() {
-    Get.toNamed(Routes.loginScreen);
+  /// when tap on button navigate to login screen
+  void loginButton(BuildContext context) {
+    context.pushNamed(Routes.loginScreen);
   }
 }
