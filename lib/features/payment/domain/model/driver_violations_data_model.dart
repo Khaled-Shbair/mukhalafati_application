@@ -2,10 +2,10 @@ class DriverViolationsDataModel {
   int id;
   String violationDate;
   String violationTime;
-  String violationState;
+  bool violationState;
   String violationAddress;
   String violationReason;
-  String priceOfViolation;
+  num priceOfViolation;
 
   DriverViolationsDataModel({
     required this.id,

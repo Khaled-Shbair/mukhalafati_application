@@ -11,7 +11,7 @@ class VerificationCodeScreen extends StatelessWidget {
 
   final String phoneNumber;
   final int id;
-  final int verificationCode;
+  final String verificationCode;
   final bool isDriver;
 
   @override
@@ -31,7 +31,7 @@ class VerificationCodeScreen extends StatelessWidget {
             padding: EdgeInsetsDirectional.only(
               start: ManagerWidth.w28,
               end: ManagerWidth.w28,
-              top: ManagerHeight.h64,
+              top: ManagerHeight.h40,
             ),
             children: [
               CustomVerificationImage(

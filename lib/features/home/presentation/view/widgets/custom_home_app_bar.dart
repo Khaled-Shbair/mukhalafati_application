@@ -43,7 +43,7 @@ PreferredSizeWidget customHomeAppBar({
       ],
     ),
     actions: [
-      menuButton(openEndDrawer),
+      CustomMenuButton(openEndDrawer),
     ],
   );
 }

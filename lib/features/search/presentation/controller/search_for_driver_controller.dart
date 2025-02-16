@@ -1,92 +1,132 @@
 import '/config/all_imports.dart';
 
-class SearchForDriverController extends GetxController with Helpers {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final SearchForDriverUseCase _searchForDriverUseCase =
-      instance<SearchForDriverUseCase>();
+class SearchForDriverController extends GetxController with CustomToast {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _searchForDriverUseCase = instance<SearchForDriverUseCase>();
 
-  late TextEditingController licenseNumberController;
-  bool loading = false;
-  bool result = false;
-  late String licenseNumber;
+  late TextEditingController _licenseNumberController;
 
-  late String expiryDate;
-  late String releaseDate;
+  late FocusNode _focusNode;
 
-  late String idNumber;
-  late String nameAr;
-  late String nameEn;
+  bool _loading = false;
+  bool _result = false;
+  String _savedSearchLicenseNumber = '';
 
-  late String licenseLevels;
+  String _licenseNumber = '';
+  String _expiryDate = '';
+  String _releaseDate = '';
+  String _idNumber = '';
+  String _nameAr = '';
+  String _nameEn = '';
+  String _licenseLevels = '';
+  String _imageDriver = '';
+  int _numberOfViolations = 1;
 
-  late String imageDriver;
+  bool get loading => _loading;
 
-  late int numberOfViolations;
+  bool get result => _result;
+
+  int get numberOfViolations => _numberOfViolations;
+
+  FocusNode get focusNode => _focusNode;
+
+  String get licenseNumber => _licenseNumber;
+
+  String get expiryDate => _expiryDate;
+
+  String get releaseDate => _releaseDate;
+
+  String get idNumber => _idNumber;
+
+  String get nameAr => _nameAr;
+
+  String get nameEn => _nameEn;
+
+  String get licenseLevels => _licenseLevels;
+
+  String get imageDriver => _imageDriver;
+
+  TextEditingController get licenseNumberController => _licenseNumberController;
+
+  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
 
   @override
   void onInit() {
     super.onInit();
-    licenseNumberController = TextEditingController();
+
+    _licenseNumberController = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_licenseNumberController);
+        },
+      );
+    _focusNode = FocusNode();
   }
 
   @override
-  void onClose() {
-    licenseNumberController.dispose();
-    super.onClose();
+  void dispose() {
+    _licenseNumberController.dispose();
+    _focusNode.dispose();
+    super.dispose();
   }
 
   /// Open [endDrawer], use this drawer as menu.
-  void openEndDrawer() {
-    if (scaffoldKey.currentState != null &&
-        !scaffoldKey.currentState!.isEndDrawerOpen) {
-      scaffoldKey.currentState!.openEndDrawer();
+  void openEndDrawer(BuildContext context) {
+    if (_scaffoldKey.currentState != null &&
+        !_scaffoldKey.currentState!.isEndDrawerOpen) {
+      _scaffoldKey.currentState!.openEndDrawer();
+      _focusNode.unfocus();
     }
   }
 
   void searchButton(BuildContext context) async {
-    loading = true;
-    update();
-    if (_checkData()) {
-      (await _searchForDriverUseCase.execute(
-        SearchForDriverInput(licenseNumber: licenseNumberController.text),
-      ))
+    _focusNode.unfocus();
+    if (_licenseNumberController.text.isNotEmpty &&
+        _licenseNumberController.text != _savedSearchLicenseNumber) {
+      if (_licenseNumberController.text.length ==
+          AppConstants.maxLengthOfLicenseNumber) {
+        _loading = true;
+        _result = false;
+        update();
+        (await _searchForDriverUseCase.execute(
+          SearchForDriverInput(licenseNumber: _licenseNumberController.text),
+        ))
 
-          /// Failed request search for driver
-          .fold(
-        (l) {
-          /// Appear message of error in SnackBar to user
-          showSnackBar(message: l.message, context: context);
-        },
+            /// Failed request search for driver
+            .fold(
+          (l) {
+            _result = false;
+            _licenseNumberController.clear();
 
-        /// Successfully request search for driver
-        (r) {
-          licenseNumber = r.licenseNumber;
-          expiryDate = r.expiryDate;
-          releaseDate = r.releaseDate;
-          idNumber = r.idNumber;
-          nameAr = r.nameAr;
-          nameEn = r.nameEn;
-          licenseLevels = r.licenseLevels;
-          imageDriver = r.imageDriver;
-          numberOfViolations = r.numberOfViolations;
-          result = true;
-        },
-      );
+            /// Appear message of error in SnackBar to user
+            showToast(message: l.message, context: context);
+          },
+
+          /// Successfully request search for driver
+          (r) {
+            _savedSearchLicenseNumber = r.licenseNumber;
+            _licenseNumber = r.licenseNumber;
+            _expiryDate = r.expiryDate;
+            _releaseDate = r.releaseDate;
+            _idNumber = r.idNumber;
+            _nameAr = r.nameAr;
+            _nameEn = r.nameEn;
+            _licenseLevels = r.licenseLevels;
+            _imageDriver = r.imageDriver;
+            _numberOfViolations = r.numberOfViolations;
+            _result = true;
+          },
+        );
+      } else {
+        showToast(
+            message: ManagerStrings.licenseNumberUnAccept, context: context);
+      }
     } else {
       /// Appear message of error in SnackBar to user
-      showSnackBar(
+      showToast(
           message: ManagerStrings.pleaseEnterLicenseNumber, context: context);
     }
-    loading = false;
+    _loading = false;
     update();
-  }
-
-  /// check inputs user data in not empty
-  bool _checkData() {
-    if (licenseNumberController.text.isNotEmpty) {
-      return true;
-    } else {
-      return false;
-    }
   }
 }

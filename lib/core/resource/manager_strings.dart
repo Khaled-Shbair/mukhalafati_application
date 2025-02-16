@@ -2,14 +2,63 @@ import '/config/all_imports.dart';
 
 class ManagerStrings {
   static String noRouteFound = 'noRouteFound'.tr;
+  static String violationHasBeenRegistered = 'violation_has_been_registered'.tr;
+  static String noViolationHasBeenRegistered = 'no_violation_has_been_registered'.tr;
   static String badRequest = 'bad_request'.tr;
+  static String search = 'search'.tr;
+  static String noteInPoliceHomeScreen = 'note_in_police_home_screen'.tr;
+  static String drivingLicenseEn =
+      'DRIVING LICENSE'; //[_TitleOfDrivingLicenseEn]
   static String pleaseEnterNewPassword = 'please_enter_new_password'.tr;
+  static String passwordsNotMatched = 'passwords_not_matched'.tr;
+  static String pleaseEnterExpiryDateCard = 'please_enter_expiry_date_card'.tr;
+  static String expiryDateCardUnAccept = 'expiry_date_card_un_accept'.tr;
+  static String securityCodeUnAccept = 'security_code_un_accept'.tr;
+  static String pleaseEnterCardNumber = 'please_enter_card_number'.tr;
+  static String cardNumberUnAccept = 'card_number_un_accept'.tr;
+  static String pleaseEnterCardHolderName = 'please_enter_card_holder_name'.tr;
+  static String cardHolderNameUnAccept = 'card_holder_name_un_accept'.tr;
+  static String pleaseEnterPlaceOfViolation =
+      'please_enter_place_of_violation'.tr;
+  static String january = 'january'.tr;
+  static String february = 'february'.tr;
+  static String march = 'march'.tr;
+  static String april = 'april'.tr;
+  static String may = 'may'.tr;
+  static String june = 'june'.tr;
+  static String july = 'july'.tr;
+  static String august = 'august'.tr;
+  static String september = 'september'.tr;
+  static String october = 'october'.tr;
+  static String november = 'november'.tr;
+  static String december = 'december'.tr;
+
+  static String placeOfViolationUnAccept = 'place_of_violation_un_accept'.tr;
+
+  static String pleaseEnterSecurityCode = 'please_enter_security_code'.tr;
+  static String pleaseEnterFullName = 'please_enter_full_name'.tr;
+  static String pleaseEnterPassword = 'please_enter_password'.tr;
+  static String passwordUnAccept = 'password_un_accept'.tr;
+  static String pleaseEnterDataOfIncidentOrProblem =
+      'please_enter_date_of_incident_or_problem'.tr;
+  static String pleaseEnterAddressOfIncidentOrProblem =
+      'please_enter_address_of_incident_or_problem'.tr;
+  static String pleaseEnterDetailOfComplaint =
+      'please_enter_detail_of_complaint'.tr;
+  static String fullNameUnAccept = 'full_name_un_accept'.tr;
+  static String licenseNumberUnAccept = 'license_number_un_accept'.tr;
+  static String jobNumberUnAccept = 'job_number_un_accept'.tr;
+
   static String pleaseEnterIdNumber = 'please_enter_id_number'.tr;
+  static String idNumberUnAccept = 'id_number_un_accept'.tr;
   static String pleaseEnterDataThisNeedUpdated =
       'please_enter_data_this_need_updated'.tr;
   static String noInternetConnection = 'no_internet_connection'.tr;
   static String skip = 'skip'.tr;
   static String policeMan = 'police_man'.tr;
+  static String driverIdNumber = 'driver_id_number'.tr;
+  static String ownerIdNumber = 'owner_id_number'.tr;
+  static String notificationEditorName = 'notification_editor_name'.tr;
   static String subTitleOnBoardingOne = 'sub_title_on_boarding_one'.tr;
   static String theEnteredDataIsIncorrect = 'the_entered_data_is_incorrect'.tr;
   static String theDriver = 'the_driver'.tr;
@@ -17,9 +66,23 @@ class ManagerStrings {
   static String violations = 'violations'.tr;
   static String subTitleOnBoardingThree = 'sub_title_on_boarding_three'.tr;
   static String welcome = 'welcome'.tr;
+
   static String pleaseEnterLicenseNumber = 'please_enter_license_number'.tr;
+  static String pleaseSelectReasonForViolation =
+      'please_select_reason_for_violation'.tr;
+  static String pleaseEnterVehicleType = 'please_enter_vehicle_type'.tr;
+  static String vehicleTypeUnAccept = 'vehicle_type_un_accept'.tr;
+  static String pleaseEnterVehicleColor = 'please_enter_vehicle_color'.tr;
+  static String vehicleColorUnAccept = 'vehicle_color_un_accept'.tr;
+  static String pleaseEnterVehicleNumber = 'please_enter_vehicle_number'.tr;
+  static String vehicleNumberUnAccept = 'vehicle_number_un_accept'.tr;
   static String pleaseEnterJobNumber = 'please_enter_job_number'.tr;
   static String verificationFailed = 'verification_failed'.tr;
+
+  static String maximumAmount = 'maximum_amount'.tr;
+  static String minimumAmount = 'minimum_amount'.tr;
+  static String oldestDate = 'oldest_date'.tr;
+  static String latestDate = 'latest_date'.tr;
 
   static String pleaseEnterVerificationCode =
       'please_enter_verification_code'.tr;
@@ -92,6 +155,8 @@ class ManagerStrings {
       'the_violation_was_successfully_created'.tr;
   static String date = 'date'.tr;
   static String regions = 'regions'.tr;
+  static String regionFilter = 'region_filter'.tr;
+  static String dateFilter = 'date_filter'.tr;
   static String violationAmount = 'violation_amount'.tr;
   static String unpaidViolations = 'unpaid_violations'.tr;
   static String paidViolations = 'paid_violations'.tr;
@@ -207,6 +272,7 @@ class ManagerStrings {
   static String paid = 'paid'.tr;
   static String close = 'close'.tr;
   static String violationDetails = 'violation_details'.tr;
+  static String documentReservationNotice = 'document_reservation_notice'.tr;
   static String amount = 'amount'.tr;
   static String noRecordedViolations = 'no_recorded_violations'.tr;
   static String instructionsAndGuidelines = 'instructions_and_guidelines'.tr;

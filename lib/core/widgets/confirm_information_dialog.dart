@@ -1,13 +1,13 @@
 import '/config/all_imports.dart';
 
-Future<void> confirmInformationDialog({
+Future<void> customConfirmInformationDialog({
   required BuildContext context,
   required String text,
   String? textConfirmButton,
   String? textCancelButton,
   String? title,
   required Function() closeButton,
-  Function()? confirmButton,
+  required Function() confirmButton,
   Function()? cancelButton,
 }) async {
   await showDialog(
@@ -30,7 +30,7 @@ Future<void> confirmInformationDialog({
               bottom: ManagerHeight.h50,
             ),
             decoration: BoxDecoration(
-              color: ManagerColors.white,
+              color: context.theme.colorScheme.surface,
               borderRadius: BorderRadius.circular(ManagerRadius.r10),
               boxShadow: [
                 BoxShadow(
@@ -49,7 +49,7 @@ Future<void> confirmInformationDialog({
                 Align(
                   alignment: Alignment.topRight,
                   child: CustomButton(
-                    onPressed: cancelButton ?? () => Get.back(),
+                    onPressed: cancelButton ?? () => context.pop(),
                     shape: const CircleBorder(),
                     height: ManagerHeight.h24,
                     minWidth: ManagerWidth.w0,
@@ -70,13 +70,9 @@ Future<void> confirmInformationDialog({
                   child: Text(
                     title ?? ManagerStrings.doYouWantToConfirmTheInformation,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: ManagerColors.eerieBlack,
-                      fontWeight: ManagerFontWeight.semiBold,
-                      fontFamily: ManagerFontFamily.cairo,
-                      fontSize: ManagerFontsSizes.f20,
-                      decoration: TextDecoration.none,
-                    ),
+                    style: context.textTheme
+                        .textStyleOfTitleOfCustomConfirmInformationDialog(
+                            context),
                   ),
                 ),
                 Padding(
@@ -88,45 +84,30 @@ Future<void> confirmInformationDialog({
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       CustomButton(
-                        onPressed: cancelButton ?? () => Get.back(),
+                        onPressed: cancelButton ?? () => context.pop(),
                         borderRadius: ManagerRadius.r8,
                         height: ManagerHeight.h40,
                         minWidth: ManagerWidth.w85,
-                        backgroundColor: ManagerColors.antiFlashWhite,
+                        backgroundColor:
+                            context.theme.colorScheme.primaryContainer,
                         side: BorderSide.none,
                         child: Text(
                           textCancelButton ?? ManagerStrings.back,
-                          style: TextStyle(
-                            color: ManagerColors.darkGunmetal,
-                            fontWeight: ManagerFontWeight.semiBold,
-                            fontFamily: ManagerFontFamily.cairo,
-                            fontSize: ManagerFontsSizes.f14,
-                          ),
+                          style: context.textTheme
+                              .textStyleOfBackButtonOfCustomConfirmInformationDialog(
+                                  context),
                         ),
                       ),
                       CustomButton(
-                        onPressed: () async {
-                          Get.back();
-                          if (confirmButton != null) {
-                            confirmButton();
-                          }
-                          await customCreatedSuccessfullyDialog(
-                            context: context,
-                            closeButton: closeButton,
-                            text: text,
-                          );
-                        },
+                        onPressed: confirmButton,
                         borderRadius: ManagerRadius.r8,
                         height: ManagerHeight.h40,
                         minWidth: ManagerWidth.w85,
                         child: Text(
                           textConfirmButton ?? ManagerStrings.confirm,
-                          style: TextStyle(
-                            color: ManagerColors.white,
-                            fontWeight: ManagerFontWeight.bold,
-                            fontFamily: ManagerFontFamily.cairo,
-                            fontSize: ManagerFontsSizes.f14,
-                          ),
+                          style: context.textTheme
+                              .textStyleOfConfirmButtonOfCustomConfirmInformationDialog(
+                                  context),
                         ),
                       ),
                     ],

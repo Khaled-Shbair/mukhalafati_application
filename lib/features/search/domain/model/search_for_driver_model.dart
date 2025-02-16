@@ -1,16 +1,20 @@
 class SearchForDriverModel {
-  String licenseNumber;
-  String expiryDate;
-  String releaseDate;
-  String idNumber;
-  String nameAr;
-  String nameEn;
-  String licenseLevels;
-  String imageDriver;
-  int numberOfViolations;
+final String licenseNumber;
+final String expiryDate;
+final String releaseDate;
+final String idNumber;
+final String nameAr;
+final String nameEn;
+final String licenseLevels;
+final String imageDriver;
+final int numberOfViolations;
+final String message;
+final bool status;
 
   SearchForDriverModel({
     required this.licenseNumber,
+    required this.status,
+    required this.message,
     required this.idNumber,
     required this.expiryDate,
     required this.licenseLevels,

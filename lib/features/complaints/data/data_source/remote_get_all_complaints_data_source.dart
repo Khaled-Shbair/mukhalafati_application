@@ -16,6 +16,9 @@ class RemoteGetAllComplaintsDataSourceImpl
       GetAllComplaintsRequest request) async {
     return await _appApi.getAllComplaintsForDriver(
       request.driverId,
+      request.page,
+      request.maxLimit,
+      request.orderBy,
     );
   }
 }

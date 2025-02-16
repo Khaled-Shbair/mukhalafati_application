@@ -2,7 +2,7 @@ import '/config/all_imports.dart';
 
 class DrivingLicenseCardController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
+  final _sharedPrefController = instance<SharedPreferencesController>();
   late String licenseNumber;
   late String expiryDate;
 
@@ -17,7 +17,6 @@ class DrivingLicenseCardController extends GetxController {
   late String licenseLevels;
 
   late String imageDriver;
-  late String driverName;
 
   bool openFrontElectronicLicenseCard = false;
   bool openBackElectronicLicenseCard = false;
@@ -26,27 +25,21 @@ class DrivingLicenseCardController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    licenseNumber = SharedPreferencesController.getString(
-        SharedPreferencesKeys.licenseOrJobNumber);
-    expiryDate = SharedPreferencesController.getString(
-        SharedPreferencesKeys.expiryDateLicense);
+    licenseNumber = _sharedPrefController
+        .getString(SharedPreferencesKeys.licenseOrJobNumber);
+    expiryDate = _sharedPrefController
+        .getString(SharedPreferencesKeys.expiryDateLicense);
 
-    releaseDate = SharedPreferencesController.getString(
-        SharedPreferencesKeys.releaseDateLicense);
+    releaseDate = _sharedPrefController
+        .getString(SharedPreferencesKeys.releaseDateLicense);
 
-    idNumber =
-        SharedPreferencesController.getString(SharedPreferencesKeys.idNumber);
-    nameAr =
-        SharedPreferencesController.getString(SharedPreferencesKeys.fullNameAr);
-    nameEn =
-        SharedPreferencesController.getString(SharedPreferencesKeys.fullNameEn);
+    idNumber = _sharedPrefController.getString(SharedPreferencesKeys.idNumber);
+    nameAr = _sharedPrefController.getString(SharedPreferencesKeys.nameAr);
+    nameEn = _sharedPrefController.getString(SharedPreferencesKeys.nameEn);
 
-    licenseLevels = SharedPreferencesController.getString(
-        SharedPreferencesKeys.licenseLevelsOfLicense);
-    driverName =
-        '${SharedPreferencesController.getString(SharedPreferencesKeys.firstName)} ${SharedPreferencesController.getString(SharedPreferencesKeys.lastName)}';
-    imageDriver =
-        SharedPreferencesController.getString(SharedPreferencesKeys.image);
+    licenseLevels = _sharedPrefController
+        .getString(SharedPreferencesKeys.licenseLevelsOfLicense);
+    imageDriver = _sharedPrefController.getString(SharedPreferencesKeys.image);
   }
 
   /// Open [endDrawer], use this drawer as menu.

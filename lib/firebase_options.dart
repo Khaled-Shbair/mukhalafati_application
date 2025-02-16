@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCN2-Kn94bI-yL2bsJhXivWzPjbEG9ZDMk',
-    appId: '1:134182730151:android:e4e73af9e308d112b09e82',
-    messagingSenderId: '134182730151',
-    projectId: 'community-app-31b67',
-    storageBucket: 'community-app-31b67.appspot.com',
+    apiKey: 'AIzaSyC_G7EqPK7SquvBfBrMAdPmKPSMmGkPibc',
+    appId: '1:723708133227:android:53ec1a2b432de4a5d9562e',
+    messagingSenderId: '723708133227',
+    projectId: 'mukhalafati',
+    storageBucket: 'mukhalafati.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBpcRTR0DpmsJJeS7XcjacGBqm0MATnKzM',
-    appId: '1:134182730151:ios:23f6218cf7420716b09e82',
-    messagingSenderId: '134182730151',
-    projectId: 'community-app-31b67',
-    storageBucket: 'community-app-31b67.appspot.com',
-    androidClientId: '134182730151-9i7m0t49ju4jldkcd7692rhd0ppm7kht.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCI_wpkTktH5XS6Uy1spY0dfyVdwugyxes',
+    appId: '1:723708133227:ios:0712ff6a73f16be7d9562e',
+    messagingSenderId: '723708133227',
+    projectId: 'mukhalafati',
+    storageBucket: 'mukhalafati.firebasestorage.app',
     iosBundleId: 'mukhalafati.com.mukhalafatiApplication',
   );
+
 }

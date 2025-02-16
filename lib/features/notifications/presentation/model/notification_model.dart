@@ -12,9 +12,9 @@ class NotificationModel {
   NotificationModel();
 
   NotificationModel.fromMap(Map<String, dynamic> map) {
-    notificationText = map[DatabaseConstants.notificationText];
-    notificationTime = map[DatabaseConstants.notificationTime];
-    driverId = map[DatabaseConstants.driverId];
+    // notificationText = map[DatabaseConstants.notificationText];
+    // notificationTime = map[DatabaseConstants.notificationTime];
+    // driverId = map[DatabaseConstants.driverId];
     boxColor = ManagerColors.lotion2;
     textColor = ManagerColors.black;
     timeColor = ManagerColors.black50;
@@ -22,9 +22,9 @@ class NotificationModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      DatabaseConstants.notificationText: notificationText,
-      DatabaseConstants.notificationTime: notificationTime,
-      DatabaseConstants.driverId: driverId,
+      // DatabaseConstants.notificationText: notificationText,
+      // DatabaseConstants.notificationTime: notificationTime,
+      // DatabaseConstants.driverId: driverId,
     };
   }
 }

@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'all_imports.dart';
 
@@ -7,35 +6,47 @@ final instance = GetIt.instance;
 
 initModule() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferencesController.init();
   await _initDio();
+  await _initSharedPreferences();
   await _initFirebase();
   instance.registerLazySingleton<NetworkInfo>(
       () => NetworkInfoImplementation(InternetConnection()));
 }
 
-Future<void> _initFirebase() async {
-  try {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-  } catch (e) {
-    debugPrint("Firebase already initialized.");
+Future<void> _initSharedPreferences() async {
+  if (!GetIt.I.isRegistered<SharedPreferences>()) {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    instance.registerLazySingleton(() => sharedPreferences);
   }
-  await FbNotifications.initNotifications();
-  await FbNotifications.requestNotificationPermissions();
-  FbNotifications.initializeForegroundNotificationForAndroid();
-  FbNotifications.manageNotificationAction();
-  debugPrint('FCM: ${await FirebaseMessaging.instance.getToken()}');
-  if (!GetIt.I.isRegistered<FirebaseAuth>()) {
-    instance.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
+  if (!GetIt.I.isRegistered<SharedPreferencesController>()) {
+    instance.registerLazySingleton(
+        () => SharedPreferencesController(instance<SharedPreferences>()));
   }
 }
 
+Future<void> _initFirebase() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  if (!GetIt.I.isRegistered<FbNotifications>()) {
+    instance.registerLazySingleton<FbNotifications>(() => FbNotifications());
+  }
+  if (!GetIt.I.isRegistered<FirebaseMessaging>()) {
+    instance.registerLazySingleton<FirebaseMessaging>(
+        () => FirebaseMessaging.instance);
+  }
+  await instance<FbNotifications>().initNotifications();
+  await instance<FbNotifications>().requestNotificationPermissions();
+  instance<FbNotifications>().initializeForegroundNotificationForAndroid();
+  instance<FbNotifications>().manageNotificationAction();
+}
+
 Future<void> _initDio() async {
-  instance.registerLazySingleton<DioFactory>(() => DioFactory());
-  Dio dio = await instance<DioFactory>().getDio();
-  instance.registerLazySingleton<AppApi>(() => AppApi(dio));
+  if (!GetIt.I.isRegistered<DioFactory>()) {
+    instance.registerLazySingleton<DioFactory>(() => DioFactory());
+  }
+  if (!GetIt.I.isRegistered<AppApi>()) {
+    Dio dio = await instance<DioFactory>().getDio();
+    instance.registerLazySingleton<AppApi>(() => AppApi(dio));
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -60,10 +71,11 @@ initLogin() {
   Get.put<LoginController>(LoginController());
 }
 
-initDriverLogin() {
+Future<void> initDriverLogin() async {
   if (!GetIt.I.isRegistered<RemoteDriverLoginDataSource>()) {
-    instance.registerLazySingleton<RemoteDriverLoginDataSource>(
-        () => RemoteLoginDataSourceImpl(instance<AppApi>()));
+    instance.registerLazySingleton<RemoteDriverLoginDataSource>(() =>
+        RemoteLoginDataSourceImpl(
+            instance<AppApi>(), instance<SharedPreferencesController>()));
   }
   if (!GetIt.I.isRegistered<DriverLoginRepository>()) {
     instance.registerLazySingleton<DriverLoginRepository>(
@@ -78,10 +90,13 @@ initDriverLogin() {
   }
 }
 
-initPoliceManLogin() {
+Future<void> initPoliceManLogin() async {
   if (!GetIt.I.isRegistered<RemotePoliceManLoginDataSource>()) {
     instance.registerLazySingleton<RemotePoliceManLoginDataSource>(
-        () => RemotePoliceManLoginDataSourceImpl(instance<AppApi>()));
+        () => RemotePoliceManLoginDataSourceImpl(
+              instance<AppApi>(),
+              instance<SharedPreferencesController>(),
+            ));
   }
   if (!GetIt.I.isRegistered<PoliceManLoginRepository>()) {
     instance.registerLazySingleton<PoliceManLoginRepository>(
@@ -130,9 +145,20 @@ initForgotPassword() {
 }
 
 initForgotPasswordForDriver() {
+  if (!GetIt.I.isRegistered<FirebaseAuth>()) {
+    instance.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
+  }
+  if (!GetIt.I.isRegistered<FBAuthentication>()) {
+    instance.registerLazySingleton<FBAuthentication>(
+        () => FBAuthentication(instance<FirebaseAuth>()));
+  }
+
   if (!GetIt.I.isRegistered<RemoteDriverForgotPasswordDataSource>()) {
     instance.registerLazySingleton<RemoteDriverForgotPasswordDataSource>(
-        () => RemoteDriverForgotPasswordDataSourceImpl(instance<AppApi>()));
+        () => RemoteDriverForgotPasswordDataSourceImpl(
+              instance<AppApi>(),
+              instance<SharedPreferencesController>(),
+            ));
   }
   if (!GetIt.I.isRegistered<DriverForgotPasswordRepository>()) {
     instance.registerLazySingleton<DriverForgotPasswordRepository>(
@@ -149,9 +175,20 @@ initForgotPasswordForDriver() {
 }
 
 initForgotPasswordForPoliceMan() {
+  if (!GetIt.I.isRegistered<FirebaseAuth>()) {
+    instance.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
+  }
+  if (!GetIt.I.isRegistered<FBAuthentication>()) {
+    instance.registerLazySingleton<FBAuthentication>(
+        () => FBAuthentication(instance<FirebaseAuth>()));
+  }
+
   if (!GetIt.I.isRegistered<RemotePoliceManForgotPasswordDataSource>()) {
     instance.registerLazySingleton<RemotePoliceManForgotPasswordDataSource>(
-        () => RemotePoliceManForgotPasswordDataSourceImpl(instance<AppApi>()));
+        () => RemotePoliceManForgotPasswordDataSourceImpl(
+              instance<AppApi>(),
+              instance<SharedPreferencesController>(),
+            ));
   }
   if (!GetIt.I.isRegistered<PoliceManForgotPasswordRepository>()) {
     instance.registerLazySingleton<PoliceManForgotPasswordRepository>(
@@ -168,6 +205,13 @@ initForgotPasswordForPoliceMan() {
 }
 
 disposeForgotPassword() {
+  if (GetIt.I.isRegistered<FBAuthentication>()) {
+    instance.unregister<FBAuthentication>();
+  }
+  if (GetIt.I.isRegistered<FirebaseAuth>()) {
+    instance.unregister<FirebaseAuth>();
+  }
+
   if (GetIt.I.isRegistered<RemoteDriverForgotPasswordDataSource>()) {
     instance.unregister<RemoteDriverForgotPasswordDataSource>();
   }
@@ -231,6 +275,7 @@ initDriverChangePassword() {
     instance.registerLazySingleton<RemoteDriverChangePasswordDataSource>(
         () => RemoteDriverChangePasswordDataSourceImpl(
               instance<AppApi>(),
+              instance<SharedPreferencesController>(),
             ));
   }
   if (!GetIt.I.isRegistered<DriverChangePasswordRepository>()) {
@@ -252,6 +297,7 @@ initPoliceManChangePassword() {
     instance.registerLazySingleton<RemotePoliceManChangePasswordDataSource>(
         () => RemotePoliceManChangePasswordDataSourceImpl(
               instance<AppApi>(),
+              instance<SharedPreferencesController>(),
             ));
   }
   if (!GetIt.I.isRegistered<PoliceManChangePasswordRepository>()) {
@@ -283,18 +329,70 @@ disposeLogout() {
 ////////////////////////////////////////////////////////////////////////////////
 /// [Driver_home] and [Police_man_home]
 initPoliceManHome() {
+  if (!GetIt.I.isRegistered<RemoteHomePoliceManDataSource>()) {
+    instance.registerLazySingleton<RemoteHomePoliceManDataSource>(
+        () => RemoteHomePoliceManDataSourceImpl(
+              instance<AppApi>(),
+              instance<SharedPreferencesController>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<HomePoliceManRepo>()) {
+    instance.registerLazySingleton<HomePoliceManRepo>(
+      () => HomePoliceManRepoImpl(
+          instance<RemoteHomePoliceManDataSource>(), instance<NetworkInfo>()),
+    );
+  }
+  if (!GetIt.I.isRegistered<HomePoliceManUseCase>()) {
+    instance.registerLazySingleton<HomePoliceManUseCase>(
+        () => HomePoliceManUseCase(instance<HomePoliceManRepo>()));
+  }
   Get.put<PoliceManHomeController>(PoliceManHomeController());
 }
 
 disposePoliceManHome() {
+  if (GetIt.I.isRegistered<RemoteHomePoliceManDataSource>()) {
+    instance.unregister<RemoteHomePoliceManDataSource>();
+  }
+  if (GetIt.I.isRegistered<HomePoliceManRepo>()) {
+    instance.unregister<HomePoliceManRepo>();
+  }
+  if (GetIt.I.isRegistered<HomePoliceManUseCase>()) {
+    instance.unregister<HomePoliceManUseCase>();
+  }
   Get.delete<PoliceManHomeController>();
 }
 
 initDriverHome() {
+  if (!GetIt.I.isRegistered<RemoteHomeDriverDataSource>()) {
+    instance.registerLazySingleton<RemoteHomeDriverDataSource>(
+        () => RemoteHomeDriverDataSourceImpl(
+              instance<AppApi>(),
+              instance<SharedPreferencesController>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<HomeDriverRepo>()) {
+    instance.registerLazySingleton<HomeDriverRepo>(
+      () => HomeDriverRepoImpl(
+          instance<RemoteHomeDriverDataSource>(), instance<NetworkInfo>()),
+    );
+  }
+  if (!GetIt.I.isRegistered<UpdateFcmTokenUseCase>()) {
+    instance.registerLazySingleton<UpdateFcmTokenUseCase>(
+        () => UpdateFcmTokenUseCase(instance<HomeDriverRepo>()));
+  }
   Get.put<DriverHomeController>(DriverHomeController());
 }
 
 disposeDriverHome() {
+  if (GetIt.I.isRegistered<RemoteHomeDriverDataSource>()) {
+    instance.unregister<RemoteHomeDriverDataSource>();
+  }
+  if (GetIt.I.isRegistered<HomeDriverRepo>()) {
+    instance.unregister<HomeDriverRepo>();
+  }
+  if (GetIt.I.isRegistered<UpdateFcmTokenUseCase>()) {
+    instance.unregister<UpdateFcmTokenUseCase>();
+  }
   Get.delete<DriverHomeController>();
 }
 
@@ -302,40 +400,113 @@ disposeDriverHome() {
 ////////////////////////////////////////////////////////////////////////////////
 
 initCreateViolation() {
-  if (!GetIt.I.isRegistered<RemoteCreateViolationDataSource>()) {
-    instance.registerLazySingleton<RemoteCreateViolationDataSource>(
-        () => RemoteCreateViolationDataSourceImpl(
+  initReasonsOfViolation();
+  if (!GetIt.I.isRegistered<RemoteViolationDataSource>()) {
+    instance.registerLazySingleton<RemoteViolationDataSource>(
+        () => RemoteViolationDataSourceImpl(
               instance<AppApi>(),
+              instance<SharedPreferencesController>(),
             ));
   }
-  if (!GetIt.I.isRegistered<CreateViolationRepository>()) {
-    instance.registerLazySingleton<CreateViolationRepository>(
-        () => CreateViolationRepositoryImpl(
-              instance<RemoteCreateViolationDataSource>(),
+  if (!GetIt.I.isRegistered<ViolationRepository>()) {
+    instance.registerLazySingleton<ViolationRepository>(
+        () => ViolationRepositoryImpl(
+              instance<RemoteViolationDataSource>(),
               instance<NetworkInfo>(),
             ));
   }
   if (!GetIt.I.isRegistered<CreateViolationUseCase>()) {
     instance.registerLazySingleton<CreateViolationUseCase>(
-        () => CreateViolationUseCase(instance<CreateViolationRepository>()));
+        () => CreateViolationUseCase(instance<ViolationRepository>()));
+  }
+  if (!GetIt.I.isRegistered<RemoteSaveNotificationDataSource>()) {
+    instance.registerLazySingleton<RemoteSaveNotificationDataSource>(
+        () => RemoteSaveNotificationDataSourceImpl(instance<AppApi>()));
+  }
+  if (!GetIt.I.isRegistered<SaveNotificationRepository>()) {
+    instance.registerLazySingleton<SaveNotificationRepository>(
+        () => SaveNotificationRepositoryImpl(
+              instance<RemoteSaveNotificationDataSource>(),
+              instance<NetworkInfo>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<SaveNotificationUseCase>()) {
+    instance.registerLazySingleton<SaveNotificationUseCase>(
+        () => SaveNotificationUseCase(instance<SaveNotificationRepository>()));
   }
   Get.put<CreateViolationController>(CreateViolationController());
 }
 
 disposeCreateViolation() {
-  if (GetIt.I.isRegistered<RemoteCreateViolationDataSource>()) {
-    instance.unregister<RemoteCreateViolationDataSource>();
+  if (GetIt.I.isRegistered<RemoteViolationDataSource>()) {
+    instance.unregister<RemoteViolationDataSource>();
   }
-  if (GetIt.I.isRegistered<CreateViolationRepository>()) {
-    instance.unregister<CreateViolationRepository>();
+  if (GetIt.I.isRegistered<ViolationRepository>()) {
+    instance.unregister<ViolationRepository>();
   }
   if (GetIt.I.isRegistered<CreateViolationUseCase>()) {
     instance.unregister<CreateViolationUseCase>();
   }
+  disposeReasonsOfViolation();
   Get.delete<CreateViolationController>();
 }
 
+disposeReasonsOfViolation() {
+  if (GetIt.I.isRegistered<RemoteViolationDataSource>()) {
+    instance.unregister<RemoteViolationDataSource>();
+  }
+  if (GetIt.I.isRegistered<ViolationRepository>()) {
+    instance.unregister<ViolationRepository>();
+  }
+  if (GetIt.I.isRegistered<AllReasonOfViolationUseCase>()) {
+    instance.unregister<AllReasonOfViolationUseCase>();
+  }
+}
+
+initReasonsOfViolation() {
+  if (!GetIt.I.isRegistered<RemoteViolationDataSource>()) {
+    instance.registerLazySingleton<RemoteViolationDataSource>(
+        () => RemoteViolationDataSourceImpl(
+              instance<AppApi>(),
+              instance<SharedPreferencesController>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<ViolationRepository>()) {
+    instance.registerLazySingleton<ViolationRepository>(
+        () => ViolationRepositoryImpl(
+              instance<RemoteViolationDataSource>(),
+              instance<NetworkInfo>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<AllReasonOfViolationUseCase>()) {
+    instance.registerLazySingleton<AllReasonOfViolationUseCase>(
+        () => AllReasonOfViolationUseCase(instance<ViolationRepository>()));
+  }
+}
+
 initListOfViolations() {
+  if (!GetIt.I.isRegistered<RemoteViolationDataSource>()) {
+    instance.registerLazySingleton<RemoteViolationDataSource>(
+        () => RemoteViolationDataSourceImpl(
+              instance<AppApi>(),
+              instance<SharedPreferencesController>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<ViolationRepository>()) {
+    instance.registerLazySingleton<ViolationRepository>(
+        () => ViolationRepositoryImpl(
+              instance<RemoteViolationDataSource>(),
+              instance<NetworkInfo>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<AllViolationUseCase>()) {
+    instance.registerLazySingleton<AllViolationUseCase>(
+        () => AllViolationUseCase(instance<ViolationRepository>()));
+  }
+  if (!GetIt.I.isRegistered<GetViolationDetailsUseCase>()) {
+    instance.registerLazySingleton<GetViolationDetailsUseCase>(
+        () => GetViolationDetailsUseCase(instance<ViolationRepository>()));
+  }
   Get.put<ListOfViolationsController>(ListOfViolationsController());
 }
 
@@ -348,8 +519,9 @@ disposeListOfViolations() {
 /// [Search_for_driver] and [Search_on_results_tests_of_license]
 initSearchForDriver() {
   if (!GetIt.I.isRegistered<RemoteSearchForDriverDataSource>()) {
-    instance.registerLazySingleton<RemoteSearchForDriverDataSource>(
-        () => RemoteSearchForDriverDataSourceImpl(instance<AppApi>()));
+    instance.registerLazySingleton<RemoteSearchForDriverDataSource>(() =>
+        RemoteSearchForDriverDataSourceImpl(
+            instance<AppApi>(), instance<SharedPreferencesController>()));
   }
   if (!GetIt.I.isRegistered<SearchForDriverRepository>()) {
     instance.registerLazySingleton<SearchForDriverRepository>(
@@ -362,7 +534,6 @@ initSearchForDriver() {
     instance.registerLazySingleton<SearchForDriverUseCase>(
         () => SearchForDriverUseCase(instance<SearchForDriverRepository>()));
   }
-
   Get.put<SearchForDriverController>(SearchForDriverController());
 }
 
@@ -393,7 +564,7 @@ initSearchOnResultsTestsOfLicense() {
               instance<NetworkInfo>(),
             ));
   }
-  if (!GetIt.I.isRegistered<SearchForDriverUseCase>()) {
+  if (!GetIt.I.isRegistered<SearchOnResultsTestsOfLicenseUseCase>()) {
     instance.registerLazySingleton<SearchOnResultsTestsOfLicenseUseCase>(() =>
         SearchOnResultsTestsOfLicenseUseCase(
             instance<SearchOnResultsTestsOfLicenseRepository>()));

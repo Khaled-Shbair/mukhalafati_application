@@ -8,9 +8,11 @@ abstract class RemotePoliceManChangePasswordDataSource {
 class RemotePoliceManChangePasswordDataSourceImpl
     extends RemotePoliceManChangePasswordDataSource {
   final AppApi _appApi;
+  final SharedPreferencesController _sharedPreferences;
 
   RemotePoliceManChangePasswordDataSourceImpl(
     this._appApi,
+    this._sharedPreferences,
   );
 
   @override
@@ -20,7 +22,7 @@ class RemotePoliceManChangePasswordDataSourceImpl
       request.policeManId,
       request.newPassword,
       request.confirmPassword,
-      SharedPreferencesController.getString(SharedPreferencesKeys.language),
+      _sharedPreferences.getString(SharedPreferencesKeys.language),
     );
   }
 }

@@ -34,6 +34,9 @@ class ManagerColors {
   /// ThemeData: dividerColor
   static const Color dividerColor = Color(0XFFE8E8E8);
 
+  /// colorScheme: inversePrimary
+  static const Color unnecessaryDistribution = Color.fromRGBO(205, 171, 53, .40); //black opacity 70%
+
   /// Theme Data:
   static const Color labelTextFieldColor = Color.fromRGBO(78, 74, 74, .25);
 

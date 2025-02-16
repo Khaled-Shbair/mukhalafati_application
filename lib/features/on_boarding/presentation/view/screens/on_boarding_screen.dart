@@ -5,7 +5,7 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return willPopScope(
+    return CustomPopScope(
       child: GetBuilder<OnBoardingController>(
         builder: (controller) {
           return Directionality(

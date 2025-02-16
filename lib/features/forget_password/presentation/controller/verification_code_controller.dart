@@ -1,6 +1,7 @@
 import '/config/all_imports.dart';
 
-class VerificationCodeController extends GetxController with Helpers {
+class VerificationCodeController extends GetxController with CustomToast {
+  final _verifyOTP = instance<FBAuthentication>();
   late TextEditingController oneNumberOfCode;
   late TextEditingController twoNumberOfCode;
   late TextEditingController threeNumberOfCode;
@@ -75,13 +76,17 @@ class VerificationCodeController extends GetxController with Helpers {
   void verifyButton(
     int id,
     bool isDriver,
-    int verificationCode,
+    String verificationCode,
     BuildContext context,
   ) async {
     if (_checkData()) {
       _verificationCode();
+
       debugPrint('_verificationCodeInput:$_verificationCodeInput');
       debugPrint('verificationCode:$verificationCode');
+      bool result = await _verifyOTP.verifyOTP(
+          verificationCode, _verificationCodeInput.toString());
+      print('Result : $result');
       if (verificationCode == _verificationCodeInput) {
         /// Navigate to change password screen
         Get.offAndToNamed(
@@ -93,7 +98,7 @@ class VerificationCodeController extends GetxController with Helpers {
       }
     } else {
       /// Appear message of error in SnackBar to user
-      showSnackBar(
+      showToast(
           message: ManagerStrings.pleaseEnterVerificationCode,
           context: context);
     }
@@ -190,6 +195,8 @@ class VerificationCodeController extends GetxController with Helpers {
         twoNumberOfCode.clear();
         threeNumberOfCode.clear();
         fourNumberOfCode.clear();
+        fiveNumberOfCode.clear();
+        sexNumberOfCode.clear();
         update();
       },
     );

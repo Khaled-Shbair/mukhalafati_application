@@ -3,9 +3,10 @@ import '/config/all_imports.dart';
 class ThemeService {
   ThemeService._();
 
+  static final _sharedPrefController = instance<SharedPreferencesController>();
+
   void changeTheme(bool isDarkMode) {
-    SharedPreferencesController.setData(
-        SharedPreferencesKeys.darkTheme, isDarkMode);
+    _sharedPrefController.setData(SharedPreferencesKeys.darkTheme, isDarkMode);
     if (isDarkMode) {
       Get.changeTheme(managerDarkTheme());
     } else {
@@ -14,7 +15,7 @@ class ThemeService {
   }
 
   static ThemeMode get themeMode {
-    if (SharedPreferencesController.getBool(SharedPreferencesKeys.darkTheme)) {
+    if (_sharedPrefController.getBool(SharedPreferencesKeys.darkTheme)) {
       return ThemeMode.dark;
     } else {
       return ThemeMode.light;
@@ -22,7 +23,7 @@ class ThemeService {
   }
 
   static ThemeData get themeData {
-    if (SharedPreferencesController.getBool(SharedPreferencesKeys.darkTheme)) {
+    if (_sharedPrefController.getBool(SharedPreferencesKeys.darkTheme)) {
       return managerDarkTheme();
     } else {
       return managerLightTheme();

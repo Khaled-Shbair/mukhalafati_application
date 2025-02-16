@@ -7,6 +7,7 @@ class CustomPageViewItem extends StatelessWidget {
     required this.barChart,
     this.startBarchartPadding,
     this.isTotalOfWeek = true,
+    this.visible = false,
     super.key,
   });
 
@@ -15,6 +16,7 @@ class CustomPageViewItem extends StatelessWidget {
   final Widget barChart;
   final bool isTotalOfWeek;
   final double? startBarchartPadding;
+  final bool visible;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,8 @@ class CustomPageViewItem extends StatelessWidget {
             isTotalOfWeek
                 ? ManagerStrings.distributionOfViolationsByDays
                 : ManagerStrings.distributionOfViolationsByMonths,
-            style: context.textTheme.logoutAndCreateComplaintAndNameDriverButton(context),
+            style: context.textTheme
+                .logoutAndCreateComplaintAndNameDriverButton(context),
           ),
         ),
         Container(
@@ -73,7 +76,28 @@ class CustomPageViewItem extends StatelessWidget {
               ),
             ],
           ),
-          child: barChart,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Visibility(
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                visible: visible,
+                child: SizedBox(
+                  width: ManagerWidth.w246,
+                  child: Text(
+                    ManagerStrings.noteInPoliceHomeScreen,
+                    textAlign: TextAlign.start,
+                    style: context.textTheme
+                        .textStyleOfNoteInPoliceHomeScreen(context),
+                  ),
+                ),
+              ),
+              verticalSpace(ManagerHeight.h10),
+              barChart,
+            ],
+          ),
         ),
       ],
     );

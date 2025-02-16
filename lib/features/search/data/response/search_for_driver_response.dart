@@ -22,6 +22,10 @@ class SearchForDriverResponse {
   String? imageDriver;
   @JsonKey(name: ApiKeys.numberOfViolations)
   int? numberOfViolations;
+  @JsonKey(name: ApiKeys.message)
+  String? message;
+  @JsonKey(name: ApiKeys.status)
+  bool? status;
 
   SearchForDriverResponse({
     required this.licenseNumber,
@@ -32,6 +36,8 @@ class SearchForDriverResponse {
     required this.imageDriver,
     required this.nameAr,
     required this.nameEn,
+    required this.message,
+    required this.status,
     required this.numberOfViolations,
   });
 

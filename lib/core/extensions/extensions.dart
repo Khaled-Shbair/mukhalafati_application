@@ -30,6 +30,16 @@ extension NonNullString on String? {
   }
 }
 
+extension NonNullNum on num? {
+  num onNull() {
+    if (this == null) {
+      return 0;
+    } else {
+      return this!;
+    }
+  }
+}
+
 extension NonNullDouble on double? {
   double onNull() {
     if (this == null) {

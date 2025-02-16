@@ -15,7 +15,7 @@ class DrivingLicenseCardScreen extends StatelessWidget {
             automaticallyImplyLeading: false,
             title: Text(ManagerStrings.electronicLicense),
             actions: [
-              menuButton(() => controller.openEndDrawer()),
+              CustomMenuButton(() => controller.openEndDrawer()),
             ],
           ),
           body: GetBuilder<DrivingLicenseCardController>(
@@ -82,7 +82,7 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                                   .changeOpenFrontElectronicLicenseCard(value);
                             },
                             children: [
-                              FrontDrivingLicenseCard(
+                              CustomFrontDrivingLicenseCard(
                                 licenseNumber: controller.licenseNumber,
                                 nameAr: controller.nameAr,
                                 nameEn: controller.nameEn,
@@ -103,7 +103,7 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                                   .changeOpenBackElectronicLicenseCard(value);
                             },
                             children: [
-                              backDrivingLicenseCard(),
+                              CustomBackDrivingLicenseCard(),
                             ],
                           ),
                           verticalSpace(ManagerHeight.h10),
@@ -115,7 +115,7 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                                   .changeOpenFullElectronicLicenseCard(value);
                             },
                             children: [
-                              FrontDrivingLicenseCard(
+                              CustomFrontDrivingLicenseCard(
                                 licenseNumber: controller.licenseNumber,
                                 nameAr: controller.nameAr,
                                 nameEn: controller.nameEn,
@@ -141,7 +141,7 @@ class DrivingLicenseCardScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              backDrivingLicenseCard(),
+                              CustomBackDrivingLicenseCard(),
                             ],
                           ),
                         ],

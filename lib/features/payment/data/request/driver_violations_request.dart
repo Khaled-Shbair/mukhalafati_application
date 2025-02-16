@@ -1,7 +1,11 @@
 class DriverViolationsRequest {
-  int? driverId;
+  final int driverId;
+  final int limit;
+  final int page;
 
-   DriverViolationsRequest({
+  DriverViolationsRequest({
     required this.driverId,
+    required this.page,
+    required this.limit,
   });
 }

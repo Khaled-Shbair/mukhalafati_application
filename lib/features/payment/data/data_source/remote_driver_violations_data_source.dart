@@ -14,6 +14,10 @@ class RemoteDriverViolationsDataSourceImpl
   @override
   Future<DriverViolationsResponse> getDriverViolations(
       DriverViolationsRequest request) async {
-    return await _appApi.getViolationsByDriver(request.driverId);
+    return await _appApi.getViolationsByDriver(
+      request.driverId,
+      request.page,
+      request.limit,
+    );
   }
 }

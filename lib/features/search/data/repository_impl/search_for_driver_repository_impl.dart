@@ -12,7 +12,16 @@ class SearchForDriverRepositoryImpl extends SearchForDriverRepository {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _dataSource.searchForDriver(request);
-        return Right(response.toDomain());
+        if (response.status == false) {
+          return Left(
+            Failure(
+              message: response.message.onNull(),
+              code: ResponseCode.BAD_REQUEST.value,
+            ),
+          );
+        } else {
+          return Right(response.toDomain());
+        }
       } catch (e) {
         return Left(ErrorHandler.handle(e).failure);
       }

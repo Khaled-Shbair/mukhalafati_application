@@ -1,5 +1,5 @@
 class SearchForDriverRequest {
-  String? licenseNumber;
+  final String licenseNumber;
 
   SearchForDriverRequest({
     required this.licenseNumber,
