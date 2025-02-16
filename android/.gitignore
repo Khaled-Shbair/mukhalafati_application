@@ -1,34 +1,17 @@
-# Gradle wrapper files
-gradle-wrapper.jar
-
-# Gradle directories
-/.gradle
-
-# Captures
-/captures/
-
-# Gradle scripts
-/gradlew
-/gradlew.bat
-
-# Local properties
-/local.properties
-
-# Generated plugin registrant
-GeneratedPluginRegistrant.java
-
-# App constants
-lib/config/constants/app_constants.dart
-lib/config/constants/api_keys.dart
-lib/config/constants/shared_preferences_keys.dart
-
-# Core language preferences
-lib/core/language/shared_preferences_keys.dart
-
-# Keystore files (should never be shared publicly)
-key.properties
-**/*.keystore
-**/*.jks
-
-# Dart generated files
-*.g.dart
+#gradle-wrapper.jar
+#/.gradle
+#/captures/
+#/gradlew
+#/gradlew.bat
+#/local.properties
+#GeneratedPluginRegistrant.java
+#lib/config/constants/app_constants.dart
+#lib/config/constants/api_keys.dart
+#lib/config/constants/shared_preferences_keys.dart
+#lib/core/language/shared_preferences_keys.dart
+## Remember to never publicly share your keystore.
+## See https://flutter.dev/docs/deployment/android#reference-the-keystore-from-the-app
+#key.properties
+#**/*.keystore
+#**/*.jks
+#*.g.dart
