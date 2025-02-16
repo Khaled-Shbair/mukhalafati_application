@@ -14,20 +14,25 @@ class CustomItemCardOfListOfViolation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(
-        icon,
-        color: context.theme.listTileTheme.iconColor,
-        size: ManagerIconsSizes.i24,
+    return Padding(
+      padding: EdgeInsetsDirectional.only(
+        top: ManagerHeight.h5,
       ),
-      title: Text(
-        text,
-        style: context.theme.listTileTheme.titleTextStyle?.copyWith(
-          fontSize: ManagerFontsSizes.f11,
-        ),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: context.theme.listTileTheme.iconColor,
+            size: ManagerIconsSizes.i24,
+          ),
+          horizontalSpace(ManagerWidth.w10),
+          Text(
+            text,
+            overflow: TextOverflow.ellipsis,
+            style: context.textTheme.textStyleOfDateOfListOfViolation(context),
+          ),
+        ],
       ),
-      trailing: trailing,
-      minTileHeight: context.theme.listTileTheme.minTileHeight,
     );
   }
 }

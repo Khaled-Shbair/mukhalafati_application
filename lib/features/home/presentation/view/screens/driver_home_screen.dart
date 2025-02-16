@@ -17,7 +17,7 @@ class DriverHomeScreen extends StatelessWidget {
             openEndDrawer: () => controller.openEndDrawer(),
             firstName: controller.driverFirstName,
             widget: GestureDetector(
-              onTap: () => controller.notificationButton(),
+              onTap: () => controller.notificationButton(context),
               child: Badge(
                 label: Text(
                   controller.counterOfNotification.toString(),

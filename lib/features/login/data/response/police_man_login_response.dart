@@ -6,14 +6,10 @@ part 'police_man_login_response.g.dart';
 class PoliceManLoginResponse {
   @JsonKey(name: ApiKeys.id)
   int? id;
-  @JsonKey(name: ApiKeys.firstNameAr)
-  String? firstNameAr;
-  @JsonKey(name: ApiKeys.lastNameAr)
-  String? lastNameAr;
-  @JsonKey(name: ApiKeys.fatherNameAr)
-  String? fatherNameAr;
-  @JsonKey(name: ApiKeys.grandFatherNameAr)
-  String? grandFatherNameAr;
+  @JsonKey(name: ApiKeys.nameEn)
+  String? nameEn;
+  @JsonKey(name: ApiKeys.nameAr)
+  String? nameAr;
   @JsonKey(name: ApiKeys.image)
   String? image;
   @JsonKey(name: ApiKeys.jobNumber)
@@ -25,11 +21,9 @@ class PoliceManLoginResponse {
 
   PoliceManLoginResponse({
     required this.id,
-    required this.firstNameAr,
-    required this.fatherNameAr,
     required this.phoneNumber,
-    required this.grandFatherNameAr,
-    required this.lastNameAr,
+    required this.nameEn,
+    required this.nameAr,
     required this.image,
     required this.jobNumber,
     required this.militaryRank,

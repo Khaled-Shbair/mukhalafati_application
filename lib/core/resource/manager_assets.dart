@@ -1,4 +1,5 @@
 const String _imagePath = 'assets/images';
+const String _jsonPath = 'assets/json';
 
 class ManagerAssets {
   static const String logo = '$_imagePath/logo.png';
@@ -69,11 +70,6 @@ class ManagerAssets {
   static const String cancelFilterIcon =
       '$_imagePath/payment/cancel_filter_icon.png';
 
-  ///////////////////////////////////
-  static const String geneen = '$_imagePath/team/geneen.jpeg';
-  static const String malak = '$_imagePath/team/malak.jpeg';
-  static const String saja = '$_imagePath/team/saja.jpeg';
-  static const String shahed = '$_imagePath/team/shahed.jpeg';
-  static const String doctor = '$_imagePath/team/doctor.jpg';
-  static const String policeImage = '$_imagePath/team/police_image.jpg';
+//////////////////////////////////////////
+  static const String googleServiceKey = '$_jsonPath/notification_json/mukhalafati-62f02eada005.json';
 }

@@ -9,13 +9,12 @@ class DriverViolationsScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           key: controller.scaffoldKey,
-          resizeToAvoidBottomInset: false,
           endDrawer: CustomDriverDrawer(isPayViolationsScreen: true),
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Text(ManagerStrings.payViolations),
             actions: [
-              menuButton(() => controller.openEndDrawer()),
+              CustomMenuButton(() => controller.openEndDrawer()),
             ],
           ),
           body: Container(
@@ -32,11 +31,11 @@ class DriverViolationsScreen extends StatelessWidget {
               bottom: ManagerHeight.h40,
             ),
             decoration: BoxDecoration(
-              color: ManagerColors.white,
+              color: context.theme.colorScheme.surface,
               borderRadius: BorderRadius.circular(ManagerRadius.r5),
               boxShadow: [
                 BoxShadow(
-                  color: ManagerColors.black5,
+                  color: context.theme.colorScheme.shadow,
                   blurRadius: AppConstants
                       .blurRadiusOfBoxShadowInViolationPaymentScreen,
                   spreadRadius: AppConstants
@@ -51,12 +50,8 @@ class DriverViolationsScreen extends StatelessWidget {
               children: [
                 Text(
                   ManagerStrings.yourViolations,
-                  style: TextStyle(
-                    color: ManagerColors.primaryColor,
-                    fontFamily: ManagerFontFamily.cairo,
-                    fontWeight: ManagerFontWeight.bold,
-                    fontSize: ManagerFontsSizes.f13,
-                  ),
+                  style: context.textTheme
+                      .textStyleOfTitleDriverViolationsScreen(),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.only(
@@ -65,207 +60,47 @@ class DriverViolationsScreen extends StatelessWidget {
                   ),
                   child: Text(
                     ManagerStrings.youCanViewAllYourPaidAndUnpaidViolations,
-                    style: TextStyle(
-                      color: ManagerColors.black,
-                      fontFamily: ManagerFontFamily.cairo,
-                      fontWeight: ManagerFontWeight.semiBold,
-                      fontSize: ManagerFontsSizes.f12,
-                    ),
+                    style: context.textTheme
+                        .textStyleOfSubTitleDriverViolationsScreen(),
                   ),
                 ),
-                Stack(
-                  children: [
-                    if (controller.viewViolations.isNotEmpty) ...{
-                      ListView(
-                        padding: EdgeInsetsDirectional.only(
-                          top: ManagerHeight.h50,
-                        ),
-                        primary: false,
-                        shrinkWrap: true,
-                        children: [
-                          CustomTable(
-                            columns: [
-                              ...List.generate(
-                                controller.namesOfColumns.length,
-                                (index) => customDataColumn(
-                                  controller.namesOfColumns[index],
-                                  context,
-                                ),
-                              ),
-                            ],
-                            rows: [
-                              ...List.generate(
-                                controller.viewViolations.length,
-                                (index) {
-                                  var data = controller.viewViolations[index];
-                                  return dataRowOfViolationTable(
-                                    numberOfRow: (index + 1).toString(),
-                                    price: data.priceOfViolation.toString(),
-                                    date: data.violationDate,
-                                    isPaid:
-                                        data.violationState == 1 ? true : false,
-                                    onTap: () {
-                                      controller.showViolationButton(
-                                        isPaid: data.violationState == 1
-                                            ? true
-                                            : false,
-                                        numberOfViolation:
-                                            data.violationId.toString(),
-                                        reasonForViolation:
-                                            data.violationReason,
-                                        placeOfViolation: data.violationAddress,
-                                        timeOfViolation: data.violationTime,
-                                        violationId: data.violationId,
-                                        price: data.priceOfViolation.toString(),
-                                        date: data.violationDate,
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    } else ...{
-                      CustomEmptyTable(
-                        length: controller.namesOfColumns.length,
-                        nameOfColumns: controller.namesOfColumns,
-                      ),
-                    },
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: ExpansionTile(
-                            controller: controller.expansionTileController,
-                            minTileHeight: ManagerHeight.h34,
-                            backgroundColor: ManagerColors.primaryColor,
-                            collapsedBackgroundColor:
-                                ManagerColors.primaryColor,
-                            tilePadding: EdgeInsetsDirectional.only(
-                              start: ManagerWidth.w10,
-                              end: ManagerWidth.w4,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(ManagerRadius.r5),
-                            ),
-                            collapsedShape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(ManagerRadius.r5),
-                              side: BorderSide(
-                                width: ManagerWidth.w05,
-                                color: ManagerColors.primaryColor,
-                              ),
-                            ),
-                            showTrailingIcon: false,
-                            title: ListTile(
-                              contentPadding: EdgeInsetsDirectional.zero,
-                              horizontalTitleGap: ManagerWidth.w4,
-                              minTileHeight: ManagerHeight.h0,
-                              minLeadingWidth: ManagerWidth.w0,
-                              minVerticalPadding: ManagerWidth.w0,
-                              leading: Image.asset(
-                                ManagerAssets.filterIcon,
-                                height: ManagerHeight.h21,
-                                width: ManagerWidth.w21,
-                              ),
-                              title: Text(
-                                controller.filter,
-                                style: TextStyle(
-                                  color: ManagerColors.white,
-                                  fontSize: ManagerFontsSizes.f11,
-                                  fontWeight: ManagerFontWeight.bold,
-                                  fontFamily: ManagerFontFamily.cairo,
-                                ),
-                              ),
-                              trailing: Icon(
-                                Icons.keyboard_arrow_down,
-                                size: ManagerIconsSizes.i24,
-                              ),
-                            ),
-                            maintainState: true,
-                            iconColor: ManagerColors.white,
-                            collapsedIconColor: ManagerColors.white,
-                            children: [
-                              TextButton(
-                                onPressed: () => controller.paidButton(),
-                                child: Text(
-                                  ManagerStrings.paid,
-                                  style: TextStyle(
-                                    color: ManagerColors.white,
-                                    fontSize: ManagerFontsSizes.f11,
-                                    fontWeight: ManagerFontWeight.bold,
-                                    fontFamily: ManagerFontFamily.cairo,
-                                  ),
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () => controller.unpaidButton(),
-                                child: Text(
-                                  ManagerStrings.unpaid,
-                                  style: TextStyle(
-                                    color: ManagerColors.white,
-                                    fontSize: ManagerFontsSizes.f11,
-                                    fontWeight: ManagerFontWeight.bold,
-                                    fontFamily: ManagerFontFamily.cairo,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: ManagerWidth.w15),
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () => controller.cancelFilterButton(),
-                            style: ElevatedButton.styleFrom(
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              minimumSize: Size(
-                                ManagerWidth.infinity,
-                                ManagerHeight.h34,
-                              ),
-                              backgroundColor: ManagerColors.lotion,
-                              elevation: 0,
-                              alignment: AlignmentDirectional.center,
-                              shadowColor: ManagerColors.transparent,
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(ManagerRadius.r5),
-                              ),
-                              padding: EdgeInsetsDirectional.only(
-                                start: ManagerWidth.w11,
-                              ),
-                            ),
-                            child: ListTile(
-                              contentPadding: EdgeInsetsDirectional.zero,
-                              horizontalTitleGap: ManagerWidth.w3,
-                              minTileHeight: ManagerHeight.h0,
-                              minLeadingWidth: ManagerWidth.w0,
-                              minVerticalPadding: ManagerWidth.w0,
-                              leading: Image.asset(
-                                ManagerAssets.cancelFilterIcon,
-                                height: ManagerHeight.h24,
-                                width: ManagerWidth.w24,
-                              ),
-                              title: Text(
-                                ManagerStrings.cancelFilter,
-                                style: TextStyle(
-                                  color: ManagerColors.black,
-                                  fontSize: ManagerFontsSizes.f11,
-                                  fontWeight: ManagerFontWeight.bold,
-                                  fontFamily: ManagerFontFamily.cairo,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: ManagerWidth.w12),
-                      ],
-                    ),
-                  ],
+                CustomFilterViolationsButton(
+                  isPaid: controller.paid,
+                  isUnPaid: controller.unPaid,
+                  isLatestDate: controller.latestDate,
+                  isOldestDate: controller.oldestDate,
+                  isMaximumAmount: controller.maximumAmount,
+                  isMinimumAmount: controller.minimumAmount,
+                  selectPaidFilter: controller.selectPaidFilter,
+                  selectUnPaidFilter: controller.selectUnPaidFilter,
+                  selectLatestDateFilter: controller.selectLatestDateFilter,
+                  selectOldestDateFilter: controller.selectOldestDateFilter,
+                  selectMaximumAmountFilter:
+                      controller.selectMaximumAmountFilter,
+                  selectMinimumAmountFilter:
+                      controller.selectMinimumAmountFilter,
+                  cancelFilterButton: controller.cancelFilterButton,
                 ),
+                if (controller.loading == true &&
+                    controller.viewViolations.isEmpty) ...{
+                  SizedBox(
+                    height: ManagerHeight.h154,
+                    child: CustomLoading(),
+                  ),
+                } else if (controller.viewViolations.isNotEmpty &&
+                    controller.loading == false) ...{
+                  CustomTableOfViolations(
+                    namesOfColumns: controller.namesOfColumns,
+                    scrollController: controller.scrollController,
+                    viewViolations: controller.viewViolations,
+                    onTap: controller.showViolationButton,
+                  ),
+                } else ...{
+                  CustomEmptyTable(
+                    length: controller.namesOfColumns.length,
+                    nameOfColumns: controller.namesOfColumns,
+                  ),
+                },
               ],
             ),
           ),

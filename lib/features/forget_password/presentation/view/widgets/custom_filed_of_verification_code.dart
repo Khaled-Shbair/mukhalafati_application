@@ -34,7 +34,7 @@ class CustomFiledOfVerificationCode extends StatelessWidget {
           borderColor: changeBorderColor
               ? context.theme.primaryColor
               : context.theme.inputDecorationTheme.border!.borderSide.color,
-          maxHeightConstraints: ManagerHeight.h64,
+          minHeightConstraints: ManagerHeight.h64,
           contentPadding: EdgeInsetsDirectional.only(
             bottom: ManagerHeight.h24,
           ),

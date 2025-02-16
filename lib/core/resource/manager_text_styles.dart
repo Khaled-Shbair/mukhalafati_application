@@ -6,6 +6,7 @@ TextStyle _textStyle({
   required Color color,
   double? height,
   TextDecoration? decoration,
+  Color? decorationColor,
 }) {
   return TextStyle(
     fontFamily: ManagerFontFamily.cairo,
@@ -14,6 +15,7 @@ TextStyle _textStyle({
     color: color,
     height: height,
     decoration: decoration,
+    decorationColor: decorationColor,
   );
 }
 
@@ -37,6 +39,7 @@ TextStyle getBoldTextStyle({
   required Color color,
   double? height,
   TextDecoration? decoration,
+  Color? decorationColor,
 }) {
   return _textStyle(
     fontWeight: ManagerFontWeight.bold,
@@ -44,6 +47,7 @@ TextStyle getBoldTextStyle({
     color: color,
     height: height,
     decoration: decoration,
+    decorationColor: decorationColor,
   );
 }
 

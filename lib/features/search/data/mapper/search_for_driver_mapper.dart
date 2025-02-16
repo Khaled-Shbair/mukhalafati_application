@@ -12,6 +12,8 @@ extension SearchForDriverMapper on SearchForDriverResponse {
       nameEn: nameEn.onNull(),
       numberOfViolations: numberOfViolations.onNull(),
       releaseDate: releaseDate.onNull(),
+      status: status.onNull(),
+      message: message.onNull(),
     );
   }
 }

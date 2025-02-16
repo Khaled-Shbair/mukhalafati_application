@@ -22,10 +22,10 @@ class PaymentScreen extends StatelessWidget {
             title: Text(ManagerStrings.payViolations),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios),
-              onPressed: () => controller.backButton(),
+              onPressed: () => controller.backButton(context),
             ),
             actions: [
-              menuButton(() => controller.openEndDrawer()),
+              CustomMenuButton(() => controller.openEndDrawer()),
             ],
           ),
           body: Padding(
@@ -38,29 +38,26 @@ class PaymentScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsetsDirectional.only(
-                      start: ManagerWidth.w15,
-                      end: ManagerWidth.w15,
-                      bottom: ManagerHeight.h5),
+                    start: ManagerWidth.w15,
+                    end: ManagerWidth.w15,
+                    bottom: ManagerHeight.h5,
+                  ),
                   child: Row(
                     children: [
                       CircleAvatar(
                         radius: ManagerRadius.r17,
-                        backgroundColor: ManagerColors.primaryColor,
+                        backgroundColor: context.theme.primaryColor,
                         child: Text(
                           AppConstants.one,
-                          style: TextStyle(
-                            fontFamily: ManagerFontFamily.cairo,
-                            fontWeight: ManagerFontWeight.bold,
-                            fontSize: ManagerFontsSizes.f16,
-                            color: ManagerColors.white,
-                          ),
+                          style: context.textTheme
+                              .textStyleOfNumberOfStepOfPayment(context, true),
                         ),
                       ),
                       Expanded(
                         child: Divider(
                           color: controller.isFirstPage()
-                              ? ManagerColors.lightSilver40
-                              : ManagerColors.primaryColor,
+                              ? context.theme.colorScheme.onTertiary
+                              : context.theme.primaryColor,
                           thickness: ManagerHeight.h3,
                         ),
                       ),
@@ -68,44 +65,35 @@ class PaymentScreen extends StatelessWidget {
                         radius: ManagerRadius.r17,
                         backgroundColor:
                             controller.isTwoPage() || controller.isThreePage()
-                                ? ManagerColors.primaryColor
-                                : ManagerColors.lightSilver40,
+                                ? context.theme.primaryColor
+                                : context.theme.colorScheme.onTertiary,
                         child: Text(
                           AppConstants.two,
-                          style: TextStyle(
-                            fontFamily: ManagerFontFamily.cairo,
-                            fontWeight: ManagerFontWeight.bold,
-                            fontSize: ManagerFontsSizes.f16,
-                            color: controller.isTwoPage() ||
-                                    controller.isThreePage()
-                                ? ManagerColors.white
-                                : ManagerColors.black,
-                          ),
+                          style: context.textTheme
+                              .textStyleOfNumberOfStepOfPayment(
+                                  context,
+                                  controller.isTwoPage() ||
+                                      controller.isThreePage()),
                         ),
                       ),
                       Expanded(
                         child: Divider(
                           color: controller.isThreePage()
-                              ? ManagerColors.primaryColor
-                              : ManagerColors.lightSilver40,
+                              ? context.theme.primaryColor
+                              : context.theme.colorScheme.onTertiary,
                           thickness: ManagerHeight.h3,
                         ),
                       ),
                       CircleAvatar(
                         radius: ManagerRadius.r17,
                         backgroundColor: controller.isThreePage()
-                            ? ManagerColors.primaryColor
-                            : ManagerColors.lightSilver40,
+                            ? context.theme.primaryColor
+                            : context.theme.colorScheme.onTertiary,
                         child: Text(
                           AppConstants.three,
-                          style: TextStyle(
-                            fontFamily: ManagerFontFamily.cairo,
-                            fontWeight: ManagerFontWeight.bold,
-                            fontSize: ManagerFontsSizes.f16,
-                            color: controller.isThreePage()
-                                ? ManagerColors.white
-                                : ManagerColors.black,
-                          ),
+                          style: context.textTheme
+                              .textStyleOfNumberOfStepOfPayment(
+                                  context, controller.isThreePage()),
                         ),
                       ),
                     ],
@@ -116,34 +104,22 @@ class PaymentScreen extends StatelessWidget {
                   children: [
                     Text(
                       ManagerStrings.paymentSelection,
-                      style: TextStyle(
-                        color: ManagerColors.black,
-                        fontSize: ManagerFontsSizes.f12,
-                        fontWeight: ManagerFontWeight.semiBold,
-                        fontFamily: ManagerFontFamily.cairo,
-                      ),
+                      style: context.textTheme
+                          .textStyleOfNameOfStepOfPayment(context),
                     ),
                     Text(
                       ManagerStrings.paymentMethod,
-                      style: TextStyle(
-                        color: ManagerColors.black,
-                        fontSize: ManagerFontsSizes.f12,
-                        fontWeight: ManagerFontWeight.semiBold,
-                        fontFamily: ManagerFontFamily.cairo,
-                      ),
+                      style: context.textTheme
+                          .textStyleOfNameOfStepOfPayment(context),
                     ),
                     Text(
                       ManagerStrings.paymentConfirmation,
-                      style: TextStyle(
-                        color: ManagerColors.black,
-                        fontSize: ManagerFontsSizes.f12,
-                        fontWeight: ManagerFontWeight.semiBold,
-                        fontFamily: ManagerFontFamily.cairo,
-                      ),
+                      style: context.textTheme
+                          .textStyleOfNameOfStepOfPayment(context),
                     ),
                   ],
                 ),
-                SizedBox(height: ManagerHeight.h34),
+                verticalSpace(ManagerHeight.h34),
                 if (controller.loading) ...{
                   CustomLoading(),
                 } else ...{
@@ -154,7 +130,7 @@ class PaymentScreen extends StatelessWidget {
                       onPageChanged: (value) =>
                           controller.changeCurrentPage(value),
                       children: [
-                        paymentSelectionStep(
+                        CustomPaymentSelectionStep(
                           paymentSelectionButton: () =>
                               controller.paymentSelectionButton(context),
                           paymentSelectionDone: controller.paymentSelectionDone,
@@ -165,7 +141,8 @@ class PaymentScreen extends StatelessWidget {
                           isPalPay: controller.isPalPay,
                           isVisaCard: controller.isVisaCard,
                         ),
-                        enterDetailsStep(
+                        CustomEnterDetailsStep(
+                          formKey: controller.formKey,
                           enterDetailsDone: controller.enterDetailsDone,
                           completePaymentButton: () =>
                               controller.completePaymentButton(context),
@@ -176,14 +153,14 @@ class PaymentScreen extends StatelessWidget {
                           expiryDateCard: controller.expiryDateCard,
                           securityCode: controller.securityCode,
                         ),
-                        paymentConfirmationStep(
+                        CustomPaymentConfirmationStep(
                           paymentConfirmationDone:
                               controller.paymentConfirmationDone,
                           paymentConfirmationButton: () =>
                               controller.paymentConfirmationButton(violationId),
                           totalAmount: priceOfViolation,
                           paymentMethod: controller.paymentBy,
-                          cancelButton: () => controller.cancelButton(),
+                          cancelButton: () => controller.cancelButton(context),
                         ),
                       ],
                     ),

@@ -10,10 +10,16 @@ CreateViolationResponse _$CreateViolationResponseFromJson(
         Map<String, dynamic> json) =>
     CreateViolationResponse(
       message: json['message'] as String?,
+      fcmToken: json['fcm_token'] as String?,
+      status: json['status'] as bool?,
+      driverId: (json['driver_id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$CreateViolationResponseToJson(
         CreateViolationResponse instance) =>
     <String, dynamic>{
       'message': instance.message,
+      'status': instance.status,
+      'fcm_token': instance.fcmToken,
+      'driver_id': instance.driverId,
     };

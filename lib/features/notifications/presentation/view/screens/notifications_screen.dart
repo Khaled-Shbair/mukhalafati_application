@@ -17,7 +17,7 @@ class NotificationsScreen extends StatelessWidget {
               icon: const Icon(Icons.arrow_back_ios_new),
             ),
             actions: [
-              menuButton(() => controller.openEndDrawer()),
+              CustomMenuButton(() => controller.openEndDrawer()),
             ],
           ),
           body: Padding(

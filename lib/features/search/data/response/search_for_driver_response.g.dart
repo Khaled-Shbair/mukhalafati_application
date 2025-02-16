@@ -17,6 +17,8 @@ SearchForDriverResponse _$SearchForDriverResponseFromJson(
       imageDriver: json['image'] as String?,
       nameAr: json['name_ar'] as String?,
       nameEn: json['name_en'] as String?,
+      message: json['message'] as String?,
+      status: json['status'] as bool?,
       numberOfViolations: (json['number_of_violations'] as num?)?.toInt(),
     );
 
@@ -32,4 +34,6 @@ Map<String, dynamic> _$SearchForDriverResponseToJson(
       'license_levels': instance.licenseLevels,
       'image': instance.imageDriver,
       'number_of_violations': instance.numberOfViolations,
+      'message': instance.message,
+      'status': instance.status,
     };

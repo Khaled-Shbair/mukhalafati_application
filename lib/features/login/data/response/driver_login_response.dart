@@ -8,22 +8,10 @@ class DriverLoginResponse {
   int? id;
   @JsonKey(name: ApiKeys.image)
   String? image;
-  @JsonKey(name: ApiKeys.firstNameEn)
-  String? firstNameEn;
-  @JsonKey(name: ApiKeys.firstNameAr)
-  String? firstNameAr;
-  @JsonKey(name: ApiKeys.lastNameEn)
-  String? lastNameEn;
-  @JsonKey(name: ApiKeys.lastNameAr)
-  String? lastNameAr;
-  @JsonKey(name: ApiKeys.fatherNameAr)
-  String? fatherNameAr;
-  @JsonKey(name: ApiKeys.fatherNameEn)
-  String? fatherNameEn;
-  @JsonKey(name: ApiKeys.grandFatherNameAr)
-  String? grandFatherNameAr;
-  @JsonKey(name: ApiKeys.grandFatherNameEn)
-  String? grandFatherNameEn;
+  @JsonKey(name: ApiKeys.nameAr)
+  String? nameAr;
+  @JsonKey(name: ApiKeys.nameEn)
+  String? nameEn;
   @JsonKey(name: ApiKeys.phoneNumber)
   String? phoneNumber;
   @JsonKey(name: ApiKeys.licenseNumber)
@@ -47,17 +35,11 @@ class DriverLoginResponse {
     required this.phoneNumber,
     required this.id,
     required this.numberOfViolationsPaid,
-    required this.firstNameAr,
     required this.numberOfViolationsUnPaid,
-    required this.fatherNameEn,
-    required this.fatherNameAr,
-    required this.firstNameEn,
-    required this.grandFatherNameAr,
-    required this.grandFatherNameEn,
+    required this.nameEn,
+    required this.nameAr,
     required this.idNumber,
-    required this.lastNameAr,
     required this.image,
-    required this.lastNameEn,
     required this.expiryDate,
     required this.licenseLevels,
     required this.licenseNumber,

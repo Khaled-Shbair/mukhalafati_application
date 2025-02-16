@@ -1,9 +1,10 @@
 import '/config/all_imports.dart';
 
-class DriverProfileController extends GetxController with Helpers {
+class DriverProfileController extends GetxController with CustomToast {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final SendRequestUpdateProfileUseCase _useCase =
-      instance<SendRequestUpdateProfileUseCase>();
+  final _useCase = instance<SendRequestUpdateProfileUseCase>();
+  final _sharedPrefController = instance<SharedPreferencesController>();
+
   late String driverImage;
 
   late TextEditingController driverName;
@@ -14,20 +15,17 @@ class DriverProfileController extends GetxController with Helpers {
   @override
   void onInit() {
     super.onInit();
-    driverImage =
-        SharedPreferencesController.getString(SharedPreferencesKeys.image);
+    driverImage = _sharedPrefController.getString(SharedPreferencesKeys.image);
     driverName = TextEditingController(
-        text: SharedPreferencesController.getString(
-            SharedPreferencesKeys.fullNameAr));
+        text: _sharedPrefController.getString(SharedPreferencesKeys.nameAr));
     driverPhone = TextEditingController(
-        text: SharedPreferencesController.getString(
-            SharedPreferencesKeys.phoneNumber));
+        text:
+            _sharedPrefController.getString(SharedPreferencesKeys.phoneNumber));
     driverId = TextEditingController(
-        text: SharedPreferencesController.getString(
-            SharedPreferencesKeys.idNumber));
+        text: _sharedPrefController.getString(SharedPreferencesKeys.idNumber));
     licenceNumber = TextEditingController(
-        text: SharedPreferencesController.getString(
-            SharedPreferencesKeys.licenseOrJobNumber));
+        text: _sharedPrefController
+            .getString(SharedPreferencesKeys.licenseOrJobNumber));
   }
 
   @override
@@ -54,8 +52,8 @@ class DriverProfileController extends GetxController with Helpers {
         SendRequestUpdateProfileInput(
             phoneNumber: driverPhone.text,
             idNumber: driverId.text,
-            driverId: SharedPreferencesController.getInt(
-                SharedPreferencesKeys.userId),
+            driverId:
+                _sharedPrefController.getInt(SharedPreferencesKeys.userId),
             name: driverName.text,
             licenseNumber: licenceNumber.text),
       ))
@@ -63,7 +61,7 @@ class DriverProfileController extends GetxController with Helpers {
         /// Failed request update profile
         (l) {
           /// Appear message of error in SnackBar to user
-          showSnackBar(message: l.message, context: context);
+          showToast(message: l.message, context: context);
         },
 
         /// Successfully request update profile
@@ -86,7 +84,7 @@ class DriverProfileController extends GetxController with Helpers {
       );
     } else {
       /// Appear message of error in SnackBar to user
-      showSnackBar(
+      showToast(
           message: ManagerStrings.pleaseEnterDataThisNeedUpdated,
           context: context);
     }
@@ -99,17 +97,15 @@ class DriverProfileController extends GetxController with Helpers {
             driverId.text.isNotEmpty &&
             licenceNumber.text.isNotEmpty &&
             driverName.text !=
-                SharedPreferencesController.getString(
-                    SharedPreferencesKeys.fullNameAr) ||
+                _sharedPrefController.getString(SharedPreferencesKeys.nameAr) ||
         driverPhone.text !=
-            SharedPreferencesController.getString(
-                SharedPreferencesKeys.phoneNumber) ||
+            _sharedPrefController
+                .getString(SharedPreferencesKeys.phoneNumber) ||
         driverId.text !=
-            SharedPreferencesController.getString(
-                SharedPreferencesKeys.idNumber) ||
+            _sharedPrefController.getString(SharedPreferencesKeys.idNumber) ||
         licenceNumber.text !=
-            SharedPreferencesController.getString(
-                SharedPreferencesKeys.licenseOrJobNumber)) {
+            _sharedPrefController
+                .getString(SharedPreferencesKeys.licenseOrJobNumber)) {
       return true;
     } else {
       return false;

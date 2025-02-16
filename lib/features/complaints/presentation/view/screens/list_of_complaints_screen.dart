@@ -15,7 +15,7 @@ class ListOfComplaintsScreen extends StatelessWidget {
             automaticallyImplyLeading: false,
             title: Text(ManagerStrings.listOfComplaints),
             actions: [
-              menuButton(() => controller.openEndDrawer()),
+              CustomMenuButton(() => controller.openEndDrawer()),
             ],
           ),
           body: Container(
@@ -48,127 +48,99 @@ class ListOfComplaintsScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      ManagerStrings.complaintsSubmitted,
-                      style: context.textTheme
-                          .titleListOfComplaintsScreenAndStyleOfTextInEmptyTable(context),
-                    ),
-                    horizontalSpace(ManagerWidth.w10),
-                    CustomButton(
-                      height: ManagerHeight.h32,
-                      minWidth: ManagerWidth.w120,
-                      padding: EdgeInsetsDirectional.only(
-                        start: ManagerWidth.w6,
-                      ),
-                      onPressed: () => controller.submitComplaintButton(),
-                      child: SizedBox(
-                        width: ManagerWidth.w120,
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.add,
-                              color: context.theme.colorScheme.surface,
-                              size: ManagerIconsSizes.i18,
+                CustomTitleAndCreateComplaint(
+                  createComplaint: controller.submitComplaintButton,
+                ),
+                verticalSpace(ManagerHeight.h20),
+                Flexible(
+                  child: ListView(
+                    controller: controller.scrollController,
+                    shrinkWrap: true,
+                    children: [
+
+                      if (controller.loading == true&& controller.data.isEmpty) ...{
+                        SizedBox(
+                          height: ManagerHeight.h154,
+                          child: CustomLoading(),
+                        ),
+                      } else if (controller.data.isNotEmpty &&
+                          controller.loading == false) ...{
+                        CustomTable(
+                          columns: [
+                            ...List.generate(
+                              controller.namesOfColumns.length,
+                              (index) => customDataColumn(
+                                controller.namesOfColumns[index],
+                                context,
+                              ),
                             ),
-                            horizontalSpace(ManagerWidth.w4),
-                            Text(
-                              ManagerStrings.submitComplaint,
-                              maxLines: 1,
-                              style: context.textTheme
-                                  .submitComplaintButton(context),
+                          ],
+                          rows: [
+                            ...List.generate(
+                              controller.data.length,
+                              (index) {
+                                return DataRow(
+                                  cells: [
+                                    customFieldOfRow(
+                                      '${index + 1}',
+                                      context: context,
+                                    ),
+                                    customFieldOfRow(
+                                      context: context,
+                                      controller
+                                          .data[index].dateOfIncidentOrProblem,
+                                      start: ManagerWidth.w6,
+                                      end: ManagerWidth.w4,
+                                    ),
+                                    customFieldOfRow(
+                                      context: context,
+                                      controller.data[index].detailOfComplaint,
+                                      start: ManagerWidth.w4,
+                                      end: ManagerWidth.w1,
+                                      placeholder: true,
+                                    ),
+                                    DataCell(
+                                      SizedBox(
+                                        height: ManagerHeight.h34,
+                                        width: ManagerWidth.w60,
+                                        child: Card(
+                                          color: controller.data[index].status
+                                              ? ManagerColors.grannySmithApple
+                                              : ManagerColors.peach,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                ManagerRadius.r5),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              controller.data[index].status
+                                                  ? ManagerStrings.solved
+                                                  : ManagerStrings.inProgress,
+                                              textAlign: TextAlign.center,
+                                              style: context.textTheme
+                                                  .statusOfComplaint(
+                                                      context,
+                                                      controller
+                                                          .data[index].status),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                verticalSpace(ManagerHeight.h20),
-                ListView(
-                  primary: false,
-                  shrinkWrap: true,
-                  children: [
-                    if (controller.loading) ...{
-                      CustomLoading(),
-                    } else if (controller.data.isNotEmpty &&
-                        controller.loading == false) ...{
-                      CustomTable(
-                        columns: [
-                          ...List.generate(
-                            controller.namesOfColumns.length,
-                            (index) => customDataColumn(
-                              controller.namesOfColumns[index],
-                              context,
-                            ),
-                          ),
-                        ],
-                        rows: [
-                          ...List.generate(
-                            controller.data.length,
-                            (index) {
-                              return DataRow(
-
-                                cells: [
-                                  customFieldOfRow(
-                                    '${index + 1}',
-                                    context: context,
-                                  ),
-                                  customFieldOfRow(
-                                    context: context,
-                                    controller
-                                        .data[index].dateOfIncidentOrProblem,
-                                    start: ManagerWidth.w6,
-                                    end: ManagerWidth.w4,
-                                  ),
-                                  customFieldOfRow(
-                                    context: context,
-                                    controller.data[index].detailOfComplaint,
-                                    start: ManagerWidth.w4,
-                                    end: ManagerWidth.w1,
-                                    placeholder: true,
-                                  ),
-                                  DataCell(
-                                    Container(
-                                      alignment: AlignmentDirectional.center,
-                                      height: ManagerHeight.h26,
-                                      width: ManagerWidth.w50,
-                                      margin: EdgeInsetsDirectional.only(
-                                        start: ManagerWidth.w4,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: controller.data[index].status
-                                            ? ManagerColors.grannySmithApple
-                                            : ManagerColors.peach,
-                                        borderRadius: BorderRadius.circular(
-                                            ManagerRadius.r5),
-                                      ),
-                                      child: Text(
-                                        controller.data[index].status
-                                            ? ManagerStrings.solved
-                                            : ManagerStrings.inProgress,
-                                        style: context.textTheme
-                                            .statusOfComplaint(context,
-                                                controller.data[index].status),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    } else ...{
-                      CustomEmptyTable(
-                        length: controller.namesOfColumns.length,
-                        nameOfColumns: controller.namesOfColumns,
-                      ),
-                    },
-                  ],
+                      } else ...{
+                        CustomEmptyTable(
+                          length: controller.namesOfColumns.length,
+                          nameOfColumns: controller.namesOfColumns,
+                        ),
+                      },
+                    ],
+                  ),
                 ),
               ],
             ),

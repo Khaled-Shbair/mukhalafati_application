@@ -1,23 +1,17 @@
 class DriverLoginModel {
-  int id;
-  String image;
-  String firstNameEn;
-  String firstNameAr;
-  String fatherNameAr;
-  String fatherNameEn;
-  String lastNameEn;
-  String lastNameAr;
-  String grandFatherNameAr;
-  String grandFatherNameEn;
-  String phone;
-  String licenseNumber;
-  String releaseDate;
-  String expiryDate;
-  String licenseLevels;
-  String idNumber;
-  int numberOfViolationsUnPaid;
-  int numberOfViolationsPaid;
-  int numberOfUnReadNotifications;
+  final int id;
+  final String image;
+  final String nameEn;
+  final String nameAr;
+  final String phone;
+  final String licenseNumber;
+  final String releaseDate;
+  final String expiryDate;
+  final String licenseLevels;
+  final String idNumber;
+  final int numberOfViolationsUnPaid;
+  final int numberOfViolationsPaid;
+  final int numberOfUnReadNotifications;
 
   DriverLoginModel({
     required this.licenseNumber,
@@ -25,19 +19,13 @@ class DriverLoginModel {
     required this.numberOfUnReadNotifications,
     required this.licenseLevels,
     required this.expiryDate,
-    required this.firstNameAr,
-    required this.fatherNameAr,
-    required this.grandFatherNameAr,
+    required this.nameEn,
+    required this.nameAr,
     required this.idNumber,
-    required this.lastNameAr,
     required this.image,
     required this.id,
-    required this.grandFatherNameEn,
-    required this.fatherNameEn,
     required this.numberOfViolationsUnPaid,
-    required this.firstNameEn,
     required this.numberOfViolationsPaid,
-    required this.lastNameEn,
     required this.phone,
   });
 }

@@ -15,7 +15,7 @@ class DriverProfileScreen extends StatelessWidget {
             title: Text(ManagerStrings.profile),
             automaticallyImplyLeading: false,
             actions: [
-              menuButton(() => controller.openEndDrawer()),
+              CustomMenuButton(() => controller.openEndDrawer()),
             ],
           ),
           body: ListView(

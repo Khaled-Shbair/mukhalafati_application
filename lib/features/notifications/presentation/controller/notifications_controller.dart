@@ -20,13 +20,21 @@ class NotificationsController extends GetxController {
   }
 
   void deleteNotifications() async {
-    confirmInformationDialog(
+    customConfirmInformationDialog(
       title: ManagerStrings.doYouWantToDeleteAllNotifications,
       text: ManagerStrings.notificationsSuccessfullyDeleted,
       textConfirmButton: ManagerStrings.yes,
       textCancelButton: ManagerStrings.no,
       confirmButton: () async {
-        // _notificationsDatabase.clear();
+        // await customCreatedSuccessfullyDialog(
+        //   context: context,
+        //   closeButton: () {
+        //     context
+        //         .pushNamedAndRemoveAllUntil(Routes.policeManHomeScreen);
+        //     disposeCreateViolation();
+        //   },
+        //   text: ManagerStrings.theViolationWasSuccessfullyCreated,
+        // );
       },
       closeButton: () async {
         getNotifications();
@@ -48,7 +56,7 @@ class NotificationsController extends GetxController {
     notifications[index].boxColor = ManagerColors.primaryColor;
     notifications[index].textColor = ManagerColors.white;
     notifications[index].timeColor = ManagerColors.white80;
-    confirmInformationDialog(
+    customConfirmInformationDialog(
       title: ManagerStrings.doYouWantToDeleteNotification,
       text: ManagerStrings.notificationSuccessfullyDeleted,
       textConfirmButton: ManagerStrings.yes,

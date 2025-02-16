@@ -44,11 +44,11 @@ Widget resultOfLicense({
         ],
       ),
       SizedBox(height: ManagerHeight.h28),
-      resultOfTest(
+      CustomCardOfResultTest(
         testType: ManagerStrings.theoreticalTestResult,
         isSuccessful: statusLicenseTest,
       ),
-      resultOfTest(
+      CustomCardOfResultTest(
         testType: ManagerStrings.practicalTestResult,
         isSuccessful: statusPracticalTest,
       ),

@@ -2,6 +2,7 @@ import '/config/all_imports.dart';
 
 class OnBoardingController extends GetxController {
   late PageController pageController;
+  final _sharedPreferencesController = instance<SharedPreferencesController>();
 
   //Current page
   int currentPage = 0;
@@ -76,16 +77,30 @@ class OnBoardingController extends GetxController {
   /// completing the OnBoarding.
   void _moveToWelcomeScreen(BuildContext context) {
     /// It sets the default language to Arabic.
-    saveLanguage(LocaleConstants.arabicLanguage);
+    _saveLanguage(LocaleConstants.arabicLanguage);
 
     /// Move to (Welcome Screen) and remove all previous screens
     context.pushNamedAndRemoveAllUntil(Routes.welcomeScreen);
 
     /// It sets marks the OnBoarding screen as completed, ensuring it will not
     /// appear again on subsequent app launches.
-    saveOnBoardingViewed();
+    _saveOnBoardingViewed();
 
     /// Dispose OnBoarding controller form memory
     disposeOnBoarding();
+  }
+
+  _saveOnBoardingViewed() async {
+    await _sharedPreferencesController.setData(
+      SharedPreferencesKeys.viewOnBoarding,
+      true,
+    );
+  }
+
+  _saveLanguage(String language) async {
+    await _sharedPreferencesController.setData(
+      SharedPreferencesKeys.language,
+      language,
+    );
   }
 }

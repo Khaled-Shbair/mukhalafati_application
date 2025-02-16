@@ -1,10 +1,16 @@
 import '/config/all_imports.dart';
 
 class GetAllComplaintsInput {
-  int? driverId;
+  final int driverId;
+  final int page;
+  final int limit;
+  final String orderBy;
 
   GetAllComplaintsInput({
     required this.driverId,
+    required this.page,
+    required this.limit,
+    required this.orderBy,
   });
 }
 
@@ -20,6 +26,9 @@ class GetAllComplaintsUseCase
     return await _repository.getAllComplaints(
       GetAllComplaintsRequest(
         driverId: input.driverId,
+        maxLimit: input.limit,
+        orderBy: input.orderBy,
+        page: input.page,
       ),
     );
   }

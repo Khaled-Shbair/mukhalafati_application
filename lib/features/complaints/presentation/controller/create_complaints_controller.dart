@@ -1,80 +1,81 @@
 import '/config/all_imports.dart';
 
-class CreateComplaintsController extends GetxController with Helpers {
-  final CreateComplaintUseCase _sendComplaintUseCase =
-      instance<CreateComplaintUseCase>();
-  late TextEditingController detailOfComplaint;
-  late TextEditingController complaintName;
-  late TextEditingController addressOfComplaint;
-  late TextEditingController dateOfComplaint;
+class CreateComplaintsController extends GetxController with CustomToast {
+  final _createComplaintUseCase = instance<CreateComplaintUseCase>();
+  final _sharedPrefController = instance<SharedPreferencesController>();
+  final _formKey = GlobalKey<FormState>();
+
+  late TextEditingController _detailOfComplaint;
+  late TextEditingController _complaintName;
+  late TextEditingController _addressOfComplaint;
+  late TextEditingController _dateOfComplaint;
+
+  GlobalKey<FormState> get formKey => _formKey;
+
+  TextEditingController get detailOfComplaint => _detailOfComplaint;
+
+  TextEditingController get complaintName => _complaintName;
+
+  TextEditingController get addressOfComplaint => _addressOfComplaint;
+
+  TextEditingController get dateOfComplaint => _dateOfComplaint;
   DateTime _dateTime = DateTime.now();
 
   @override
   void onInit() {
     super.onInit();
-    detailOfComplaint = TextEditingController();
-    complaintName = TextEditingController();
-    addressOfComplaint = TextEditingController();
-    dateOfComplaint = TextEditingController();
+    _detailOfComplaint = TextEditingController();
+    _complaintName = TextEditingController();
+    _addressOfComplaint = TextEditingController();
+    _dateOfComplaint = TextEditingController();
   }
 
   @override
   void dispose() {
-    detailOfComplaint.dispose();
-    complaintName.dispose();
-    addressOfComplaint.dispose();
-    dateOfComplaint.dispose();
+    _detailOfComplaint.dispose();
+    _complaintName.dispose();
+    _addressOfComplaint.dispose();
+    _dateOfComplaint.dispose();
     super.dispose();
   }
 
-  void cancelButton() {
-    Get.back();
+  void cancelButton(BuildContext context) {
+    context.pop();
     disposeCreateComplaints();
   }
 
   void createComplaintsButton(BuildContext context) async {
-    if (_checkData()) {
-      (await _sendComplaintUseCase.execute(
+    if (_formKey.currentState!.validate()) {
+      (await _createComplaintUseCase.execute(
         CreateComplaintInput(
-          driverId:
-              SharedPreferencesController.getInt(SharedPreferencesKeys.userId),
-          addressOfComplaint: addressOfComplaint.text,
-          complaintsName: complaintName.text,
-          dateOfIncidentOrProblem: dateOfComplaint.text,
-          detailOfComplaint: detailOfComplaint.text,
+          driverId: _sharedPrefController.getInt(SharedPreferencesKeys.userId),
+          addressOfComplaint: _addressOfComplaint.text,
+          complaintsName: _complaintName.text,
+          dateOfIncidentOrProblem: _dateOfComplaint.text,
+          detailOfComplaint: _detailOfComplaint.text,
           statusOfComplaint: false,
         ),
       ))
           .fold(
         (l) {
-          showSnackBar(message: l.message,context:context);
+          showToast(message: l.message, context: context);
         },
         (r) async {
-          Get.back();
           disposeListOfComplaints();
-          Get.clearRouteTree();
+          context.pop();
+          initListOfComplaints();
           customCreatedSuccessfullyDialog(
-            closeButton: () async {
-              initListOfComplaints();
-              Get.back();
-              Get.offAllNamed(Routes.listOfComplaintsScreen);
+            closeButton: () {
+              context.pop();
+              ListOfComplaintsController.to.getComplaints();
+              // context.pushNamedAndRemoveAllUntil(Routes.listOfComplaintsScreen);
               disposeCreateComplaints();
             },
             text: ManagerStrings.complaintCreatedSuccessfully,
-            context: Get.context!,
+            context: context,
           );
         },
       );
-    } else {
-      showSnackBar(message: ManagerStrings.pleaseEnterTheRequiredData,context: context);
-    }
-  }
-
-  bool _checkData() {
-    if (complaintName.text.isNotEmpty) {
-      return true;
-    } else {
-      return false;
     }
   }
 
@@ -90,7 +91,7 @@ class CreateComplaintsController extends GetxController with Helpers {
 
     if (selectedDateTime != null) {
       _dateTime = selectedDateTime;
-      dateOfComplaint.text =
+      _dateOfComplaint.text =
           '${_dateTime.day}/${_dateTime.month}/${_dateTime.year}';
     }
 

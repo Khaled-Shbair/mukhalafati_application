@@ -1,14 +1,15 @@
 class SharedPreferencesKeys {
   static const String viewOnBoarding = 'view_on_boarding';
   static const String language = 'language';
+  static const String isFcmTokenUpdated = 'isFcmTokenUpdated';
+  static const String policeData = 'police_data';
+  static const String driverData = 'driver_data';
   static const String darkTheme = 'dark_theme';
   static const String userId = 'user_id';
   static const String rememberMeDriver = 'remember_me_driver';
   static const String rememberMePolice = 'remember_me_police';
-  static const String firstName = 'first_name';
-  static const String lastName = 'lastName';
-  static const String fullNameAr = 'full_name_ar';
-  static const String fullNameEn = 'full_name_en';
+  static const String nameAr = 'name_ar';
+  static const String nameEn = 'name_en';
   static const String image = 'image';
   static const String phoneNumber = 'phone_number';
   static const String licenseOrJobNumber = 'license_or_job_number';

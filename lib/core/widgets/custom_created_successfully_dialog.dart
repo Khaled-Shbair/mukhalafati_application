@@ -9,7 +9,7 @@ Future<void> customCreatedSuccessfullyDialog({
 }) async {
   await showDialog(
     context: context,
-    barrierColor: ManagerColors.white,
+    barrierColor: context.theme.colorScheme.surface,
     barrierDismissible: false,
     builder: (context) {
       return Column(

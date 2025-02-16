@@ -1,7 +1,7 @@
 import '/config/all_imports.dart';
 
 class SearchForDriverInput {
-  String? licenseNumber;
+  final String licenseNumber;
 
   SearchForDriverInput({
     required this.licenseNumber,

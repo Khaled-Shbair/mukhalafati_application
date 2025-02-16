@@ -29,6 +29,9 @@ ThemeData managerLightTheme() {
       secondary: ManagerColors.blanchedAlmond,
       onSecondary: ManagerColors.harvestGold,
 
+      // used in [chartBar] in policeManHome
+      inversePrimary: ManagerColors.unnecessaryDistribution,
+
       /// Used as color of [failed status].
       error: ManagerColors.error,
 
@@ -51,6 +54,9 @@ ThemeData managerLightTheme() {
       /// Used with any white background
       surface: ManagerColors.white,
 
+      /// Used with any white background
+      inverseSurface: ManagerColors.black,
+
       /// Background color of [cancel button] in [LogoutScreen]
       primaryContainer: ManagerColors.antiFlashWhite,
 
@@ -65,6 +71,9 @@ ThemeData managerLightTheme() {
 
       /// Background color of [tabBar] in [LoginScreen]
       secondaryContainer: ManagerColors.ghostWhite,
+
+      /// Used in complete step of payment
+      onTertiary: ManagerColors.lightSilver40,
     ),
 
     expansionTileTheme: ExpansionTileThemeData(
@@ -239,12 +248,31 @@ ThemeData managerLightTheme() {
       fillColor: ManagerColors.transparent,
       constraints: BoxConstraints(
         minHeight: ManagerHeight.h48,
-        maxHeight: ManagerHeight.h48,
+        // maxHeight: ManagerHeight.h48,
       ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(ManagerRadius.r5),
         borderSide: BorderSide(
           color: ManagerColors.lightSilver,
+          width: AppConstants.widthOfBorderSideOfMainTextField,
+        ),
+      ),
+      errorStyle: getRegularTextStyle(
+        fontSize: ManagerFontsSizes.f9,
+        color: ManagerColors.error,
+      ),
+      errorMaxLines: 1,
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(ManagerRadius.r5),
+        borderSide: BorderSide(
+          color: ManagerColors.lightSilver,
+          width: AppConstants.widthOfBorderSideOfMainTextField,
+        ),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(ManagerRadius.r5),
+        borderSide: BorderSide(
+          color: ManagerColors.error,
           width: AppConstants.widthOfBorderSideOfMainTextField,
         ),
       ),

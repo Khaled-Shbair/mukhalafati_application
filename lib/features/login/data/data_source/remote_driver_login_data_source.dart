@@ -6,15 +6,16 @@ abstract class RemoteDriverLoginDataSource {
 
 class RemoteLoginDataSourceImpl extends RemoteDriverLoginDataSource {
   final AppApi _appApi;
+  final SharedPreferencesController _sharedPreferences;
 
-  RemoteLoginDataSourceImpl(this._appApi);
+  RemoteLoginDataSourceImpl(this._appApi, this._sharedPreferences);
 
   @override
   Future<DriverLoginResponse> login(DriverLoginRequest request) async {
     return await _appApi.driverLogin(
       request.licenseNumber,
       request.password,
-      SharedPreferencesController.getString(SharedPreferencesKeys.language),
+      _sharedPreferences.getString(SharedPreferencesKeys.language),
     );
   }
 }

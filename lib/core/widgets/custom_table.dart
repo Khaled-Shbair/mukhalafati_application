@@ -104,7 +104,8 @@ class CustomEmptyTable extends StatelessWidget {
           Text(
             ManagerStrings.noRecordedViolations,
             textAlign: TextAlign.center,
-            style: context.textTheme.titleListOfComplaintsScreenAndStyleOfTextInEmptyTable(context),
+            style: context.textTheme
+                .titleListOfComplaintsScreenAndStyleOfTextInEmptyTable(context),
           ),
         ],
       ),

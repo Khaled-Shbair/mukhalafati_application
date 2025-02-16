@@ -1,4 +1,3 @@
-
 import '/config/all_imports.dart';
 
 class SendRequestUpdateProfileRepositoryImpl
@@ -11,9 +10,9 @@ class SendRequestUpdateProfileRepositoryImpl
   @override
   Future<Either<Failure, SendRequestUpdateProfileModel>>
       sendRequestUpdateProfile(request) async {
-    final response = await _dataSource.sendRequestUpdateProfile(request);
     if (await _networkInfo.isConnected) {
       try {
+        final response = await _dataSource.sendRequestUpdateProfile(request);
         return Right(response.toDomain());
       } catch (e) {
         return Left(ErrorHandler.handle(e).failure);

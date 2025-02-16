@@ -3,14 +3,8 @@ import '/config/all_imports.dart';
 extension DriverLoginMapper on DriverLoginResponse {
   toDomain() {
     return DriverLoginModel(
-      firstNameAr: firstNameAr.onNull(),
-      firstNameEn: firstNameEn.onNull(),
-      fatherNameAr: fatherNameAr.onNull(),
-      fatherNameEn: fatherNameEn.onNull(),
-      grandFatherNameAr: grandFatherNameAr.onNull(),
-      grandFatherNameEn: grandFatherNameEn.onNull(),
-      lastNameAr: lastNameAr.onNull(),
-      lastNameEn: lastNameEn.onNull(),
+      nameAr: nameAr.onNull(),
+      nameEn:FormatNameHelper. fullNameEn(nameEn.onNull()),
       licenseNumber: licenseNumber.onNull(),
       id: this.id.onNull(),
       idNumber: idNumber.onNull(),

@@ -1,10 +1,14 @@
 import '/config/all_imports.dart';
 
 class DriverViolationsUseCaseInput {
-  int? driverId;
+  final int driverId;
+  final int page;
+  final int limit;
 
   DriverViolationsUseCaseInput({
     required this.driverId,
+    required this.page,
+    required this.limit,
   });
 }
 
@@ -19,6 +23,8 @@ class DriverViolationsUseCase
     return await _repository.getDriverViolations(
       DriverViolationsRequest(
         driverId: input.driverId,
+        page: input.page,
+        limit: input.limit,
       ),
     );
   }

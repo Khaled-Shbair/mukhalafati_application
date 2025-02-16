@@ -1,84 +1,105 @@
 import '/config/all_imports.dart';
 
 class SearchOnResultsTestsOfLicenseController extends GetxController
-    with Helpers {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final SearchOnResultsTestsOfLicenseUseCase _useCase =
-      instance<SearchOnResultsTestsOfLicenseUseCase>();
+    with CustomToast {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _useCase = instance<SearchOnResultsTestsOfLicenseUseCase>();
 
-  late TextEditingController idNumber;
+  late TextEditingController _idNumber;
 
-  late String resultName;
+  String _resultName = '';
+  late FocusNode _focusNode;
 
-  late bool licenseTestResults;
+  bool _licenseTestResults = false;
 
-  late bool practicalTestResult;
+  bool _practicalTestResult = false;
+  String _savedSearchIdNumber = '';
 
-  bool loading = false;
-  bool result = false;
+  bool _loading = false;
+  bool _result = false;
+
+  bool get loading => _loading;
+
+  bool get result => _result;
+
+  bool get licenseTestResults => _licenseTestResults;
+
+  bool get practicalTestResult => _practicalTestResult;
+
+  String get resultName => _resultName;
+
+  String get savedSearchIdNumber => _savedSearchIdNumber;
+
+  TextEditingController get idNumber => _idNumber;
+
+  FocusNode get focusNode => _focusNode;
+
+  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
 
   @override
   void onInit() {
     super.onInit();
-    idNumber = TextEditingController();
+    _idNumber = TextEditingController() ..addListener(
+          () {
+        selectCursorPosition(_idNumber);
+      },
+    );
+    _focusNode = FocusNode();
   }
 
   @override
-  void onClose() {
-    idNumber.dispose();
-    super.onClose();
+  void dispose() {
+    _idNumber.dispose();
+    _focusNode.dispose();
+    super.dispose();
   }
 
   /// Open [endDrawer], use this drawer as menu.
-  void openEndDrawer() {
-    if (scaffoldKey.currentState != null &&
-        !scaffoldKey.currentState!.isEndDrawerOpen) {
-      scaffoldKey.currentState!.openEndDrawer();
+  void openEndDrawer(BuildContext context) {
+    if (_scaffoldKey.currentState != null &&
+        !_scaffoldKey.currentState!.isEndDrawerOpen) {
+      // _focusNode.unfocus();
+      _scaffoldKey.currentState!.openEndDrawer();
     }
   }
 
   void searchButton(BuildContext context) async {
-    loading = true;
-    result = false;
-    update();
+    FocusScope.of(context).requestFocus(FocusNode());
+    if (_idNumber.text.isNotEmpty && _idNumber.text != _savedSearchIdNumber) {
+      if (_idNumber.text.length == AppConstants.maxLengthOfIDNumber) {
+        _loading = true;
+        _result = false;
+        update();
+        (await _useCase.execute(
+          SearchOnResultsTestsOfLicenseUseCaseInput(idNumber: _idNumber.text),
+        ))
+            .fold(
+          /// Failed request search on results tests of license
+          (l) {
+            /// Appear message of error in SnackBar to user
+            _result = false;
+            _idNumber.clear();
+            showToast(message: l.message, context: context);
+          },
 
-    if (_checkData()) {
-      (await _useCase.execute(
-        SearchOnResultsTestsOfLicenseUseCaseInput(idNumber: idNumber.text),
-      ))
-          .fold(
-        /// Failed request search on results tests of license
-        (l) {
-          result = false;
-          loading = false;
-
-          /// Appear message of error in SnackBar to user
-          showSnackBar(message: l.message, context: context);
-          update();
-        },
-
-        /// Successfully request search on results tests of license
-        (r) {
-          resultName = r.studentName;
-          practicalTestResult = r.practicalTestResult;
-          licenseTestResults = r.licenseTestResults;
-          loading = false;
-          result = true;
-          update();
-        },
-      );
+          /// Successfully request search on results tests of license
+          (r) {
+            _savedSearchIdNumber = _idNumber.text;
+            _resultName = r.studentName;
+            _practicalTestResult = r.practicalTestResult;
+            _licenseTestResults = r.licenseTestResults;
+            _result = true;
+          },
+        );
+      } else {
+        /// Appear message of error in SnackBar to user
+        showToast(message: ManagerStrings.idNumberUnAccept, context: context);
+      }
     } else {
       /// Appear message of error in SnackBar to user
-      showSnackBar(
-          message: ManagerStrings.pleaseEnterIdNumber, context: context);
+      showToast(message: ManagerStrings.pleaseEnterIdNumber, context: context);
     }
-  }
-
-  bool _checkData() {
-    if (idNumber.text.isNotEmpty) {
-      return true;
-    } else {
-      return false;
-    }
+    _loading = false;
+    update();
   }
 }

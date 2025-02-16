@@ -54,24 +54,28 @@ class LogoutScreen extends StatelessWidget {
                     Row(
                       children: [
                         CustomButton(
-                          onPressed: () => controller.cancelButton(),
+                          onPressed: () => controller.cancelButton(context),
                           height: ManagerHeight.h40,
                           minWidth: ManagerWidth.w85,
-                          backgroundColor: context.theme.colorScheme.primaryContainer,
+                          backgroundColor:
+                              context.theme.colorScheme.primaryContainer,
                           side: BorderSide.none,
                           child: Text(
                             ManagerStrings.cancel,
-                            style: context.textTheme.cancelLogoutButton(context),
+                            style:
+                                context.textTheme.cancelLogoutButton(context),
                           ),
                         ),
                         horizontalSpace(ManagerWidth.w7),
                         CustomButton(
-                          onPressed: () => controller.logoutButton(),
+                          onPressed: () => controller.logoutButton(context),
                           height: ManagerHeight.h40,
                           minWidth: ManagerWidth.w122,
                           child: Text(
                             ManagerStrings.logout,
-                            style: context.textTheme.logoutAndCreateComplaintAndNameDriverButton(context),
+                            style: context.textTheme
+                                .logoutAndCreateComplaintAndNameDriverButton(
+                                    context),
                           ),
                         ),
                       ],

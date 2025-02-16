@@ -8,9 +8,11 @@ abstract class RemoteDriverForgotPasswordDataSource {
 class RemoteDriverForgotPasswordDataSourceImpl
     extends RemoteDriverForgotPasswordDataSource {
   final AppApi _appApi;
+  final SharedPreferencesController _sharedPreferences;
 
   RemoteDriverForgotPasswordDataSourceImpl(
     this._appApi,
+    this._sharedPreferences,
   );
 
   @override
@@ -18,7 +20,7 @@ class RemoteDriverForgotPasswordDataSourceImpl
       DriverForgotPasswordRequest request) async {
     return await _appApi.forgetPasswordDriver(
       request.licenseNumber,
-      SharedPreferencesController.getString(SharedPreferencesKeys.language),
+      _sharedPreferences.getString(SharedPreferencesKeys.language),
     );
   }
 }

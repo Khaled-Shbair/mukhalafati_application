@@ -1,28 +1,21 @@
 class CreateViolationRequest {
-  String? driverIdNumber;
-  double? priceOfViolation;
-  int? policeManId;
-  String? driverName;
-  String? ownerName;
-  String? ownerId;
+  String? violationDate;
+  String? violationAddress;
   String? vehicleNumber;
   String? vehicleType;
   String? vehicleColor;
   String? violationTime;
-  String? violationDate;
-  String? violationReason;
-  String? violationAddress;
-  String? reasonForViolation;
+  int? reasonOfViolationId;
+  String? ownerName;
+  String? ownerIdNumber;
+  String? driverIdNumber;
 
   CreateViolationRequest({
     required this.driverIdNumber,
-    required this.priceOfViolation,
     required this.violationAddress,
-    required this.driverName,
     required this.ownerName,
-    required this.ownerId,
-    required this.violationReason,
-    required this.reasonForViolation,
+    required this.ownerIdNumber,
+    required this.reasonOfViolationId,
     required this.vehicleColor,
     required this.vehicleNumber,
     required this.violationDate,

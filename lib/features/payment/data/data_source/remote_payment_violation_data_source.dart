@@ -16,9 +16,10 @@ class RemotePaymentViolationDataSourceImpl
       PaymentViolationRequest request) async {
     return await _appApi.paymentViolation(
       request.violationId,
+      request.paymentDateAndTime,
       request.violationState,
       request.violationPayedBy,
-      request.paymentDateAndTime,
+
     );
   }
 }

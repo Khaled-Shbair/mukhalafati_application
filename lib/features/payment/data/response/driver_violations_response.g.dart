@@ -20,3 +20,27 @@ Map<String, dynamic> _$DriverViolationsResponseToJson(
     <String, dynamic>{
       'data': instance.data,
     };
+
+DriverViolationsDataResponse _$DriverViolationsDataResponseFromJson(
+        Map<String, dynamic> json) =>
+    DriverViolationsDataResponse(
+      id: (json['id'] as num?)?.toInt(),
+      violationState: json['violation_state'] as bool?,
+      violationAddress: json['violation_address'] as String?,
+      violationTime: json['violation_time'] as String?,
+      violationDate: json['violation_date'] as String?,
+      violationReason: json['violation_reason'] as String?,
+      priceOfViolation: json['price_of_violation'] as num?,
+    );
+
+Map<String, dynamic> _$DriverViolationsDataResponseToJson(
+        DriverViolationsDataResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'violation_date': instance.violationDate,
+      'violation_time': instance.violationTime,
+      'violation_state': instance.violationState,
+      'violation_address': instance.violationAddress,
+      'violation_reason': instance.violationReason,
+      'price_of_violation': instance.priceOfViolation,
+    };
