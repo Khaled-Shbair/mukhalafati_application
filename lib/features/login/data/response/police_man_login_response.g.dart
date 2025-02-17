@@ -1,0 +1,31 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'police_man_login_response.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+PoliceManLoginResponse _$PoliceManLoginResponseFromJson(
+        Map<String, dynamic> json) =>
+    PoliceManLoginResponse(
+      id: (json['id'] as num?)?.toInt(),
+      phoneNumber: json['phone_number'] as String?,
+      nameEn: json['name_en'] as String?,
+      nameAr: json['name_ar'] as String?,
+      image: json['image'] as String?,
+      jobNumber: json['job_number'] as String?,
+      militaryRank: json['military_rank'] as String?,
+    );
+
+Map<String, dynamic> _$PoliceManLoginResponseToJson(
+        PoliceManLoginResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name_en': instance.nameEn,
+      'name_ar': instance.nameAr,
+      'image': instance.image,
+      'job_number': instance.jobNumber,
+      'phone_number': instance.phoneNumber,
+      'military_rank': instance.militaryRank,
+    };
