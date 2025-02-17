@@ -17,18 +17,10 @@ gradle-wrapper.jar
 # Generated plugin registrant
 GeneratedPluginRegistrant.java
 
-# App constants
-lib/config/constants/app_constants.dart
-lib/config/constants/api_keys.dart
-lib/config/constants/shared_preferences_keys.dart
-
-# Core language preferences
-lib/core/language/shared_preferences_keys.dart
-
 # Keystore files (should never be shared publicly)
 key.properties
 **/*.keystore
 **/*.jks
 
-# Dart generated files
-*.g.dart
+# Notifications api keys
+/assets/json/notification_json/mukhalafati-62f02eada005.json
