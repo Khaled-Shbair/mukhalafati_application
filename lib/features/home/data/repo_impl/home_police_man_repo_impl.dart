@@ -7,7 +7,7 @@ class HomePoliceManRepoImpl extends HomePoliceManRepo {
   HomePoliceManRepoImpl(this._dataSource, this._networkInfo);
 
   @override
-  Future<Either<Failure, HomePoliceManModel>> homePoliceMan() async {
+  Future<Either<Failure, HomePoliceManModel>> getHomePoliceManData() async {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _dataSource.homePoliceMan();

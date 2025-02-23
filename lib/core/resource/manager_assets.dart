@@ -69,7 +69,10 @@ class ManagerAssets {
   static const String filterIcon = '$_imagePath/payment/filter_icon.png';
   static const String cancelFilterIcon =
       '$_imagePath/payment/cancel_filter_icon.png';
+  static const String backgroundSplashScreen =
+      '$_imagePath/splash/background_splash_screen.png';
 
 //////////////////////////////////////////
-  static const String googleServiceKey = '$_jsonPath/notification_json/mukhalafati-62f02eada005.json';
+  static const String googleServiceKey =
+      '$_jsonPath/notification_json/mukhalafati-62f02eada005.json';
 }

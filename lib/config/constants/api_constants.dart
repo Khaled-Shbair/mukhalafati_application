@@ -32,4 +32,5 @@ class ApiConstants {
   static const String getAllNotification = '$completeBaseUrl/get_all_notification';
   static const String getViolationDetailsById = '$completeBaseUrl/get_violation_details_by_id';
   static const String homePoliceMan = '$completeBaseUrl/get_police_man_statistics';
+  static const String getHomeDriverData = '$completeBaseUrl/get_home_driver_data';
 }

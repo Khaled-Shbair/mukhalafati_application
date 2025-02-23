@@ -93,7 +93,7 @@ class Validator with CustomToast {
   }
 
   static String? detailsOfComplaintValidator(String? details) {
-    if (details!.isEmpty || details.length > 20) {
+    if (details!.isEmpty || details.length < 20) {
       return ManagerStrings.pleaseEnterDetailOfComplaint;
     }
     return null;

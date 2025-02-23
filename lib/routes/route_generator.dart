@@ -3,6 +3,7 @@ import '/config/all_imports.dart';
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+
       case Routes.onBoardingScreen:
         initOnBoarding();
         return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
@@ -26,7 +27,7 @@ class RouteGenerator {
         final phoneNumber = args[0] as String;
         final id = args[1] as int;
         final isDriver = args[2] as bool;
-        final verificationId  = args[3] as String;
+        final verificationId = args[3] as String;
         return MaterialPageRoute(
           builder: (_) => VerificationCodeScreen(
             phoneNumber: phoneNumber,

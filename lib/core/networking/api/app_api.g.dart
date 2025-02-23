@@ -739,6 +739,33 @@ class _AppApi implements AppApi {
   }
 
   @override
+  Future<HomePoliceManResponse> homePoliceMan(dynamic policeManId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'input_id': policeManId};
+    final _options = _setStreamType<HomePoliceManResponse>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_police_man_statistics',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late HomePoliceManResponse _value;
+    try {
+      _value = HomePoliceManResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<dynamic> updateNotificationStatus(dynamic driverId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -781,25 +808,25 @@ class _AppApi implements AppApi {
   }
 
   @override
-  Future<HomePoliceManResponse> homePoliceMan(dynamic policeManId) async {
+  Future<HomeDriverDataResponse> getHomeDriverData(dynamic driverId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = {'input_id': policeManId};
-    final _options = _setStreamType<HomePoliceManResponse>(
+    final _data = {'input_id': driverId};
+    final _options = _setStreamType<HomeDriverDataResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_police_man_statistics',
+            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_home_driver_data',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late HomePoliceManResponse _value;
+    late HomeDriverDataResponse _value;
     try {
-      _value = HomePoliceManResponse.fromJson(_result.data!);
+      _value = HomeDriverDataResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

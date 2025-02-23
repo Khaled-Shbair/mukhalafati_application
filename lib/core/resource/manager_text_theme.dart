@@ -592,4 +592,10 @@ extension ManagerTextTheme on TextTheme {
         color: ManagerColors.black,
         fontSize: ManagerFontsSizes.f13,
       );
+  /// core >> widgets >> [CustomNotInternetConnection]
+  TextStyle textStyleOfCustomNotInternetConnection(BuildContext context) =>
+      getSemiBoldTextStyle(
+        color: ManagerColors.black,
+        fontSize: ManagerFontsSizes.f14,
+      );
 }

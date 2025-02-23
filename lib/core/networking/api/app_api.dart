@@ -167,4 +167,8 @@ abstract class AppApi {
 
   @POST(ApiConstants.getAllNotification)
   Future getAllNotification(@Field(ApiKeys.userId) driverId);
+
+  @POST(ApiConstants.getHomeDriverData)
+  Future<HomeDriverDataResponse> getHomeDriverData(
+      @Field(ApiKeys.inputId) driverId);
 }

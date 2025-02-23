@@ -1,12 +1,14 @@
-import 'config/all_imports.dart';
+import '/config/all_imports.dart';
 import 'package:device_preview/device_preview.dart';
 
 void main() async {
   await initModule();
+
   runApp(
     MyApp(),
     // DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()),
   );
+  FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatelessWidget {

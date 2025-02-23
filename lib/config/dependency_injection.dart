@@ -5,12 +5,24 @@ import 'all_imports.dart';
 final instance = GetIt.instance;
 
 initModule() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await _initDio();
   await _initSharedPreferences();
   await _initFirebase();
-  instance.registerLazySingleton<NetworkInfo>(
-      () => NetworkInfoImplementation(InternetConnection()));
+  await _initNetworkInfo();
+  await updateFcmInDatabase().then(
+    (value) async {
+      await disposeUpdateFcmInDatabase();
+    },
+  );
+}
+
+Future<void> _initNetworkInfo() async {
+  if (!GetIt.I.isRegistered<NetworkInfo>()) {
+    instance.registerLazySingleton<NetworkInfo>(
+        () => NetworkInfoImplementation(InternetConnection()));
+  }
 }
 
 Future<void> _initSharedPreferences() async {
@@ -342,9 +354,9 @@ initPoliceManHome() {
           instance<RemoteHomePoliceManDataSource>(), instance<NetworkInfo>()),
     );
   }
-  if (!GetIt.I.isRegistered<HomePoliceManUseCase>()) {
-    instance.registerLazySingleton<HomePoliceManUseCase>(
-        () => HomePoliceManUseCase(instance<HomePoliceManRepo>()));
+  if (!GetIt.I.isRegistered<GetHomePoliceManDataUseCase>()) {
+    instance.registerLazySingleton<GetHomePoliceManDataUseCase>(
+        () => GetHomePoliceManDataUseCase(instance<HomePoliceManRepo>()));
   }
   Get.put<PoliceManHomeController>(PoliceManHomeController());
 }
@@ -356,13 +368,17 @@ disposePoliceManHome() {
   if (GetIt.I.isRegistered<HomePoliceManRepo>()) {
     instance.unregister<HomePoliceManRepo>();
   }
-  if (GetIt.I.isRegistered<HomePoliceManUseCase>()) {
-    instance.unregister<HomePoliceManUseCase>();
+  if (GetIt.I.isRegistered<GetHomePoliceManDataUseCase>()) {
+    instance.unregister<GetHomePoliceManDataUseCase>();
   }
   Get.delete<PoliceManHomeController>();
 }
 
 initDriverHome() {
+  if (!GetIt.I.isRegistered<LocalHomeDriverDataSource>()) {
+    instance.registerLazySingleton<LocalHomeDriverDataSource>(() =>
+        LocalHomeDriverDataSourceImpl(instance<SharedPreferencesController>()));
+  }
   if (!GetIt.I.isRegistered<RemoteHomeDriverDataSource>()) {
     instance.registerLazySingleton<RemoteHomeDriverDataSource>(
         () => RemoteHomeDriverDataSourceImpl(
@@ -373,12 +389,15 @@ initDriverHome() {
   if (!GetIt.I.isRegistered<HomeDriverRepo>()) {
     instance.registerLazySingleton<HomeDriverRepo>(
       () => HomeDriverRepoImpl(
-          instance<RemoteHomeDriverDataSource>(), instance<NetworkInfo>()),
+        instance<RemoteHomeDriverDataSource>(),
+        instance<NetworkInfo>(),
+        instance<LocalHomeDriverDataSource>(),
+      ),
     );
   }
-  if (!GetIt.I.isRegistered<UpdateFcmTokenUseCase>()) {
-    instance.registerLazySingleton<UpdateFcmTokenUseCase>(
-        () => UpdateFcmTokenUseCase(instance<HomeDriverRepo>()));
+  if (!GetIt.I.isRegistered<GetHomeDriverDataUseCase>()) {
+    instance.registerLazySingleton<GetHomeDriverDataUseCase>(
+        () => GetHomeDriverDataUseCase(instance<HomeDriverRepo>()));
   }
   Get.put<DriverHomeController>(DriverHomeController());
 }
@@ -390,8 +409,8 @@ disposeDriverHome() {
   if (GetIt.I.isRegistered<HomeDriverRepo>()) {
     instance.unregister<HomeDriverRepo>();
   }
-  if (GetIt.I.isRegistered<UpdateFcmTokenUseCase>()) {
-    instance.unregister<UpdateFcmTokenUseCase>();
+  if (GetIt.I.isRegistered<GetHomeDriverDataUseCase>()) {
+    instance.unregister<GetHomeDriverDataUseCase>();
   }
   Get.delete<DriverHomeController>();
 }
@@ -772,9 +791,62 @@ disposeDriverProfile() {
 ////////////////////////////////////////////////////////////////////////////////
 /// [Notification]
 initNotification() {
+  if (!GetIt.I.isRegistered<RemoteNotificationsDataSource>()) {
+    instance.registerLazySingleton<RemoteNotificationsDataSource>(() =>
+        RemoteNotificationsDataSourceImpl(
+            instance<AppApi>(), instance<SharedPreferencesController>()));
+  }
+  if (!GetIt.I.isRegistered<NotificationsRepo>()) {
+    instance
+        .registerLazySingleton<NotificationsRepo>(() => NotificationsRepoImpl(
+              instance<RemoteNotificationsDataSource>(),
+              instance<NetworkInfo>(),
+            ));
+  }
+
   Get.put<NotificationsController>(NotificationsController());
 }
 
 disposeNotification() {
+  if (GetIt.I.isRegistered<RemoteNotificationsDataSource>()) {
+    instance.unregister<RemoteNotificationsDataSource>();
+  }
+  if (GetIt.I.isRegistered<NotificationsRepo>()) {
+    instance.unregister<NotificationsRepo>();
+  }
+
   Get.delete<NotificationsController>();
+}
+
+Future<void> updateFcmInDatabase() async {
+  if (!GetIt.I.isRegistered<RemoteNotificationsDataSource>()) {
+    instance.registerLazySingleton<RemoteNotificationsDataSource>(() =>
+        RemoteNotificationsDataSourceImpl(
+            instance<AppApi>(), instance<SharedPreferencesController>()));
+  }
+  if (!GetIt.I.isRegistered<NotificationsRepo>()) {
+    instance
+        .registerLazySingleton<NotificationsRepo>(() => NotificationsRepoImpl(
+              instance<RemoteNotificationsDataSource>(),
+              instance<NetworkInfo>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<UpdateFcmTokenUseCase>()) {
+    instance.registerLazySingleton<UpdateFcmTokenUseCase>(
+        () => UpdateFcmTokenUseCase(instance<NotificationsRepo>()));
+  }
+
+  await instance<UpdateFcmTokenUseCase>().execute();
+}
+
+disposeUpdateFcmInDatabase() {
+  if (GetIt.I.isRegistered<RemoteNotificationsDataSource>()) {
+    instance.unregister<RemoteNotificationsDataSource>();
+  }
+  if (GetIt.I.isRegistered<NotificationsRepo>()) {
+    instance.unregister<NotificationsRepo>();
+  }
+  if (GetIt.I.isRegistered<UpdateFcmTokenUseCase>()) {
+    instance.unregister<UpdateFcmTokenUseCase>();
+  }
 }

@@ -2,7 +2,7 @@ import '/config/all_imports.dart';
 
 PreferredSizeWidget customHomeAppBar({
   required String welcome,
-  required String firstName,
+  required String name,
   required Function() openEndDrawer,
   required Widget widget,
   required BuildContext context,
@@ -27,7 +27,7 @@ PreferredSizeWidget customHomeAppBar({
             Row(
               children: [
                 Text(
-                  firstName,
+                  FormatNameHelper.firstNameAr(name),
                   style: context.textTheme.textStyleOfNameOfUser(context),
                 ),
                 horizontalSpace(ManagerWidth.w4),

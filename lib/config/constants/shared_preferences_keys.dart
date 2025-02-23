@@ -1,7 +1,7 @@
 class SharedPreferencesKeys {
   static const String viewOnBoarding = 'view_on_boarding';
+  static const String fcm = 'fcm';
   static const String language = 'language';
-  static const String isFcmTokenUpdated = 'isFcmTokenUpdated';
   static const String policeData = 'police_data';
   static const String driverData = 'driver_data';
   static const String darkTheme = 'dark_theme';
