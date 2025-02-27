@@ -1,0 +1,27 @@
+flutter_native_splash:
+  # ios & Android below 12
+  background_image: assets/images/splash/splash_android_12.png
+#  branding: "assets/images/logo.png"
+  #color: "#CDAB35"
+  color: "#ffffff"
+
+  android: true
+  ios: true
+
+  # Android 12 or more
+  android_12:
+    image: assets/images/splash/splash_android_12.png
+    color: "#ffffff"
+    #color: "#CDAB35"
+
+
+    ### Step to create splash android 12 or more:- ###
+    #   1- create frame in figma size (640,640) and radius (320)
+    #   2- add logo and resize in this frame
+    #   3- create new frame in figma size (960,960)
+    #   4- add first frame in center of new frame
+    #   5 - export new frame as splash_android_12.png
+
+
+### Commands used to create flutter native splash:- ###
+#   - dart run flutter_native_splash:create --path=flutter_native_splash.yaml
