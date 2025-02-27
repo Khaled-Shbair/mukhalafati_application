@@ -1,9 +1,20 @@
+# Gradle wrapper files
 gradle-wrapper.jar
+
+# Gradle directories
 /.gradle
+
+# Captures
 /captures/
+
+# Gradle scripts
 /gradlew
 /gradlew.bat
+
+# Local properties
 /local.properties
+
+# Generated plugin registrant
 GeneratedPluginRegistrant.java
 
 # Remember to never publicly share your keystore.
@@ -11,3 +22,21 @@ key.properties
 **/*.keystore
 **/*.jks
 /android/app/google-services.json
+=======
+
+# Some import file
+lib/config/constants/app_constants.dart
+lib/config/constants/api_keys.dart
+lib/config/constants/shared_preferences_keys.dart
+lib/core/language/shared_preferences_keys.dart
+
+# Google-services file
+/android/app/google-services.json
+
+# Keystore files (should never be shared publicly)
+key.properties
+**/*.keystore
+**/*.jks
+
+# Notifications api keys file
+assets/json/notification_json/mukhalafati-62f02eada005.json

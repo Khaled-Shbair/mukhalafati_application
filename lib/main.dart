@@ -6,7 +6,7 @@ void main() async {
 
   runApp(
     MyApp(),
-    // DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()),
+    // DevicePrevgit filter-repo --path assets/json/notification_json/mukhalafati-62f02eada005.jsoniew(enabled: !kReleaseMode, builder: (context) => MyApp()),
   );
   FlutterNativeSplash.remove();
 }
