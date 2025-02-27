@@ -196,7 +196,7 @@ class CreateViolationController extends GetxController with CustomToast {
             },
           );
         },
-        text: ManagerStrings.theViolationWasSuccessfullyCreated,
+        title: ManagerStrings.theViolationWasSuccessfullyCreated,
         closeButton: () {
           context.pushNamedAndRemoveAllUntil(Routes.policeManHomeScreen);
           disposeCreateViolation();
@@ -232,8 +232,10 @@ class CreateViolationController extends GetxController with CustomToast {
     await customCreatedSuccessfullyDialog(
       context: context,
       closeButton: () {
-        context.pushNamedAndRemoveAllUntil(Routes.policeManHomeScreen);
-        disposeCreateViolation();
+        if (context.mounted) {
+          context.pushNamedAndRemoveAllUntil(Routes.policeManHomeScreen);
+          disposeCreateViolation();
+        }
       },
       text: ManagerStrings.theViolationWasSuccessfullyCreated,
     );

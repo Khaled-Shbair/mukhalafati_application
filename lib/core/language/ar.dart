@@ -3,6 +3,7 @@ const Map<String, String> ar = {
   'bad_request': 'عذراً!\n هناك خطا ما حصل\n يرجى المحاولة مرة اخرى',
   'full_name_un_accept': 'يرجي إدخال الاسم بشكل صحيح',
   'search': 'بحث',
+  'no_notifications': 'لا يوجد إشعارات',
   'no_violation_has_been_registered': 'لا يوجد مخالفات مسجلة',
   'violation_has_been_registered': 'تم تسجيل مخالفة',
   'please_select_reason_for_violation': 'يرجي اختيار سبب المخالفة',

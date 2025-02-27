@@ -2,10 +2,9 @@ import '/config/all_imports.dart';
 
 Future<void> customConfirmInformationDialog({
   required BuildContext context,
-  required String text,
+  String? title,
   String? textConfirmButton,
   String? textCancelButton,
-  String? title,
   required Function() closeButton,
   required Function() confirmButton,
   Function()? cancelButton,

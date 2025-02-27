@@ -166,5 +166,19 @@ abstract class AppApi {
   Future updateNotificationStatus(@Field(ApiKeys.userId) driverId);
 
   @POST(ApiConstants.getAllNotification)
-  Future getAllNotification(@Field(ApiKeys.userId) driverId);
+  Future<NotificationsResponse> getAllNotification(
+      @Field(ApiKeys.inputId) driverId);
+
+  @POST(ApiConstants.getHomeDriverData)
+  Future<HomeDriverDataResponse> getHomeDriverData(
+      @Field(ApiKeys.inputId) driverId);
+
+  @POST(ApiConstants.deleteAllNotification)
+  Future deleteAllNotification(@Field(ApiKeys.userId) driverId);
+
+  @POST(ApiConstants.deleteDriverNotificationById)
+  Future deleteDriverNotificationById(
+    @Field(ApiKeys.userId) driverId,
+    @Field(ApiKeys.notificationId) notificationId,
+  );
 }

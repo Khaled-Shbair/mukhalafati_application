@@ -1,12 +1,21 @@
+import 'package:mukhalafati_application/features/notifications/domain/use_case/delete_all_notifications_use_case.dart';
+import 'package:mukhalafati_application/features/notifications/domain/use_case/delete_driver_notifications_by_id_use_case.dart';
+
 import '/config/all_imports.dart';
 
-class NotificationsController extends GetxController {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+class NotificationsController extends GetxController with CustomToast {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _getAllNotificationsUseCase = instance<GetAllNotificationsUseCase>();
+  final _updateNotificationStatusUseCase =
+      instance<UpdateNotificationStatusUseCase>();
+  bool _loading = false;
+  NotificationsModel? _notificationsModel;
 
-  // int unReadMessagesNumber = 4;
-  bool loading = false;
+  NotificationsModel? get notificationsModel => _notificationsModel;
 
-  List notifications = <NotificationModel>[];
+  bool get loading => _loading;
+
+  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
 
   @override
   void onInit() {
@@ -16,75 +25,100 @@ class NotificationsController extends GetxController {
 
   void backButton() {
     Get.back();
+    _readAllNotification();
     disposeNotification();
   }
 
-  void deleteNotifications() async {
+  void deleteNotification(int index, int id, BuildContext context) async {
+    final delete = instance<DeleteDriverNotificationsByIdUseCase>();
+    (await delete.execute(DeleteDriverNotificationsInput(notificationId: id)))
+        .fold(
+      (l) {
+        if (l.code == -1) {
+          showToast(message: l.message, context: context);
+        }
+      },
+      (r) async {
+        context.pop();
+        _notificationsModel!.data.removeAt(index);
+        await customCreatedSuccessfullyDialog(
+          context: context,
+          closeButton: () {
+            context.pop();
+          },
+          text: ManagerStrings.notificationSuccessfullyDeleted,
+        );
+      },
+    );
+  }
+
+  void deleteAllNotification(BuildContext context) async {
     customConfirmInformationDialog(
+      context: context,
       title: ManagerStrings.doYouWantToDeleteAllNotifications,
-      text: ManagerStrings.notificationsSuccessfullyDeleted,
       textConfirmButton: ManagerStrings.yes,
       textCancelButton: ManagerStrings.no,
       confirmButton: () async {
-        // await customCreatedSuccessfullyDialog(
-        //   context: context,
-        //   closeButton: () {
-        //     context
-        //         .pushNamedAndRemoveAllUntil(Routes.policeManHomeScreen);
-        //     disposeCreateViolation();
-        //   },
-        //   text: ManagerStrings.theViolationWasSuccessfullyCreated,
-        // );
+        final delete = instance<DeleteAllNotificationsUseCase>();
+        (await delete.execute()).fold(
+          (l) {
+            if (l.code == -1) {
+              showToast(message: l.message, context: context);
+            }
+          },
+          (r) async {
+            context.pop();
+            _notificationsModel!.data.clear();
+            _notificationsModel!.unreadCount = 0;
+            update();
+            await customCreatedSuccessfullyDialog(
+              context: context,
+              closeButton: () {
+                if (_notificationsModel != null &&
+                    _notificationsModel!.data.isNotEmpty) {
+                  _notificationsModel!.data.clear();
+                }
+                context.pop();
+              },
+              text: ManagerStrings.notificationsSuccessfullyDeleted,
+            );
+          },
+        );
       },
-      closeButton: () async {
-        getNotifications();
-        Get.back();
-        update();
-      },
-      context: Get.context!,
+      closeButton: () => context.pop(),
     );
+    update();
   }
 
+  /// Open [endDrawer], use this drawer as menu.
   void openEndDrawer() {
-    if (scaffoldKey.currentState != null &&
-        !scaffoldKey.currentState!.isEndDrawerOpen) {
-      scaffoldKey.currentState!.openEndDrawer();
+    if (_scaffoldKey.currentState != null &&
+        !_scaffoldKey.currentState!.isEndDrawerOpen) {
+      _scaffoldKey.currentState!.openEndDrawer();
     }
   }
 
-  void onLongPressOnBoxOfNotification(int notificationId, int index) async {
-    notifications[index].boxColor = ManagerColors.primaryColor;
-    notifications[index].textColor = ManagerColors.white;
-    notifications[index].timeColor = ManagerColors.white80;
-    customConfirmInformationDialog(
-      title: ManagerStrings.doYouWantToDeleteNotification,
-      text: ManagerStrings.notificationSuccessfullyDeleted,
-      textConfirmButton: ManagerStrings.yes,
-      textCancelButton: ManagerStrings.no,
-      confirmButton: () {
-        // _notificationsDatabase.delete(notificationId);
+  /// get all notifications of this driver from database
+  void getNotifications() async {
+    _loading = true;
+    (await _getAllNotificationsUseCase.execute()).fold(
+      (l) {
+        showToast(message: l.message, context: Get.context!);
       },
-      closeButton: () {
-        getNotifications();
-        Get.back();
+      (r) {
+        _notificationsModel = r;
       },
-      cancelButton: () {
-        notifications[index].boxColor = ManagerColors.lotion2;
-        notifications[index].textColor = ManagerColors.black;
-        notifications[index].timeColor = ManagerColors.black50;
-        Get.back();
-        update();
-      },
-      context: Get.context!,
     );
-
+    _loading = false;
     update();
   }
 
-  void getNotifications() async {
-    loading = true;
-    // notifications = await _notificationsDatabase.read();
-    loading = false;
-    update();
+  //when user open notifications screen, send request to change
+  //status of notification = true, to determine all notifications (is_read)
+  void _readAllNotification() async {
+    (await _updateNotificationStatusUseCase.execute()).fold(
+      (l) {},
+      (r) {},
+    );
   }
 }

@@ -6,6 +6,7 @@ class SharedPreferencesKeys {
   static const String driverData = 'driver_data';
   static const String darkTheme = 'dark_theme';
   static const String userId = 'user_id';
+  static const String fcm = 'fcm';
   static const String rememberMeDriver = 'remember_me_driver';
   static const String rememberMePolice = 'remember_me_police';
   static const String nameAr = 'name_ar';

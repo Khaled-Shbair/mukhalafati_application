@@ -32,56 +32,61 @@ class NotificationsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${controller.notifications.length} ${ManagerStrings.unReadMessages}',
-                      style: TextStyle(
-                        color: ManagerColors.black50,
-                        fontWeight: ManagerFontWeight.semiBold,
-                        fontFamily: ManagerFontFamily.cairo,
-                        fontSize: ManagerFontsSizes.f13,
-                      ),
+                      '  ${controller.notificationsModel?.unreadCount ?? 0} ${ManagerStrings.unReadMessages}',
+                      style: context.textTheme
+                          .textStyleOfUnReadMessagesInNotificationScreen(
+                              context),
                     ),
                     IconButton(
-                      onPressed: () => controller.deleteNotifications(),
-                      icon: Icon(
-                        Icons.delete,
-                        color: ManagerColors.primaryColor,
-                        size: ManagerIconsSizes.i24,
+                      onPressed: () =>
+                          controller.deleteAllNotification(context),
+                      icon: Image.asset(
+                        ManagerAssets.deleteIcon,
+                        height: ManagerHeight.h22,
+                        width: ManagerWidth.w22,
                       ),
                     )
                   ],
                 ),
-                Expanded(
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    primary: false,
-                    padding: EdgeInsetsDirectional.only(
-                      bottom: ManagerHeight.h15,
-                      top: ManagerHeight.h10,
-                    ),
-                    itemCount: controller.notifications.length,
-                    itemBuilder: (context, index) {
-                      if (controller.loading == true) {
-                        return CustomLoading();
-                      } else {
-                        return boxOfNotification(
-                          onLongPress: () =>
-                              controller.onLongPressOnBoxOfNotification(
-                            controller.notifications[index].notificationId,
-                            index,
-                          ),
-                          color: controller.notifications[index].boxColor,
-                          colorText: controller.notifications[index].textColor,
-                          colorTime: controller.notifications[index].timeColor,
-                          text: controller.notifications[index].text,
-                          time: controller.notifications[index].time,
+                if (controller.loading == true) ...{
+                  Spacer(),
+                  CustomLoading(),
+                  Spacer(),
+                } else if (controller.notificationsModel != null &&
+                    controller.notificationsModel!.data.isNotEmpty) ...{
+                  Expanded(
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      padding: EdgeInsetsDirectional.only(
+                        bottom: ManagerHeight.h15,
+                        top: ManagerHeight.h10,
+                      ),
+                      itemCount:
+                          controller.notificationsModel?.data.length ?? 0,
+                      itemBuilder: (context, index) {
+                        var data = controller.notificationsModel!.data;
+                        return BoxOfNotification(
+                          isRead: data[index].isRead,
+                          text: data[index].content,
+                          id: data[index].id,
+                          time: data[index].date,
+                          delete: () => controller.deleteNotification(
+                              index, data[index].id, context),
                         );
-                      }
-                    },
-                    separatorBuilder: (context, index) {
-                      return SizedBox(height: ManagerHeight.h15);
-                    },
+                      },
+                      separatorBuilder: (context, index) {
+                        return verticalSpace(ManagerHeight.h15);
+                      },
+                    ),
                   ),
-                ),
+                } else ...{
+                  verticalSpace(ManagerHeight.h280),
+                  Text(
+                    ManagerStrings.noNotifications,
+                    style: context.textTheme
+                        .textStyleOfEmptyNotificationMessage(context),
+                  ),
+                },
               ],
             ),
           ),

@@ -80,5 +80,5 @@ extension Navigators on BuildContext {
     return Navigator.of(this).popAndPushNamed(routeName, arguments: arguments);
   }
 
-  pop() => Navigator.of(this).pop();
+  pop<T extends Object?>([T? result]) => Navigator.of(this).pop();
 }

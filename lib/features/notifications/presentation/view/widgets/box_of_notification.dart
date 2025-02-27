@@ -1,53 +1,98 @@
+import 'dart:async';
+
 import '/config/all_imports.dart';
 
-Widget boxOfNotification({
-  Color? color,
-  Color? colorText,
-  Color? colorTime,
-  required String text,
-  required String time,
-  required Function() onLongPress,
-}) {
-  return GestureDetector(
-    onLongPress: onLongPress,
-    child: Container(
-      height: ManagerHeight.h98,
-      padding: EdgeInsetsDirectional.only(
-        start: ManagerWidth.w10,
-        top: ManagerHeight.h10,
-        bottom: ManagerHeight.h10,
-        end: ManagerWidth.w4,
+class BoxOfNotification extends StatelessWidget {
+  const BoxOfNotification({
+    required this.text,
+    required this.id,
+    required this.delete,
+    required this.time,
+    required this.isRead,
+    super.key,
+  });
+
+  final String text;
+  final int id;
+  final String time;
+  final bool isRead;
+  final void Function() delete;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dismissible(
+      key: Key(id.toString()),
+      confirmDismiss: (direction) async {
+        final completer = Completer<bool>();
+        await customConfirmInformationDialog(
+          context: context,
+          title: ManagerStrings.doYouWantToDeleteNotification,
+          textConfirmButton: ManagerStrings.yes,
+          textCancelButton: ManagerStrings.no,
+          confirmButton: () async {
+            delete();
+            completer.complete(true);
+          },
+          closeButton: () {
+            context.pop();
+            completer.complete(false);
+          },
+        );
+        return await completer.future;
+      },
+      background: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(ManagerRadius.r5),
+          color: ManagerColors.error,
+        ),
+        child: Image.asset(
+          ManagerAssets.deleteIcon,
+          color: ManagerColors.primaryColor,
+          height: ManagerHeight.h22,
+          width: ManagerWidth.w22,
+        ),
       ),
-      decoration: BoxDecoration(
-        color: color ?? ManagerColors.lotion2,
-        borderRadius: BorderRadius.circular(ManagerRadius.r5),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            text,
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              color: colorText ?? ManagerColors.black,
-              fontSize: ManagerFontsSizes.f12,
-              fontFamily: ManagerFontFamily.cairo,
-              fontWeight: ManagerFontWeight.medium,
+      child: Container(
+        height: ManagerHeight.h98,
+        width: ManagerWidth.infinity,
+        padding: EdgeInsetsDirectional.only(
+          start: ManagerWidth.w10,
+          top: ManagerHeight.h10,
+          bottom: ManagerHeight.h10,
+          end: ManagerWidth.w10,
+        ),
+        decoration: BoxDecoration(
+          color: isRead ? ManagerColors.lotion2 : context.theme.primaryColor,
+          borderRadius: BorderRadius.circular(ManagerRadius.r5),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.only(
+                end: ManagerWidth.w15,
+              ),
+              child: Text(
+                text,
+                textAlign: TextAlign.start,
+                style: context.textTheme
+                    .textStyleOfContentOfNotificationMessage(context, isRead),
+              ),
             ),
-          ),
-          SizedBox(height: ManagerHeight.h5),
-          Text(
-            '${ManagerStrings.since} $time',
-            style: TextStyle(
-              color: colorTime ?? ManagerColors.black50,
-              fontSize: ManagerFontsSizes.f10,
-              fontFamily: ManagerFontFamily.cairo,
-              fontWeight: ManagerFontWeight.semiBold,
+            verticalSpace(ManagerHeight.h6),
+            Align(
+              alignment: AlignmentDirectional.bottomEnd,
+              child: Text(
+                time,
+                textAlign: TextAlign.end,
+                style: context.textTheme
+                    .textStyleOfTimeOfNotificationMessage(context, isRead),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

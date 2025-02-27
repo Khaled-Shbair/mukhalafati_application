@@ -6,6 +6,7 @@ class ManagerStrings {
   static String noViolationHasBeenRegistered = 'no_violation_has_been_registered'.tr;
   static String badRequest = 'bad_request'.tr;
   static String search = 'search'.tr;
+  static String noNotifications = 'no_notifications'.tr;
   static String noteInPoliceHomeScreen = 'note_in_police_home_screen'.tr;
   static String drivingLicenseEn =
       'DRIVING LICENSE'; //[_TitleOfDrivingLicenseEn]

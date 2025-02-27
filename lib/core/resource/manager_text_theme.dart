@@ -36,8 +36,7 @@ extension ManagerTextTheme on TextTheme {
 
   /// TextStyle of screen that used [MainButton] and child is text.
   /// such as: [login], [forgotPassword], [changePassword] buttons
-  mainButtonTextStyle(BuildContext context) =>
-      getBoldTextStyle(
+  mainButtonTextStyle(BuildContext context) => getBoldTextStyle(
         fontSize: ManagerFontsSizes.f16,
         color: ManagerColors.white,
       );
@@ -45,7 +44,7 @@ extension ManagerTextTheme on TextTheme {
   /// core >> widgets >> [CustomCheckBox].
   /// login >> presentation >> view >> screens >> [CustomTabBarPage]
   TextStyle forgotPasswordButtonAndTextOfCheckBoxInLoginScreen(
-      BuildContext context) =>
+          BuildContext context) =>
       getMediumTextStyle(
         fontSize: ManagerFontsSizes.f13,
         color: ManagerColors.black50,
@@ -55,7 +54,7 @@ extension ManagerTextTheme on TextTheme {
   /// forget_password >> presentation >> view >> screens >> [ForgotPasswordScreen]
   /// forget_password >> presentation >> view >> screens >> [VerificationCodeScreen]
   TextStyle titleForgotAndChangePasswordAndVerificationCodeScreens(
-      BuildContext context) =>
+          BuildContext context) =>
       getBoldTextStyle(
         fontSize: ManagerFontsSizes.f15,
         color: ManagerColors.black,
@@ -65,7 +64,7 @@ extension ManagerTextTheme on TextTheme {
   /// forget_password >> presentation >> view >> screens >> [VerificationCodeScreen]
   /// change_password >> presentation >> view >> screens >> [ChangePasswordScreen]
   TextStyle subTitleForgotAndChangePasswordAndVerificationCodeScreens(
-      BuildContext context) =>
+          BuildContext context) =>
       getMediumTextStyle(
         fontSize: ManagerFontsSizes.f13,
         color: ManagerColors.davyGrey,
@@ -87,8 +86,7 @@ extension ManagerTextTheme on TextTheme {
       );
 
   /// logout >> presentation >> view >> screens >> [LogoutScreen]
-  TextStyle titleLogoutScreen(BuildContext context) =>
-      getSemiBoldTextStyle(
+  TextStyle titleLogoutScreen(BuildContext context) => getSemiBoldTextStyle(
         fontSize: ManagerFontsSizes.f20,
         color: ManagerColors.black,
       );
@@ -108,8 +106,7 @@ extension ManagerTextTheme on TextTheme {
 
   /// TextStyle of [cancelButton] in logout screen
   /// complaints >> presentation >> view >> screens >> [LogoutScreen]
-  TextStyle cancelLogoutButton(BuildContext context) =>
-      getSemiBoldTextStyle(
+  TextStyle cancelLogoutButton(BuildContext context) => getSemiBoldTextStyle(
         fontSize: ManagerFontsSizes.f14,
         color: ManagerColors.darkGunmetal,
       );
@@ -131,8 +128,7 @@ extension ManagerTextTheme on TextTheme {
 
   /// TextStyle of [submitComplaint] button in [List of complaints screen]
   /// complaints >> presentation >> view >> screens >> [ListOfComplaintsScreen]
-  TextStyle submitComplaintButton(BuildContext context) =>
-      getBoldTextStyle(
+  TextStyle submitComplaintButton(BuildContext context) => getBoldTextStyle(
         fontSize: ManagerFontsSizes.f12,
         color: ManagerColors.white,
       );
@@ -140,7 +136,7 @@ extension ManagerTextTheme on TextTheme {
   /// core >> widgets >> custom_table >> [CustomEmptyTable]
   /// complaints >> presentation >> view >> screens >> [ListOfComplaintsScreen]
   TextStyle titleListOfComplaintsScreenAndStyleOfTextInEmptyTable(
-      BuildContext context) =>
+          BuildContext context) =>
       getSemiBoldTextStyle(
         fontSize: ManagerFontsSizes.f12,
         color: ManagerColors.black,
@@ -179,15 +175,13 @@ extension ManagerTextTheme on TextTheme {
       );
 
   /// home >> presentation >> view >> widgets >> [customHomeAppBar]
-  TextStyle textStyleOfWelcomeWord(BuildContext context) =>
-      getBoldTextStyle(
+  TextStyle textStyleOfWelcomeWord(BuildContext context) => getBoldTextStyle(
         fontSize: ManagerFontsSizes.f15,
         color: ManagerColors.black,
       );
 
   /// home >> presentation >> view >> widgets >> [customHomeAppBar]
-  TextStyle textStyleOfNameOfUser(BuildContext context) =>
-      getBoldTextStyle(
+  TextStyle textStyleOfNameOfUser(BuildContext context) => getBoldTextStyle(
         fontSize: ManagerFontsSizes.f15,
         color: ManagerColors.eerieBlack,
       );
@@ -227,7 +221,7 @@ extension ManagerTextTheme on TextTheme {
   /// TextStyle of [label] of data of bar chart in custom bar chart distribution widget
   /// home >> presentation >> view >> widgets >> [CustomBarChartDistribution]
   TextStyle titleCustomStatisticsBoxPoliceManAndDataLabelInBarChart(
-      BuildContext context) =>
+          BuildContext context) =>
       getSemiBoldTextStyle(
         fontSize: ManagerFontsSizes.f11,
         color: ManagerColors.black,
@@ -243,7 +237,7 @@ extension ManagerTextTheme on TextTheme {
   /// TextStyle of title selected [Button] in CustomButtonForViolationDistributionPages widget
   /// home >> presentation >> view >> widgets >> [CustomButtonForViolationDistributionPages]
   TextStyle selectedCustomButtonForViolationDistributionPages(
-      BuildContext context) =>
+          BuildContext context) =>
       getBoldTextStyle(
         fontSize: ManagerFontsSizes.f13,
         color: ManagerColors.white,
@@ -252,7 +246,7 @@ extension ManagerTextTheme on TextTheme {
   /// TextStyle of title un-selected [Button] in CustomButtonForViolationDistributionPages widget
   /// home >> presentation >> view >> widgets >> [CustomButtonForViolationDistributionPages]
   TextStyle unSelectedCustomButtonForViolationDistributionPages(
-      BuildContext context) =>
+          BuildContext context) =>
       getSemiBoldTextStyle(
         fontSize: ManagerFontsSizes.f13,
         color: ManagerColors.primaryColor,
@@ -267,7 +261,7 @@ extension ManagerTextTheme on TextTheme {
 
   /// core >> widgets >> custom_front_driving_license_card.dart >> [_StateOfPalestineLogo]
   TextStyle textStyleOfStateOfPalestineMinistryOfTransportAnCommunicationsEn(
-      BuildContext context) =>
+          BuildContext context) =>
       getSemiBoldTextStyle(
         color: ManagerColors.black,
         fontSize: ManagerFontsSizes.f7,
@@ -275,7 +269,7 @@ extension ManagerTextTheme on TextTheme {
 
   /// core >> widgets >> custom_front_driving_license_card.dart >> [_StateOfPalestineLogo]
   TextStyle textStyleOfStateOfPalestineMinistryOfTransportAnCommunicationsAr(
-      BuildContext context) =>
+          BuildContext context) =>
       getBoldTextStyle(
         color: ManagerColors.black,
         fontSize: ManagerFontsSizes.f10,
@@ -311,7 +305,7 @@ extension ManagerTextTheme on TextTheme {
 
   /// core >> widgets >> custom_back_driving_license_card.dart >> [CustomBackDrivingLicenseCard]
   TextStyle textStyleOfDrivingLicenseGradesArAndBottomTypeOfBackCard(
-      BuildContext context) =>
+          BuildContext context) =>
       getSemiBoldTextStyle(
         color: ManagerColors.black,
         fontSize: ManagerFontsSizes.f9,
@@ -325,8 +319,8 @@ extension ManagerTextTheme on TextTheme {
       );
 
   /// features >> search >> presentation >> widgets >> [CustomCardOfResultTest]
-  TextStyle textStyleOfTitleAndSubTitleOfResultTest(BuildContext context,
-      bool isSuccessful, bool isTitle) =>
+  TextStyle textStyleOfTitleAndSubTitleOfResultTest(
+          BuildContext context, bool isSuccessful, bool isTitle) =>
       getBoldTextStyle(
         color: isSuccessful
             ? ManagerColors.successColor
@@ -335,23 +329,20 @@ extension ManagerTextTheme on TextTheme {
       );
 
   /// features >> payment >> presentation >> screens >> [yourViolations]
-  TextStyle textStyleOfTitleDriverViolationsScreen() =>
-      getBoldTextStyle(
+  TextStyle textStyleOfTitleDriverViolationsScreen() => getBoldTextStyle(
         color: ManagerColors.primaryColor,
         fontSize: ManagerFontsSizes.f13,
       );
 
   /// features >> payment >> presentation >> screens >> [youCanViewAllYourPaidAndUnpaidViolations]
   /// features >> payment >> presentation >> screens >> [titleOfCheckBox]
-  TextStyle textStyleOfSubTitleDriverViolationsScreen() =>
-      getSemiBoldTextStyle(
+  TextStyle textStyleOfSubTitleDriverViolationsScreen() => getSemiBoldTextStyle(
         color: ManagerColors.black,
         fontSize: ManagerFontsSizes.f12,
       );
 
   /// features >> payment >> presentation >> screens >> [DropdownButton]
-  TextStyle textStyleOfTitleTypeOfFilter() =>
-      getBoldTextStyle(
+  TextStyle textStyleOfTitleTypeOfFilter() => getBoldTextStyle(
         color: ManagerColors.black,
         fontSize: ManagerFontsSizes.f13,
       );
@@ -364,32 +355,28 @@ extension ManagerTextTheme on TextTheme {
       );
 
   /// features >> payment >> presentation >> widget >> [CustomViewViolationDetails]
-  TextStyle textStyleOfDateOfViolation() =>
-      getMediumTextStyle(
+  TextStyle textStyleOfDateOfViolation() => getMediumTextStyle(
         color: ManagerColors.black,
         fontSize: ManagerFontsSizes.f9,
         decoration: TextDecoration.none,
       );
 
   /// features >> payment >> presentation >> widget >> [CustomViewViolationDetails]
-  TextStyle textStyleOfNumberOfViolation() =>
-      getMediumTextStyle(
+  TextStyle textStyleOfNumberOfViolation() => getMediumTextStyle(
         color: ManagerColors.black,
         fontSize: ManagerFontsSizes.f11,
         decoration: TextDecoration.none,
       );
 
   /// features >> payment >> presentation >> widget >> [CustomViewViolationDetails]
-  TextStyle textStyleOfTitleOfViolation() =>
-      getBoldTextStyle(
+  TextStyle textStyleOfTitleOfViolation() => getBoldTextStyle(
         color: ManagerColors.black,
         fontSize: ManagerFontsSizes.f15,
         decoration: TextDecoration.none,
       );
 
   /// payment >> presentation >> widget >> [CustomViewViolationDetails]
-  TextStyle textStyleOfPayNowButton(BuildContext context) =>
-      getBoldTextStyle(
+  TextStyle textStyleOfPayNowButton(BuildContext context) => getBoldTextStyle(
         color: ManagerColors.white,
         fontSize: ManagerFontsSizes.f15,
         decoration: TextDecoration.none,
@@ -404,8 +391,8 @@ extension ManagerTextTheme on TextTheme {
       );
 
   /// payment >> presentation >> screens >> [PaymentScreen]
-  TextStyle textStyleOfNumberOfStepOfPayment(BuildContext context,
-      bool isComplete) =>
+  TextStyle textStyleOfNumberOfStepOfPayment(
+          BuildContext context, bool isComplete) =>
       getBoldTextStyle(
         color: isComplete ? ManagerColors.white : ManagerColors.black,
         fontSize: ManagerFontsSizes.f16,
@@ -428,7 +415,9 @@ extension ManagerTextTheme on TextTheme {
       );
 
   /// payment >> presentation >> widgets >> [_dataRowOfViolationTable]
-  TextStyle textStyleOfDataRowInTableViolation(BuildContext context,) =>
+  TextStyle textStyleOfDataRowInTableViolation(
+    BuildContext context,
+  ) =>
       getSemiBoldTextStyle(
         color: ManagerColors.black50,
         fontSize: ManagerFontsSizes.f12,
@@ -509,8 +498,7 @@ extension ManagerTextTheme on TextTheme {
       );
 
   /// core >> presentation >> widgets >> [CustomDrawer]
-  TextStyle textStyleOfNameInDrawer(BuildContext context) =>
-      getBoldTextStyle(
+  TextStyle textStyleOfNameInDrawer(BuildContext context) => getBoldTextStyle(
         color: ManagerColors.white,
         fontSize: ManagerFontsSizes.f14,
       );
@@ -527,7 +515,7 @@ extension ManagerTextTheme on TextTheme {
 
   /// core >> presentation >> widgets >> [customConfirmInformationDialog]
   TextStyle textStyleOfTitleOfCustomConfirmInformationDialog(
-      BuildContext context) =>
+          BuildContext context) =>
       getSemiBoldTextStyle(
         color: ManagerColors.eerieBlack,
         fontSize: ManagerFontsSizes.f20,
@@ -536,7 +524,7 @@ extension ManagerTextTheme on TextTheme {
 
   /// core >> presentation >> widgets >> [customConfirmInformationDialog]
   TextStyle textStyleOfBackButtonOfCustomConfirmInformationDialog(
-      BuildContext context) =>
+          BuildContext context) =>
       getSemiBoldTextStyle(
         color: ManagerColors.darkGunmetal,
         fontSize: ManagerFontsSizes.f14,
@@ -544,7 +532,7 @@ extension ManagerTextTheme on TextTheme {
 
   /// core >> presentation >> widgets >> [customConfirmInformationDialog]
   TextStyle textStyleOfConfirmButtonOfCustomConfirmInformationDialog(
-      BuildContext context) =>
+          BuildContext context) =>
       getBoldTextStyle(
         color: ManagerColors.white,
         fontSize: ManagerFontsSizes.f14,
@@ -573,7 +561,7 @@ extension ManagerTextTheme on TextTheme {
 
   /// home >> presentation >> view >> widgets >> [CustomBarChartDistribution]
   TextStyle textStyleOfLabelOfXAxisInCustomBarChartDistribution(
-      BuildContext context) =>
+          BuildContext context) =>
       getBoldTextStyle(
         color: ManagerColors.black,
         fontSize: ManagerFontsSizes.f9,
@@ -581,15 +569,75 @@ extension ManagerTextTheme on TextTheme {
 
   /// home >> presentation >> view >> widgets >> [CustomBarChartDistribution]
   TextStyle textStyleOfLabelOfYAxisInCustomBarChartDistribution(
-      BuildContext context) =>
+          BuildContext context) =>
       getSemiBoldTextStyle(
         color: ManagerColors.black,
         fontSize: ManagerFontsSizes.f11,
       );
+
   /// home >> presentation >> view >> widgets >> [CustomBarChartDistribution]
   TextStyle textStyleOfNoteInPoliceHomeScreen(BuildContext context) =>
       getSemiBoldTextStyle(
         color: ManagerColors.black,
         fontSize: ManagerFontsSizes.f13,
+      );
+
+  /// core >> widgets >> [CustomNotInternetConnection]
+  TextStyle textStyleOfCustomNotInternetConnection(BuildContext context) =>
+      getSemiBoldTextStyle(
+        color: ManagerColors.black,
+        fontSize: ManagerFontsSizes.f14,
+      );
+
+  /// notifications >>  presentation >> view >> screens >> [NotificationsScreen]
+  TextStyle textStyleOfUnReadMessagesInNotificationScreen(
+          BuildContext context) =>
+      getSemiBoldTextStyle(
+        color: ManagerColors.black50,
+        fontSize: ManagerFontsSizes.f13,
+      );
+
+  /// notifications >>  presentation >> view >> widget >>  [BoxOfNotification]
+  TextStyle textStyleOfContentOfNotificationMessage(
+          BuildContext context, bool isRead) =>
+      getMediumTextStyle(
+        color: isRead ? ManagerColors.black : ManagerColors.white,
+        fontSize: ManagerFontsSizes.f12,
+      );
+
+  /// notifications >>  presentation >> view >> widget >>  [BoxOfNotification]
+  TextStyle textStyleOfTimeOfNotificationMessage(
+          BuildContext context, bool isRead) =>
+      getSemiBoldTextStyle(
+        color: isRead ? ManagerColors.black50 : ManagerColors.white,
+        fontSize: ManagerFontsSizes.f10,
+      );
+
+  /// notifications >>  presentation >> view >> screens >>  [NotificationsScreen]
+  TextStyle textStyleOfEmptyNotificationMessage(BuildContext context) =>
+      getMediumTextStyle(
+        color: ManagerColors.black,
+        fontSize: ManagerFontsSizes.f18,
+      );
+
+  /// notifications >>  presentation >> view >> widget >>  [customDeleteDialog]
+  TextStyle textStyleOfQuestionDeleteNotification(BuildContext context) =>
+      getSemiBoldTextStyle(
+        color: ManagerColors.eerieBlack,
+        fontSize: ManagerFontsSizes.f20,
+      );
+
+  /// notifications >>  presentation >> view >> widget >>  [customDeleteDialog]
+  TextStyle textStyleOfYesDeleteNotification(BuildContext context) =>
+      getBoldTextStyle(
+        color: ManagerColors.white,
+        fontSize: ManagerFontsSizes.f14,
+      );
+
+  /// notifications >>  presentation >> view >> widget >>  [customDeleteDialog]
+  TextStyle textStyleOfNoDeleteNotification(BuildContext context) =>
+      getSemiBoldTextStyle(
+        color: ManagerColors.darkGunmetal,
+        fontSize: ManagerFontsSizes.f14,
       );
 }

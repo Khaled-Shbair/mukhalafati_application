@@ -97,7 +97,8 @@ Future<void> dialogOfCreateComplaint(BuildContext context) async {
                           child: Text(
                             ManagerStrings.cancel,
                             style: context.textTheme
-                                .cancelCreateComplaintButtonAndCloseButton(context),
+                                .cancelCreateComplaintButtonAndCloseButton(
+                                    context),
                           ),
                         ),
                         CustomButton(

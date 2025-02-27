@@ -117,6 +117,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/splash/
+    - assets/images/icons/
     - assets/images/on_boarding/
     - assets/images/login/
     - assets/images/search/
@@ -126,7 +127,6 @@ flutter:
     - assets/images/home/
     - assets/images/forgot_password/
     - assets/images/payment/
-    - assets/images/team/
     - assets/json/notification_json/
 
   fonts:

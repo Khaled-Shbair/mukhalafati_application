@@ -17,7 +17,7 @@ class AppConstants {
   static const int maxLengthOfCardNumber = 16;
   static const String exclamationMark = '!';
   static const double expansionFactorOfSmoothPageIndicatorInOnBoardingScreen =
-      2;
+  2;
   static const double strokeWidthOfCircularProgressIndicator = 3;
   static const double sideOfBorderSideInMainButton = 0.25;
   static const double elevationOfStepperInPaymentScreen = 0;
@@ -31,7 +31,7 @@ class AppConstants {
   static const double spreadRadiusOfBoxShadowInCustomStatisticsBoxPoliceManWidget = 1;
   static const double blurRadiusOfBoxShadowInCustomStatisticsBoxPoliceManWidget = 4;
   static const double blurRadiusOfBoxShadowInTabBarViewInPoliceManHomeScreen =
-      4;
+  4;
   static const double spreadRadiusOfBoxShadowInLogoutScreen = 6;
   static const double blurRadiusOfBoxShadowInLogoutScreen = 6;
   static const double spreadRadiusOfBoxShadowInListOfComplaintsScreen = 3;
@@ -48,8 +48,8 @@ class AppConstants {
   static const int maxLengthOfVehicleColor = 8;
   static const int maxLengthOfVerificationCode = 1;
   static const double
-      blurRadiusOfBoxShadowInNumberOfViolationsContainerInResultOfDriverWidget =
-      2;
+  blurRadiusOfBoxShadowInNumberOfViolationsContainerInResultOfDriverWidget =
+  2;
   static const double stepIconSizeOfStepperInPaymentScreen = 34;
   static const String one = '1';
   static const String two = '2';

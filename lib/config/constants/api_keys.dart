@@ -4,6 +4,7 @@ class ApiKeys {
 
   static const String apikey = 'apikey';
   static const String message = 'message';
+  static const String unreadCount = 'unread_count';
   static const String token = 'token';
   static const String notification = 'notification';
   static const String body = 'body';
@@ -27,6 +28,7 @@ class ApiKeys {
   static const String page = 'page';
   static const String orderBy = 'order_by';
   static const String userId = 'user_id';
+  static const String notificationId = 'notification_id';
 
   // Driver and Police man Keys
   static const String id = 'id';

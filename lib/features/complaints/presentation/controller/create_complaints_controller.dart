@@ -46,6 +46,7 @@ class CreateComplaintsController extends GetxController with CustomToast {
 
   void createComplaintsButton(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
+      customLoading(context);
       (await _createComplaintUseCase.execute(
         CreateComplaintInput(
           driverId: _sharedPrefController.getInt(SharedPreferencesKeys.userId),
@@ -58,17 +59,22 @@ class CreateComplaintsController extends GetxController with CustomToast {
       ))
           .fold(
         (l) {
+          context.pop();
           showToast(message: l.message, context: context);
         },
         (r) async {
-          disposeListOfComplaints();
           context.pop();
-          initListOfComplaints();
+          ListOfComplaintsController.to.addNewComplaint(
+            detailOfComplaint: _detailOfComplaint.text,
+            dateOfIncidentOrProblem: _dateOfComplaint.text,
+            status: false,
+          );
           customCreatedSuccessfullyDialog(
             closeButton: () {
-              context.pop();
-              ListOfComplaintsController.to.getComplaints();
-              // context.pushNamedAndRemoveAllUntil(Routes.listOfComplaintsScreen);
+              if (context.mounted) {
+                context.pop();
+                context.pop();
+              }
               disposeCreateComplaints();
             },
             text: ManagerStrings.complaintCreatedSuccessfully,

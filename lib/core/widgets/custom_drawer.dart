@@ -73,7 +73,7 @@ class CustomDriverDrawer extends StatelessWidget {
               disposeDriverHome();
             }
           },
-          icon: ManagerAssets.userProfileIcon,
+          icon: ManagerAssets.userIcon,
           title: ManagerStrings.profile,
         ),
         _CustomButtonOfMainDrawer(

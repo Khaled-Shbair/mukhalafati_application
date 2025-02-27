@@ -159,9 +159,8 @@ class LoginController extends GetxController
           if (context.mounted) {
             /// Close loading dialog && Navigate to driver home screen
             context.popAndPushNamed(Routes.driverHomeScreen);
+            disposeLogin();
           }
-
-          disposeLogin();
         },
       );
     } else {
@@ -203,8 +202,8 @@ class LoginController extends GetxController
           if (context.mounted) {
             /// Close loading dialog && Navigate to police man home screen
             context.popAndPushNamed(Routes.policeManHomeScreen);
+            disposeLogin();
           }
-          disposeLogin();
         },
       );
     } else {

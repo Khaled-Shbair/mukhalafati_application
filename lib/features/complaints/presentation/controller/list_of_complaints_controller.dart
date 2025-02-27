@@ -11,7 +11,7 @@ class ListOfComplaintsController extends GetxController with CustomToast {
   int _currentPage = 1;
 
   bool _loading = false;
-  List<ComplaintDataModel> _data = [];
+  final List<ComplaintDataModel> _data = [];
   final List<String> _namesOfColumns = [
     AppConstants.hash,
     ManagerStrings.date,
@@ -48,7 +48,6 @@ class ListOfComplaintsController extends GetxController with CustomToast {
     });
     getComplaints();
   }
-
 
   /// Open [endDrawer], use this drawer as menu.
   void openEndDrawer() {
@@ -101,6 +100,25 @@ class ListOfComplaintsController extends GetxController with CustomToast {
       },
     );
     // Hide loading and appear data
+    _loading = false;
+    update();
+  }
+
+  // when create new complaint, add this complaint to list of complaint
+  // without needed to send request to database
+  void addNewComplaint({
+    required bool status,
+    required String dateOfIncidentOrProblem,
+    required String detailOfComplaint,
+  }) {
+    _loading = true;
+    _data.insert(
+        0,
+        ComplaintDataModel(
+          status: status,
+          dateOfIncidentOrProblem: dateOfIncidentOrProblem,
+          detailOfComplaint: detailOfComplaint,
+        ));
     _loading = false;
     update();
   }

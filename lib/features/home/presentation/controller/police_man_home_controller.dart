@@ -3,16 +3,16 @@ import '/config/all_imports.dart';
 class PoliceManHomeController extends GetxController
     with GetSingleTickerProviderStateMixin, CustomToast {
   final _sharedPref = instance<SharedPreferencesController>();
-  final _homePoliceManUseCase = instance<HomePoliceManUseCase>();
+  final _homePoliceManUseCase = instance<GetHomePoliceManDataUseCase>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   HomePoliceManModel? _homeData;
 
   late PageController _pageController;
   late TooltipBehavior _tooltipBehavior;
   bool _loading = false;
+  bool _noInternetConnection = false;
   int _currentPage = 0;
-  String _policeFirstName = '';
-  String _policeImage = '';
+
   String currentMonth = FormatDateAndTimeHelper.currentMonth;
   String currentDay = FormatDateAndTimeHelper.currentDay;
   String _welcome = ManagerStrings.goodMorning;
@@ -20,8 +20,12 @@ class PoliceManHomeController extends GetxController
   bool _isSelectedButtonWeeklyViolations = true;
   bool _isSelectedButtonMonthlyViolations = false;
 
+  SharedPreferencesController get sharedPref => _sharedPref;
+
   bool get isSelectedButtonWeeklyViolations =>
       _isSelectedButtonWeeklyViolations;
+
+  bool get noInternetConnection => _noInternetConnection;
 
   bool get loading => _loading;
 
@@ -32,10 +36,6 @@ class PoliceManHomeController extends GetxController
 
   String get welcome => _welcome;
 
-  String get policeFirstName => _policeFirstName;
-
-  String get policeImage => _policeImage;
-
   TooltipBehavior get tooltipBehavior => _tooltipBehavior;
 
   GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
@@ -43,17 +43,12 @@ class PoliceManHomeController extends GetxController
   PageController get pageController => _pageController;
 
   @override
-  void onInit() async {
-    super.onInit();
-    _policeImage = _sharedPref.getString(SharedPreferencesKeys.image);
-    _policeFirstName = FormatNameHelper.firstNameAr(
-        _sharedPref.getString(SharedPreferencesKeys.nameAr));
-
+  void onInit() {
     getHomePoliceManData();
-    getTotalViolationsFromDatabase();
     changeWelcome();
     _pageController = PageController();
     _tooltipBehavior = TooltipBehavior(enable: true);
+    super.onInit();
   }
 
   /// Open [endDrawer], use this drawer as menu.
@@ -62,12 +57,6 @@ class PoliceManHomeController extends GetxController
         !_scaffoldKey.currentState!.isEndDrawerOpen) {
       _scaffoldKey.currentState!.openEndDrawer();
     }
-  }
-
-  void getTotalViolationsFromDatabase() {
-    // totalViolations = _violationsDatabase
-    //     .totalViolationsOfPolice(_sharedPreferences.getUserId())
-    //     .toString();
   }
 
   /// Change the hello word based on time [goodEvening] and [goodMorning]
@@ -113,7 +102,12 @@ class PoliceManHomeController extends GetxController
     _loading = true;
     (await _homePoliceManUseCase.execute()).fold(
       (l) {
-        showToast(message: l.message, context: Get.context!);
+        if (l.code == -1) {
+          _noInternetConnection = true;
+        } else {
+          _noInternetConnection = false;
+          showToast(message: l.message, context: Get.context!);
+        }
       },
       (r) {
         _homeData = r;
