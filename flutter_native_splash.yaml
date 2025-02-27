@@ -1,18 +1,16 @@
 flutter_native_splash:
   # ios & Android below 12
-  background_image: assets/images/splash/splash_android_12.png
-#  branding: "assets/images/logo.png"
-  #color: "#CDAB35"
+  image: assets/images/splash/splash.png
   color: "#ffffff"
-
   android: true
   ios: true
 
   # Android 12 or more
   android_12:
-    image: assets/images/splash/splash_android_12.png
     color: "#ffffff"
-    #color: "#CDAB35"
+    image: assets/images/splash/splash_android_12.png
+
+
 
 
     ### Step to create splash android 12 or more:- ###
