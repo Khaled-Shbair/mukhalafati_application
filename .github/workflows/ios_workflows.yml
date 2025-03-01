@@ -3,17 +3,18 @@ name: Build iOS App
 on:
   push:
     branches:
-      - main
+      - master  # سيتم تنفيذ الـ workflow عند الدفع إلى الفرع الرئيسي
   pull_request:
     branches:
-      - main
+      - master  # سيتم تنفيذ الـ workflow عند تقديم PR إلى الفرع الرئيسي
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-latest  # يعمل على خوادم macOS
+
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2  # تنزيل الكود من المستودع
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
