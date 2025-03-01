@@ -1,0 +1,15 @@
+platform :ios, '13.0'
+
+# Required by Flutter
+use_frameworks!
+
+target 'Runner' do
+  use_frameworks!
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Messaging'
+  # إضافة أي pod آخر تحتاجه هنا.
+
+  # Flutter's plugin dependencies
+  flutter_install_all_ios_pods(File.dirname(File.realpath(__FILE__)))
+end
