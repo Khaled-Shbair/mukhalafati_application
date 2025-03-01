@@ -8,7 +8,7 @@ void main() async {
     // MyApp(),
      DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()),
   );
-  FlutterNativeSplash.remove();
+  // FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatelessWidget {

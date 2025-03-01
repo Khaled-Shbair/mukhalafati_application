@@ -8,8 +8,9 @@ import 'all_imports.dart';
 final instance = GetIt.instance;
 
 initModule() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+   WidgetsFlutterBinding.ensureInitialized();
+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await _initDio();
   await _initSharedPreferences();
   await _initFirebase();
