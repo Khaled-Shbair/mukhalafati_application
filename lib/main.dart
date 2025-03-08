@@ -1,5 +1,3 @@
-import 'package:mukhalafati_application/routes/navigator_observer.dart';
-
 import '/config/all_imports.dart';
 import 'package:device_preview/device_preview.dart';
 
@@ -30,7 +28,6 @@ class MyApp extends StatelessWidget {
       enableScaleText: () => true,
       builder: (context, child) {
         return GetMaterialApp(
-          navigatorObservers: [MyNavigatorObserver()],
           useInheritedMediaQuery: true,
           themeMode: ThemeService.themeMode,
           theme: ThemeService.themeData,
