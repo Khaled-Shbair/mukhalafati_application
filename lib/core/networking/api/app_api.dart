@@ -132,7 +132,7 @@ abstract class AppApi {
   );
 
   @POST(ApiConstants.sendVerificationCode)
-  Future<SendVerificationCodeResponse> sendVerificationCode(
+  Future<OtpCodeResponse> sendVerificationCode(
     @Field(ApiKeys.phoneNumber) phoneNumber,
   );
 

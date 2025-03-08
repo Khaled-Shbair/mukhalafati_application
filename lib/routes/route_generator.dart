@@ -3,24 +3,26 @@ import '/config/all_imports.dart';
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
-
       case Routes.onBoardingScreen:
         initOnBoarding();
         return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
       case Routes.welcomeScreen:
         initWelcome();
-        return MaterialPageRoute(builder: (_) => const WelcomeScreen());
+        return MaterialPageRoute(
+          builder: (_) => const WelcomeScreen(),
+        );
       case Routes.loginScreen:
         initLogin();
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
-      case Routes.logoutScreen:
-        initLogout();
-        return MaterialPageRoute(builder: (_) => const LogoutScreen());
+        return MaterialPageRoute(
+          builder: (_) => const LoginScreen(),
+        );
+
       case Routes.forgetPasswordScreen:
         initForgotPassword();
         final isDriver = settings.arguments as bool;
         return MaterialPageRoute(
-            builder: (_) => ForgotPasswordScreen(isDriver: isDriver));
+          builder: (_) => ForgotPasswordScreen(isDriver: isDriver),
+        );
       case Routes.verificationCodeScreen:
         initVerificationCode();
         final args = settings.arguments as List;
@@ -33,7 +35,7 @@ class RouteGenerator {
             phoneNumber: phoneNumber,
             id: id,
             isDriver: isDriver,
-            verificationCode: verificationId,
+            verificationId: verificationId,
           ),
         );
 
@@ -43,7 +45,8 @@ class RouteGenerator {
         final isDriver = args[0] as bool;
         final id = args[1] as int;
         return MaterialPageRoute(
-            builder: (_) => ChangePasswordScreen(id: id, isDriver: isDriver));
+          builder: (_) => ChangePasswordScreen(id: id, isDriver: isDriver),
+        );
       case Routes.driverHomeScreen:
         initDriverHome();
         return MaterialPageRoute(builder: (_) => const DriverHomeScreen());
@@ -103,10 +106,16 @@ class RouteGenerator {
     return MaterialPageRoute(
       builder: (_) => Scaffold(
         appBar: AppBar(
-          title: Text(ManagerStrings.noRouteFound),
+          title: Text(
+            ManagerStrings.noRouteFound,
+            style: TextStyle(color: Colors.black, fontSize: 24),
+          ),
         ),
         body: Center(
-          child: Text(ManagerStrings.noRouteFound),
+          child: Text(
+            ManagerStrings.noRouteFound,
+            style: TextStyle(color: Colors.black, fontSize: 24),
+          ),
         ),
       ),
     );

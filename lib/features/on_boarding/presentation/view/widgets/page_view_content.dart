@@ -19,25 +19,30 @@ class PageViewContent extends StatelessWidget {
         Image.asset(
           image,
           width: ManagerWidth.infinity,
-          height: ManagerHeight.h405,
-          fit: BoxFit.cover,
+          height: context.mediaQuery.size.height * 0.5,
+          fit: BoxFit.fill,
         ),
         verticalSpace(ManagerHeight.h5),
         Text(
-          title, style: context.textTheme.titleOnBoardingAndWelcomeAndLoginScreen(context),
-          // context.theme.textTheme.titleLarge,
+          title,
+          textDirection: TextDirection.rtl,
+          style: context.textTheme
+              .titleOnBoardingAndWelcomeAndLoginScreen(context),
         ),
         Container(
+          alignment: AlignmentDirectional.center,
           margin: EdgeInsetsDirectional.only(
-            start: ManagerWidth.w24,
-            end: ManagerWidth.w24,
-            top: ManagerHeight.h16,
-            bottom: ManagerHeight.h44,
+            start: ManagerWidth.w40,
+            end: ManagerWidth.w42,
+            top: ManagerHeight.h8,
           ),
           child: Text(
             subTitle,
             textAlign: TextAlign.center,
+            textDirection: TextDirection.rtl,
             style: context.textTheme.subTitleOnBoardingScreen(context),
+            maxLines: 4,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],

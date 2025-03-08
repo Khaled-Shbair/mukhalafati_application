@@ -68,7 +68,7 @@ extension ManagerTextTheme on TextTheme {
       getMediumTextStyle(
         fontSize: ManagerFontsSizes.f13,
         color: ManagerColors.davyGrey,
-        height: 2.5,
+        height: 2,
       );
 
   /// forget_password >> presentation >> view >> widgets >> [customIncorrectEnteredCodeMessage]
@@ -507,10 +507,9 @@ extension ManagerTextTheme on TextTheme {
   TextStyle textStyleOfTextOfHeadOfOfficialPaper(BuildContext context) =>
       getSemiBoldTextStyle(
         color: ManagerColors.black,
-        fontSize: ManagerFontsSizes.f8,
+        fontSize: ManagerFontsSizes.f7,
         height: ManagerHeight.h2,
         decoration: TextDecoration.none,
-        // decorationColor: ManagerColors.transparent,
       );
 
   /// core >> presentation >> widgets >> [customConfirmInformationDialog]

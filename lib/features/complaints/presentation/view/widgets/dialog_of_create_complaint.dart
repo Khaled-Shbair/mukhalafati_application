@@ -6,17 +6,17 @@ Future<void> dialogOfCreateComplaint(BuildContext context) async {
     barrierColor: context.theme.dialogTheme.barrierColor,
     barrierDismissible: false,
     builder: (context) {
-      return Card(
-        margin: EdgeInsetsDirectional.only(
+      return Dialog(
+        insetPadding: EdgeInsets.only(
           top: ManagerHeight.h60,
-          bottom: ManagerHeight.h86,
-          start: ManagerWidth.w20,
-          end: ManagerWidth.w20,
+          bottom: ManagerHeight.h26,
+          right: ManagerWidth.w20,
+          left: ManagerWidth.w20,
         ),
-        color: context.theme.colorScheme.surface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(ManagerRadius.r5),
         ),
+
         child: GetBuilder<CreateComplaintsController>(
           builder: (controller) {
             return Material(
@@ -26,10 +26,12 @@ Future<void> dialogOfCreateComplaint(BuildContext context) async {
               child: Form(
                 key: controller.formKey,
                 child: ListView(
+                  shrinkWrap: true,
+                  primary: false,
                   padding: EdgeInsetsDirectional.only(
                     start: ManagerWidth.w18,
                     end: ManagerWidth.w18,
-                    top: ManagerHeight.h20,
+                    top: ManagerHeight.h10,
                     bottom: ManagerHeight.h20,
                   ),
                   children: [
@@ -53,7 +55,7 @@ Future<void> dialogOfCreateComplaint(BuildContext context) async {
                           Validator.dateOfIncidentOrProblemValidator(v),
                       readOnly: true,
                       onTap: () async =>
-                          await controller.selectDateTime(context),
+                      await controller.selectDateTime(context),
                       controller: controller.dateOfComplaint,
                       labelText: ManagerStrings.dateOfIncidentOrProblem,
                       keyboardType: TextInputType.text,
@@ -77,8 +79,8 @@ Future<void> dialogOfCreateComplaint(BuildContext context) async {
                         onEditingComplete: () =>
                             controller.createComplaintsButton(context),
                         controller: controller.detailOfComplaint,
-                        hintText:
-                            ManagerStrings.pleaseWriteTheDetailsOfTheComplaint,
+                        hintText: ManagerStrings
+                            .pleaseWriteTheDetailsOfTheComplaint,
                         keyboardType: TextInputType.text,
                         maxLines: AppConstants.maxLinesOfTextOfComplaint,
                         minLines: AppConstants.minLinesOfTextOfComplaint,
@@ -89,28 +91,34 @@ Future<void> dialogOfCreateComplaint(BuildContext context) async {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomButton(
-                          onPressed: () => controller.cancelButton(context),
-                          backgroundColor: ManagerColors.antiFlashWhite,
-                          minWidth: ManagerWidth.w122,
-                          side: BorderSide.none,
-                          child: Text(
-                            ManagerStrings.cancel,
-                            style: context.textTheme
-                                .cancelCreateComplaintButtonAndCloseButton(
-                                    context),
+                        Expanded(
+                          flex: 2,
+                          child: CustomButton(
+                            onPressed: () => controller.cancelButton(context),
+                            backgroundColor: ManagerColors.antiFlashWhite,
+                            side: BorderSide.none,
+                            child: Text(
+                              ManagerStrings.cancel,
+                              style: context.textTheme
+                                  .cancelCreateComplaintButtonAndCloseButton(
+                                  context),
+                            ),
                           ),
                         ),
-                        CustomButton(
-                          onPressed: () =>
-                              controller.createComplaintsButton(context),
-                          minWidth: ManagerWidth.w169,
-                          side: BorderSide.none,
-                          child: Text(
-                            ManagerStrings.createComplaint,
-                            style: context.textTheme
-                                .logoutAndCreateComplaintAndNameDriverButton(
-                                    context),
+                        horizontalSpace(ManagerWidth.w10),
+                        Expanded(
+                          flex: 3,
+                          child: CustomButton(
+                            onPressed: () =>
+                                controller.createComplaintsButton(context),
+                            // minWidth: ManagerWidth.w169,
+                            side: BorderSide.none,
+                            child: Text(
+                              ManagerStrings.createComplaint,
+                              style: context.textTheme
+                                  .logoutAndCreateComplaintAndNameDriverButton(
+                                  context),
+                            ),
                           ),
                         ),
                       ],

@@ -11,7 +11,7 @@ class LoginScreen extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             leading: IconButton(
-              onPressed: () => controller.backButton(),
+              onPressed: () => controller.backButton(context),
               icon: const Icon(Icons.arrow_back_ios),
             ),
           ),

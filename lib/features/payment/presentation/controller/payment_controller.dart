@@ -55,10 +55,18 @@ class PaymentController extends GetxController with CustomToast {
   @override
   void onInit() {
     super.onInit();
-    _cardHolderName = TextEditingController();
-    _cardNumber = TextEditingController();
-    _securityCode = TextEditingController();
-    _expiryDateCard = TextEditingController();
+    _cardHolderName = TextEditingController()
+      ..addListener(
+        () {
+          selectCursorPosition(_cardHolderName);
+        },
+      );
+    _cardNumber = TextEditingController()
+      ..addListener(() => selectCursorPosition(_cardNumber));
+    _securityCode = TextEditingController()
+      ..addListener(() => selectCursorPosition(_securityCode));
+    _expiryDateCard = TextEditingController()
+      ..addListener(() => selectCursorPosition(_expiryDateCard));
     _pageController = PageController();
   }
 

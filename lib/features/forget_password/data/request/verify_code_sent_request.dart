@@ -1,7 +1,9 @@
-class VerifyCodeSentRequest {
-  final String phoneNumber;
+class VerifyOtpRequest {
+  final String smsCode;
+  final String verificationId;
 
-  VerifyCodeSentRequest({
-    required this.phoneNumber,
+  VerifyOtpRequest({
+    required this.verificationId,
+    required this.smsCode,
   });
 }

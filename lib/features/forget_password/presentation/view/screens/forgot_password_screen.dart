@@ -31,7 +31,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 SvgPicture.asset(
                   ManagerAssets.forgotPasswordImage,
                   height: ManagerHeight.h182,
-                  width: ManagerWidth.infinity,
+                  width: ManagerWidth.w275,
                 ),
                 verticalSpace(ManagerHeight.h50),
                 Text(

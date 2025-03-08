@@ -1,16 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:mukhalafati_application/features/notifications/domain/use_case/delete_all_notifications_use_case.dart';
-import 'package:mukhalafati_application/features/notifications/domain/use_case/delete_driver_notifications_by_id_use_case.dart';
-import 'package:mukhalafati_application/features/notifications/domain/use_case/get_all_notifications_use_case.dart';
-
 import 'all_imports.dart';
 
 final instance = GetIt.instance;
 
 initModule() async {
-  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-   WidgetsFlutterBinding.ensureInitialized();
-  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  WidgetsFlutterBinding.ensureInitialized();
   await _initDio();
   await _initSharedPreferences();
   await _initFirebase();
@@ -157,10 +151,6 @@ disposeWelcome() {
 ////////////////////////////////////////////////////////////////////////////////
 /// [Forgot_password] and [Verification_code]
 initForgotPassword() {
-  Get.put<ForgotPasswordController>(ForgotPasswordController());
-}
-
-initForgotPasswordForDriver() {
   if (!GetIt.I.isRegistered<FirebaseAuth>()) {
     instance.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   }
@@ -168,7 +158,21 @@ initForgotPasswordForDriver() {
     instance.registerLazySingleton<FBAuthentication>(
         () => FBAuthentication(instance<FirebaseAuth>()));
   }
-
+  if (!GetIt.I.isRegistered<RemoteOtpCodeDataSource>()) {
+    instance.registerLazySingleton<RemoteOtpCodeDataSource>(
+        () => RemoteOtpCodeDataSourceImpl(instance<FBAuthentication>()));
+  }
+  if (!GetIt.I.isRegistered<OtpCodeRepository>()) {
+    instance
+        .registerLazySingleton<OtpCodeRepository>(() => OtpCodeRepositoryImpl(
+              instance<RemoteOtpCodeDataSource>(),
+              instance<NetworkInfo>(),
+            ));
+  }
+  if (!GetIt.I.isRegistered<SendOtpCodeUseCase>()) {
+    instance.registerLazySingleton<SendOtpCodeUseCase>(
+        () => SendOtpCodeUseCase(instance<OtpCodeRepository>()));
+  }
   if (!GetIt.I.isRegistered<RemoteDriverForgotPasswordDataSource>()) {
     instance.registerLazySingleton<RemoteDriverForgotPasswordDataSource>(
         () => RemoteDriverForgotPasswordDataSourceImpl(
@@ -188,17 +192,6 @@ initForgotPasswordForDriver() {
         DriverForgotPasswordUseCase(
             instance<DriverForgotPasswordRepository>()));
   }
-}
-
-initForgotPasswordForPoliceMan() {
-  if (!GetIt.I.isRegistered<FirebaseAuth>()) {
-    instance.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
-  }
-  if (!GetIt.I.isRegistered<FBAuthentication>()) {
-    instance.registerLazySingleton<FBAuthentication>(
-        () => FBAuthentication(instance<FirebaseAuth>()));
-  }
-
   if (!GetIt.I.isRegistered<RemotePoliceManForgotPasswordDataSource>()) {
     instance.registerLazySingleton<RemotePoliceManForgotPasswordDataSource>(
         () => RemotePoliceManForgotPasswordDataSourceImpl(
@@ -218,16 +211,13 @@ initForgotPasswordForPoliceMan() {
         PoliceManForgotPasswordUseCase(
             instance<PoliceManForgotPasswordRepository>()));
   }
+  Get.put<ForgotPasswordController>(ForgotPasswordController());
 }
 
 disposeForgotPassword() {
-  if (GetIt.I.isRegistered<FBAuthentication>()) {
-    instance.unregister<FBAuthentication>();
+  if (GetIt.I.isRegistered<SendOtpCodeUseCase>()) {
+    instance.unregister<SendOtpCodeUseCase>();
   }
-  if (GetIt.I.isRegistered<FirebaseAuth>()) {
-    instance.unregister<FirebaseAuth>();
-  }
-
   if (GetIt.I.isRegistered<RemoteDriverForgotPasswordDataSource>()) {
     instance.unregister<RemoteDriverForgotPasswordDataSource>();
   }
@@ -246,14 +236,45 @@ disposeForgotPassword() {
   if (GetIt.I.isRegistered<PoliceManForgotPasswordUseCase>()) {
     instance.unregister<PoliceManForgotPasswordUseCase>();
   }
+  if (GetIt.I.isRegistered<FirebaseAuth>()) {
+    instance.unregister<FirebaseAuth>();
+  }
+  if (GetIt.I.isRegistered<FBAuthentication>()) {
+    instance.unregister<FBAuthentication>();
+  }
+  if (GetIt.I.isRegistered<RemoteOtpCodeDataSource>()) {
+    instance.unregister<RemoteOtpCodeDataSource>();
+  }
+  if (GetIt.I.isRegistered<OtpCodeRepository>()) {
+    instance.unregister<OtpCodeRepository>();
+  }
   Get.delete<ForgotPasswordController>();
 }
 
 initVerificationCode() {
+  if (!GetIt.I.isRegistered<VerifyOtpCodeUseCase>()) {
+    instance.registerLazySingleton<VerifyOtpCodeUseCase>(
+        () => VerifyOtpCodeUseCase(instance<OtpCodeRepository>()));
+  }
   Get.put<VerificationCodeController>(VerificationCodeController());
 }
 
 disposeVerificationCode() {
+  if (GetIt.I.isRegistered<FirebaseAuth>()) {
+    instance.unregister<FirebaseAuth>();
+  }
+  if (GetIt.I.isRegistered<FBAuthentication>()) {
+    instance.unregister<FBAuthentication>();
+  }
+  if (GetIt.I.isRegistered<RemoteOtpCodeDataSource>()) {
+    instance.unregister<RemoteOtpCodeDataSource>();
+  }
+  if (GetIt.I.isRegistered<OtpCodeRepository>()) {
+    instance.unregister<OtpCodeRepository>();
+  }
+  if (GetIt.I.isRegistered<VerifyOtpCodeUseCase>()) {
+    instance.unregister<VerifyOtpCodeUseCase>();
+  }
   Get.delete<VerificationCodeController>();
 }
 
@@ -801,9 +822,12 @@ initNotification() {
             instance<AppApi>(), instance<SharedPreferencesController>()));
   }
   if (!GetIt.I.isRegistered<NotificationsRepo>()) {
-    instance.registerLazySingleton<NotificationsRepo>(() =>
-        NotificationsRepoImpl(instance<RemoteNotificationsDataSource>(),
-            instance<NetworkInfo>()));
+    instance
+        .registerLazySingleton<NotificationsRepo>(() => NotificationsRepoImpl(
+              instance<RemoteNotificationsDataSource>(),
+              instance<NetworkInfo>(),
+              instance<SharedPreferencesController>(),
+            ));
   }
   if (!GetIt.I.isRegistered<GetAllNotificationsUseCase>()) {
     instance.registerLazySingleton<GetAllNotificationsUseCase>(
@@ -858,6 +882,7 @@ Future<void> updateFcmInDatabase() async {
         .registerLazySingleton<NotificationsRepo>(() => NotificationsRepoImpl(
               instance<RemoteNotificationsDataSource>(),
               instance<NetworkInfo>(),
+              instance<SharedPreferencesController>(),
             ));
   }
   if (!GetIt.I.isRegistered<UpdateFcmTokenUseCase>()) {

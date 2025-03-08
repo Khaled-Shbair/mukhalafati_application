@@ -9,7 +9,11 @@ part of 'app_api.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
 class _AppApi implements AppApi {
-  _AppApi(this._dio, {this.baseUrl, this.errorLogger}) {
+  _AppApi(
+    this._dio, {
+    this.baseUrl,
+    this.errorLogger,
+  }) {
     baseUrl ??= 'https://zcknvmsialjyofywmiac.supabase.co';
   }
 
@@ -33,16 +37,22 @@ class _AppApi implements AppApi {
       'input_fcm_token': fcmToken,
       'language': language,
     };
-    final _options = _setStreamType<UpdateFcmTokenResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/update_driver_fcm_token',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<UpdateFcmTokenResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/update_driver_fcm_token',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late UpdateFcmTokenResponse _value;
     try {
@@ -68,16 +78,22 @@ class _AppApi implements AppApi {
       'input_password': password,
       'language': language,
     };
-    final _options = _setStreamType<DriverLoginResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/driver_login',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<DriverLoginResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/driver_login',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late DriverLoginResponse _value;
     try {
@@ -103,16 +119,22 @@ class _AppApi implements AppApi {
       'input_password': password,
       'language': language,
     };
-    final _options = _setStreamType<PoliceManLoginResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/police_man_login',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<PoliceManLoginResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/police_man_login',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late PoliceManLoginResponse _value;
     try {
@@ -144,16 +166,22 @@ class _AppApi implements AppApi {
       'status': status,
       'driver_id': driverId,
     };
-    final _options = _setStreamType<CreateComplaintResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/create_complaint',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<CreateComplaintResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/create_complaint',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late CreateComplaintResponse _value;
     try {
@@ -173,17 +201,26 @@ class _AppApi implements AppApi {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = {'input_license_number': licenseNumber, 'language': language};
-    final _options = _setStreamType<DriverForgotPasswordResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/forget_password_driver',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _data = {
+      'input_license_number': licenseNumber,
+      'language': language,
+    };
+    final _options = _setStreamType<DriverForgotPasswordResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/forget_password_driver',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late DriverForgotPasswordResponse _value;
     try {
@@ -203,17 +240,26 @@ class _AppApi implements AppApi {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = {'input_job_number': jobNumber, 'language': language};
-    final _options = _setStreamType<PoliceManForgotPasswordResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/forget_password_police_man',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _data = {
+      'input_job_number': jobNumber,
+      'language': language,
+    };
+    final _options = _setStreamType<PoliceManForgotPasswordResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/forget_password_police_man',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late PoliceManForgotPasswordResponse _value;
     try {
@@ -241,16 +287,22 @@ class _AppApi implements AppApi {
       'confirm_password': confirmPassword,
       'language': language,
     };
-    final _options = _setStreamType<DriverChangePasswordResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/driver_change_password',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<DriverChangePasswordResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/driver_change_password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late DriverChangePasswordResponse _value;
     try {
@@ -278,16 +330,22 @@ class _AppApi implements AppApi {
       'confirm_password': confirmPassword,
       'language': language,
     };
-    final _options = _setStreamType<PoliceManChangePasswordResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/police_man_change_password',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<PoliceManChangePasswordResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/police_man_change_password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late PoliceManChangePasswordResponse _value;
     try {
@@ -315,16 +373,22 @@ class _AppApi implements AppApi {
       'max_limit': limit,
       'order_by': orderBy,
     };
-    final _options = _setStreamType<GetAllComplaintsForDriverResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_all_complaints_for_driver',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<GetAllComplaintsForDriverResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_all_complaints_for_driver',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late GetAllComplaintsForDriverResponse _value;
     try {
@@ -350,16 +414,22 @@ class _AppApi implements AppApi {
       'page': page,
       'max_limit': limit,
     };
-    final _options = _setStreamType<DriverViolationsResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_driver_violations',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<DriverViolationsResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_driver_violations',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late DriverViolationsResponse _value;
     try {
@@ -383,16 +453,22 @@ class _AppApi implements AppApi {
       'input_license_number': inputLicenseNumber,
       'language': language,
     };
-    final _options = _setStreamType<SearchForDriverResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/search_for_driver',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<SearchForDriverResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/search_for_driver',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late SearchForDriverResponse _value;
     try {
@@ -406,22 +482,28 @@ class _AppApi implements AppApi {
 
   @override
   Future<SearchOnResultsTestsOfLicenseResponse> searchOnResultsTestsOfLicense(
-    dynamic idNumber,
-  ) async {
+      dynamic idNumber) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'id_number': idNumber};
-    final _options = _setStreamType<SearchOnResultsTestsOfLicenseResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/search_on_results_tests_of_license',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options =
+        _setStreamType<SearchOnResultsTestsOfLicenseResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/search_on_results_tests_of_license',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late SearchOnResultsTestsOfLicenseResponse _value;
     try {
@@ -465,16 +547,22 @@ class _AppApi implements AppApi {
       'driver_id_number': driverIdNumber,
       'police_man_id': policeId,
     };
-    final _options = _setStreamType<CreateViolationResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/create_violation',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<CreateViolationResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/create_violation',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late CreateViolationResponse _value;
     try {
@@ -492,16 +580,22 @@ class _AppApi implements AppApi {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<AllReasonsOfViolationResponse>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/list_of_reasons_of_violations',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<AllReasonsOfViolationResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/list_of_reasons_of_violations',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late AllReasonsOfViolationResponse _value;
     try {
@@ -519,16 +613,22 @@ class _AppApi implements AppApi {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'input_id': id};
-    final _options = _setStreamType<ReasonOfViolationResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/reason_of_violation',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<ReasonOfViolationResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/reason_of_violation',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ReasonOfViolationResponse _value;
     try {
@@ -556,16 +656,22 @@ class _AppApi implements AppApi {
       'violation_state': violationState,
       'violation_payed_by': violationPayedBy,
     };
-    final _options = _setStreamType<PaymentViolationResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/payment_violation',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<PaymentViolationResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/payment_violation',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late PaymentViolationResponse _value;
     try {
@@ -586,17 +692,27 @@ class _AppApi implements AppApi {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = {'input_id': policeManId, 'max_limit': limit, 'page': page};
-    final _options = _setStreamType<AllViolationResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_all_violation',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _data = {
+      'input_id': policeManId,
+      'max_limit': limit,
+      'page': page,
+    };
+    final _options = _setStreamType<AllViolationResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_all_violation',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late AllViolationResponse _value;
     try {
@@ -609,27 +725,31 @@ class _AppApi implements AppApi {
   }
 
   @override
-  Future<SendVerificationCodeResponse> sendVerificationCode(
-    dynamic phoneNumber,
-  ) async {
+  Future<OtpCodeResponse> sendVerificationCode(dynamic phoneNumber) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'phone_number': phoneNumber};
-    final _options = _setStreamType<SendVerificationCodeResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/send_verification_code',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<OtpCodeResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/send_verification_code',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late SendVerificationCodeResponse _value;
+    late OtpCodeResponse _value;
     try {
-      _value = SendVerificationCodeResponse.fromJson(_result.data!);
+      _value = OtpCodeResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -655,16 +775,22 @@ class _AppApi implements AppApi {
       'license_number': licenseNumber,
       'phone_number': phoneNumber,
     };
-    final _options = _setStreamType<SendRequestUpdateProfileResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/send_request_update_profile',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<SendRequestUpdateProfileResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/send_request_update_profile',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late SendRequestUpdateProfileResponse _value;
     try {
@@ -678,22 +804,27 @@ class _AppApi implements AppApi {
 
   @override
   Future<GetViolationDetailsResponse> getViolationDetailsById(
-    dynamic violationId,
-  ) async {
+      dynamic violationId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'violation_id': violationId};
-    final _options = _setStreamType<GetViolationDetailsResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_violation_details_by_id',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<GetViolationDetailsResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_violation_details_by_id',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late GetViolationDetailsResponse _value;
     try {
@@ -723,16 +854,22 @@ class _AppApi implements AppApi {
       'time_send': timeSend,
       'date_send': dateSend,
     };
-    final _options = _setStreamType<dynamic>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/save_notification',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/save_notification',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch(_options);
     final _value = _result.data;
     return _value;
@@ -744,16 +881,22 @@ class _AppApi implements AppApi {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'input_id': policeManId};
-    final _options = _setStreamType<HomePoliceManResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_police_man_statistics',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<HomePoliceManResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_police_man_statistics',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late HomePoliceManResponse _value;
     try {
@@ -771,16 +914,22 @@ class _AppApi implements AppApi {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'user_id': driverId};
-    final _options = _setStreamType<dynamic>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/update_notification_status',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/update_notification_status',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch(_options);
     final _value = _result.data;
     return _value;
@@ -792,16 +941,22 @@ class _AppApi implements AppApi {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'input_id': driverId};
-    final _options = _setStreamType<NotificationsResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_all_notification',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<NotificationsResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_all_notification',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late NotificationsResponse _value;
     try {
@@ -819,16 +974,22 @@ class _AppApi implements AppApi {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'input_id': driverId};
-    final _options = _setStreamType<HomeDriverDataResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_home_driver_data',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<HomeDriverDataResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/get_home_driver_data',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late HomeDriverDataResponse _value;
     try {
@@ -846,16 +1007,22 @@ class _AppApi implements AppApi {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'user_id': driverId};
-    final _options = _setStreamType<dynamic>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/delete_all_notification',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/delete_all_notification',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch(_options);
     final _value = _result.data;
     return _value;
@@ -869,17 +1036,26 @@ class _AppApi implements AppApi {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = {'user_id': driverId, 'notification_id': notificationId};
-    final _options = _setStreamType<dynamic>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/delete_driver_notification_by_id',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _data = {
+      'user_id': driverId,
+      'notification_id': notificationId,
+    };
+    final _options = _setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'https://zcknvmsialjyofywmiac.supabase.co/rest/v1/rpc/delete_driver_notification_by_id',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
     final _result = await _dio.fetch(_options);
     final _value = _result.data;
     return _value;
@@ -898,7 +1074,10 @@ class _AppApi implements AppApi {
     return requestOptions;
   }
 
-  String _combineBaseUrls(String dioBaseUrl, String? baseUrl) {
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
     if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }

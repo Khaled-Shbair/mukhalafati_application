@@ -12,21 +12,25 @@ class ChangePasswordController extends GetxController with CustomToast {
   @override
   void onInit() {
     super.onInit();
-    newPassword = TextEditingController();
-    confirmPassword = TextEditingController();
+    newPassword = TextEditingController()
+      ..addListener(
+        () => selectCursorPosition(newPassword),
+      );
+    confirmPassword = TextEditingController()
+      ..addListener(
+        () => selectCursorPosition(confirmPassword),
+      );
   }
 
   @override
-  void onClose() {
+  void dispose() {
     newPassword.dispose();
     confirmPassword.dispose();
-    super.onClose();
+    super.dispose();
   }
 
   void backButton(BuildContext context) {
     context.pop();
-
-    /// Remove change password controller form memory
     disposeChangePassword();
   }
 
@@ -64,7 +68,7 @@ class ChangePasswordController extends GetxController with CustomToast {
 
       /// Successfully change password for driver request
       (r) {
-        _changedPasswordSuccessfully();
+        _changedPasswordSuccessfully(context);
       },
     );
   }
@@ -89,22 +93,20 @@ class ChangePasswordController extends GetxController with CustomToast {
 
       /// Successfully change password for police man request
       (r) {
-        _changedPasswordSuccessfully();
+        _changedPasswordSuccessfully(context);
       },
     );
   }
 
   /// show dialog when return changed Password is Successfully
-  void _changedPasswordSuccessfully() {
+  void _changedPasswordSuccessfully(BuildContext context) {
     customCreatedSuccessfullyDialog(
       closeButton: () {
-        /// Remove change password controller form memory
+        context.pop();
+        context.pop();
         disposeChangePassword();
-
-        /// Navigate to login screen
-        Get.offAndToNamed(Routes.loginScreen);
       },
-      context: Get.context!,
+      context: context,
       text: ManagerStrings.passwordHasBeenChangedSuccessfully,
     );
   }

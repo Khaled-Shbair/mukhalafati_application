@@ -77,15 +77,10 @@ class LoginController extends GetxController
         },
       );
     _forgetPoliceManPasswordRecognizer = TapGestureRecognizer()
-      ..onTap = () async {
-        await initForgotPasswordForPoliceMan();
-        Get.toNamed(Routes.forgetPoliceManPasswordScreen, arguments: false);
-      };
+      ..onTap =
+          () => Get.toNamed(Routes.forgetPasswordScreen, arguments: false);
     _forgetDriverPasswordRecognizer = TapGestureRecognizer()
-      ..onTap = () async {
-        await initForgotPasswordForDriver();
-        Get.toNamed(Routes.forgetPasswordScreen, arguments: true);
-      };
+      ..onTap = () => Get.toNamed(Routes.forgetPasswordScreen, arguments: true);
   }
 
   @override
@@ -100,9 +95,9 @@ class LoginController extends GetxController
   }
 
   /// To back to welcome screen and remove login controller from memory
-  void backButton() {
+  void backButton(BuildContext context) {
+    context.pop();
     disposeLogin();
-    Get.offAllNamed(Routes.welcomeScreen);
   }
 
   void changeRememberMePoliceMan(bool isRememberMe) {

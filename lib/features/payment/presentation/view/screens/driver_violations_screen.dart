@@ -53,17 +53,16 @@ class DriverViolationsScreen extends StatelessWidget {
                   style: context.textTheme
                       .textStyleOfTitleDriverViolationsScreen(),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.only(
-                    end: ManagerWidth.w85,
-                    bottom: ManagerHeight.h20,
-                  ),
+                verticalSpace(ManagerHeight.h2),
+                SizedBox(
+                  width: ManagerWidth.w169,
                   child: Text(
                     ManagerStrings.youCanViewAllYourPaidAndUnpaidViolations,
                     style: context.textTheme
                         .textStyleOfSubTitleDriverViolationsScreen(),
                   ),
                 ),
+                verticalSpace(ManagerHeight.h10),
                 CustomFilterViolationsButton(
                   isPaid: controller.paid,
                   isUnPaid: controller.unPaid,
@@ -81,6 +80,7 @@ class DriverViolationsScreen extends StatelessWidget {
                       controller.selectMinimumAmountFilter,
                   cancelFilterButton: controller.cancelFilterButton,
                 ),
+                verticalSpace(ManagerHeight.h10),
                 if (controller.loading == true &&
                     controller.viewViolations.isEmpty) ...{
                   SizedBox(

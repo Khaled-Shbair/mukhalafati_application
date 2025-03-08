@@ -9,6 +9,7 @@ TextStyle _textStyle({
   Color? decorationColor,
 }) {
   return TextStyle(
+
     fontFamily: ManagerFontFamily.cairo,
     fontWeight: fontWeight,
     fontSize: fontSize,

@@ -1,7 +1,7 @@
 import '/config/all_imports.dart';
 
 class VerificationCodeController extends GetxController with CustomToast {
-  final _verifyOTP = instance<FBAuthentication>();
+  final _verifyOTP = instance<VerifyOtpCodeUseCase>();
   late TextEditingController oneNumberOfCode;
   late TextEditingController twoNumberOfCode;
   late TextEditingController threeNumberOfCode;
@@ -42,7 +42,7 @@ class VerificationCodeController extends GetxController with CustomToast {
   }
 
   @override
-  void onClose() {
+  void dispose() {
     oneNumberOfCode.dispose();
     twoNumberOfCode.dispose();
     threeNumberOfCode.dispose();
@@ -55,12 +55,13 @@ class VerificationCodeController extends GetxController with CustomToast {
     fourFocusNode.dispose();
     fiveFocusNode.dispose();
     sexFocusNode.dispose();
-    super.onClose();
+    super.dispose();
+
   }
 
-  void backButton() {
+  void backButton(BuildContext context, bool isDriver) {
+    context.pop();
     disposeVerificationCode();
-    Get.back();
   }
 
   /// Parse code input form user
@@ -76,26 +77,36 @@ class VerificationCodeController extends GetxController with CustomToast {
   void verifyButton(
     int id,
     bool isDriver,
-    String verificationCode,
+    String verificationId,
     BuildContext context,
   ) async {
     if (_checkData()) {
+      customLoading(context);
       _verificationCode();
+      FocusScope.of(context).requestFocus(FocusNode());
+      (await _verifyOTP.execute(VerifyOtpCodeUseCaseInput(
+              verificationId: verificationId,
+              smsCode: _verificationCodeInput.toString())))
+          .fold(
+        (l) {
+          /// Close loading dialog
+          context.pop();
+          _incorrectEntered(context);
+        },
+        (r) {
+          context.pop(); // close loading dialog
 
-      debugPrint('_verificationCodeInput:$_verificationCodeInput');
-      debugPrint('verificationCode:$verificationCode');
-      bool result = await _verifyOTP.verifyOTP(
-          verificationCode, _verificationCodeInput.toString());
-      print('Result : $result');
-      if (verificationCode == _verificationCodeInput) {
-        /// Navigate to change password screen
-        Get.offAndToNamed(
-          Routes.changePasswordScreen,
-          arguments: [isDriver, id],
-        );
-      } else {
-        _incorrectEntered();
-      }
+          context.pop(); // remove forgot password screen from stack
+
+          /// Navigate to change password screen
+          context.popAndPushNamed(
+            Routes.changePasswordScreen,
+            arguments: [isDriver, id],
+          );
+          disposeVerificationCode();
+          disposeForgotPassword();
+        },
+      );
     } else {
       /// Appear message of error in SnackBar to user
       showToast(
@@ -171,9 +182,21 @@ class VerificationCodeController extends GetxController with CustomToast {
 
   /// Return to fifty field when sixty field is un-fill
   /// and change color of border
-  void onChangeSexFiled(value) {
+  void onChangeSexFiled(
+    value,
+    BuildContext context,
+    int id,
+    bool isDriver,
+    String verificationId,
+  ) {
     if (value.isNotEmpty) {
       changeBorderColorSexFiled = true;
+      verifyButton(
+        id,
+        isDriver,
+        verificationId,
+        context,
+      );
     } else {
       changeBorderColorSexFiled = false;
       fiveFocusNode.requestFocus();
@@ -185,7 +208,7 @@ class VerificationCodeController extends GetxController with CustomToast {
   /// appear error message and change image to incorrect image
   /// add timer 3 seconds, then hide message, return to previous image and
   /// clear field of input code.
-  void _incorrectEntered() {
+  void _incorrectEntered(BuildContext context) {
     returnCodeIsInCorrect = true;
     Future.delayed(
       const Duration(seconds: 3),
@@ -197,6 +220,9 @@ class VerificationCodeController extends GetxController with CustomToast {
         fourNumberOfCode.clear();
         fiveNumberOfCode.clear();
         sexNumberOfCode.clear();
+        if (context.mounted) {
+          FocusScope.of(context).requestFocus(oneFocusNode);
+        }
         update();
       },
     );

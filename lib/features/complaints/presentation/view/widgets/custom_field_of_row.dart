@@ -16,6 +16,8 @@ DataCell customFieldOfRow(
       ),
       child: Text(
         text,
+        overflow: TextOverflow.ellipsis,
+        maxLines: 2,
         textAlign: TextAlign.center,
         style: context.theme.dataTableTheme.dataTextStyle,
       ),

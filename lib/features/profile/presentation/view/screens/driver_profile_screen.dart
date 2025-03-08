@@ -23,7 +23,7 @@ class DriverProfileScreen extends StatelessWidget {
               start: ManagerWidth.w22,
               end: ManagerWidth.w22,
               top: ManagerHeight.h28,
-
+              bottom: ManagerHeight.h20,
             ),
             primary: true,
             children: [

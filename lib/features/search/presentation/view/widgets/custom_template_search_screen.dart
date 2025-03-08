@@ -53,62 +53,66 @@ class CustomTemplateSearchScreen extends StatelessWidget {
         ),
         child: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: ManagerHeight.h48,
-                child: Card(
-                  color: context.theme.colorScheme.onPrimaryContainer,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(ManagerRadius.r5),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.only(
-                      start: ManagerWidth.w5,
-                      top: ManagerHeight.h4,
-                      bottom: ManagerHeight.h4,
+          child: SingleChildScrollView(
+            primary: false,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: ManagerHeight.h48,
+                  child: Card(
+                    color: context.theme.colorScheme.onPrimaryContainer,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(ManagerRadius.r5),
                     ),
-                    child: Row(
-                      children: [
-                        CustomButton(
-                          onPressed: () => searchButton(context),
-                          minWidth: ManagerWidth.w24,
-                          height: ManagerHeight.h24,
-                          backgroundColor: context.theme.unselectedWidgetColor,
-                          highlightColor: context.theme.unselectedWidgetColor,
-                          side: BorderSide.none,
-                          padding: EdgeInsetsDirectional.zero,
-                          child: SvgPicture.asset(ManagerAssets.searchIcon),
-                        ),
-                        Expanded(
-                          child: CustomTextField(
-                            focusNode: focusNode,
-                            onEditingComplete: () => searchButton(context),
-                            contentPadding: EdgeInsetsDirectional.zero,
-                            controller: textController,
-                            hintText: hintTextFiled,
-                            color: context.theme.unselectedWidgetColor,
-                            borderColor: context.theme.unselectedWidgetColor,
-                            maxLength: maxLengthInput,
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.only(
+                        start: ManagerWidth.w5,
+                        top: ManagerHeight.h4,
+                        bottom: ManagerHeight.h4,
+                      ),
+                      child: Row(
+                        children: [
+                          CustomButton(
+                            onPressed: () => searchButton(context),
+                            minWidth: ManagerWidth.w24,
+                            height: ManagerHeight.h24,
+                            backgroundColor:
+                                context.theme.unselectedWidgetColor,
+                            highlightColor: context.theme.unselectedWidgetColor,
+                            side: BorderSide.none,
+                            padding: EdgeInsetsDirectional.zero,
+                            child: SvgPicture.asset(ManagerAssets.searchIcon),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: CustomTextField(
+                              focusNode: focusNode,
+                              onEditingComplete: () => searchButton(context),
+                              contentPadding: EdgeInsetsDirectional.zero,
+                              controller: textController,
+                              hintText: hintTextFiled,
+                              color: context.theme.unselectedWidgetColor,
+                              borderColor: context.theme.unselectedWidgetColor,
+                              maxLength: maxLengthInput,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              if (loading == true) ...{
-                Spacer(),
-                CustomLoading(),
-                Spacer(),
-              } else if (resultStatus == true && loading == false) ...{
-                verticalSpace(ManagerHeight.h24),
-                resultWidget,
-              } else ...{
-                CustomEmptyResultSearch(text: textOfEmptyResult),
-              },
-            ],
+                if (loading == true) ...{
+                  Spacer(),
+                  CustomLoading(),
+                  Spacer(),
+                } else if (resultStatus == true && loading == false) ...{
+                  verticalSpace(ManagerHeight.h24),
+                  resultWidget,
+                } else ...{
+                  CustomEmptyResultSearch(text: textOfEmptyResult),
+                },
+              ],
+            ),
           ),
         ),
       ),

@@ -101,15 +101,13 @@ class Validator with CustomToast {
 
   static String? passwordValidator(String? password,
       {String? confirmPassword}) {
-    if (password!.isEmpty) {
+    if (password == null) {
       return ManagerStrings.pleaseEnterPassword;
     }
     if (password.length < 8) {
       return ManagerStrings.passwordUnAccept;
     }
-    if (confirmPassword != null &&
-        password.isNotEmpty &&
-        confirmPassword == password) {
+    if (confirmPassword == null && confirmPassword == password) {
       return ManagerStrings.passwordsNotMatched;
     }
     return null;

@@ -1,3 +1,5 @@
+import 'package:mukhalafati_application/routes/navigator_observer.dart';
+
 import '/config/all_imports.dart';
 import 'package:device_preview/device_preview.dart';
 
@@ -6,9 +8,8 @@ void main() async {
 
   runApp(
     // MyApp(),
-     DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()),
+    DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()),
   );
-  // FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatelessWidget {
@@ -23,8 +24,14 @@ class MyApp extends StatelessWidget {
       ),
       splitScreenMode: true,
       minTextAdapt: true,
+      ensureScreenSize: true,
+      useInheritedMediaQuery: true,
+      enableScaleWH: () => true,
+      enableScaleText: () => true,
       builder: (context, child) {
         return GetMaterialApp(
+          navigatorObservers: [MyNavigatorObserver()],
+          useInheritedMediaQuery: true,
           themeMode: ThemeService.themeMode,
           theme: ThemeService.themeData,
           darkTheme: ThemeService.darkTheme,

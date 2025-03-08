@@ -22,17 +22,11 @@ class CustomHeadOfOfficialPaper extends StatelessWidget {
 }
 
 Widget _textOfHeadOfficialPaper(String text, BuildContext context) {
-  return Padding(
-    padding: EdgeInsetsDirectional.only(
-      start: ManagerWidth.w5,
-      end: ManagerWidth.w5,
-    ),
+  return Expanded(
     child: Text(
       text,
       textAlign: TextAlign.center,
       textScaler: const TextScaler.linear(0.9),
-      overflow: TextOverflow.ellipsis,
-      maxLines: 3,
       style: context.textTheme.textStyleOfTextOfHeadOfOfficialPaper(context),
     ),
   );

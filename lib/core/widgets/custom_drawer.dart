@@ -155,15 +155,8 @@ class CustomDriverDrawer extends StatelessWidget {
         ),
         _CustomButtonOfMainDrawer(
           onPressed: () {
-            context.pop();
-            context.pushReplacementNamed(Routes.logoutScreen);
-            disposeDriverProfile();
-            disposeDrivingLicenseCard();
-            disposeListOfComplaints();
-            disposeViolationPayment();
-            disposeNotification();
-            disposeSearchOnResultsTestsOfLicense();
-            disposeDriverHome();
+            initLogout();
+            customLogoutDialog(context);
           },
           icon: ManagerAssets.logoutIcon,
           title: ManagerStrings.logout,
@@ -270,7 +263,7 @@ class CustomPoliceManDrawer extends StatelessWidget with CustomToast {
         ),
         _CustomButtonOfMainDrawer(
           onPressed: () {
-            context.pop();
+            // context.pop();
             context.pushNamed(Routes.logoutScreen, arguments: true);
           },
           icon: ManagerAssets.logoutIcon,

@@ -66,6 +66,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 CustomTextField(
                   validator: (v) => Validator.passwordValidator(v),
                   controller: controller.newPassword,
+                  textInputAction: TextInputAction.next,
                   labelText: ManagerStrings.newPassword,
                   isPassword: true,
                   obscureText: controller.obscureNewPassword,
@@ -75,6 +76,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 ),
                 verticalSpace(ManagerHeight.h15),
                 CustomTextField(
+                  textInputAction: TextInputAction.done,
                   validator: (v) => Validator.passwordValidator(v,
                       confirmPassword: controller.newPassword.text),
                   controller: controller.confirmPassword,

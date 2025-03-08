@@ -20,12 +20,27 @@ class DriverProfileController extends GetxController with CustomToast {
         text: _sharedPrefController.getString(SharedPreferencesKeys.nameAr));
     driverPhone = TextEditingController(
         text:
-            _sharedPrefController.getString(SharedPreferencesKeys.phoneNumber));
+            _sharedPrefController.getString(SharedPreferencesKeys.phoneNumber))
+
+      ..addListener(
+            () {
+          selectCursorPosition(driverPhone);
+        },
+      );
     driverId = TextEditingController(
-        text: _sharedPrefController.getString(SharedPreferencesKeys.idNumber));
+        text: _sharedPrefController.getString(SharedPreferencesKeys.idNumber)) ..addListener(
+          () {
+        selectCursorPosition(driverId);
+      },
+    );
     licenceNumber = TextEditingController(
         text: _sharedPrefController
-            .getString(SharedPreferencesKeys.licenseOrJobNumber));
+            .getString(SharedPreferencesKeys.licenseOrJobNumber))
+      ..addListener(
+            () {
+          selectCursorPosition(licenceNumber);
+        },
+      );
   }
 
   @override

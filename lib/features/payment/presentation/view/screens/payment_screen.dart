@@ -1,3 +1,4 @@
+
 import '/config/all_imports.dart';
 
 class PaymentScreen extends StatelessWidget {
@@ -36,89 +37,12 @@ class PaymentScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.only(
-                    start: ManagerWidth.w15,
-                    end: ManagerWidth.w15,
-                    bottom: ManagerHeight.h5,
-                  ),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: ManagerRadius.r17,
-                        backgroundColor: context.theme.primaryColor,
-                        child: Text(
-                          AppConstants.one,
-                          style: context.textTheme
-                              .textStyleOfNumberOfStepOfPayment(context, true),
-                        ),
-                      ),
-                      Expanded(
-                        child: Divider(
-                          color: controller.isFirstPage()
-                              ? context.theme.colorScheme.onTertiary
-                              : context.theme.primaryColor,
-                          thickness: ManagerHeight.h3,
-                        ),
-                      ),
-                      CircleAvatar(
-                        radius: ManagerRadius.r17,
-                        backgroundColor:
-                            controller.isTwoPage() || controller.isThreePage()
-                                ? context.theme.primaryColor
-                                : context.theme.colorScheme.onTertiary,
-                        child: Text(
-                          AppConstants.two,
-                          style: context.textTheme
-                              .textStyleOfNumberOfStepOfPayment(
-                                  context,
-                                  controller.isTwoPage() ||
-                                      controller.isThreePage()),
-                        ),
-                      ),
-                      Expanded(
-                        child: Divider(
-                          color: controller.isThreePage()
-                              ? context.theme.primaryColor
-                              : context.theme.colorScheme.onTertiary,
-                          thickness: ManagerHeight.h3,
-                        ),
-                      ),
-                      CircleAvatar(
-                        radius: ManagerRadius.r17,
-                        backgroundColor: controller.isThreePage()
-                            ? context.theme.primaryColor
-                            : context.theme.colorScheme.onTertiary,
-                        child: Text(
-                          AppConstants.three,
-                          style: context.textTheme
-                              .textStyleOfNumberOfStepOfPayment(
-                                  context, controller.isThreePage()),
-                        ),
-                      ),
-                    ],
-                  ),
+                CustomPaymentStep(
+                  isFirstStep: controller.isFirstPage(),
+                  isSecondStep: controller.isTwoPage(),
+                  isThirdStep: controller.isThreePage(),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      ManagerStrings.paymentSelection,
-                      style: context.textTheme
-                          .textStyleOfNameOfStepOfPayment(context),
-                    ),
-                    Text(
-                      ManagerStrings.paymentMethod,
-                      style: context.textTheme
-                          .textStyleOfNameOfStepOfPayment(context),
-                    ),
-                    Text(
-                      ManagerStrings.paymentConfirmation,
-                      style: context.textTheme
-                          .textStyleOfNameOfStepOfPayment(context),
-                    ),
-                  ],
-                ),
+                CustomNameOfPaymentStep(),
                 verticalSpace(ManagerHeight.h34),
                 if (controller.loading) ...{
                   CustomLoading(),

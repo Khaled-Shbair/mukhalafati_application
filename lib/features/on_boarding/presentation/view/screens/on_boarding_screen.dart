@@ -13,6 +13,7 @@ class OnBoardingScreen extends StatelessWidget {
             child: Scaffold(
               resizeToAvoidBottomInset: false,
               body: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: PageView(
@@ -41,12 +42,12 @@ class OnBoardingScreen extends StatelessWidget {
                       dotColor: context.theme.disabledColor,
                     ),
                   ),
-                  verticalSpace(ManagerHeight.h42),
+                  verticalSpace(ManagerHeight.h30),
                   MoveButton(
                     value: controller.valueOfIndicator,
                     onPressed: () => controller.nextPage(context),
                   ),
-                  verticalSpace(ManagerHeight.h42),
+                  verticalSpace(ManagerHeight.h24),
                 ],
               ),
             ),

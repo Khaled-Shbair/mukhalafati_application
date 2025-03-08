@@ -40,7 +40,7 @@ class CustomPaymentConfirmationStep extends StatelessWidget {
         Container(
           padding: EdgeInsetsDirectional.only(
             start: ManagerWidth.w15,
-            end: ManagerWidth.w76,
+            end: ManagerWidth.w15,
             top: ManagerHeight.h15,
             bottom: ManagerHeight.h15,
           ),
@@ -55,10 +55,11 @@ class CustomPaymentConfirmationStep extends StatelessWidget {
             ),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _DetailsOfConfirmationPayment(
                 title: ManagerStrings.totalAmount,
-                subTitle: totalAmount,
+                subTitle: '$totalAmount ${ManagerStrings.shekel}',
               ),
               verticalSpace(ManagerHeight.h15),
               _DetailsOfConfirmationPayment(
@@ -69,6 +70,7 @@ class CustomPaymentConfirmationStep extends StatelessWidget {
           ),
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
@@ -77,8 +79,7 @@ class CustomPaymentConfirmationStep extends StatelessWidget {
               width: ManagerWidth.w24,
             ),
             horizontalSpace(ManagerWidth.w4),
-            SizedBox(
-              width: ManagerWidth.w320,
+            Expanded(
               child: Text(
                 ManagerStrings.afterClickingOnConfirmPayment,
                 style: context.textTheme
@@ -141,7 +142,7 @@ class _DetailsOfConfirmationPayment extends StatelessWidget {
               .textStyleOfDetailsOfConfirmationPayment(context),
         ),
         Text(
-          '$subTitle ${ManagerStrings.shekel}',
+          subTitle,
           style: context.textTheme
               .textStyleOfDetailsOfConfirmationPayment(context),
         ),

@@ -14,20 +14,22 @@ class WelcomeScreen extends StatelessWidget {
               Image.asset(
                 ManagerAssets.backgroundWelcomeScreen,
                 width: ManagerWidth.infinity,
-                height: ManagerHeight.h406,
-                fit: BoxFit.cover,
+                height: context.mediaQuery.size.height * 0.5,
+                fit: BoxFit.fill,
               ),
               verticalSpace(ManagerHeight.h40),
               Text(
                 ManagerStrings.welcome,
                 textAlign: TextAlign.center,
-                style: context.textTheme.titleOnBoardingAndWelcomeAndLoginScreen(context),
+                style: context.textTheme
+                    .titleOnBoardingAndWelcomeAndLoginScreen(context),
               ),
               verticalSpace(ManagerHeight.h10),
               Text(
                 ManagerStrings.subTitleWelcome,
                 textAlign: TextAlign.center,
-                style: context.textTheme.subTitleWelcomeAndLoginScreens(context),
+                style:
+                    context.textTheme.subTitleWelcomeAndLoginScreens(context),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.only(

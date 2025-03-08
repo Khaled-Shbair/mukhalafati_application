@@ -74,6 +74,7 @@ class CustomTextField extends StatelessWidget with CustomToast {
       textInputAction: textInputAction,
       onEditingComplete: onEditingComplete,
       onTap: onTap,
+      enableInteractiveSelection: true,
       minLines: minLines ?? AppConstants.minLinesOfTextFormField,
       maxLines: maxLines ?? AppConstants.maxLinesOfTextFormField,
       autofocus: autofocus,

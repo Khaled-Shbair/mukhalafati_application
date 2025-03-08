@@ -121,7 +121,7 @@ class CustomFilterViolationsButton extends StatelessWidget {
               ),
             ),
           ),
-          horizontalSpace(ManagerWidth.w15),
+          horizontalSpace(ManagerWidth.w5),
           Expanded(
             child: ElevatedButton(
               onPressed: () => cancelFilterButton,
@@ -139,29 +139,27 @@ class CustomFilterViolationsButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(ManagerRadius.r5),
                 ),
                 padding: EdgeInsetsDirectional.only(
-                  start: ManagerWidth.w11,
-                ),
+                    // start: ManagerWidth.w10,
+                    ),
               ),
-              child: ListTile(
-                contentPadding: EdgeInsetsDirectional.zero,
-                horizontalTitleGap: ManagerWidth.w3,
-                minTileHeight: ManagerHeight.h0,
-                minLeadingWidth: ManagerWidth.w0,
-                minVerticalPadding: ManagerWidth.w0,
-                leading: Image.asset(
-                  ManagerAssets.cancelFilterIcon,
-                  height: ManagerHeight.h24,
-                  width: ManagerWidth.w24,
-                ),
-                title: Text(
-                  ManagerStrings.cancelFilter,
-                  style: context.textTheme
-                      .textStyleOfFilterAndUnFilterButtons(false),
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    ManagerAssets.cancelFilterIcon,
+                    height: ManagerHeight.h24,
+                    width: ManagerWidth.w24,
+                  ),
+                  horizontalSpace(ManagerWidth.w3),
+                  Text(
+                    ManagerStrings.cancelFilter,
+                    style: context.textTheme
+                        .textStyleOfFilterAndUnFilterButtons(false),
+                  ),
+                ],
               ),
             ),
           ),
-          horizontalSpace(ManagerWidth.w12),
         ],
       ),
     );

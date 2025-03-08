@@ -70,10 +70,16 @@ extension Navigators on BuildContext {
         .pushReplacementNamed(routeName, arguments: arguments);
   }
 
-  pushNamedAndRemoveAllUntil(String routeName, {Object? arguments}) {
+  pushNamedAndRemoveAllUntil(
+    String routeName, {
+    Object? arguments,
+    bool Function(Route<dynamic>)? predicate,
+  }) {
     return Navigator.of(this).pushNamedAndRemoveUntil(
-        routeName, (route) => false,
-        arguments: arguments);
+      routeName,
+      predicate ?? (route) => false,
+      arguments: arguments,
+    );
   }
 
   popAndPushNamed(String routeName, {Object? arguments}) {

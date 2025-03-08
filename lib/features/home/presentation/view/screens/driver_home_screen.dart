@@ -24,6 +24,7 @@ class DriverHomeScreen extends StatelessWidget {
               widget: GestureDetector(
                 onTap: () => controller.notificationButton(context),
                 child: Badge(
+                  isLabelVisible: controller.homeDriverData.numberOfUnReadNotifications!=0,
                   label: Text(
                     controller.homeDriverData.numberOfUnReadNotifications
                         .toString(),
