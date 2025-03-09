@@ -23,6 +23,12 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Clean Xcode derived data
+        run: rm -rf ~/Library/Developer/Xcode/DerivedData
+
+      - name: Check Flutter doctor
+        run: flutter doctor -v
+
       - name: Set iOS platform version
         run: |
           cd ios
@@ -42,4 +48,4 @@ jobs:
           pod install
 
       - name: Build iOS without signing
-        run: flutter build ios --no-codesign --release
+        run: flutter build ios --no-codesign --release  --verbose
