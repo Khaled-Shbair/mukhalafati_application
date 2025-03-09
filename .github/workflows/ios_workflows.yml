@@ -31,10 +31,22 @@ jobs:
       - name: Clean Xcode derived data
         run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
-      - name: Set iOS platform version
+      - name: Set Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer # Replace with your Xcode path
+
+      - name: Modify Podfile
         run: |
           cd ios
-          sed -i '' "s/platform :ios, '.*'/platform :ios, '13.0'/" Podfile
+          echo "platform :ios, '13.0'" > Podfile
+          echo "target 'Runner' do" >> Podfile
+          echo "  use_frameworks! " >> Podfile
+          echo "  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))" >> Podfile
+          echo "end" >> Podfile
+
+      - name: Verify Podfile
+        run: |
+          cd ios
+          cat Podfile
 
       - name: Install CocoaPods
         run: |
