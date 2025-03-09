@@ -23,6 +23,10 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Modify Podfile to set iOS version to 13.0
+        run: |
+          cd ios
+          echo "platform :ios, '13.0'" >> Podfile
+
       - name: Build iOS without signing
         run: flutter build ios --no-codesign --release
-
