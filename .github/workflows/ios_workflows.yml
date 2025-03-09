@@ -23,17 +23,18 @@ jobs:
       - name: Install dependencies
         run: flutter pub get  # تأكد من تشغيل flutter pub get أولاً
 
-      - name: Clean Flutter project
-        run: flutter clean  # تنظيف المشروع قبل متابعة البناء
-
       - name: Set iOS platform version
         run: |
           cd ios
           echo "platform :ios, '13.0'" >> Podfile  # تأكد من ضبط الإصدار الصحيح
 
+      - name: Clean Flutter project
+        run: flutter clean  # تنظيف المشروع قبل متابعة البناء
+
       - name: Install CocoaPods dependencies
         run: |
           cd ios
+          flutter pub get  # تأكد من أنه يتم تشغيل flutter pub get داخل مجلد iOS
           pod install  # تأكد من تثبيت جميع الحزم المطلوبة
 
       - name: Build iOS without signing
