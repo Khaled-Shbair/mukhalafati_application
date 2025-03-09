@@ -40,7 +40,8 @@ jobs:
           echo "platform :ios, '13.0'" > Podfile
           echo "target 'Runner' do" >> Podfile
           echo "  use_frameworks! " >> Podfile
-          echo "  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))" >> Podfile
+          echo "  use_modular_headers! " >> Podfile
+          echo "  flutter_install_ios_pods File.dirname(File.realpath(__FILE__))" >> Podfile
           echo "end" >> Podfile
 
       - name: Verify Podfile
