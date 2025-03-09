@@ -31,13 +31,14 @@ jobs:
       - name: Clean Flutter project
         run: flutter clean
 
-      - name: Clean iOS build
+      - name: Clean iOS build and reinstall pods
         run: |
           cd ios
           rm -rf build
           rm -rf Podfile.lock
           rm -rf Pods
           pod deintegrate
+          flutter pub get # run flutter pub get before pod install
           pod install
 
       - name: Build iOS without signing
