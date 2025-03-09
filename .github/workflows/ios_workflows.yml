@@ -25,23 +25,21 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Update packages
-        run: flutter pub upgrade
-
       - name: Clean Xcode derived data
         run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
       - name: Set Xcode version
-        run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer # Replace with your Xcode path
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
 
       - name: Modify Podfile
         run: |
           cd ios
           echo "platform :ios, '13.0'" > Podfile
+          echo "flutter_ios_podfile_setup" >> Podfile
           echo "target 'Runner' do" >> Podfile
-          echo "  use_frameworks! " >> Podfile
-          echo "  use_modular_headers! " >> Podfile
-          echo "  flutter_install_ios_pods File.dirname(File.realpath(__FILE__))" >> Podfile
+          echo "  use_frameworks!" >> Podfile
+          echo "  use_modular_headers!" >> Podfile
+          echo "  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))" >> Podfile
           echo "end" >> Podfile
 
       - name: Verify Podfile
@@ -57,12 +55,9 @@ jobs:
       - name: Clean iOS build and reinstall pods
         run: |
           cd ios
-          rm -rf build
-          rm -rf Podfile.lock
-          rm -rf Pods
+          rm -rf Pods Podfile.lock
           pod deintegrate
-          flutter pub get
-          pod install
+          pod install --repo-update
 
       - name: Build iOS without signing
         run: flutter build ios --no-codesign --release
