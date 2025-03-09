@@ -2,11 +2,9 @@ name: Build iOS App
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
   pull_request:
-    branches:
-      - master
+    branches: [master]
 
 jobs:
   build:
@@ -19,6 +17,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.24.4'
+          channel: 'stable'
 
       - name: Check Flutter doctor
         run: flutter doctor -v
@@ -26,22 +25,23 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Update packages
-        run: flutter pub upgrade
-
       - name: Clean Xcode derived data
         run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
       - name: Set iOS platform version
         run: |
           cd ios
-          echo "platform :ios, '13.0'" >> Podfile
+          sed -i '' "s/platform :ios, '.*'/platform :ios, '13.0'/" Podfile
 
-      - name: Clean Flutter project
-        run: flutter clean
+      - name: Verify Podfile syntax
+        run: |
+          cd ios
+          pod lib lint --no-clean
 
       - name: Install CocoaPods
-        run: sudo gem install cocoapods
+        run: |
+          sudo gem install cocoapods -v 1.15.0
+          pod setup
 
       - name: Clean iOS build and reinstall pods
         run: |
@@ -50,8 +50,8 @@ jobs:
           rm -rf Podfile.lock
           rm -rf Pods
           pod deintegrate
-          flutter pub get # run flutter pub get before pod install
-          pod install
+          flutter pub get
+          pod install --repo-update
 
       - name: Build iOS without signing
         run: flutter build ios --no-codesign --release
