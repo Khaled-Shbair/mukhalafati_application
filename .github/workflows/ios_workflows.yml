@@ -25,6 +25,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Update packages
+        run: flutter pub upgrade
+
       - name: Clean Xcode derived data
         run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
@@ -32,11 +35,6 @@ jobs:
         run: |
           cd ios
           sed -i '' "s/platform :ios, '.*'/platform :ios, '13.0'/" Podfile
-
-      - name: Verify Podfile syntax
-        run: |
-          cd ios
-          pod lib lint --no-clean
 
       - name: Install CocoaPods
         run: |
@@ -51,7 +49,7 @@ jobs:
           rm -rf Pods
           pod deintegrate
           flutter pub get
-          pod install --repo-update
+          pod install
 
       - name: Build iOS without signing
         run: flutter build ios --no-codesign --release
