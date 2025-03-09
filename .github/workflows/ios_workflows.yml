@@ -21,21 +21,20 @@ jobs:
           flutter-version: '3.24.4'
 
       - name: Install dependencies
-        run: flutter pub get  # تأكد من تشغيل هذا أولاً
+        run: flutter pub get  # تأكد من تشغيل flutter pub get أولاً
 
       - name: Clean Flutter project
-        run: flutter clean
+        run: flutter clean  # تنظيف المشروع قبل متابعة البناء
 
-      - name: Modify Podfile to set iOS version to 13.0
+      - name: Set iOS platform version
         run: |
           cd ios
-          echo "platform :ios, '13.0'" >> Podfile
+          echo "platform :ios, '13.0'" >> Podfile  # تأكد من ضبط الإصدار الصحيح
 
-      - name: Clean CocoaPods cache
+      - name: Install CocoaPods dependencies
         run: |
           cd ios
-          pod cache clean --all
-          pod install
+          pod install  # تأكد من تثبيت جميع الحزم المطلوبة
 
       - name: Build iOS without signing
-        run: flutter build ios --no-codesign --release
+        run: flutter build ios --no-codesign --release  # بناء التطبيق بدون التوقيع
