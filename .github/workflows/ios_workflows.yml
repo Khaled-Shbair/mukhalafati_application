@@ -48,4 +48,4 @@ jobs:
           pod install
 
       - name: Build iOS without signing
-        run: flutter build ios --no-codesign --release  --verbose
+        run: flutter build ios --no-codesign --release
