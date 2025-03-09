@@ -35,11 +35,15 @@ jobs:
         run: |
           cd ios
           echo "platform :ios, '13.0'" > Podfile
-          echo "flutter_ios_podfile_setup" >> Podfile
+          echo "flutter_application_path = '../'" >> Podfile
+          echo "load File.join(flutter_application_path, '.ios', 'Flutter', 'podhelper.rb')" >> Podfile
           echo "target 'Runner' do" >> Podfile
           echo "  use_frameworks!" >> Podfile
           echo "  use_modular_headers!" >> Podfile
-          echo "  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))" >> Podfile
+          echo "  install_all_flutter_pods(flutter_application_path)" >> Podfile
+          echo "end" >> Podfile
+          echo "post_install do |installer|" >> Podfile
+          echo "  flutter_post_install(installer)" >> Podfile
           echo "end" >> Podfile
 
       - name: Verify Podfile
@@ -55,8 +59,9 @@ jobs:
       - name: Clean iOS build and reinstall pods
         run: |
           cd ios
-          rm -rf Pods Podfile.lock
+          rm -rf Pods Podfile.lock Flutter/App.framework Flutter/Flutter.xcframework
           pod deintegrate
+          flutter pub get
           pod install --repo-update
 
       - name: Build iOS without signing
