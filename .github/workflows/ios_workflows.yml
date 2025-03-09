@@ -21,7 +21,7 @@ jobs:
           flutter-version: '3.24.4'
 
       - name: Install dependencies
-        run: flutter pub get
+        run: flutter pub get  # تأكد من تشغيل هذا أولاً
 
       - name: Clean Flutter project
         run: flutter clean
