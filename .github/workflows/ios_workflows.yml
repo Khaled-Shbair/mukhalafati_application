@@ -21,8 +21,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'  # Use the stable Flutter channel
-
+          flutter-version: '3.24.4'
       # Install CocoaPods dependencies
       - name: Install CocoaPods
         run: |
