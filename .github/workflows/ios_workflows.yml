@@ -3,7 +3,7 @@ name: iOS Build
 on:
   push:
     branches:
-      - master  # تغيير الفرع إذا لزم الأمر
+      - master
   pull_request:
     branches:
       - master
