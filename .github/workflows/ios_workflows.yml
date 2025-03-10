@@ -11,6 +11,7 @@ on:
 jobs:
   build_ios:
     runs-on: macos-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -23,15 +24,22 @@ jobs:
       - name: Enable iOS Platform
         run: flutter config --enable-ios
 
-      - name: Set Xcode Version (13.0)
+      - name: Check Available Xcode Versions
         run: |
-          sudo xcode-select -s /Applications/Xcode_13.0.app/Contents/Developer
+          xcode-select -p
+          ls /Applications | grep Xcode
+
+      - name: Set Xcode Version (13.x or latest available)
+        run: |
+          sudo xcode-select -s /Applications/Xcode_13.0.app/Contents/Developer || \
+          sudo xcode-select -s /Applications/Xcode_14.0.app/Contents/Developer || \
+          sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
           sudo xcodebuild -license accept
 
       - name: Get Dependencies
         run: |
           flutter pub get
-          flutter doctor -v # Ensure no issues with dependencies
+          flutter doctor -v
 
       - name: Clean Flutter Project
         run: flutter clean
@@ -39,8 +47,8 @@ jobs:
       - name: Clean & Setup iOS
         run: |
           cd ios
-          flutter pub get # Ensure dependencies are fetched for iOS
-          pod install --verbose || pod update # Try installing pods or updating them if necessary
+          flutter pub get
+          pod install --verbose || pod update
 
       - name: Build iOS
         run: flutter build ios --release --no-codesign
@@ -49,4 +57,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ios-build
-          path: build/ios/iphoneos/*.app # Ensure you upload the correct artifact (iOS app package)
+          path: build/ios/iphoneos/*.app
