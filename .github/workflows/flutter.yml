@@ -34,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-artifact
-          path: build/ios/iphoneos/Runner.ipa  # تغيير المسار إلى .ipa
+          path: build/ios/archive/Runner.xcarchive/Products/Applications/Runner.ipa  # المسار الصحيح إلى .app أو .ipa
