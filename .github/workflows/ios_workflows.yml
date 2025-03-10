@@ -15,24 +15,22 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install Flutter
+      - name: Install Flutter 3.24.4
         uses: subosito/flutter-action@v2
         with:
-          flutter-version:  '3.24.4'
-
-      - name: Ensure iOS directory is set up
-        run: flutter create .
-
-      - name: Install CocoaPods dependencies
-        run: |
-          cd ios
-          pod install
+          flutter-version: "3.24.4"
 
       - name: Enable iOS Platform
         run: flutter config --enable-ios
 
       - name: Get Dependencies
         run: flutter pub get
+
+      - name: Clean & Setup iOS
+        run: |
+          cd ios
+          flutter clean
+          pod install --verbose
 
       - name: Build iOS
         run: flutter build ios --release --no-codesign
