@@ -31,15 +31,12 @@ jobs:
 
       - name: Set Xcode Version (13.x or latest available)
         run: |
-          sudo xcode-select -s /Applications/Xcode_13.0.app/Contents/Developer || \
-          sudo xcode-select -s /Applications/Xcode_14.0.app/Contents/Developer || \
           sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
           sudo xcodebuild -license accept
 
       - name: Get Dependencies
         run: |
           flutter pub get
-          flutter doctor -v
 
       - name: Clean Flutter Project
         run: flutter clean
@@ -48,7 +45,7 @@ jobs:
         run: |
           cd ios
           flutter pub get
-          pod install --verbose || pod update
+          pod install --verbose
 
       - name: Build iOS
         run: flutter build ios --release --no-codesign
