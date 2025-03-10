@@ -1,0 +1,37 @@
+name: Flutter Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'  # يمكنك تحديد إصدار Flutter الذي تريده
+
+      - name: Install dependencies
+        run: |
+          flutter pub get
+          cd ios
+          pod install --repo-update
+
+      - name: Build iOS app
+        run: flutter build ios --release --no-codesign
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifact
+          path: build/ios/iphoneos/Runner.app
