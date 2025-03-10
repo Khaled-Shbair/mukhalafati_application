@@ -23,10 +23,15 @@ jobs:
       - name: Enable iOS Platform
         run: flutter config --enable-ios
 
+      - name: Set Xcode Version (13.0)
+        run: |
+          sudo xcode-select -s /Applications/Xcode_13.0.app/Contents/Developer
+          sudo xcodebuild -license accept
+
       - name: Get Dependencies
         run: |
           flutter pub get
-          flutter doctor -v # تأكد من أنه لا توجد مشاكل في التبعيات
+          flutter doctor -v # Ensure no issues with dependencies
 
       - name: Clean Flutter Project
         run: flutter clean
@@ -34,8 +39,8 @@ jobs:
       - name: Clean & Setup iOS
         run: |
           cd ios
-          flutter pub get # تأكد من أن التبعيات تم تحميلها في مجلد iOS
-          pod install --verbose # تأكد من أن جميع التبعيات تم تثبيتها بشكل صحيح
+          flutter pub get # Ensure dependencies are fetched for iOS
+          pod install --verbose || pod update # Try installing pods or updating them if necessary
 
       - name: Build iOS
         run: flutter build ios --release --no-codesign
@@ -44,4 +49,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ios-build
-          path: build/ios/iphoneos
+          path: build/ios/iphoneos/*.app # Ensure you upload the correct artifact (iOS app package)
