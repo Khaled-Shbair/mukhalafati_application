@@ -2,8 +2,8 @@ platform :ios, '11.0'
 
 require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
 
-flutter_application_path = File.dirname(File.realpath(__FILE__))
-load File.join(flutter_application_path, 'flutter', 'podhelper.rb')
+flutter_root = File.expand_path('..', File.dirname(`which flutter`))
+require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
 
 target 'Runner' do
   use_frameworks!
