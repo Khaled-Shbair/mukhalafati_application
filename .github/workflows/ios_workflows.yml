@@ -1,50 +1,39 @@
-name: Build Flutter iOS App
+name: iOS Build
 
 on:
   push:
     branches:
-      - master  # Trigger on push to the main branch
+      - master  # تغيير الفرع إذا لزم الأمر
   pull_request:
     branches:
-      - master  # Trigger on pull requests to the main branch
+      - master
 
 jobs:
-  build-ios:
-    runs-on: macos-latest  # Use a macOS runner
-
+  build_ios:
+    runs-on: macos-latest
     steps:
-      # Checkout the repository
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Set up Flutter
-      - name: Set up Flutter
+      - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'  # Use the stable Flutter channel
+          flutter-version:  '3.24.4'
 
-      # Install CocoaPods dependencies
       - name: Install CocoaPods
-        run: |
-          cd ios
-          sudo gem install cocoapods
-          pod install
+        run: pod install --project-directory=ios
 
-      # Install Flutter dependencies
-      - name: Install Flutter dependencies
+      - name: Enable iOS Platform
+        run: flutter config --enable-ios
+
+      - name: Get Dependencies
         run: flutter pub get
 
-      # Generate code for Retrofit, JSON serialization, etc.
-      - name: Generate code
-        run: flutter pub run build_runner build --delete-conflicting-outputs
-
-      # Build the iOS app
-      - name: Build iOS app
+      - name: Build iOS
         run: flutter build ios --release --no-codesign
 
-      # Upload the .ipa file as an artifact (using v4 of upload-artifact)
-      - name: Upload .ipa artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v3
         with:
-          name: Runner.ipa
-          path: build/ios/ipa/Runner.ipa
+          name: ios-build
+          path: build/ios/iphoneos
