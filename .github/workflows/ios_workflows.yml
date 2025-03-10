@@ -21,14 +21,14 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.4'
+          channel: 'stable'  # Use the stable Flutter channel
+
       # Install CocoaPods dependencies
       - name: Install CocoaPods
         run: |
           cd ios
           sudo gem install cocoapods
           pod install
-        working-directory: ./ios
 
       # Install Flutter dependencies
       - name: Install Flutter dependencies
@@ -41,23 +41,6 @@ jobs:
       # Build the iOS app
       - name: Build iOS app
         run: flutter build ios --release --no-codesign
-
-      # Optional: Archive the iOS app (requires a development team and provisioning profile)
-      # - name: Archive iOS app
-      #   run: |
-      #     cd ios
-      #     xcodebuild -workspace Runner.xcworkspace -scheme Runner -sdk iphoneos -configuration Release archive -archivePath RunnerArchive
-      #   env:
-      #     DEVELOPER_TEAM: YOUR_DEVELOPER_TEAM_ID
-      #     PROVISIONING_PROFILE_SPECIFIER: YOUR_PROVISIONING_PROFILE
-
-      # Optional: Export the .ipa file (requires a development team and provisioning profile)
-      # - name: Export .ipa
-      #   run: |
-      #     xcodebuild -exportArchive -archivePath RunnerArchive.xcarchive -exportPath . -exportOptionsPlist ExportOptions.plist
-      #   env:
-      #     DEVELOPER_TEAM: YOUR_DEVELOPER_TEAM_ID
-      #     PROVISIONING_PROFILE_SPECIFIER: YOUR_PROVISIONING_PROFILE
 
       # Upload the .ipa file as an artifact (using v4 of upload-artifact)
       - name: Upload .ipa artifact
