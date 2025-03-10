@@ -24,6 +24,9 @@ jobs:
       - name: Enable iOS Platform
         run: flutter config --enable-ios
 
+      - name: Install CocoaPods
+        run: sudo gem install cocoapods
+
       - name: Check Available Xcode Versions
         run: |
           xcode-select -p
@@ -31,15 +34,13 @@ jobs:
 
       - name: Set Xcode Version (13.x or latest available)
         run: |
+          sudo xcode-select -s /Applications/Xcode_13.0.app/Contents/Developer || \
+          sudo xcode-select -s /Applications/Xcode_14.0.app/Contents/Developer || \
           sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
           sudo xcodebuild -license accept
 
       - name: Get Dependencies
-        run: |
-          flutter pub get
-
-      - name: Clean Flutter Project
-        run: flutter clean
+        run: flutter pub get
 
       - name: Clean & Setup iOS
         run: |
