@@ -3,10 +3,10 @@ name: Build Flutter iOS App
 on:
   push:
     branches:
-      - master  # Trigger on push to the main branch
+      - main  # Trigger on push to the main branch
   pull_request:
     branches:
-      - master  # Trigger on pull requests to the main branch
+      - main  # Trigger on pull requests to the main branch
 
 jobs:
   build-ios:
@@ -60,9 +60,9 @@ jobs:
       #     DEVELOPER_TEAM: YOUR_DEVELOPER_TEAM_ID
       #     PROVISIONING_PROFILE_SPECIFIER: YOUR_PROVISIONING_PROFILE
 
-      # Optional: Upload the .ipa file as an artifact
+      # Upload the .ipa file as an artifact (using v4 of upload-artifact)
       - name: Upload .ipa artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Runner.ipa
           path: build/ios/ipa/Runner.ipa
