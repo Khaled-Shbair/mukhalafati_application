@@ -21,7 +21,7 @@ jobs:
           flutter-version: "3.24.4"
 
       - name: Enable iOS Platform
-        run: flutter config --enable-ios
+        run: flutter config --enable-ios #
 
       - name: Get Dependencies
         run: flutter pub get
