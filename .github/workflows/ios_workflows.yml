@@ -26,7 +26,6 @@ jobs:
       - name: Install CocoaPods dependencies
         run: |
           cd ios
-          pod init
           pod install
 
       - name: Enable iOS Platform
