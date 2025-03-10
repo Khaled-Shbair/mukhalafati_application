@@ -21,16 +21,21 @@ jobs:
           flutter-version: "3.24.4"
 
       - name: Enable iOS Platform
-        run: flutter config --enable-ios #
+        run: flutter config --enable-ios
 
       - name: Get Dependencies
-        run: flutter pub get
+        run: |
+          flutter pub get
+          flutter doctor -v # تأكد من أنه لا توجد مشاكل في التبعيات
+
+      - name: Clean Flutter Project
+        run: flutter clean
 
       - name: Clean & Setup iOS
         run: |
           cd ios
-          flutter clean
-          pod install --verbose
+          flutter pub get # تأكد من أن التبعيات تم تحميلها في مجلد iOS
+          pod install --verbose # تأكد من أن جميع التبعيات تم تثبيتها بشكل صحيح
 
       - name: Build iOS
         run: flutter build ios --release --no-codesign
