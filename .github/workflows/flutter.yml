@@ -3,10 +3,10 @@ name: Flutter Build and Test
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'stable'  # يمكنك تحديد إصدار Flutter الذي تريده
+          flutter-version: '3.24.4'  # تحديد إصدار Flutter
 
       - name: Install dependencies
         run: |
@@ -31,7 +31,7 @@ jobs:
         run: flutter build ios --release --no-codesign
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: build-artifact
           path: build/ios/iphoneos/Runner.app
