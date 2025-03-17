@@ -32,8 +32,18 @@ jobs:
           rm -f Flutter/Generated.xcconfig
           flutter pub get
 
-      - name: Generate Flutter XCConfig
-        run: flutter build ios --no-codesign
+      - name: Create Podfile if not exists
+        run: |
+          if [ ! -f ios/Podfile ]; then
+            echo "Creating Podfile..."
+            echo "platform :ios, '13.0'" > ios/Podfile
+            echo "target 'Runner' do" >> ios/Podfile
+            echo "  use_frameworks!" >> ios/Podfile
+            echo "  pod 'Flutter', :path => '../flutter'" >> ios/Podfile
+            echo "end" >> ios/Podfile
+          else
+            echo "Podfile already exists"
+          fi
 
       - name: Install CocoaPods
         run: pod install --project-directory=ios
