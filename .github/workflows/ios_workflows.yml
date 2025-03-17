@@ -32,12 +32,8 @@ jobs:
           rm -f Flutter/Generated.xcconfig
           flutter pub get
 
-      - name: Update Generated.xcconfig with correct FLUTTER_ROOT
-        run: |
-          sed -i '' 's|FLUTTER_ROOT=.*|FLUTTER_ROOT=/Users/runner/hostedtoolcache/flutter/stable-3.24.4-arm64|' ios/Flutter/Generated.xcconfig
-
-      - name: Clean Previous Builds
-        run: flutter clean
+      - name: Generate Flutter XCConfig
+        run: flutter build ios --no-codesign
 
       - name: Install CocoaPods
         run: pod install --project-directory=ios
