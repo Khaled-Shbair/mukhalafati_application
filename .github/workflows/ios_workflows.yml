@@ -31,9 +31,19 @@ jobs:
           rm -rf Podfile.lock Pods
           flutter pub get
 
-
       - name: Clean Previous Builds
         run: flutter clean
+
+      - name: Create Missing Files (if necessary)
+        run: |
+          cd ios/Flutter
+          if [ ! -f "Generated.xcconfig" ]; then
+            echo "// This file is generated automatically by Flutter" > Generated.xcconfig
+            echo "FLUTTER_FRAMEWORK_DIR=$(pwd)/Flutter.framework" >> Generated.xcconfig
+          fi
+          if [ ! -f "Flutter.xcconfig" ]; then
+            echo "// This file is generated automatically by Flutter" > Flutter.xcconfig
+          fi
 
       - name: Install CocoaPods
         run: pod install --project-directory=ios
@@ -45,4 +55,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ios-build
-          path: build/ios/iphoneos/**/*.app
+          path: build/ios/iphoneos/Runner.ipa
