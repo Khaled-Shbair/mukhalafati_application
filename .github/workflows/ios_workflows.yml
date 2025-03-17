@@ -29,21 +29,15 @@ jobs:
           flutter pub get
           cd ios
           rm -rf Podfile.lock Pods
+          rm -f Flutter/Generated.xcconfig
           flutter pub get
+
+      - name: Update Generated.xcconfig with correct FLUTTER_ROOT
+        run: |
+          sed -i '' 's|FLUTTER_ROOT=.*|FLUTTER_ROOT=/Users/runner/hostedtoolcache/flutter/stable-3.24.4-arm64|' ios/Flutter/Generated.xcconfig
 
       - name: Clean Previous Builds
         run: flutter clean
-
-      - name: Create Missing Files (if necessary)
-        run: |
-          cd ios/Flutter
-          if [ ! -f "Generated.xcconfig" ]; then
-            echo "// This file is generated automatically by Flutter" > Generated.xcconfig
-            echo "FLUTTER_FRAMEWORK_DIR=$(pwd)/Flutter.framework" >> Generated.xcconfig
-          fi
-          if [ ! -f "Flutter.xcconfig" ]; then
-            echo "// This file is generated automatically by Flutter" > Flutter.xcconfig
-          fi
 
       - name: Install CocoaPods
         run: pod install --project-directory=ios
@@ -55,4 +49,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ios-build
-          path: build/ios/iphoneos/Runner.ipa
+          path: build/ios/iphoneos/Runner.app
