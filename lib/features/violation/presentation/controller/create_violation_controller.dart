@@ -188,7 +188,7 @@ class CreateViolationController extends GetxController with CustomToast {
             },
             (r) async {
               context.pop();
-              if (r.fcmToken != null || r.fcmToken.isNotEmpty) {
+              if (r.fcmToken != '' || r.fcmToken.isNotEmpty) {
                 _sendNotification(r.fcmToken);
                 _saveNotification(r.driverId);
               }
@@ -222,8 +222,7 @@ class CreateViolationController extends GetxController with CustomToast {
         driverId: driverId,
         title: ManagerStrings.violationHasBeenRegistered,
         content: _reasonOfViolation.onNull(),
-        dateSend: FormatDateAndTimeHelper.dateNow,
-        timeSend: FormatDateAndTimeHelper.timeNow,
+        timeSend: DateTime.now().toString(),
       ),
     );
   }

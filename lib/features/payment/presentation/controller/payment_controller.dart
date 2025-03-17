@@ -5,9 +5,6 @@ class PaymentController extends GetxController with CustomToast {
   final _formKey = GlobalKey<FormState>();
   final _paymentViolationUseCase = instance<PaymentViolationUseCase>();
   late PageController _pageController;
-  bool _paymentSelectionDone = false;
-  bool _enterDetailsDone = false;
-  bool _paymentConfirmationDone = false;
   bool _isJawwalPay = false;
   bool _isPalPay = false;
   bool _isVisaCard = false;
@@ -26,8 +23,6 @@ class PaymentController extends GetxController with CustomToast {
 
   PageController get pageController => _pageController;
 
-  bool get paymentSelectionDone => _paymentSelectionDone;
-
   GlobalKey<FormState> get formKey => _formKey;
 
   String get paymentBy => _paymentBy;
@@ -39,10 +34,6 @@ class PaymentController extends GetxController with CustomToast {
   bool get isJawwalPay => _isJawwalPay;
 
   bool get loading => _loading;
-
-  bool get paymentConfirmationDone => _paymentConfirmationDone;
-
-  bool get enterDetailsDone => _enterDetailsDone;
 
   TextEditingController get cardHolderName => _cardHolderName;
 

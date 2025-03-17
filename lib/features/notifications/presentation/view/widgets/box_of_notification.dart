@@ -84,7 +84,7 @@ class BoxOfNotification extends StatelessWidget {
             Align(
               alignment: AlignmentDirectional.bottomEnd,
               child: Text(
-                time,
+                '${time.replaceFirst('قبل', 'منذ')}',
                 textAlign: TextAlign.end,
                 style: context.textTheme
                     .textStyleOfTimeOfNotificationMessage(context, isRead),

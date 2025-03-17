@@ -6,7 +6,6 @@ class CustomPaymentSelectionStep extends StatelessWidget {
     required this.selectJawwalPay,
     required this.selectPalPay,
     required this.selectVisaCard,
-    required this.paymentSelectionDone,
     this.isVisaCard = false,
     this.isPalPay = false,
     this.isJawwalPay = false,
@@ -17,7 +16,6 @@ class CustomPaymentSelectionStep extends StatelessWidget {
   final Function() selectJawwalPay;
   final Function() selectPalPay;
   final Function() selectVisaCard;
-  final bool paymentSelectionDone;
   final bool isVisaCard;
 
   final bool isPalPay;

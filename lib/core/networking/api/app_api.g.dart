@@ -842,7 +842,6 @@ class _AppApi implements AppApi {
     dynamic title,
     dynamic content,
     dynamic timeSend,
-    dynamic dateSend,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -852,7 +851,6 @@ class _AppApi implements AppApi {
       'title': title,
       'content': content,
       'time_send': timeSend,
-      'date_send': dateSend,
     };
     final _options = _setStreamType<dynamic>(Options(
       method: 'POST',

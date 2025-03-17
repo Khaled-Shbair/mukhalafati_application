@@ -69,7 +69,7 @@ class NotificationsScreen extends StatelessWidget {
                           isRead: data[index].isRead,
                           text: data[index].content,
                           id: data[index].id,
-                          time: data[index].date,
+                          time: data[index].timeAge,
                           delete: () => controller.deleteNotification(
                               index, data[index].id, context),
                         );

@@ -2,14 +2,13 @@ import '/config/all_imports.dart';
 
 class CustomPaymentConfirmationStep extends StatelessWidget {
   const CustomPaymentConfirmationStep(
-      {required this.paymentConfirmationDone,
+      {
       required this.paymentConfirmationButton,
       required this.cancelButton,
       required this.totalAmount,
       required this.paymentMethod,
       super.key});
 
-  final bool paymentConfirmationDone;
   final Function() paymentConfirmationButton;
   final Function() cancelButton;
   final String totalAmount;

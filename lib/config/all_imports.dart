@@ -107,7 +107,6 @@ export '/features/login/presentation/view/screens/welcome_screen.dart';
 export '/features/login/presentation/controller/login_controller.dart';
 export '/features/login/domain/repository/driver_login_repository.dart';
 export '/features/login/domain/use_case/police_man_login_use_case.dart';
-export '/features/login/presentation/controller/welcome_controller.dart';
 export '/features/login/presentation/view/widgets/custom_tab_bar_page.dart';
 export '/features/login/domain/repository/police_man_login_repository.dart';
 export '/features/login/presentation/view/widgets/custom_tab_bar_button.dart';

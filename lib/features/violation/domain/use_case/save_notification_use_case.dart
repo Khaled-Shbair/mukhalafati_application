@@ -5,14 +5,12 @@ class SaveNotificationUseCaseInput {
   final String title;
   final String content;
   final String timeSend;
-  final String dateSend;
 
   SaveNotificationUseCaseInput({
     required this.timeSend,
     required this.driverId,
     required this.title,
     required this.content,
-    required this.dateSend,
   });
 }
 
@@ -26,7 +24,6 @@ class SaveNotificationUseCase
   Future<Either<Failure, bool>> execute(input) async {
     return await _repository.saveNotification(
       SaveNotificationRequest(
-        dateSend: input.dateSend,
         content: input.content,
         title: input.title,
         driverId: input.driverId,

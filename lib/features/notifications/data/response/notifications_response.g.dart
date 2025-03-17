@@ -27,7 +27,7 @@ NotificationResponse _$NotificationResponseFromJson(
     NotificationResponse(
       id: (json['id'] as num?)?.toInt(),
       content: json['content'] as String?,
-      date: json['date_send'] as String?,
+      timeSend: json['time_send'] as String?,
       isRead: json['is_read'] as bool?,
     );
 
@@ -36,6 +36,6 @@ Map<String, dynamic> _$NotificationResponseToJson(
     <String, dynamic>{
       'id': instance.id,
       'content': instance.content,
-      'date_send': instance.date,
+      'time_send': instance.timeSend,
       'is_read': instance.isRead,
     };

@@ -16,6 +16,7 @@ class HomeDriverRepoImpl extends HomeDriverRepo {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _dataSource.getHomeDriverData();
+        print('ssss: ${response.numberOfUnReadNotifications}');
         return Right(response.toDomain());
       } catch (e) {
         return Left(

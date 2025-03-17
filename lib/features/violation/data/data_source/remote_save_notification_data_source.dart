@@ -16,8 +16,7 @@ class RemoteSaveNotificationDataSourceImpl
       request.driverId,
       request.title,
       request.content,
-      request.timeSend,
-      request.dateSend,
+      request.timeSend
     );
   }
 }

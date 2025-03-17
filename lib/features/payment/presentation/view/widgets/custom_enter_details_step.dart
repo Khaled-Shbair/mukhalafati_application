@@ -2,7 +2,6 @@ import '/config/all_imports.dart';
 
 class CustomEnterDetailsStep extends StatelessWidget {
   const CustomEnterDetailsStep({
-    required this.enterDetailsDone,
     required this.completePaymentButton,
     required this.paymentBy,
     required this.price,
@@ -14,7 +13,6 @@ class CustomEnterDetailsStep extends StatelessWidget {
     super.key,
   });
 
-  final bool enterDetailsDone;
   final Function() completePaymentButton;
   final String paymentBy;
   final String price;

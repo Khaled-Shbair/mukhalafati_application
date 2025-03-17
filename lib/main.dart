@@ -5,14 +5,13 @@ void main() async {
   await initModule();
 
   runApp(
-    // MyApp(),
-    DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()),
+    MyApp(),
+    // DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()),
   );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

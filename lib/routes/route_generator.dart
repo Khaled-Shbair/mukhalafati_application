@@ -1,3 +1,4 @@
+
 import '/config/all_imports.dart';
 
 class RouteGenerator {
@@ -7,7 +8,6 @@ class RouteGenerator {
         initOnBoarding();
         return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
       case Routes.welcomeScreen:
-        initWelcome();
         return MaterialPageRoute(
           builder: (_) => const WelcomeScreen(),
         );

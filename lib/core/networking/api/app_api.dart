@@ -155,7 +155,6 @@ abstract class AppApi {
     @Field(ApiKeys.title) title,
     @Field(ApiKeys.content) content,
     @Field(ApiKeys.timeSend) timeSend,
-    @Field(ApiKeys.dateSend) dateSend,
   );
 
   @POST(ApiConstants.homePoliceMan)

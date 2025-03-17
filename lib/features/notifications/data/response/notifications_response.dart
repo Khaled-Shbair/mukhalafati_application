@@ -26,15 +26,15 @@ class NotificationResponse {
   int? id;
   @JsonKey(name: ApiKeys.content)
   String? content;
-  @JsonKey(name: ApiKeys.dateSend)
-  String? date;
+  @JsonKey(name: ApiKeys.timeSend)
+  String? timeSend;
   @JsonKey(name: ApiKeys.isRead)
   bool? isRead;
 
   NotificationResponse({
     required this.id,
     required this.content,
-    required this.date,
+    required this.timeSend,
     required this.isRead,
   });
 

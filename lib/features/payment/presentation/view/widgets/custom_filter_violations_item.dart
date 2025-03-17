@@ -64,7 +64,6 @@ class _CustomCheckBoxOfFilterViolations extends StatelessWidget {
         InkWell(
           onTap: () {
             onTap();
-            print('isChecked:$isChecked');
           },
           child: Icon(
             isChecked ? Icons.check_box : Icons.check_box_outline_blank,

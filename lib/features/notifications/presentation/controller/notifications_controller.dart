@@ -1,13 +1,10 @@
-import 'package:mukhalafati_application/features/notifications/domain/use_case/delete_all_notifications_use_case.dart';
-import 'package:mukhalafati_application/features/notifications/domain/use_case/delete_driver_notifications_by_id_use_case.dart';
-
 import '/config/all_imports.dart';
 
 class NotificationsController extends GetxController with CustomToast {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _getAllNotificationsUseCase = instance<GetAllNotificationsUseCase>();
   final _updateNotificationStatusUseCase =
-      instance<UpdateNotificationStatusUseCase>();
+  instance<UpdateNotificationStatusUseCase>();
   bool _loading = false;
   NotificationsModel? _notificationsModel;
 
@@ -33,12 +30,12 @@ class NotificationsController extends GetxController with CustomToast {
     final delete = instance<DeleteDriverNotificationsByIdUseCase>();
     (await delete.execute(DeleteDriverNotificationsInput(notificationId: id)))
         .fold(
-      (l) {
+          (l) {
         if (l.code == -1) {
           showToast(message: l.message, context: context);
         }
       },
-      (r) async {
+          (r) async {
         context.pop();
         _notificationsModel!.data.removeAt(index);
         await customCreatedSuccessfullyDialog(
@@ -61,12 +58,12 @@ class NotificationsController extends GetxController with CustomToast {
       confirmButton: () async {
         final delete = instance<DeleteAllNotificationsUseCase>();
         (await delete.execute()).fold(
-          (l) {
+              (l) {
             if (l.code == -1) {
               showToast(message: l.message, context: context);
             }
           },
-          (r) async {
+              (r) async {
             context.pop();
             _notificationsModel!.data.clear();
             _notificationsModel!.unreadCount = 0;
@@ -102,10 +99,10 @@ class NotificationsController extends GetxController with CustomToast {
   void getNotifications() async {
     _loading = true;
     (await _getAllNotificationsUseCase.execute()).fold(
-      (l) {
+          (l) {
         showToast(message: l.message, context: Get.context!);
       },
-      (r) {
+          (r) {
         _notificationsModel = r;
       },
     );
@@ -117,8 +114,8 @@ class NotificationsController extends GetxController with CustomToast {
   //status of notification = true, to determine all notifications (is_read)
   void _readAllNotification() async {
     (await _updateNotificationStatusUseCase.execute()).fold(
-      (l) {},
-      (r) {},
+          (l) {},
+          (r) {},
     );
   }
 }

@@ -1,4 +1,3 @@
-
 import '/config/all_imports.dart';
 
 class PaymentScreen extends StatelessWidget {
@@ -57,7 +56,6 @@ class PaymentScreen extends StatelessWidget {
                         CustomPaymentSelectionStep(
                           paymentSelectionButton: () =>
                               controller.paymentSelectionButton(context),
-                          paymentSelectionDone: controller.paymentSelectionDone,
                           selectJawwalPay: () => controller.selectJawwalPay(),
                           selectPalPay: () => controller.selectPalPay(),
                           selectVisaCard: () => controller.selectVisaCard(),
@@ -67,7 +65,6 @@ class PaymentScreen extends StatelessWidget {
                         ),
                         CustomEnterDetailsStep(
                           formKey: controller.formKey,
-                          enterDetailsDone: controller.enterDetailsDone,
                           completePaymentButton: () =>
                               controller.completePaymentButton(context),
                           paymentBy: controller.paymentBy,
@@ -78,8 +75,6 @@ class PaymentScreen extends StatelessWidget {
                           securityCode: controller.securityCode,
                         ),
                         CustomPaymentConfirmationStep(
-                          paymentConfirmationDone:
-                              controller.paymentConfirmationDone,
                           paymentConfirmationButton: () =>
                               controller.paymentConfirmationButton(violationId),
                           totalAmount: priceOfViolation,
