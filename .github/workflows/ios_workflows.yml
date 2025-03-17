@@ -25,7 +25,12 @@ jobs:
         run: flutter config --enable-ios
 
       - name: Install Dependencies
-        run: flutter pub get
+        run: |
+          flutter pub get
+          cd ios
+          rm -rf Podfile.lock Pods
+          flutter pub get
+
 
       - name: Clean Previous Builds
         run: flutter clean
