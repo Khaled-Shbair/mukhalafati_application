@@ -36,7 +36,7 @@ jobs:
         run: |
           if [ ! -f ios/Podfile ]; then
             echo "Creating Podfile..."
-            echo "platform :ios, '13.0'" > ios/Podfile
+            echo "platform :ios, '11.0'" > ios/Podfile
             echo "target 'Runner' do" >> ios/Podfile
             echo "  use_frameworks!" >> ios/Podfile
             echo "  pod 'FirebaseCore', '~> 11.6.0'" >> ios/Podfile
@@ -47,7 +47,6 @@ jobs:
           else
             echo "Podfile already exists"
           fi
-
 
       - name: Install CocoaPods
         run: |
