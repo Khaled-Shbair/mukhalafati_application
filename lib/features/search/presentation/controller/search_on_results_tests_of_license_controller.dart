@@ -69,7 +69,8 @@ class SearchOnResultsTestsOfLicenseController extends GetxController
       if (_idNumber.text.length == AppConstants.maxLengthOfIDNumber) {
         _loading = true;
         _result = false;
-        update();
+update();
+        print('loading:$_loading');
         (await _useCase.execute(
           SearchOnResultsTestsOfLicenseUseCaseInput(idNumber: _idNumber.text),
         ))

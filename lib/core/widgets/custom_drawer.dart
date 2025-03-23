@@ -263,8 +263,8 @@ class CustomPoliceManDrawer extends StatelessWidget with CustomToast {
         ),
         _CustomButtonOfMainDrawer(
           onPressed: () {
-            // context.pop();
-            context.pushNamed(Routes.logoutScreen, arguments: true);
+            initLogout();
+            customLogoutDialog(context);
           },
           icon: ManagerAssets.logoutIcon,
           title: ManagerStrings.logout,
