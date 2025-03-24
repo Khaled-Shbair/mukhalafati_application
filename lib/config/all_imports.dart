@@ -18,8 +18,6 @@ export 'package:cached_network_image/cached_network_image.dart';
 export 'package:smooth_page_indicator/smooth_page_indicator.dart';
 export 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
-///firebase_options file
-export '/firebase_options.dart';
 
 ///routes file
 export '/routes/routes.dart';
@@ -29,10 +27,7 @@ export '/routes/route_generator.dart';
 export 'all_imports.dart';
 export 'dependency_injection.dart';
 export 'constants/app_constants.dart';
-export 'constants/api_constants.dart';
 export 'constants/locale_constants.dart';
-export '/config/constants/api_keys.dart';
-export 'constants/shared_preferences_keys.dart';
 
 ///core file
 export '/core/language/ar.dart';
