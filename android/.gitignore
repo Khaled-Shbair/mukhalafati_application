@@ -30,13 +30,5 @@ lib/config/constants/api_keys.dart
 lib/config/constants/shared_preferences_keys.dart
 lib/core/language/shared_preferences_keys.dart
 
-# Google-services file
-/android/app/google-services.json
-
-# Keystore files (should never be shared publicly)
-key.properties
-**/*.keystore
-**/*.jks
-
 # Notifications api keys file
 assets/json/notification_json/mukhalafati-62f02eada005.json
