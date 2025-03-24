@@ -2,7 +2,7 @@
 class HomeDriverModel {
   final int numberOfViolationsPaid;
   final int numberOfViolationsUnPaid;
-  final int numberOfUnReadNotifications;
+   int numberOfUnReadNotifications;
   final int id;
   final String image;
   final String nameEn;
