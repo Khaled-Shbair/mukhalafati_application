@@ -48,22 +48,4 @@ class DefaultFirebaseOptions {
         );
     }
   }
-
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC_G7EqPK7SquvBfBrMAdPmKPSMmGkPibc',
-    appId: '1:723708133227:android:53ec1a2b432de4a5d9562e',
-    messagingSenderId: '723708133227',
-    projectId: 'mukhalafati',
-    storageBucket: 'mukhalafati.firebasestorage.app',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCI_wpkTktH5XS6Uy1spY0dfyVdwugyxes',
-    appId: '1:723708133227:ios:0712ff6a73f16be7d9562e',
-    messagingSenderId: '723708133227',
-    projectId: 'mukhalafati',
-    storageBucket: 'mukhalafati.firebasestorage.app',
-    iosBundleId: 'mukhalafati.com.mukhalafatiApplication',
-  );
-
 }
