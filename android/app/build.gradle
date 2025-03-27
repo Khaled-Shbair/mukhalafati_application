@@ -12,7 +12,6 @@ ext.kotlin_version = '2.1.0'
 android {
     namespace = "mukhalafati.com.mukhalafati_application"
     compileSdk = 34
-//    ndkVersion = flutter.ndkVersion
     ndkVersion = "27.0.12077973"
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
