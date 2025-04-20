@@ -1,0 +1,2 @@
+K:/mukhalafati_application/android/app/.cxx/Debug/4x47303w/armeabi-v7a/CMakeFiles/edit_cache.dir
+K:/mukhalafati_application/android/app/.cxx/Debug/4x47303w/armeabi-v7a/CMakeFiles/rebuild_cache.dir

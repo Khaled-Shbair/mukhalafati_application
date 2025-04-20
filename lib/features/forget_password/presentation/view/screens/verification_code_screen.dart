@@ -5,18 +5,24 @@ class VerificationCodeScreen extends StatelessWidget {
     required this.id,
     required this.isDriver,
     required this.phoneNumber,
-    required this.verificationId,
     super.key,
   });
 
   final String phoneNumber;
   final int id;
-  final String verificationId;
+
   final bool isDriver;
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<VerificationCodeController>(
+      initState: (state) {
+        Get.find<VerificationCodeController>().sendSmsOtpCode(
+          context,
+          phoneNumber,
+          id,
+        );
+      },
       builder: (controller) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -43,7 +49,7 @@ class VerificationCodeScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: context.textTheme
                       .titleForgotAndChangePasswordAndVerificationCodeScreens(
-                          context),
+                      context),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.only(
@@ -53,11 +59,17 @@ class VerificationCodeScreen extends StatelessWidget {
                     end: ManagerWidth.w14,
                   ),
                   child: Text(
-                    '${ManagerStrings.pleaseEnterTheConfirmationCodeSentToYourMobileNumber} $phoneNumber',
+
+                    '${ManagerStrings
+                        .pleaseEnterTheConfirmationCodeSentToYourMobileNumber} ${phoneNumber
+                        .characters.characterAt(8)}${phoneNumber.characters
+                        .characterAt(9)}*****${phoneNumber.characters
+                        .characterAt(0)}${phoneNumber.characters.characterAt(
+                        1)}${phoneNumber.characters.characterAt(2)}',
                     textAlign: TextAlign.center,
                     style: context.textTheme
                         .subTitleForgotAndChangePasswordAndVerificationCodeScreens(
-                            context),
+                      context),
                   ),
                 ),
                 Row(
@@ -65,15 +77,13 @@ class VerificationCodeScreen extends StatelessWidget {
                     CustomFiledOfVerificationCode(
                       controller: controller.oneNumberOfCode,
                       focusNode: controller.oneFocusNode,
-                      onChanged: (value) =>
-                          controller.onChangeOneFiled(value),
+                      onChanged: (value) => controller.onChangeOneFiled(value),
                       changeBorderColor: controller.changeBorderColorOneFiled,
                     ),
                     CustomFiledOfVerificationCode(
                       controller: controller.twoNumberOfCode,
                       focusNode: controller.twoFocusNode,
-                      onChanged: (value) =>
-                          controller.onChangeTwoFiled(value),
+                      onChanged: (value) => controller.onChangeTwoFiled(value),
                       changeBorderColor: controller.changeBorderColorTwoFiled,
                     ),
                     CustomFiledOfVerificationCode(
@@ -81,35 +91,30 @@ class VerificationCodeScreen extends StatelessWidget {
                       focusNode: controller.threeFocusNode,
                       onChanged: (value) =>
                           controller.onChangeThreeFiled(value),
-                      changeBorderColor:
-                          controller.changeBorderColorThreeFiled,
+                      changeBorderColor: controller.changeBorderColorThreeFiled,
                     ),
                     CustomFiledOfVerificationCode(
                       controller: controller.fourNumberOfCode,
                       focusNode: controller.fourFocusNode,
-                      onChanged: (value) =>
-                          controller.onChangeFourFiled(value),
-                      changeBorderColor:
-                          controller.changeBorderColorFourFiled,
+                      onChanged: (value) => controller.onChangeFourFiled(value),
+                      changeBorderColor: controller.changeBorderColorFourFiled,
                     ),
                     CustomFiledOfVerificationCode(
                       controller: controller.fiveNumberOfCode,
                       focusNode: controller.fiveFocusNode,
-                      onChanged: (value) =>
-                          controller.onChangeFiveFiled(value),
-                      changeBorderColor:
-                          controller.changeBorderColorFiveFiled,
+                      onChanged: (value) => controller.onChangeFiveFiled(value),
+                      changeBorderColor: controller.changeBorderColorFiveFiled,
                     ),
                     CustomFiledOfVerificationCode(
                       controller: controller.sexNumberOfCode,
                       focusNode: controller.sexFocusNode,
-                      onChanged: (value) => controller.onChangeSexFiled(
-                        value,
-                        context,
-                        id,
-                        isDriver,
-                        verificationId,
-                      ),
+                      onChanged: (value) =>
+                          controller.onChangeSexFiled(
+                            value,
+                            context,
+                            id,
+                            isDriver,
+                          ),
                       changeBorderColor: controller.changeBorderColorSexFiled,
                     ),
                   ],
@@ -119,12 +124,12 @@ class VerificationCodeScreen extends StatelessWidget {
                 ),
                 verticalSpace(ManagerHeight.h10),
                 CustomButton(
-                  onPressed: () => controller.verifyButton(
-                    id,
-                    isDriver,
-                    verificationId,
-                    context,
-                  ),
+                  onPressed: () =>
+                      controller.verifyButton(
+                        id,
+                        isDriver,
+                        context,
+                      ),
                   child: Text(
                     ManagerStrings.verify,
                     style: context.textTheme.mainButtonTextStyle(context),

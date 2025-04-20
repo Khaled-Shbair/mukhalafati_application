@@ -43,11 +43,12 @@ class CustomEnterDetailsStep extends StatelessWidget {
               ),
               child: Text(
                 ManagerStrings.subTitlePaymentDetails,
-                style:
-                    context.textTheme.textStyleOfSubTitleOfStepOfPayment(context),
+                style: context.textTheme
+                    .textStyleOfSubTitleOfStepOfPayment(context),
               ),
             ),
             CustomTextField(
+              textInputAction: TextInputAction.next,
               controller: cardHolderName,
               labelText: ManagerStrings.cardHolderName,
               keyboardType: TextInputType.name,
@@ -55,6 +56,7 @@ class CustomEnterDetailsStep extends StatelessWidget {
             ),
             verticalSpace(ManagerHeight.h24),
             CustomTextField(
+              textInputAction: TextInputAction.next,
               controller: cardNumber,
               labelText: ManagerStrings.cardNumber,
               maxLength: AppConstants.maxLengthOfCardNumber,
@@ -66,6 +68,7 @@ class CustomEnterDetailsStep extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: CustomTextField(
+                    textInputAction: TextInputAction.next,
                     controller: expiryDateCard,
                     labelText: ManagerStrings.expiryDateCard,
                     keyboardType: TextInputType.text,
@@ -76,6 +79,8 @@ class CustomEnterDetailsStep extends StatelessWidget {
                 horizontalSpace(ManagerWidth.w10),
                 Expanded(
                   child: CustomTextField(
+                    textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (p0) => completePaymentButton,
                     controller: securityCode,
                     labelText: ManagerStrings.securityCode,
                     maxLength: AppConstants.maxLengthOfSecurityCode,

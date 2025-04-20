@@ -40,7 +40,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
 
   #obtain Access credentials for Google services using OAuth 2.0
-  googleapis_auth: ^1.6.0
+  googleapis_auth: ^2.0.0
 
   #state_management
   get: ^4.6.6
@@ -71,17 +71,18 @@ dependencies:
   #firebase
   firebase_core: ^3.10.1
   firebase_messaging: ^15.2.1
-  flutter_local_notifications: ^18.0.1
+  flutter_local_notifications: ^19.1.0
   firebase_auth: ^5.4.1
 
   #use to draw chart
-  syncfusion_flutter_charts: ^28.2.3
+  syncfusion_flutter_charts: ^29.1.38
 
   #use to draw indicator with beautiful animation
   smooth_page_indicator: ^1.2.0+3
 
   #use to draw search filed and dropdown result
   dropdown_search: ^6.0.2
+
 
 dev_dependencies:
   flutter_test:

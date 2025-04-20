@@ -16,10 +16,12 @@ class OtpCodeRepositoryImpl extends OtpCodeRepository {
         return Left(ErrorHandler.handle(e).failure);
       }
     } else {
-      return Left(Failure(
-        code: ResponseCode.NO_INTERNET_CONNECTION.value,
-        message: ManagerStrings.noInternetConnection,
-      ));
+      return Left(
+        Failure(
+          code: ResponseCode.NO_INTERNET_CONNECTION.value,
+          message: ManagerStrings.noInternetConnection,
+        ),
+      );
     }
   }
 

@@ -136,7 +136,7 @@ class Validator with CustomToast {
   static String? cardNumberValidator(String? cardNumber) {
     if (cardNumber!.isEmpty) {
       return ManagerStrings.pleaseEnterCardNumber;
-    } else if (RegExp(r'^[0-9]{13,19}$').hasMatch(cardNumber)) {
+    } else if (!RegExp(r'^[0-9]{13,19}$').hasMatch(cardNumber)) {
       return ManagerStrings.cardNumberUnAccept;
     } else {
       return null;

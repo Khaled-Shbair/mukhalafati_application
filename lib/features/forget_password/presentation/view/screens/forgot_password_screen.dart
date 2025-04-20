@@ -63,6 +63,9 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ),
                 ),
                 CustomTextField(
+                  textInputAction: TextInputAction.done,
+                  onFieldSubmitted: (v) =>
+                      controller.sendButton(isDriver, context),
                   validator: (v) => isDriver
                       ? Validator.licenseNumberValidator(v)
                       : Validator.jobNumberValidator(v),
