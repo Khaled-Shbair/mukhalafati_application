@@ -10,7 +10,29 @@ This project focuses on creating an AI-based mobile application tailored to Gaza
 
 ---
 
+## 🛠️ Technologies Used
+
+The **Mukhalafati** application was developed using the following tools and best practices:
+
+| Category                 | Technologies                      |
+|--------------------------|-----------------------------------|
+| **Framework**            | Flutter (Dart)                    |
+| **State Management**     | GetX                              |
+| **Architecture**         | Clean Code (Layered Architecture) |
+| **Dependency Injection** | get_it                            |
+| **Localization**         | GetX Localization                 |
+| **Database**             | Supabase (PostgreSQL)             |
+| **Authentication**       | Supabase Auth                     |
+| **Responsive Design**    | flutter_screenutil                |
+| **Notifications**        | Firebase Cloud Messaging (FCM)    |
+| **Local Storage**        | shared_preferences                |
+| **Platform**             | Android (currently only)          |
+| **Language**             | Arabic Only                       |
+
+---
+
 ## 📱 Application Screenshots  
+
 
 ![on_boardig_screens](https://github.com/user-attachments/assets/337af11b-6645-46b1-a442-a0382b5515aa)
 
@@ -47,6 +69,11 @@ This project focuses on creating an AI-based mobile application tailored to Gaza
 ![driver_electronic_license_screens](https://github.com/user-attachments/assets/4351ee90-1e23-4a60-9f41-7722788de7a1)
 
 ![logout_screen](https://github.com/user-attachments/assets/f524351f-09b4-4622-a73e-8e28a5c89855)
+
+---
+
+## 🎥 Watch Mukhalafati in Action
+[🎬 Click here to watch the demo](https://drive.google.com/file/d/14CybgHDDO2cfKHCrL3drQGGeiRE9CDQE/view?usp=sharing)
 
 ---
 
