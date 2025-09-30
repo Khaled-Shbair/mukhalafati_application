@@ -73,8 +73,7 @@ The **Mukhalafati** application was developed using the following tools and best
 ---
 
 ## 🎥 Watch Mukhalafati in Action
-[🎬 Click here to watch the demo](https://drive.google.com/file/d/14CybgHDDO2cfKHCrL3drQGGeiRE9CDQE/view?usp=sharing)
-
+https://github.com/user-attachments/assets/7d5f76dd-cd38-40d0-824d-8da20820e63a
 ---
 
 ## 📥 Download the APK  
