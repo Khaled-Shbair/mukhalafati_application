@@ -100,7 +100,7 @@ ThemeData managerLightTheme() {
     ),
 
     /// TabBar theme template
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: TabBarThemeData(
       indicatorColor: ManagerColors.primaryColor,
       dividerColor: ManagerColors.transparent,
       labelStyle: getMediumTextStyle(
@@ -141,7 +141,7 @@ ThemeData managerLightTheme() {
       refreshBackgroundColor: ManagerColors.blanchedAlmond,
       color: ManagerColors.primaryColor,
     ),
-    dialogTheme: DialogTheme(
+    dialogTheme: DialogThemeData(
       barrierColor: ManagerColors.black50,
       backgroundColor: ManagerColors.white,
       shadowColor: ManagerColors.black5,
