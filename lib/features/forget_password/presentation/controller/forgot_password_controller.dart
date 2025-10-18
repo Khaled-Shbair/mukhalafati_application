@@ -3,7 +3,6 @@ import '/config/all_imports.dart';
 class ForgotPasswordController extends GetxController with CustomToast {
   late TextEditingController _inputNumber;
   final _formKey = GlobalKey<FormState>();
-  final _sendOtpCodeUseCase = instance<SendOtpCodeUseCase>();
 
   GlobalKey<FormState> get formKey => _formKey;
 
@@ -55,44 +54,18 @@ class ForgotPasswordController extends GetxController with CustomToast {
       /// Appear message of error in SnackBar to user
       showToast(message: l.message, context: context);
     }, (r) async {
-      final phoneNumber = r.phoneNumber;
-      final driverId = r.driverId;
-      (await _sendOtpCodeUseCase
-              .execute(SendOtpCodeUseCaseInput(phoneNumber: '+97$phoneNumber')))
-          .fold(
-        (l) {
-          showToast(message: l.message, context: context);
-        },
-        (r) {
-          if (r.message == 'loggedIn') {
-            /// Close loading dialog
-            context.pop();
+      /// Close loading dialog
+      context.pop();
 
-            /// Navigate to change password screen
-            context.pushReplacementNamed(
-              Routes.changePasswordScreen,
-              arguments: [true, driverId],
-            );
-
-            /// Remove forgot password controller form memory
-            disposeForgotPassword();
-          } else {
-            /// Close loading dialog
-            context.pop();
-
-            /// Navigate to verification code screen to input receive code
-            context.pushNamed(
-              Routes.verificationCodeScreen,
-              arguments: [
-                /// Split phone number to appear part of number only
-                '${phoneNumber.characters.characterAt(8)}${phoneNumber.characters.characterAt(9)}*****${phoneNumber.characters.characterAt(0)}${phoneNumber.characters.characterAt(1)}${phoneNumber.characters.characterAt(2)}',
-                driverId,
-                true,
-                r.message // verificationId
-              ],
-            );
-          }
-        },
+      /// Navigate to verification code screen to input receive code
+      context.pushNamed(
+        Routes.verificationCodeScreen,
+        arguments: [
+          /// Split phone number to appear part of number only
+          r.phoneNumber,
+          r.driverId,
+          true,
+        ],
       );
     });
   }
@@ -109,44 +82,18 @@ class ForgotPasswordController extends GetxController with CustomToast {
         showToast(message: l.message, context: context);
       },
       (r) async {
-        final phoneNumber = r.phoneNumber;
-        final policeManId = r.policeManId;
-        (await _sendOtpCodeUseCase.execute(
-                SendOtpCodeUseCaseInput(phoneNumber: '+97$phoneNumber')))
-            .fold(
-          (l) {
-            showToast(message: l.message, context: context);
-          },
-          (r) {
-            if (r.message == 'loggedIn') {
-              /// Close loading dialog
-              context.pop();
+        /// Close loading dialog
+        context.pop();
 
-              /// Navigate to change password screen
-              context.pushReplacementNamed(
-                Routes.changePasswordScreen,
-                arguments: [true, policeManId],
-              );
-
-              /// Remove forgot password controller form memory
-              disposeForgotPassword();
-            } else {
-              /// Close loading dialog
-              context.pop();
-
-              /// Navigate to verification code screen to input receive code
-              context.pushNamed(
-                Routes.verificationCodeScreen,
-                arguments: [
-                  /// Split phone number to appear part of number only
-                  '${phoneNumber.characters.characterAt(8)}${phoneNumber.characters.characterAt(9)}*****${phoneNumber.characters.characterAt(0)}${phoneNumber.characters.characterAt(1)}${phoneNumber.characters.characterAt(2)}',
-                  policeManId,
-                  false,
-                  r.message // verificationId
-                ],
-              );
-            }
-          },
+        /// Navigate to verification code screen to input receive code
+        context.pushNamed(
+          Routes.verificationCodeScreen,
+          arguments: [
+            /// Split phone number to appear part of number only
+            '${r.phoneNumber.characters.characterAt(8)}${r.phoneNumber.characters.characterAt(9)}*****${r.phoneNumber.characters.characterAt(0)}${r.phoneNumber.characters.characterAt(1)}${r.phoneNumber.characters.characterAt(2)}',
+            r.policeManId,
+            false,
+          ],
         );
       },
     );

@@ -44,6 +44,7 @@ class DriverHomeController extends GetxController {
   /// Navigate to [NotificationScreen]
   void notificationButton(BuildContext context) {
     context.pushNamed(Routes.notificationScreen);
+    _homeDriverData.numberOfUnReadNotifications = 0;
   }
 
   void getDriverHomeData() async {

@@ -40,64 +40,76 @@ dependencies:
   flutter_screenutil: ^5.9.3
 
   #obtain Access credentials for Google services using OAuth 2.0
-  googleapis_auth: ^1.6.0
+  googleapis_auth: ^2.0.0
 
   #state_management
-  get: ^4.6.6
+  get: ^4.7.2
 
   #image
-  flutter_svg: ^2.0.10+1
+  flutter_svg: ^2.2.0
   cached_network_image: ^3.4.1
 
   #storage data local (in device)
-  shared_preferences: ^2.3.2
+  shared_preferences: ^2.5.3
 
   #snackbar
-  fluttertoast: ^8.2.8
+  fluttertoast: ^8.2.12
 
   #dependency injection
-  get_it: ^8.0.0
-
+  get_it: ^8.2.0
 
   #Networking
-  internet_connection_checker_plus: ^2.5.2
+  internet_connection_checker_plus: ^2.7.2
   dartz: ^0.10.1
   json_annotation: ^4.9.0
   retrofit: ^4.4.1
-  retrofit_generator: ^9.1.4
-  dio: ^5.7.0
+  retrofit_generator: ^10.0.2
+  dio: ^5.9.0
   pretty_dio_logger: ^1.4.0
 
   #firebase
-  firebase_core: ^3.10.1
-  firebase_messaging: ^15.2.1
-  flutter_local_notifications: ^18.0.1
-  firebase_auth: ^5.4.1
+  firebase_core: ^4.0.0
+  firebase_messaging: ^16.0.0
+  flutter_local_notifications: ^19.4.0
+  firebase_auth: ^6.0.1
 
   #use to draw chart
-  syncfusion_flutter_charts: ^28.2.3
+  syncfusion_flutter_charts: ^31.1.19
 
   #use to draw indicator with beautiful animation
-  smooth_page_indicator: ^1.2.0+3
+  smooth_page_indicator: ^1.2.1
 
   #use to draw search filed and dropdown result
   dropdown_search: ^6.0.2
+
+  #A Dart package to convert and format `DateTime` objects into human-readable 'time ago' strings
+  # like '20 seconds ago', 'a minute ago', or '7 hours ago'.
+  get_time_ago: ^2.3.2
+
+  tflite_flutter: ^0.11.0
+  camera: ^0.11.2
+  image: ^4.5.4
+
+  #use to add payment
+  flutter_stripe: ^12.0.2
+#  flutter_stripe:
+#    git:
+#      url: https://github.com/flutter-stripe/flutter_stripe.git
+#      path: packages/stripe
+#      ref: main
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
-  #A Dart package to convert and format `DateTime` objects into human-readable 'time ago' strings
-  # like '20 seconds ago', 'a minute ago', or '7 hours ago'.
-  get_time_ago: ^2.3.0
 
   #Required library to change icon launcher of application
-  flutter_launcher_icons: ^0.14.1
+  flutter_launcher_icons: ^0.14.4
 
   #use to change splash screen
-  flutter_native_splash: ^2.4.2
+  flutter_native_splash: ^2.4.6
 
   #Required libraries to deal with remote database (Api) in dev_dependencies
   build_runner: ^2.4.13
@@ -135,6 +147,7 @@ flutter:
     - assets/images/search/
     - assets/images/splash/
     - assets/json/notification_json/
+    - assets/models/
 
   fonts:
     - family: cairo

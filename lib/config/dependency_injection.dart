@@ -1,14 +1,15 @@
 import 'package:dio/dio.dart';
 import 'all_imports.dart';
-
 final instance = GetIt.instance;
 
-initModule() async {
+Future<void> initModule() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _initDio();
   await _initSharedPreferences();
   await _initFirebase();
   await _initNetworkInfo();
+  Stripe.publishableKey = 'pk_test_51NuzxmIXh8V04UfrZgzjbw01V6YGWFjliDCosLpX7SEprgKiIVm3tKECJQv9xOsECFE7UnWzE0cSh5W4pvKmxB6e002eDANMIW';
+  await Stripe.instance.applySettings();
   await updateFcmInDatabase().then(
     (value) async {
       await disposeUpdateFcmInDatabase();

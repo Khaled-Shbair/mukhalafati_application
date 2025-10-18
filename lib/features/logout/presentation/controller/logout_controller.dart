@@ -9,9 +9,7 @@ class LogoutController extends GetxController {
   }
 
   void logoutButton(BuildContext context) async {
-    if (context.mounted) {
-      context.pushNamedAndRemoveAllUntil(Routes.loginScreen);
-    }
+    context.pushNamedAndRemoveAllUntil(Routes.loginScreen);
     await clearData();
     disposeLogout();
   }

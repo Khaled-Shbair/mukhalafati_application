@@ -1,0 +1,2 @@
+K:/mukhalafati_application/android/app/.cxx/RelWithDebInfo/5r635i3k/x86_64/CMakeFiles/edit_cache.dir
+K:/mukhalafati_application/android/app/.cxx/RelWithDebInfo/5r635i3k/x86_64/CMakeFiles/rebuild_cache.dir

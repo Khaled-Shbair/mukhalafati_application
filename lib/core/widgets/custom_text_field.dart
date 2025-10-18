@@ -3,6 +3,7 @@ import '/config/all_imports.dart';
 class CustomTextField extends StatelessWidget with CustomToast {
   const CustomTextField({
     required this.controller,
+    this.onFieldSubmitted,
     this.labelText,
     this.hintText,
     this.obscureText = false,
@@ -64,10 +65,12 @@ class CustomTextField extends StatelessWidget with CustomToast {
   final bool expands;
   final TextDirection? textDirection;
   final String? Function(String?)? validator;
+  final void Function(String)? onFieldSubmitted;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onFieldSubmitted: onFieldSubmitted,
       validator: validator,
       controller: controller,
       textDirection: textDirection,
@@ -93,11 +96,6 @@ class CustomTextField extends StatelessWidget with CustomToast {
       style: inputTextStyle ??
           context.textTheme.textStyleOfInputTextFiled(context),
       decoration: InputDecoration(
-        // errorStyle: TextStyle(
-        //   color: Colors.transparent,
-        //   height: 0,
-        //   fontSize: 0,
-        // ),
         errorStyle: context.theme.inputDecorationTheme.errorStyle,
         constraints: context.theme.inputDecorationTheme.constraints?.copyWith(
           minHeight: minHeightConstraints,

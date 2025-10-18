@@ -474,7 +474,7 @@ extension ManagerTextTheme on TextTheme {
         height: 2,
       );
 
-  /// payment >> presentation >> widgets >> [CustomPaymentMethod]
+  /// payment >> presentation >> widgets >> [CustomPaymentMethosds]
   TextStyle textStyleOfNameOfPaymentMethod(BuildContext context) =>
       getMediumTextStyle(
         color: ManagerColors.black,

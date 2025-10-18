@@ -1,1 +1,0 @@
- K:\\mukhalafati_application\\.dart_tool\\flutter_build\\b53028aefe296aeed4d684f0f14dcf68\\native_assets.yaml: 

@@ -1,7 +1,9 @@
 import '/config/all_imports.dart';
 
 class VerificationCodeController extends GetxController with CustomToast {
+  final _sendOtpCodeUseCase = instance<SendOtpCodeUseCase>();
   final _verifyOTP = instance<VerifyOtpCodeUseCase>();
+
   late TextEditingController oneNumberOfCode;
   late TextEditingController twoNumberOfCode;
   late TextEditingController threeNumberOfCode;
@@ -23,6 +25,7 @@ class VerificationCodeController extends GetxController with CustomToast {
 
   bool returnCodeIsInCorrect = false;
   late int _verificationCodeInput;
+  late String _verificationId;
 
   @override
   void onInit() {
@@ -56,7 +59,20 @@ class VerificationCodeController extends GetxController with CustomToast {
     fiveFocusNode.dispose();
     sexFocusNode.dispose();
     super.dispose();
+  }
 
+  void sendSmsOtpCode(BuildContext context, phoneNumber, id) async {
+    (await _sendOtpCodeUseCase
+            .execute(SendOtpCodeUseCaseInput(phoneNumber: '+97$phoneNumber')))
+        .fold(
+      (l) {
+        context.pop();
+        showToast(message: l.message, context: context);
+      },
+      (r) {
+        _verificationId = r.message;
+      },
+    );
   }
 
   void backButton(BuildContext context, bool isDriver) {
@@ -77,7 +93,7 @@ class VerificationCodeController extends GetxController with CustomToast {
   void verifyButton(
     int id,
     bool isDriver,
-    String verificationId,
+    // String verificationId,
     BuildContext context,
   ) async {
     if (_checkData()) {
@@ -85,12 +101,12 @@ class VerificationCodeController extends GetxController with CustomToast {
       _verificationCode();
       FocusScope.of(context).requestFocus(FocusNode());
       (await _verifyOTP.execute(VerifyOtpCodeUseCaseInput(
-              verificationId: verificationId,
+              verificationId: _verificationId,
               smsCode: _verificationCodeInput.toString())))
           .fold(
+
         (l) {
-          /// Close loading dialog
-          context.pop();
+          context.pop(); // close loading dialog
           _incorrectEntered(context);
         },
         (r) {
@@ -108,6 +124,7 @@ class VerificationCodeController extends GetxController with CustomToast {
         },
       );
     } else {
+      context.pop(); // close loading dialog
       /// Appear message of error in SnackBar to user
       showToast(
           message: ManagerStrings.pleaseEnterVerificationCode,
@@ -187,14 +204,14 @@ class VerificationCodeController extends GetxController with CustomToast {
     BuildContext context,
     int id,
     bool isDriver,
-    String verificationId,
+    // String verificationId,
   ) {
     if (value.isNotEmpty) {
       changeBorderColorSexFiled = true;
       verifyButton(
         id,
         isDriver,
-        verificationId,
+        // verificationId,
         context,
       );
     } else {

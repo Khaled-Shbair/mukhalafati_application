@@ -87,4 +87,6 @@ extension Navigators on BuildContext {
   }
 
   pop<T extends Object?>([T? result]) => Navigator.of(this).pop();
+
+  bool canPop() => Navigator.of(this).canPop();
 }

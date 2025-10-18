@@ -46,19 +46,19 @@ class CustomPaymentSelectionStep extends StatelessWidget {
                   context.textTheme.textStyleOfSubTitleOfStepOfPayment(context),
             ),
           ),
-          CustomPaymentMethod(
+           CustomSelectTypeOfPaymentMethod(
             image: ManagerAssets.visaCard,
             name: ManagerStrings.visaCard,
             selected: isVisaCard,
             onTap: selectVisaCard,
           ),
-          CustomPaymentMethod(
+           CustomSelectTypeOfPaymentMethod(
             image: ManagerAssets.palPay,
             name: ManagerStrings.palPay,
             selected: isPalPay,
             onTap: selectPalPay,
           ),
-          CustomPaymentMethod(
+            CustomSelectTypeOfPaymentMethod(
             image: ManagerAssets.jawwalPay,
             name: ManagerStrings.jawwalPay,
             selected: isJawwalPay,

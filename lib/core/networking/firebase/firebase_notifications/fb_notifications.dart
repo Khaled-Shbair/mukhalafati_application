@@ -153,8 +153,6 @@ class FbNotifications {
   }) async {
     final dio = Dio();
     String token = await _getAccessToken();
-    debugPrint("FCM Access Token: $token");
-
     try {
       await dio.post(
         ApiConstants.fcmUrl,

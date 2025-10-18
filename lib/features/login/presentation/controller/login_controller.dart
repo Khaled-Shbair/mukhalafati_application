@@ -96,8 +96,12 @@ class LoginController extends GetxController
 
   /// To back to welcome screen and remove login controller from memory
   void backButton(BuildContext context) {
-    context.pop();
-    disposeLogin();
+    if (context.canPop()) {
+      context.pop();
+      disposeLogin();
+    }else{
+      context.pushReplacementNamed(Routes.welcomeScreen);
+    }
   }
 
   void changeRememberMePoliceMan(bool isRememberMe) {

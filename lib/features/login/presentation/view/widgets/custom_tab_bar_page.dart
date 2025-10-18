@@ -36,6 +36,7 @@ class CustomTabBarPage extends StatelessWidget {
         children: [
           verticalSpace(ManagerHeight.h24),
           CustomTextField(
+            textInputAction: TextInputAction.next,
             controller: userNumber,
             labelText: labelTextOfUserField,
             validator: (v) => validatorNumber(v),
@@ -43,6 +44,8 @@ class CustomTabBarPage extends StatelessWidget {
           verticalSpace(ManagerHeight.h20),
           CustomTextField(
             validator: (v) => Validator.passwordValidator(v),
+            textInputAction: TextInputAction.done,
+            onFieldSubmitted: (v) => login(),
             controller: password,
             labelText: ManagerStrings.password,
             obscureText: obscureText,
@@ -62,7 +65,7 @@ class CustomTabBarPage extends StatelessWidget {
               CustomRichText(
                 textStyle: context.textTheme
                     .forgotPasswordButtonAndTextOfCheckBoxInLoginScreen(
-                    context),
+                        context),
                 title: ManagerStrings.forgotYourPassword,
                 recognizer: forgotPasswordRecognizer,
               ),
